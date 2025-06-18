@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,6 +13,17 @@ const Products = () => {
   const [filterCategory, setFilterCategory] = useState("all");
 
   const products = [
+    {
+      id: 7,
+      name: "TChrome — Weight Loss & Detox Capsules",
+      price: "$35",
+      originalPrice: "$42",
+      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop",
+      rating: 4.9,
+      reviews: 256,
+      badge: "🌟 New",
+      category: "weight-loss"
+    },
     {
       id: 1,
       name: "Natural Vitamin C",
@@ -84,6 +94,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "weight-loss", label: "Weight Loss" },
     { value: "vitamins", label: "Vitamins" },
     { value: "omega", label: "Omega" },
     { value: "probiotics", label: "Probiotics" },

@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +34,16 @@ const Index = () => {
 
   const featuredProducts = [
     {
+      id: 7,
+      name: "TChrome — Weight Loss & Detox Capsules",
+      price: "$35",
+      originalPrice: "$42",
+      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop",
+      rating: 4.9,
+      reviews: 256,
+      badge: "🌟 New"
+    },
+    {
       id: 1,
       name: "Natural Vitamin C",
       price: "$19",
@@ -60,15 +69,6 @@ const Index = () => {
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=400&fit=crop",
       rating: 4.7,
       reviews: 156
-    },
-    {
-      id: 4,
-      name: "Turmeric Extract",
-      price: "$15",
-      originalPrice: null,
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=400&fit=crop",
-      rating: 4.6,
-      reviews: 203
     }
   ];
 
@@ -197,7 +197,9 @@ const Index = () => {
                       size="sm"
                       className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
                     >
-                      <Link to={`/product/${product.id}`}>Best Seller</Link>
+                      <Link to={`/product/${product.id}`}>
+                        {product.badge || "Best Seller"}
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>

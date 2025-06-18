@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -23,34 +22,76 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  // Mock product data
-  const product = {
-    id: 1,
-    name: "Natural Vitamin C",
-    price: "$19",
-    originalPrice: "$23",
-    images: [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=600&h=600&fit=crop"
-    ],
-    rating: 4.8,
-    reviews: 124,
-    badge: "Best Seller",
-    inStock: true,
-    description: "Natural Vitamin C from mixed fruits and vegetables. Strengthens immune system, reduces risk of illness, and helps maintain radiant skin",
-    benefits: [
-      "Strengthens immune system",
-      "Antioxidant protection",
-      "Supports radiant skin",
-      "Reduces fatigue",
-      "Easy absorption, gentle on stomach"
-    ],
-    ingredients: "Vitamin C from Acerola Cherry 500mg, Vitamin C from Orange 200mg, Bioflavonoids 50mg",
-    dosage: "Take 1-2 capsules daily after meals",
-    warnings: "Do not exceed recommended dosage. If allergic reactions occur, discontinue use",
-    size: "60 capsules per bottle"
+  // Get product data based on ID
+  const getProductData = (productId: string) => {
+    if (productId === "7") {
+      return {
+        id: 7,
+        name: "TChrome — Weight Loss & Detox Capsules",
+        price: "$35",
+        originalPrice: "$42",
+        images: [
+          "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1434381432520-e7dceec00317?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop"
+        ],
+        rating: 4.9,
+        reviews: 256,
+        badge: "🌟 New",
+        inStock: true,
+        description: "TChrome is an innovative dietary supplement for weight management. It helps burn fat, detoxify the body, restore healthy digestion, and reduce appetite. Effectively blocks the accumulation of new fat and supports a lean physique.",
+        benefits: [
+          "Boosts fat burning",
+          "Blocks fat absorption", 
+          "Improves bowel movement",
+          "Controls appetite",
+          "Stimulates metabolism"
+        ],
+        ingredients: "Garcinia Cambogia Extract, Green Tea Extract, Calcium Pyruvate, White Kidney Bean Extract, Chitosan, Kelp Extract, Black Pepper Powder, Ginger Extract, Chromium Picolinate",
+        dosage: "Take 2 capsules daily: 1 capsule with breakfast, 1 capsule with dinner",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "60 capsules per bottle",
+        registration: "FDA Thailand Registration No.: 11-106353-1-0137",
+        idealFor: [
+          "Individuals with excess weight",
+          "People with poor digestion or constipation", 
+          "Those with slow metabolism",
+          "Anyone looking to lose 5 kg or more"
+        ]
+      };
+    }
+    
+    // Default product data for other IDs
+    return {
+      id: 1,
+      name: "Natural Vitamin C",
+      price: "$19",
+      originalPrice: "$23",
+      images: [
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=600&h=600&fit=crop"
+      ],
+      rating: 4.8,
+      reviews: 124,
+      badge: "Best Seller",
+      inStock: true,
+      description: "Natural Vitamin C from mixed fruits and vegetables. Strengthens immune system, reduces risk of illness, and helps maintain radiant skin",
+      benefits: [
+        "Strengthens immune system",
+        "Antioxidant protection",
+        "Supports radiant skin",
+        "Reduces fatigue",
+        "Easy absorption, gentle on stomach"
+      ],
+      ingredients: "Vitamin C from Acerola Cherry 500mg, Vitamin C from Orange 200mg, Bioflavonoids 50mg",
+      dosage: "Take 1-2 capsules daily after meals",
+      warnings: "Do not exceed recommended dosage. If allergic reactions occur, discontinue use",
+      size: "60 capsules per bottle"
+    };
   };
+
+  const product = getProductData(id || "1");
 
   const relatedProducts = [
     {
@@ -62,7 +103,7 @@ const ProductDetail = () => {
     },
     {
       id: 3,
-      name: "Natural Probiotics",
+      name: "Natural Probiotics", 
       price: "$24",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
       rating: 4.7
@@ -81,19 +122,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
-      name: "Mike Chen",
+      name: "Mike Chen", 
       rating: 5,
-      date: "December 10, 2024", 
-      comment: "My skin looks much better. Been taking for 2 months, will continue buying."
+      date: "December 10, 2024",
+      comment: id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
-      date: "December 5, 2024",
-      comment: "Good quality product, reasonable price, fast delivery"
+      date: "December 5, 2024", 
+      comment: id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -193,6 +234,20 @@ const ProductDetail = () => {
               </ul>
             </div>
 
+            {product.idealFor && (
+              <div className="space-y-3">
+                <h3 className="font-semibold text-gray-900">Ideal For:</h3>
+                <ul className="space-y-1">
+                  {product.idealFor.map((item, index) => (
+                    <li key={index} className="flex items-center text-sm text-gray-700">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="border rounded-lg p-4 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="font-medium">Quantity:</span>
@@ -272,12 +327,18 @@ const ProductDetail = () => {
                   <h3 className="font-semibold text-gray-900 mb-2">Warnings:</h3>
                   <p className="text-gray-700">{product.warnings}</p>
                 </div>
+                {product.registration && (
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Registration:</h3>
+                    <p className="text-gray-700">{product.registration}</p>
+                  </div>
+                )}
               </div>
             </TabsContent>
             
             <TabsContent value="ingredients" className="p-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Ingredients:</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">Active Ingredients:</h3>
                 <p className="text-gray-700">{product.ingredients}</p>
               </div>
             </TabsContent>
