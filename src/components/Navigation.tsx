@@ -24,7 +24,7 @@ const Navigation = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover-scale">
-            <div className="flex items-center justify-center w-8 h-8 bg-coral-500 rounded-full">
+            <div className="flex items-center justify-center w-8 h-8 bg-green-500 rounded-full">
               <Leaf className="h-5 w-5 text-white" />
             </div>
             <span className="font-semibold text-xl text-gray-800">Siam Healthy</span>
@@ -36,9 +36,9 @@ const Navigation = () => {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-coral-600 ${
+                className={`text-sm font-medium transition-colors hover:text-green-600 ${
                   isActive(item.href)
-                    ? "text-coral-600"
+                    ? "text-green-600"
                     : "text-gray-700"
                 }`}
               >
@@ -73,8 +73,8 @@ const Navigation = () => {
                       key={item.href}
                       to={item.href}
                       onClick={() => setIsOpen(false)}
-                      className={`text-lg font-medium transition-colors hover:text-coral-600 py-2 ${
-                        isActive(item.href) ? "text-coral-600" : "text-gray-700"
+                      className={`text-lg font-medium transition-colors hover:text-green-600 py-2 ${
+                        isActive(item.href) ? "text-green-600" : "text-gray-700"
                       }`}
                     >
                       {item.label}

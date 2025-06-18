@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -184,7 +183,7 @@ const Products = () => {
                     }`}
                   />
                   {product.badge && (
-                    <Badge className="absolute top-2 left-2 bg-coral-600 text-white">
+                    <Badge className="absolute top-2 left-2 bg-nature-600 text-white">
                       {product.badge}
                     </Badge>
                   )}
@@ -194,7 +193,7 @@ const Products = () => {
                   
                   <div className="flex items-center mb-3">
                     <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-honey-400 text-honey-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
                       <span className="text-sm text-gray-400 ml-1">({product.reviews})</span>
                     </div>
@@ -202,7 +201,7 @@ const Products = () => {
                   
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-2">
-                      <span className="font-bold text-coral-600 text-lg">{product.price}</span>
+                      <span className="font-bold text-nature-600 text-lg">{product.price}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
                       )}
@@ -210,10 +209,10 @@ const Products = () => {
                   </div>
                   
                   <div className="flex flex-col gap-2">
-                    <Button asChild className="w-full bg-coral-600 hover:bg-coral-700">
+                    <Button asChild className="w-full bg-nature-600 hover:bg-nature-700">
                       <Link to={`/product/${product.id}`}>View Details</Link>
                     </Button>
-                    <Button variant="outline" className="w-full border-sage-500 text-sage-600 hover:bg-sage-50">
+                    <Button variant="outline" className="w-full">
                       Add to Cart
                     </Button>
                   </div>
@@ -227,7 +226,7 @@ const Products = () => {
               <p className="text-gray-500 text-lg">No products found matching your search</p>
               <Button 
                 variant="outline" 
-                className="mt-4 border-coral-500 text-coral-600 hover:bg-coral-50"
+                className="mt-4"
                 onClick={() => {
                   setSearchTerm("");
                   setFilterCategory("all");
