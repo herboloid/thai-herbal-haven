@@ -27,7 +27,7 @@ const Navigation = () => {
             <div className="flex items-center justify-center w-8 h-8 bg-green-500 rounded-full">
               <Leaf className="h-5 w-5 text-white" />
             </div>
-            <span className="font-semibold text-xl text-gray-800">NaturalHealth</span>
+            <span className="font-semibold text-xl text-gray-800">Siam Healthy</span>
           </Link>
 
           {/* Desktop Navigation */}
