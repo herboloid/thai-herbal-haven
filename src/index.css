@@ -14,7 +14,7 @@
     --popover: 255 255 255;
     --popover-foreground: 68 64 60;
 
-    --primary: 168 85 67;
+    --primary: 190 80 36;
     --primary-foreground: 255 255 255;
 
     --secondary: 245 242 237;
@@ -23,7 +23,7 @@
     --muted: 245 242 237;
     --muted-foreground: 168 162 158;
 
-    --accent: 234 179 120;
+    --accent: 232 165 61;
     --accent-foreground: 92 69 49;
 
     --destructive: 239 68 68;
@@ -31,7 +31,7 @@
 
     --border: 231 229 228;
     --input: 231 229 228;
-    --ring: 168 85 67;
+    --ring: 190 80 36;
 
     --radius: 1rem;
   }
