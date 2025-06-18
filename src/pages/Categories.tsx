@@ -17,91 +17,83 @@ const Categories = () => {
   const categories = [
     {
       id: "vitamins",
-      name: "วิตามินและแร่ธาตุ",
-      nameEn: "Vitamins & Minerals",
-      description: "วิตามินและแร่ธาตุที่จำเป็นต่อร่างกาย",
+      name: "Vitamins & Minerals",
+      description: "Essential vitamins and minerals for your body",
       icon: Pill,
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop",
       productCount: 24,
       color: "bg-blue-100 text-blue-800",
-      popular: ["วิตามินซี", "วิตามินดี", "แคลเซียม", "แมกนีเซียม"]
+      popular: ["Vitamin C", "Vitamin D", "Calcium", "Magnesium"]
     },
     {
       id: "omega",
-      name: "โอเมก้าและน้ำมันปลา",
-      nameEn: "Omega & Fish Oil", 
-      description: "กรดไขมันที่ดีต่อหัวใจและสมอง",
+      name: "Omega & Fish Oil",
+      description: "Healthy fats for heart and brain health",
       icon: Fish,
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=300&fit=crop",
       productCount: 12,
       color: "bg-cyan-100 text-cyan-800",
-      popular: ["โอเมก้า 3", "น้ำมันปลา", "DHA", "EPA"]
+      popular: ["Omega-3", "Fish Oil", "DHA", "EPA"]
     },
     {
       id: "herbs",
-      name: "สมุนไพรธรรมชาติ",
-      nameEn: "Natural Herbs",
-      description: "สารสกัดจากสมุนไพรธรรมชาติ",
+      name: "Natural Herbs",
+      description: "Natural herbal extracts",
       icon: Leaf,
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop",
       productCount: 18,
       color: "bg-green-100 text-green-800",
-      popular: ["ขมิ้น", "กิงโก", "ใบบัวบก", "โสมเกาหลี"]
+      popular: ["Turmeric", "Ginkgo", "Gotu Kola", "Korean Ginseng"]
     },
     {
       id: "energy",
-      name: "เพิ่มพลังงาน",
-      nameEn: "Energy Boost",
-      description: "เสริมพลังงานและลดความเมื่อยล้า",
+      name: "Energy Boost",
+      description: "Enhance energy and reduce fatigue",
       icon: Zap,
       image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=300&fit=crop",
       productCount: 15,
       color: "bg-yellow-100 text-yellow-800",
-      popular: ["โคเอนไซม์ Q10", "โรดิโอลา", "วิตามินบี", "เหล็ก"]
+      popular: ["Coenzyme Q10", "Rhodiola", "B Vitamins", "Iron"]
     },
     {
       id: "heart",
-      name: "สุขภาพหัวใจ",
-      nameEn: "Heart Health",
-      description: "ดูแลระบบหัวใจและหลอดเลือด",
+      name: "Heart Health",
+      description: "Support cardiovascular system",
       icon: Heart,
       image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=400&h=300&fit=crop",
       productCount: 10,
       color: "bg-red-100 text-red-800",
-      popular: ["โอเมก้า 3", "โค Q10", "กระเทียม", "ฮอว์ธอร์น"]
+      popular: ["Omega-3", "CoQ10", "Garlic", "Hawthorn"]
     },
     {
       id: "brain",
-      name: "บำรุงสมอง",
-      nameEn: "Brain Support",
-      description: "เสริมสร้างความจำและสมาธิ",
+      name: "Brain Support",
+      description: "Enhance memory and focus",
       icon: Brain,
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop",
       productCount: 13,
       color: "bg-purple-100 text-purple-800",
-      popular: ["กิงโก", "DHA", "ฟอสฟาติดิลเซรีน", "วิตามินบี12"]
+      popular: ["Ginkgo", "DHA", "Phosphatidylserine", "Vitamin B12"]
     },
     {
       id: "immunity",
-      name: "เสริมภูมิคุ้มกัน",
-      nameEn: "Immune Support",
-      description: "เพิ่มความแข็งแรงของระบบภูมิคุ้มกัน",
+      name: "Immune Support",
+      description: "Strengthen immune system",
       icon: Shield,
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop",
       productCount: 16,
       color: "bg-orange-100 text-orange-800",
-      popular: ["วิตามินซี", "สังกะสี", "เอชินาเซีย", "วิตามินดี"]
+      popular: ["Vitamin C", "Zinc", "Echinacea", "Vitamin D"]
     },
     {
       id: "beauty",
-      name: "ความงามและผิวพรรณ",
-      nameEn: "Beauty & Skin",
-      description: "บำรุงผิวพรรณให้เปล่งปลั่ง",
+      name: "Beauty & Skin",
+      description: "Nourish skin for radiant appearance",
       icon: Sparkles,
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop",
       productCount: 19,
       color: "bg-pink-100 text-pink-800",
-      popular: ["คอลลาเจน", "วิตามินอี", "ไบโอติน", "ฮีโรนิค แอซิด"]
+      popular: ["Collagen", "Vitamin E", "Biotin", "Hyaluronic Acid"]
     }
   ];
 
@@ -110,10 +102,10 @@ const Categories = () => {
       {/* Header */}
       <section className="bg-gradient-to-br from-nature-50 to-earth-50 py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">หมวดหมู่สินค้า</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Product Categories</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            เลือกสินค้าตามหมวดหมู่ที่ตรงกับความต้องการของคุณ 
-            ผลิตภัณฑ์อาหารเสริมธรรมชาติคุณภาพสูง
+            Choose products by category that match your needs. 
+            High-quality natural dietary supplements
           </p>
         </div>
       </section>
@@ -141,7 +133,7 @@ const Categories = () => {
                       </div>
                       <div className="absolute bottom-3 right-3">
                         <Badge className={`${category.color} text-xs`}>
-                          {category.productCount} สินค้า
+                          {category.productCount} products
                         </Badge>
                       </div>
                     </div>
@@ -150,13 +142,12 @@ const Categories = () => {
                       <h3 className="font-bold text-gray-900 mb-1 group-hover:text-nature-600 transition-colors">
                         {category.name}
                       </h3>
-                      <p className="text-sm text-gray-500 mb-2">{category.nameEn}</p>
                       <p className="text-sm text-gray-600 mb-3 line-clamp-2">
                         {category.description}
                       </p>
                       
                       <div className="space-y-2">
-                        <p className="text-xs font-medium text-gray-700">สินค้ายอดนิยม:</p>
+                        <p className="text-xs font-medium text-gray-700">Popular products:</p>
                         <div className="flex flex-wrap gap-1">
                           {category.popular.slice(0, 2).map((item, index) => (
                             <Badge key={index} variant="outline" className="text-xs">
@@ -183,8 +174,8 @@ const Categories = () => {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">หมวดหมู่ยอดนิยม</h2>
-            <p className="text-gray-600">หมวดหมู่สินค้าที่ลูกค้าเลือกซื้อมากที่สุด</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Popular Categories</h2>
+            <p className="text-gray-600">Most purchased product categories by our customers</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -202,7 +193,7 @@ const Categories = () => {
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">{category.description}</p>
                       <Badge className={`${category.color}`}>
-                        {category.productCount} สินค้า
+                        {category.productCount} products
                       </Badge>
                     </CardContent>
                   </Card>
@@ -216,16 +207,16 @@ const Categories = () => {
       {/* CTA Section */}
       <section className="py-12 bg-nature-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">ไม่แน่ใจว่าควรเลือกอะไร?</h2>
+          <h2 className="text-3xl font-bold mb-4">Not sure what to choose?</h2>
           <p className="text-nature-100 mb-6 max-w-2xl mx-auto">
-            ทีมงานผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาเพื่อช่วยเลือกผลิตภัณฑ์ที่เหมาะกับคุณ
+            Our expert team is ready to provide consultation to help you choose the right products for you
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/products" className="bg-white text-nature-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-              ดูสินค้าทั้งหมด
+              View All Products
             </Link>
             <a href="#" className="border border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-nature-600 transition-colors">
-              ติดต่อเราเพื่อปรึกษา
+              Contact Us for Consultation
             </a>
           </div>
         </div>

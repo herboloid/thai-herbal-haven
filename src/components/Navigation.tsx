@@ -10,10 +10,10 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { href: "/", label: "Home", labelTh: "หน้าแรก" },
-    { href: "/products", label: "Supplements", labelTh: "อาหารเสริม" },
-    { href: "/affiliate", label: "Affiliate", labelTh: "แอฟฟิลิเอท" },
-    { href: "/about", label: "About Us", labelTh: "เกี่ยวกับเรา" },
+    { href: "/", label: "Home" },
+    { href: "/products", label: "Supplements" },
+    { href: "/affiliate", label: "Affiliate" },
+    { href: "/about", label: "About Us" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -77,13 +77,13 @@ const Navigation = () => {
                         isActive(item.href) ? "text-green-600" : "text-gray-700"
                       }`}
                     >
-                      {item.labelTh}
+                      {item.label}
                     </Link>
                   ))}
                   <div className="pt-4 border-t">
                     <Button className="w-full mb-3" variant="outline">
                       <Search className="h-4 w-4 mr-2" />
-                      ค้นหาสินค้า
+                      Search Products
                     </Button>
                   </div>
                 </div>

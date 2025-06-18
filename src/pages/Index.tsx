@@ -10,49 +10,43 @@ const Index = () => {
     {
       id: 1,
       name: "Energy Boosters",
-      nameEn: "Energy Boosters", 
       image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
-      description: "เพิ่มพลังงานธรรมชาติ"
+      description: "Natural energy enhancement"
     },
     {
       id: 2,
       name: "Immunity Support",
-      nameEn: "Immunity Support",
       image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=300&h=300&fit=crop",
-      description: "เสริมสร้างภูมิคุ้มกัน"
+      description: "Strengthen immune system"
     },
     {
       id: 3,
       name: "Beauty & Wellness",
-      nameEn: "Beauty & Wellness", 
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
-      description: "ความงามและสุขภาพ"
+      description: "Beauty and wellness support"
     },
     {
       id: 4,
       name: "Joint Health",
-      nameEn: "Joint Health",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&h=300&fit=crop", 
-      description: "ดูแลข้อต่อและกระดูก"
+      description: "Joint and bone care"
     }
   ];
 
   const featuredProducts = [
     {
       id: 1,
-      name: "วิตามินซี ธรรมชาติ",
-      nameEn: "Natural Vitamin C",
-      price: "฿590",
-      originalPrice: "฿690",
+      name: "Natural Vitamin C",
+      price: "$19",
+      originalPrice: "$23",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop",
       rating: 4.8,
       reviews: 124
     },
     {
       id: 2,
-      name: "โอเมก้า 3 จากปลา",
-      nameEn: "Omega-3 Fish Oil",
-      price: "฿850",
+      name: "Omega-3 Fish Oil",
+      price: "$28",
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=400&fit=crop",
       rating: 4.9,
@@ -60,19 +54,17 @@ const Index = () => {
     },
     {
       id: 3,
-      name: "โปรไบโอติกส์ธรรมชาติ",
-      nameEn: "Natural Probiotics",
-      price: "฿720",
-      originalPrice: "฿820",
+      name: "Natural Probiotics",
+      price: "$24",
+      originalPrice: "$27",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=400&fit=crop",
       rating: 4.7,
       reviews: 156
     },
     {
       id: 4,
-      name: "สารสกัดขมิ้น",
-      nameEn: "Turmeric Extract",
-      price: "฿450",
+      name: "Turmeric Extract",
+      price: "$15",
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=400&fit=crop",
       rating: 4.6,
@@ -88,8 +80,8 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-6 leading-tight">
-              Thai Dietary<br />
-              <span className="font-normal text-gray-700">supplements</span>
+              Natural Dietary<br />
+              <span className="font-normal text-gray-700">Supplements</span>
             </h1>
             
             {/* Search Bar */}
@@ -114,7 +106,7 @@ const Index = () => {
               size="lg" 
               className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-full font-medium"
             >
-              <Link to="/products">Search for Supplements</Link>
+              <Link to="/products">Shop Supplements</Link>
             </Button>
           </div>
         </div>
@@ -162,7 +154,7 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-light text-gray-800 mb-4">Featured Products</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              ผลิตภัณฑ์คุณภาพสูงที่ได้รับความนิยมจากลูกค้า
+              High-quality products popular among our customers
             </p>
           </div>
           
@@ -183,7 +175,6 @@ const Index = () => {
                 </div>
                 <CardContent className="p-4">
                   <h3 className="font-medium text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                  <p className="text-sm text-gray-500 mb-2">{product.nameEn}</p>
                   
                   <div className="flex items-center mb-2">
                     <div className="flex items-center">

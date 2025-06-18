@@ -16,45 +16,41 @@ const Products = () => {
   const products = [
     {
       id: 1,
-      name: "วิตามินซี ธรรมชาติ",
-      nameEn: "Natural Vitamin C",
-      price: "฿590",
-      originalPrice: "฿690",
+      name: "Natural Vitamin C",
+      price: "$19",
+      originalPrice: "$23",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop",
       rating: 4.8,
       reviews: 124,
-      badge: "ขายดี",
+      badge: "Best Seller",
       category: "vitamins"
     },
     {
       id: 2,
-      name: "โอเมก้า 3 จากปลา",
-      nameEn: "Omega-3 Fish Oil",
-      price: "฿850",
+      name: "Omega-3 Fish Oil",
+      price: "$28",
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=400&fit=crop",
       rating: 4.9,
       reviews: 89,
-      badge: "แนะนำ",
+      badge: "Recommended",
       category: "omega"
     },
     {
       id: 3,
-      name: "โปรไบโอติกส์ธรรมชาติ",
-      nameEn: "Natural Probiotics",
-      price: "฿720",
-      originalPrice: "฿820",
+      name: "Natural Probiotics",
+      price: "$24",
+      originalPrice: "$27",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=400&fit=crop",
       rating: 4.7,
       reviews: 156,
-      badge: "ใหม่",
+      badge: "New",
       category: "probiotics"
     },
     {
       id: 4,
-      name: "สารสกัดขมิ้น",
-      nameEn: "Turmeric Extract",
-      price: "฿450",
+      name: "Turmeric Extract",
+      price: "$15",
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=400&fit=crop",
       rating: 4.6,
@@ -64,9 +60,8 @@ const Products = () => {
     },
     {
       id: 5,
-      name: "วิตามินดี3 + K2",
-      nameEn: "Vitamin D3 + K2",
-      price: "฿680",
+      name: "Vitamin D3 + K2",
+      price: "$22",
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=400&h=400&fit=crop",
       rating: 4.5,
@@ -76,30 +71,28 @@ const Products = () => {
     },
     {
       id: 6,
-      name: "แมกนีเซียม ธรรมชาติ",
-      nameEn: "Natural Magnesium",
-      price: "฿520",
-      originalPrice: "฿580",
+      name: "Natural Magnesium",
+      price: "$17",
+      originalPrice: "$19",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=400&fit=crop",
       rating: 4.4,
       reviews: 167,
-      badge: "ลดราคา",
+      badge: "Sale",
       category: "minerals"
     }
   ];
 
   const categories = [
-    { value: "all", label: "หมวดหมู่ทั้งหมด" },
-    { value: "vitamins", label: "วิตามิน" },
-    { value: "omega", label: "โอเมก้า" },
-    { value: "probiotics", label: "โปรไบโอติกส์" },
-    { value: "herbs", label: "สมุนไพร" },
-    { value: "minerals", label: "แร่ธาตุ" }
+    { value: "all", label: "All Categories" },
+    { value: "vitamins", label: "Vitamins" },
+    { value: "omega", label: "Omega" },
+    { value: "probiotics", label: "Probiotics" },
+    { value: "herbs", label: "Herbs" },
+    { value: "minerals", label: "Minerals" }
   ];
 
   const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.nameEn.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = filterCategory === "all" || product.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
@@ -109,8 +102,8 @@ const Products = () => {
       {/* Header */}
       <section className="bg-white border-b">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">สินค้าทั้งหมด</h1>
-          <p className="text-gray-600">อาหารเสริมธรรมชาติคุณภาพสูง เพื่อสุขภาพที่ดีกว่า</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">All Products</h1>
+          <p className="text-gray-600">High-quality natural dietary supplements for better health</p>
         </div>
       </section>
 
@@ -122,7 +115,7 @@ const Products = () => {
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <Input
-                  placeholder="ค้นหาสินค้า..."
+                  placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -144,14 +137,14 @@ const Products = () => {
             </div>
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-full sm:w-48">
-                <SelectValue placeholder="เรียงตาม" />
+                <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="popular">ความนิยม</SelectItem>
-                <SelectItem value="price-low">ราคาต่ำ - สูง</SelectItem>
-                <SelectItem value="price-high">ราคาสูง - ต่ำ</SelectItem>
-                <SelectItem value="rating">คะแนนรีวิว</SelectItem>
-                <SelectItem value="newest">ใหม่ล่าสุด</SelectItem>
+                <SelectItem value="popular">Popularity</SelectItem>
+                <SelectItem value="price-low">Price: Low to High</SelectItem>
+                <SelectItem value="price-high">Price: High to Low</SelectItem>
+                <SelectItem value="rating">Rating</SelectItem>
+                <SelectItem value="newest">Newest</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -163,7 +156,7 @@ const Products = () => {
         <div className="container mx-auto px-4">
           <div className="mb-6">
             <p className="text-gray-600">
-              แสดง {filteredProducts.length} จาก {products.length} รายการ
+              Showing {filteredProducts.length} of {products.length} products
             </p>
           </div>
           
@@ -184,7 +177,6 @@ const Products = () => {
                 </div>
                 <CardContent className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                  <p className="text-sm text-gray-500 mb-2">{product.nameEn}</p>
                   
                   <div className="flex items-center mb-3">
                     <div className="flex items-center">
@@ -205,10 +197,10 @@ const Products = () => {
                   
                   <div className="flex flex-col gap-2">
                     <Button asChild className="w-full bg-nature-600 hover:bg-nature-700">
-                      <Link to={`/product/${product.id}`}>ดูรายละเอียด</Link>
+                      <Link to={`/product/${product.id}`}>View Details</Link>
                     </Button>
                     <Button variant="outline" className="w-full">
-                      เพิ่มใส่ตะกร้า
+                      Add to Cart
                     </Button>
                   </div>
                 </CardContent>
@@ -218,7 +210,7 @@ const Products = () => {
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">ไม่พบสินค้าที่ตรงกับการค้นหา</p>
+              <p className="text-gray-500 text-lg">No products found matching your search</p>
               <Button 
                 variant="outline" 
                 className="mt-4"
@@ -227,7 +219,7 @@ const Products = () => {
                   setFilterCategory("all");
                 }}
               >
-                แสดงสินค้าทั้งหมด
+                Show All Products
               </Button>
             </div>
           )}

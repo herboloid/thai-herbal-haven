@@ -26,10 +26,9 @@ const ProductDetail = () => {
   // Mock product data
   const product = {
     id: 1,
-    name: "วิตามินซี ธรรมชาติ",
-    nameEn: "Natural Vitamin C",
-    price: "฿590",
-    originalPrice: "฿690",
+    name: "Natural Vitamin C",
+    price: "$19",
+    originalPrice: "$23",
     images: [
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=600&fit=crop",
       "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=600&fit=crop",
@@ -37,41 +36,41 @@ const ProductDetail = () => {
     ],
     rating: 4.8,
     reviews: 124,
-    badge: "ขายดี",
+    badge: "Best Seller",
     inStock: true,
-    description: "วิตามินซีธรรมชาติจากผลไม้และผักรวม เสริมสร้างภูมิคุ้มกัน ลดความเสี่ยงจากการเจ็บป่วย และช่วยให้ผิวพรรากระจ่างใส",
+    description: "Natural Vitamin C from mixed fruits and vegetables. Strengthens immune system, reduces risk of illness, and helps maintain radiant skin",
     benefits: [
-      "เสริมสร้างระบบภูมิคุ้มกัน",
-      "ต้านอนุมูลอิสระ",
-      "ช่วยให้ผิวพรรากระจ่างใส",
-      "ลดความเมื่อยล้า",
-      "ดูดซึมง่าย ไม่ระคายกระเพาะ"
+      "Strengthens immune system",
+      "Antioxidant protection",
+      "Supports radiant skin",
+      "Reduces fatigue",
+      "Easy absorption, gentle on stomach"
     ],
-    ingredients: "วิตามินซีจากอะเซโรลาเชอร์รี่ 500mg, วิตามินซีจากส้ม 200mg, ไบโอฟลาโวนอยด์ 50mg",
-    dosage: "รับประทานวันละ 1-2 เม็ด หลังอาหาร",
-    warnings: "ไม่ควรรับประทานเกินขนาดที่แนะนำ หากมีอาการแพ้ให้หยุดรับประทาน",
-    size: "60 เม็ด / กระปุก"
+    ingredients: "Vitamin C from Acerola Cherry 500mg, Vitamin C from Orange 200mg, Bioflavonoids 50mg",
+    dosage: "Take 1-2 capsules daily after meals",
+    warnings: "Do not exceed recommended dosage. If allergic reactions occur, discontinue use",
+    size: "60 capsules per bottle"
   };
 
   const relatedProducts = [
     {
       id: 2,
-      name: "โอเมก้า 3 จากปลา",
-      price: "฿850",
+      name: "Omega-3 Fish Oil",
+      price: "$28",
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=300&fit=crop",
       rating: 4.9
     },
     {
       id: 3,
-      name: "โปรไบโอติกส์ธรรมชาติ",
-      price: "฿720",
+      name: "Natural Probiotics",
+      price: "$24",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
       rating: 4.7
     },
     {
       id: 4,
-      name: "สารสกัดขมิ้น",
-      price: "฿450",
+      name: "Turmeric Extract",
+      price: "$15",
       image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=300&h=300&fit=crop",
       rating: 4.6
     }
@@ -79,22 +78,22 @@ const ProductDetail = () => {
 
   const reviews = [
     {
-      name: "คุณสมใจ",
+      name: "Sarah Johnson",
       rating: 5,
-      date: "15 ธันวาคม 2024",
-      comment: "ทานแล้วรู้สึกสดชื่น ไม่ค่อยป่วยเลย แนะนำเลยค่ะ"
+      date: "December 15, 2024",
+      comment: "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
-      name: "คุณมานี",
+      name: "Mike Chen",
       rating: 5,
-      date: "10 ธันวาคม 2024", 
-      comment: "ผิวดีขึ้นมากเลย กินมา 2 เดือนแล้ว จะซื้อต่อ"
+      date: "December 10, 2024", 
+      comment: "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
-      name: "คุณวิชัย",
+      name: "Lisa Wilson",
       rating: 4,
-      date: "5 ธันวาคม 2024",
-      comment: "คุณภาพดี ราคาเหมาะสม จัดส่งเร็ว"
+      date: "December 5, 2024",
+      comment: "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -104,9 +103,9 @@ const ProductDetail = () => {
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-nature-600">หน้าแรก</Link>
+            <Link to="/" className="hover:text-nature-600">Home</Link>
             <span>/</span>
-            <Link to="/products" className="hover:text-nature-600">สินค้า</Link>
+            <Link to="/products" className="hover:text-nature-600">Products</Link>
             <span>/</span>
             <span className="text-gray-900">{product.name}</span>
           </div>
@@ -117,7 +116,7 @@ const ProductDetail = () => {
         <Button asChild variant="ghost" className="mb-6">
           <Link to="/products">
             <ChevronLeft className="h-4 w-4 mr-1" />
-            กลับไปดูสินค้า
+            Back to Products
           </Link>
         </Button>
 
@@ -155,17 +154,16 @@ const ProductDetail = () => {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-              <p className="text-lg text-gray-600">{product.nameEn}</p>
             </div>
 
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
                 <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                 <span className="ml-1 font-semibold">{product.rating}</span>
-                <span className="ml-1 text-gray-600">({product.reviews} รีวิว)</span>
+                <span className="ml-1 text-gray-600">({product.reviews} reviews)</span>
               </div>
               <span className={`text-sm ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
-                {product.inStock ? '✓ มีสินค้า' : '✗ สินค้าหมด'}
+                {product.inStock ? '✓ In Stock' : '✗ Out of Stock'}
               </span>
             </div>
 
@@ -176,7 +174,7 @@ const ProductDetail = () => {
               )}
               {product.originalPrice && (
                 <Badge className="bg-red-100 text-red-800">
-                  ประหยัด ฿{parseInt(product.originalPrice.replace('฿', '')) - parseInt(product.price.replace('฿', ''))}
+                  Save ${parseInt(product.originalPrice.replace('$', '')) - parseInt(product.price.replace('$', ''))}
                 </Badge>
               )}
             </div>
@@ -184,7 +182,7 @@ const ProductDetail = () => {
             <p className="text-gray-700 leading-relaxed">{product.description}</p>
 
             <div className="space-y-3">
-              <h3 className="font-semibold text-gray-900">ประโยชน์:</h3>
+              <h3 className="font-semibold text-gray-900">Benefits:</h3>
               <ul className="space-y-1">
                 {product.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-center text-sm text-gray-700">
@@ -197,7 +195,7 @@ const ProductDetail = () => {
 
             <div className="border rounded-lg p-4 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-medium">จำนวน:</span>
+                <span className="font-medium">Quantity:</span>
                 <div className="flex items-center space-x-3">
                   <Button
                     size="sm"
@@ -220,15 +218,15 @@ const ProductDetail = () => {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button className="flex-1 bg-nature-600 hover:bg-nature-700">
                   <ShoppingCart className="h-4 w-4 mr-2" />
-                  เพิ่มลงตะกร้า
+                  Add to Cart
                 </Button>
                 <Button variant="outline">
                   <Heart className="h-4 w-4 mr-2" />
-                  ถูกใจ
+                  Wishlist
                 </Button>
                 <Button variant="outline">
                   <Share2 className="h-4 w-4 mr-2" />
-                  แชร์
+                  Share
                 </Button>
               </div>
             </div>
@@ -237,15 +235,15 @@ const ProductDetail = () => {
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
                 <Truck className="h-6 w-6 mx-auto text-nature-600 mb-1" />
-                <p className="text-xs text-gray-600">จัดส่งฟรี</p>
+                <p className="text-xs text-gray-600">Free Shipping</p>
               </div>
               <div className="text-center">
                 <Shield className="h-6 w-6 mx-auto text-nature-600 mb-1" />
-                <p className="text-xs text-gray-600">การันตีคุณภาพ</p>
+                <p className="text-xs text-gray-600">Quality Guarantee</p>
               </div>
               <div className="text-center">
                 <Award className="h-6 w-6 mx-auto text-nature-600 mb-1" />
-                <p className="text-xs text-gray-600">รับรองมาตรฐาน</p>
+                <p className="text-xs text-gray-600">Certified Standards</p>
               </div>
             </div>
           </div>
@@ -255,23 +253,23 @@ const ProductDetail = () => {
         <Card className="mb-12">
           <Tabs defaultValue="details" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="details">รายละเอียดสินค้า</TabsTrigger>
-              <TabsTrigger value="ingredients">ส่วนประกอบ</TabsTrigger>
-              <TabsTrigger value="reviews">รีวิว ({product.reviews})</TabsTrigger>
+              <TabsTrigger value="details">Product Details</TabsTrigger>
+              <TabsTrigger value="ingredients">Ingredients</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews ({product.reviews})</TabsTrigger>
             </TabsList>
             
             <TabsContent value="details" className="p-6">
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">คำแนะนำในการรับประทาน:</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Dosage Instructions:</h3>
                   <p className="text-gray-700">{product.dosage}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">ขนาดบรรจุ:</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Package Size:</h3>
                   <p className="text-gray-700">{product.size}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">ข้อควรระวัง:</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Warnings:</h3>
                   <p className="text-gray-700">{product.warnings}</p>
                 </div>
               </div>
@@ -279,7 +277,7 @@ const ProductDetail = () => {
             
             <TabsContent value="ingredients" className="p-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">ส่วนประกอบ:</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">Ingredients:</h3>
                 <p className="text-gray-700">{product.ingredients}</p>
               </div>
             </TabsContent>
@@ -314,7 +312,7 @@ const ProductDetail = () => {
 
         {/* Related Products */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">สินค้าที่เกี่ยวข้อง</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {relatedProducts.map((product) => (
               <Card key={product.id} className="group hover:shadow-lg transition-shadow">
@@ -335,7 +333,7 @@ const ProductDetail = () => {
                     </div>
                   </div>
                   <Button asChild className="w-full mt-3" variant="outline">
-                    <Link to={`/product/${product.id}`}>ดูรายละเอียด</Link>
+                    <Link to={`/product/${product.id}`}>View Details</Link>
                   </Button>
                 </CardContent>
               </Card>
