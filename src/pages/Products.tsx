@@ -174,11 +174,13 @@ const Products = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <Card key={product.id} className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white">
-                <div className="relative">
+                <div className="relative overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
+                      product.id === 7 ? 'object-contain bg-white p-2' : 'object-cover'
+                    }`}
                   />
                   {product.badge && (
                     <Badge className="absolute top-2 left-2 bg-nature-600 text-white">

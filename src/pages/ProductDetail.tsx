@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -164,11 +165,13 @@ const ProductDetail = () => {
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {/* Product Images */}
           <div className="space-y-4">
-            <div className="relative">
+            <div className="relative overflow-hidden rounded-lg">
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
-                className="w-full h-96 object-cover rounded-lg"
+                className={`w-full h-96 rounded-lg ${
+                  id === "7" ? 'object-contain bg-white p-4' : 'object-cover'
+                }`}
               />
               {product.badge && (
                 <Badge className="absolute top-4 left-4 bg-nature-600 text-white">
@@ -185,7 +188,13 @@ const ProductDetail = () => {
                     selectedImage === index ? 'border-nature-600' : 'border-gray-200'
                   }`}
                 >
-                  <img src={image} alt="" className="w-full h-full object-cover" />
+                  <img 
+                    src={image} 
+                    alt="" 
+                    className={`w-full h-full ${
+                      id === "7" ? 'object-contain bg-white p-1' : 'object-cover'
+                    }`} 
+                  />
                 </button>
               ))}
             </div>
