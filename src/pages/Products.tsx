@@ -213,7 +213,7 @@ const Products = () => {
                     <Button asChild className="w-full bg-coral-600 hover:bg-coral-700">
                       <Link to={`/product/${product.id}`}>View Details</Link>
                     </Button>
-                    <Button variant="outline" className="w-full border-coral-500 text-coral-600 hover:bg-coral-50">
+                    <Button variant="outline" className="w-full border-sage-500 text-sage-600 hover:bg-sage-50">
                       Add to Cart
                     </Button>
                   </div>
