@@ -1,17 +1,18 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Leaf, ShieldCheck, Truck, Plant } from "lucide-react";
+import { Leaf, ShieldCheck, Truck, Sprout } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
+    <div className="min-h-screen bg-gradient-to-br from-peach-50 to-lavender-50">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 px-4">
         <div className="container mx-auto text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-forest-600 to-sage-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-terracotta-600 to-olive-600 bg-clip-text text-transparent">
               Premium Natural Supplements
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -20,7 +21,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-forest-500 hover:bg-forest-600 text-white px-8 py-3 text-lg"
+                className="bg-terracotta-500 hover:bg-terracotta-600 text-white px-8 py-3 text-lg"
                 asChild
               >
                 <Link to="/products">Shop Now</Link>
@@ -28,7 +29,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-forest-500 text-forest-600 hover:bg-forest-50 px-8 py-3 text-lg"
+                className="border-terracotta-500 text-terracotta-600 hover:bg-terracotta-50 px-8 py-3 text-lg"
                 asChild
               >
                 <Link to="/about">Learn More</Link>
@@ -50,9 +51,9 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 border-sage-200">
+              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 border-peach-200">
                 <CardContent className="p-6">
-                  <div className="aspect-square mb-4 rounded-lg overflow-hidden bg-sage-50 p-4">
+                  <div className="aspect-square mb-4 rounded-lg overflow-hidden bg-peach-50 p-4">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -60,12 +61,12 @@ const Index = () => {
                     />
                   </div>
                   <h3 className="font-semibold text-lg mb-2 text-gray-800">{product.name}</h3>
-                  <p className="text-sage-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+                  <p className="text-olive-600 text-sm mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-forest-600">${product.price}</span>
+                    <span className="text-2xl font-bold text-terracotta-600">${product.price}</span>
                     <Button 
                       size="sm" 
-                      className="bg-forest-500 hover:bg-forest-600"
+                      className="bg-terracotta-500 hover:bg-terracotta-600"
                       asChild
                     >
                       <Link to={`/product/${product.id}`}>View Details</Link>
@@ -79,7 +80,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 px-4 bg-sage-50">
+      <section className="py-16 px-4 bg-peach-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Why Choose Siam Healthy?</h2>
@@ -88,14 +89,14 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-forest-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-forest-200 transition-colors">
-                  <feature.icon className="h-8 w-8 text-forest-600" />
+                <div className="w-16 h-16 bg-terracotta-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-terracotta-200 transition-colors">
+                  <feature.icon className="h-8 w-8 text-terracotta-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">{feature.title}</h3>
-                <p className="text-sage-600 leading-relaxed">{feature.description}</p>
+                <p className="text-olive-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -103,17 +104,17 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-forest-600 to-sage-600">
+      <section className="py-16 px-4 bg-gradient-to-r from-terracotta-600 to-olive-600">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Ready to Start Your Wellness Journey?
           </h2>
-          <p className="text-forest-100 mb-8 text-lg max-w-2xl mx-auto">
+          <p className="text-terracotta-100 mb-8 text-lg max-w-2xl mx-auto">
             Join thousands of satisfied customers who have transformed their health with our premium supplements
           </p>
           <Button 
             size="lg" 
-            className="bg-white text-forest-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+            className="bg-white text-terracotta-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
             asChild
           >
             <Link to="/products">Explore All Products</Link>
@@ -157,7 +158,7 @@ const features = [
   {
     title: "Sustainable Practices",
     description: "We're committed to eco-friendly farming and ethical sourcing to protect our planet.",
-    icon: Plant,
+    icon: Sprout,
   },
   {
     title: "Secure Checkout",
