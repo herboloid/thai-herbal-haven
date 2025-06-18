@@ -76,8 +76,8 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Search */}
-      <section className="relative bg-gradient-to-br from-green-50 via-green-100 to-green-200 py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-300/20 to-green-400/20"></div>
+      <section className="relative bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-20 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-300/20 to-purple-400/20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-6 leading-tight">
@@ -95,7 +95,7 @@ const Index = () => {
                 />
                 <Button 
                   size="icon"
-                  className="absolute right-2 top-2 h-10 w-10 rounded-full bg-gray-800 hover:bg-gray-700"
+                  className="absolute right-2 top-2 h-10 w-10 rounded-full bg-indigo-600 hover:bg-indigo-700"
                 >
                   <Search className="h-5 w-5" />
                 </Button>
@@ -105,7 +105,7 @@ const Index = () => {
             <Button 
               asChild 
               size="lg" 
-              className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-full font-medium"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-medium"
             >
               <Link to="/products">Shop Supplements</Link>
             </Button>
@@ -138,7 +138,7 @@ const Index = () => {
                     asChild
                     variant="outline" 
                     size="sm"
-                    className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
+                    className="rounded-full bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700 hover:border-indigo-700"
                   >
                     <Link to="/categories">Best Sellers</Link>
                   </Button>
@@ -198,7 +198,7 @@ const Index = () => {
                       asChild
                       variant="outline" 
                       size="sm"
-                      className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
+                      className="rounded-full bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700 hover:border-indigo-700"
                     >
                       <Link to={`/product/${product.id}`}>
                         {product.badge || "Best Seller"}
