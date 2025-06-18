@@ -20,27 +20,27 @@ const Affiliate = () => {
   const benefits = [
     {
       icon: DollarSign,
-      title: "คอมมิชชั่นสูง",
-      description: "รับคอมมิชชั่น 15-25% จากยอดขายทุกครั้ง",
-      highlight: "สูงสุด 25%"
+      title: "High Commission",
+      description: "Earn 15-25% commission on every sale",
+      highlight: "Up to 25%"
     },
     {
       icon: TrendingUp,
-      title: "โบนัสเพิ่มเติม",
-      description: "โบนัสพิเศษเมื่อยอดขายเกินเป้าหมาย",
-      highlight: "โบนัส 5%"
+      title: "Bonus Rewards",
+      description: "Special bonuses when you exceed sales targets",
+      highlight: "5% Bonus"
     },
     {
       icon: Users,
-      title: "ทีมงานสนับสนุน",
-      description: "ทีมงานคอยช่วยเหลือและให้คำปรึกษา",
+      title: "Support Team",
+      description: "Dedicated team ready to help and advise",
       highlight: "24/7"
     },
     {
       icon: Gift,
-      title: "ผลิตภัณฑ์ฟรี",
-      description: "รับสินค้าตัวอย่างสำหรับทดลองและรีวิว",
-      highlight: "ฟรี!"
+      title: "Free Products",
+      description: "Receive sample products for testing and reviews",
+      highlight: "Free!"
     }
   ];
 
@@ -48,46 +48,46 @@ const Affiliate = () => {
     {
       name: "Bronze",
       color: "bg-orange-100 text-orange-800",
-      minSales: "฿10,000",
+      minSales: "$1,000",
       commission: "15%",
-      perks: ["คอมมิชชั่น 15%", "สินค้าตัวอย่างเดือนละ 1 ชิ้น", "รายงานยอดขายรายสัปดาห์"]
+      perks: ["15% Commission", "1 sample product per month", "Weekly sales reports"]
     },
     {
       name: "Silver",
       color: "bg-gray-100 text-gray-800",
-      minSales: "฿25,000",
+      minSales: "$2,500",
       commission: "20%",
-      perks: ["คอมมิชชั่น 20%", "สินค้าตัวอย่างเดือนละ 2 ชิ้น", "รายงานยอดขายรายวัน", "โค้ดส่วนลด 10%"]
+      perks: ["20% Commission", "2 sample products per month", "Daily sales reports", "10% discount code"]
     },
     {
       name: "Gold",
       color: "bg-yellow-100 text-yellow-800",
-      minSales: "฿50,000",
+      minSales: "$5,000",
       commission: "25%",
-      perks: ["คอมมิชชั่น 25%", "สินค้าตัวอย่างไม่จำกัด", "รายงานแบบเรียลไทม์", "โค้ดส่วนลด 15%", "เข้าร่วมงานพิเศษ"]
+      perks: ["25% Commission", "Unlimited sample products", "Real-time reporting", "15% discount code", "Exclusive events access"]
     }
   ];
 
   const steps = [
     {
       step: "1",
-      title: "สมัครสมาชิก",
-      description: "กรอกข้อมูลและส่งใบสมัครแอฟฟิลิเอท"
+      title: "Sign Up",
+      description: "Fill out the application form and submit your affiliate request"
     },
     {
       step: "2", 
-      title: "รอการอนุมัติ",
-      description: "ทีมงานจะตรวจสอบและอนุมัติภายใน 2-3 วันทำการ"
+      title: "Wait for Approval",
+      description: "Our team will review and approve within 2-3 business days"
     },
     {
       step: "3",
-      title: "รับลิงก์พิเศษ",
-      description: "รับลิงก์แอฟฟิลิเอทและโค้ดส่วนลดส่วนตัว"
+      title: "Get Your Links",
+      description: "Receive your affiliate links and personal discount codes"
     },
     {
       step: "4",
-      title: "เริ่มแชร์และขาย",
-      description: "แชร์สินค้าและเริ่มสร้างรายได้"
+      title: "Start Sharing",
+      description: "Share products and start earning income"
     }
   ];
 
@@ -99,22 +99,22 @@ const Affiliate = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="bg-white/20 text-white mb-4">
               <Star className="h-4 w-4 mr-1" />
-              โปรแกรมพาร์ทเนอร์
+              Partner Program
             </Badge>
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              ร่วมเป็น
-              <span className="text-nature-200 block">แอฟฟิลิเอทกับเรา</span>
+              Become Our
+              <span className="text-nature-200 block">Affiliate Partner</span>
             </h1>
             <p className="text-xl text-nature-100 mb-8 leading-relaxed">
-              สร้างรายได้เสริมด้วยการแนะนำสินค้าอาหารเสริมธรรมชาติคุณภาพสูง 
-              รับคอมมิชชั่นสูงสุด 25% ทุกยอดขาย
+              Create additional income by recommending high-quality natural supplements. 
+              Earn up to 25% commission on every sale.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-nature-600 hover:bg-gray-100">
-                สมัครเลย ฟรี!
+                Join Now - Free!
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-nature-600">
-                เรียนรู้เพิ่มเติม
+                Learn More
               </Button>
             </div>
           </div>
@@ -125,9 +125,9 @@ const Affiliate = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">ประโยชน์ที่คุณจะได้รับ</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Benefits You'll Receive</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              เราให้มากกว่าแค่คอมมิชชั่น มาดูว่าการเป็นแอฟฟิลิเอทกับเราจะได้อะไรบ้าง
+              We offer more than just commission. See what you'll get as our affiliate partner.
             </p>
           </div>
           
@@ -157,8 +157,8 @@ const Affiliate = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">ระดับคอมมิชชั่น</h2>
-            <p className="text-gray-600">ยิ่งขายมากยิ่งได้คอมมิชชั่นสูง</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Commission Tiers</h2>
+            <p className="text-gray-600">The more you sell, the higher your commission rate</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -166,7 +166,7 @@ const Affiliate = () => {
               <Card key={index} className={`relative overflow-hidden ${index === 1 ? 'ring-2 ring-nature-500 scale-105' : ''}`}>
                 {index === 1 && (
                   <div className="absolute top-0 left-0 right-0 bg-nature-500 text-white text-center py-1 text-sm font-medium">
-                    แนะนำ
+                    Recommended
                   </div>
                 )}
                 <CardHeader className="text-center pb-4">
@@ -174,7 +174,7 @@ const Affiliate = () => {
                     {tier.name}
                   </Badge>
                   <CardTitle className="text-2xl">{tier.commission}</CardTitle>
-                  <p className="text-gray-600">ยอดขายขั้นต่ำ {tier.minSales}/เดือน</p>
+                  <p className="text-gray-600">Minimum sales {tier.minSales}/month</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
@@ -196,8 +196,8 @@ const Affiliate = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">วิธีการเริ่มต้น</h2>
-            <p className="text-gray-600">เริ่มต้นง่าย ๆ ใน 4 ขั้นตอน</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">How to Get Started</h2>
+            <p className="text-gray-600">Easy start in just 4 simple steps</p>
           </div>
           
           <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
@@ -223,19 +223,19 @@ const Affiliate = () => {
                 <div className="w-12 h-12 bg-nature-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Calculator className="h-6 w-6 text-nature-600" />
                 </div>
-                <CardTitle className="text-2xl">คำนวณรายได้ที่คุณจะได้</CardTitle>
-                <p className="text-gray-600">ลองคำนวณดูว่าคุณจะได้รายได้เท่าไหร่จากการเป็นแอฟฟิลิเอท</p>
+                <CardTitle className="text-2xl">Calculate Your Potential Earnings</CardTitle>
+                <p className="text-gray-600">Try calculating how much you could earn as our affiliate</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    ยอดขายต่อเดือน (บาท)
+                    Monthly Sales ($)
                   </label>
-                  <Input placeholder="เช่น 50,000" />
+                  <Input placeholder="e.g. 5,000" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    ระดับคอมมิชชั่น
+                    Commission Tier
                   </label>
                   <select className="w-full p-2 border rounded-md">
                     <option>Bronze - 15%</option>
@@ -245,16 +245,16 @@ const Affiliate = () => {
                 </div>
                 <div className="bg-nature-50 p-4 rounded-lg">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium">รายได้ต่อเดือน:</span>
-                    <span className="text-2xl font-bold text-nature-600">฿7,500</span>
+                    <span className="font-medium">Monthly Income:</span>
+                    <span className="text-2xl font-bold text-nature-600">$750</span>
                   </div>
                   <div className="flex justify-between items-center text-sm text-gray-600 mt-1">
-                    <span>รายได้ต่อปี:</span>
-                    <span>฿90,000</span>
+                    <span>Annual Income:</span>
+                    <span>$9,000</span>
                   </div>
                 </div>
                 <Button className="w-full bg-nature-600 hover:bg-nature-700">
-                  สมัครเลยตอนนี้
+                  Apply Now
                 </Button>
               </CardContent>
             </Card>
@@ -267,8 +267,8 @@ const Affiliate = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">สมัครแอฟฟิลิเอท</h2>
-              <p className="text-gray-600">กรอกข้อมูลด้านล่างเพื่อเริ่มต้นการเป็นพาร์ทเนอร์กับเรา</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Apply for Affiliate Program</h2>
+              <p className="text-gray-600">Fill out the form below to start your partnership with us</p>
             </div>
             
             <Card>
@@ -277,61 +277,61 @@ const Affiliate = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        ชื่อ *
+                        First Name *
                       </label>
-                      <Input placeholder="ชื่อของคุณ" />
+                      <Input placeholder="Your first name" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        นามสกุล *
+                        Last Name *
                       </label>
-                      <Input placeholder="นามสกุลของคุณ" />
+                      <Input placeholder="Your last name" />
                     </div>
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      อีเมล *
+                      Email *
                     </label>
-                    <Input type="email" placeholder="อีเมลของคุณ" />
+                    <Input type="email" placeholder="Your email address" />
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      เบอร์โทรศัพท์ *
+                      Phone Number *
                     </label>
-                    <Input placeholder="เบอร์โทรศัพท์" />
+                    <Input placeholder="Your phone number" />
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      ช่องทางการตลาดหลัก *
+                      Primary Marketing Channel *
                     </label>
                     <select className="w-full p-2 border rounded-md">
-                      <option>เลือกช่องทาง</option>
+                      <option>Select channel</option>
                       <option>Facebook</option>
                       <option>Instagram</option>
                       <option>TikTok</option>
                       <option>YouTube</option>
-                      <option>เว็บไซต์ส่วนตัว</option>
+                      <option>Personal Website</option>
                       <option>Line</option>
-                      <option>อื่น ๆ</option>
+                      <option>Other</option>
                     </select>
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      ลิงก์โซเชียลมีเดียหรือเว็บไซต์
+                      Social Media or Website Link
                     </label>
                     <Input placeholder="https://..." />
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      เล่าให้ฟังหน่อยว่าทำไมอยากเป็นแอฟฟิลิเอทกับเรา
+                      Tell us why you want to become our affiliate
                     </label>
                     <Textarea 
-                      placeholder="บอกเราเกี่ยวกับประสบการณ์หรือความสนใจในด้านสุขภาพ..."
+                      placeholder="Tell us about your experience or interest in health and wellness..."
                       rows={4}
                     />
                   </div>
@@ -339,13 +339,13 @@ const Affiliate = () => {
                   <div className="flex items-start space-x-2">
                     <input type="checkbox" className="mt-1" />
                     <label className="text-sm text-gray-600">
-                      ยอมรับ <a href="#" className="text-nature-600 hover:underline">ข้อกำหนดและเงื่อนไข</a> 
-                      และ <a href="#" className="text-nature-600 hover:underline">นโยบายความเป็นส่วนตัว</a>
+                      I agree to the <a href="#" className="text-nature-600 hover:underline">Terms and Conditions</a> 
+                      and <a href="#" className="text-nature-600 hover:underline">Privacy Policy</a>
                     </label>
                   </div>
                   
                   <Button className="w-full bg-nature-600 hover:bg-nature-700 text-lg py-3">
-                    ส่งใบสมัคร
+                    Submit Application
                   </Button>
                 </form>
               </CardContent>
@@ -358,22 +358,22 @@ const Affiliate = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">คำถามที่พบบ่อย</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
           </div>
           
           <div className="max-w-3xl mx-auto space-y-4">
             {[
               {
-                question: "เงื่อนไขในการสมัครเป็นแอฟฟิลิเอทคืออะไร?",
-                answer: "ต้องมีช่องทางการตลาดออนไลน์ เช่น โซเชียลมีเดีย เว็บไซต์ หรือกลุ่มลูกค้า และมีความสนใจในผลิตภัณฑ์อาหารเสริมธรรมชาติ"
+                question: "What are the requirements to become an affiliate?",
+                answer: "You need to have an online marketing channel such as social media, website, or customer groups, and a genuine interest in natural health supplements."
               },
               {
-                question: "คอมมิชชั่นจ่ายเมื่อไหร่?",
-                answer: "จ่ายทุกวันที่ 15 ของเดือนถัดไป สำหรับยอดขายของเดือนก่อนหน้า โดยโอนเข้าบัญชีธนาคารที่ลงทะเบียนไว้"
+                question: "When are commissions paid?",
+                answer: "Commissions are paid on the 15th of each month for the previous month's sales, transferred directly to your registered bank account."
               },
               {
-                question: "มีค่าใช้จ่ายในการสมัครไหม?",
-                answer: "ไม่มีค่าใช้จ่ายใดๆ ในการสมัครเป็นแอฟฟิลิเอท สมัครฟรี 100%"
+                question: "Is there any cost to join the affiliate program?",
+                answer: "No, there are no fees to join our affiliate program. It's completely free to apply and participate."
               }
             ].map((faq, index) => (
               <Card key={index}>
