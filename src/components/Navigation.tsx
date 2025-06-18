@@ -3,10 +3,14 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Search, ShoppingCart, User, Leaf } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Menu, Search, ShoppingCart, User, Leaf, X } from "lucide-react";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [cartItems, setCartItems] = useState(3); // Example cart count
   const location = useLocation();
 
   const navItems = [
@@ -17,6 +21,31 @@ const Navigation = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      // Navigate to products with search query
+      window.location.href = `/products?search=${encodeURIComponent(searchTerm)}`;
+      setIsSearchOpen(false);
+      setSearchTerm("");
+    }
+  };
+
+  const handleCartClick = () => {
+    // For now, just show an alert. In a real app, this would open cart sidebar
+    alert(`You have ${cartItems} items in your cart`);
+  };
+
+  const handleUserClick = () => {
+    // For now, just show login options. In a real app, this would handle authentication
+    const isLoggedIn = false; // This would come from auth context
+    if (isLoggedIn) {
+      alert("User profile menu");
+    } else {
+      alert("Please log in to access your account");
+    }
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
@@ -49,13 +78,37 @@ const Navigation = () => {
 
           {/* Right Actions */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" className="hidden sm:flex">
+            {/* Search Button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="hidden sm:flex relative"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
               <Search className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm">
+
+            {/* Cart Button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="relative"
+              onClick={handleCartClick}
+            >
               <ShoppingCart className="h-4 w-4" />
+              {cartItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItems}
+                </span>
+              )}
             </Button>
-            <Button variant="ghost" size="sm">
+
+            {/* User Button */}
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={handleUserClick}
+            >
               <User className="h-4 w-4" />
             </Button>
 
@@ -81,9 +134,13 @@ const Navigation = () => {
                     </Link>
                   ))}
                   <div className="pt-4 border-t">
-                    <Button className="w-full mb-3" variant="outline">
-                      <Search className="h-4 w-4 mr-2" />
-                      Search Products
+                    <Button className="w-full mb-3" variant="outline" onClick={handleCartClick}>
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Cart ({cartItems})
+                    </Button>
+                    <Button className="w-full mb-3" variant="outline" onClick={handleUserClick}>
+                      <User className="h-4 w-4 mr-2" />
+                      Account
                     </Button>
                   </div>
                 </div>
@@ -91,6 +148,35 @@ const Navigation = () => {
             </Sheet>
           </div>
         </div>
+
+        {/* Search Bar (appears when search button is clicked) */}
+        {isSearchOpen && (
+          <div className="border-t bg-white py-4">
+            <form onSubmit={handleSearch} className="flex items-center space-x-2">
+              <div className="flex-1 relative">
+                <Input
+                  type="text"
+                  placeholder="Search for supplements..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full"
+                  autoFocus
+                />
+              </div>
+              <Button type="submit" size="sm">
+                <Search className="h-4 w-4" />
+              </Button>
+              <Button 
+                type="button" 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setIsSearchOpen(false)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </form>
+          </div>
+        )}
       </div>
     </nav>
   );
