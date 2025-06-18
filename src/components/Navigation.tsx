@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -5,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Menu, Search, ShoppingCart, User, Leaf, X, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -19,9 +21,9 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [cartItems, setCartItems] = useState(3);
   const location = useLocation();
   const { user, logout } = useAuth();
+  const { state: cartState } = useCart();
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -39,10 +41,6 @@ const Navigation = () => {
       setIsSearchOpen(false);
       setSearchTerm("");
     }
-  };
-
-  const handleCartClick = () => {
-    alert(`You have ${cartItems} items in your cart`);
   };
 
   const handleLogout = () => {
@@ -95,18 +93,15 @@ const Navigation = () => {
             </Button>
 
             {/* Cart Button */}
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="relative"
-              onClick={handleCartClick}
-            >
-              <ShoppingCart className="h-4 w-4" />
-              {cartItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartItems}
-                </span>
-              )}
+            <Button asChild variant="ghost" size="sm" className="relative">
+              <Link to="/cart">
+                <ShoppingCart className="h-4 w-4" />
+                {cartState.totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartState.totalItems}
+                  </span>
+                )}
+              </Link>
             </Button>
 
             {/* User Button */}
@@ -176,9 +171,11 @@ const Navigation = () => {
                     </Link>
                   ))}
                   <div className="pt-4 border-t">
-                    <Button className="w-full mb-3" variant="outline" onClick={handleCartClick}>
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      Cart ({cartItems})
+                    <Button asChild className="w-full mb-3" variant="outline">
+                      <Link to="/cart" onClick={() => setIsOpen(false)}>
+                        <ShoppingCart className="h-4 w-4 mr-2" />
+                        Cart ({cartState.totalItems})
+                      </Link>
                     </Button>
                     {user ? (
                       <>

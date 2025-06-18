@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,11 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Star, Search, Filter } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popular");
   const [filterCategory, setFilterCategory] = useState("all");
+  const { addItem } = useCart();
 
   const products = [
     {
@@ -107,6 +110,16 @@ const Products = () => {
     const matchesCategory = filterCategory === "all" || product.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const handleAddToCart = (product: typeof products[0]) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      originalPrice: product.originalPrice || undefined,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -212,7 +225,11 @@ const Products = () => {
                     <Button asChild className="w-full bg-nature-600 hover:bg-nature-700">
                       <Link to={`/product/${product.id}`}>View Details</Link>
                     </Button>
-                    <Button variant="outline" className="w-full">
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => handleAddToCart(product)}
+                    >
                       Add to Cart
                     </Button>
                   </div>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -17,11 +16,13 @@ import {
   Plus,
   Minus
 } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addItem } = useCart();
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
@@ -93,6 +94,19 @@ const ProductDetail = () => {
   };
 
   const product = getProductData(id || "1");
+
+  const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0],
+        originalPrice: product.originalPrice,
+      });
+    }
+    setQuantity(1);
+  };
 
   const relatedProducts = [
     {
@@ -280,7 +294,10 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button className="flex-1 bg-nature-600 hover:bg-nature-700">
+                <Button 
+                  className="flex-1 bg-nature-600 hover:bg-nature-700"
+                  onClick={handleAddToCart}
+                >
                   <ShoppingCart className="h-4 w-4 mr-2" />
                   Add to Cart
                 </Button>
