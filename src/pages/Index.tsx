@@ -2,10 +2,41 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Star, Truck, Shield, Award, ArrowRight, Heart, Leaf } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Search, Star } from "lucide-react";
 
 const Index = () => {
+  const categories = [
+    {
+      id: 1,
+      name: "Energy Boosters",
+      nameEn: "Energy Boosters", 
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
+      description: "เพิ่มพลังงานธรรมชาติ"
+    },
+    {
+      id: 2,
+      name: "Immunity Support",
+      nameEn: "Immunity Support",
+      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=300&h=300&fit=crop",
+      description: "เสริมสร้างภูมิคุ้มกัน"
+    },
+    {
+      id: 3,
+      name: "Beauty & Wellness",
+      nameEn: "Beauty & Wellness", 
+      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
+      description: "ความงามและสุขภาพ"
+    },
+    {
+      id: 4,
+      name: "Joint Health",
+      nameEn: "Joint Health",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&h=300&fit=crop", 
+      description: "ดูแลข้อต่อและกระดูก"
+    }
+  ];
+
   const featuredProducts = [
     {
       id: 1,
@@ -15,8 +46,7 @@ const Index = () => {
       originalPrice: "฿690",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop",
       rating: 4.8,
-      reviews: 124,
-      badge: "ขายดี"
+      reviews: 124
     },
     {
       id: 2,
@@ -26,8 +56,7 @@ const Index = () => {
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=400&fit=crop",
       rating: 4.9,
-      reviews: 89,
-      badge: "แนะนำ"
+      reviews: 89
     },
     {
       id: 3,
@@ -37,8 +66,7 @@ const Index = () => {
       originalPrice: "฿820",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=400&fit=crop",
       rating: 4.7,
-      reviews: 156,
-      badge: "ใหม่"
+      reviews: 156
     },
     {
       id: 4,
@@ -48,105 +76,82 @@ const Index = () => {
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=400&fit=crop",
       rating: 4.6,
-      reviews: 203,
-      badge: null
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: Shield,
-      title: "คุณภาพมาตรฐาน",
-      description: "ผลิตภัณฑ์ผ่านการรับรองมาตรฐานสากล FDA และ GMP"
-    },
-    {
-      icon: Leaf,
-      title: "ธรรมชาติ 100%",
-      description: "วัตถุดิบธรรมชาติล้วน ไม่มีสารเคมีที่เป็นอันตราย"
-    },
-    {
-      icon: Truck,
-      title: "จัดส่งรวดเร็ว",
-      description: "จัดส่งฟรีทั่วประเทศ ได้รับภายใน 1-2 วันทำการ"
-    },
-    {
-      icon: Award,
-      title: "การันตีคุณภาพ",
-      description: "รับประกันความพึงพอใจ คืนเงิน 100% หากไม่พอใจ"
+      reviews: 203
     }
   ];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-nature-50 to-earth-50 py-16 lg:py-24">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-fade-in">
-              <Badge className="bg-nature-100 text-nature-700 hover:bg-nature-200">
-                🌿 สุขภาพดี เริ่มต้นที่นี่
-              </Badge>
-              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                อาหารเสริมธรรมชาติ
-                <span className="text-nature-600 block">คุณภาพพรีเมียม</span>
-              </h1>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                ดูแลสุขภาพด้วยผลิตภัณฑ์ธรรมชาติคุณภาพสูง ที่ได้รับการคัดสรรมาอย่างดีจากธรรมชาติ 
-                เพื่อสุขภาพที่ดีกว่าของคุณและครอบครัว
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-nature-600 hover:bg-nature-700">
-                  <Link to="/products">
-                    เลือกซื้อสินค้า
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/about">เรียนรู้เพิ่มเติม</Link>
+      {/* Hero Section with Search */}
+      <section className="relative bg-gradient-to-br from-green-50 via-green-100 to-green-200 py-20 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-green-300/20 to-green-400/20"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-6 leading-tight">
+              Thai Dietary<br />
+              <span className="font-normal text-gray-700">supplements</span>
+            </h1>
+            
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Search for supplements"
+                  className="w-full h-14 pl-6 pr-16 text-lg rounded-full border-0 shadow-lg bg-white/90 backdrop-blur-sm"
+                />
+                <Button 
+                  size="icon"
+                  className="absolute right-2 top-2 h-10 w-10 rounded-full bg-gray-800 hover:bg-gray-700"
+                >
+                  <Search className="h-5 w-5" />
                 </Button>
               </div>
             </div>
-            <div className="relative animate-scale-in">
-              <img
-                src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600&h=600&fit=crop"
-                alt="Natural Supplements"
-                className="rounded-2xl shadow-2xl w-full max-w-lg mx-auto"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg">
-                <div className="flex items-center space-x-2">
-                  <Heart className="h-5 w-5 text-red-500" />
-                  <span className="text-sm font-semibold">1,000+ ลูกค้าพึงพอใจ</span>
-                </div>
-              </div>
-            </div>
+
+            <Button 
+              asChild 
+              size="lg" 
+              className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-full font-medium"
+            >
+              <Link to="/products">Search for Supplements</Link>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Categories Grid */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">ทำไมต้องเลือกเรา</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              เรามุ่งมั่นที่จะนำเสนอผลิตภัณฑ์อาหารเสริมธรรมชาติคุณภาพสูงที่สุดเพื่อสุขภาพของคุณ
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <Card key={index} className="text-center border-none shadow-sm hover:shadow-md transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-nature-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Icon className="h-6 w-6 text-nature-600" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">{benefit.title}</h3>
-                    <p className="text-sm text-gray-600">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categories.map((category) => (
+              <Card key={category.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-sm overflow-hidden">
+                <div className="relative">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <Button variant="ghost" size="icon" className="bg-white/80 hover:bg-white rounded-full h-8 w-8">
+                      <span className="text-sm">→</span>
+                    </Button>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-medium text-gray-900 mb-1">{category.name}</h3>
+                  <p className="text-sm text-gray-600 mb-3">{category.description}</p>
+                  <Button 
+                    asChild
+                    variant="outline" 
+                    size="sm"
+                    className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
+                  >
+                    <Link to="/categories">Best Sellers</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -155,27 +160,29 @@ const Index = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">สินค้าแนะนำ</h2>
-            <p className="text-gray-600">ผลิตภัณฑ์ยอดนิยมที่ลูกค้าเลือกซื้อมากที่สุด</p>
+            <h2 className="text-3xl font-light text-gray-800 mb-4">Featured Products</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              ผลิตภัณฑ์คุณภาพสูงที่ได้รับความนิยมจากลูกค้า
+            </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-shadow border-none overflow-hidden">
+              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-sm overflow-hidden bg-white">
                 <div className="relative">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  {product.badge && (
-                    <Badge className="absolute top-2 left-2 bg-nature-600 text-white">
-                      {product.badge}
-                    </Badge>
-                  )}
+                  <div className="absolute top-4 right-4">
+                    <Button variant="ghost" size="icon" className="bg-white/80 hover:bg-white rounded-full h-8 w-8">
+                      <span className="text-sm">→</span>
+                    </Button>
+                  </div>
                 </div>
                 <CardContent className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
+                  <h3 className="font-medium text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
                   <p className="text-sm text-gray-500 mb-2">{product.nameEn}</p>
                   
                   <div className="flex items-center mb-2">
@@ -188,13 +195,18 @@ const Index = () => {
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <span className="font-bold text-nature-600">{product.price}</span>
+                      <span className="font-semibold text-gray-900">{product.price}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
                       )}
                     </div>
-                    <Button asChild size="sm" variant="outline">
-                      <Link to={`/product/${product.id}`}>ดูรายละเอียด</Link>
+                    <Button 
+                      asChild
+                      variant="outline" 
+                      size="sm"
+                      className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
+                    >
+                      <Link to={`/product/${product.id}`}>Best Seller</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -203,28 +215,8 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-8">
-            <Button asChild variant="outline" size="lg">
-              <Link to="/products">ดูสินค้าทั้งหมด</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-nature-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">เริ่มต้นการดูแลสุขภาพที่ดีกว่า</h2>
-          <p className="text-nature-100 mb-8 max-w-2xl mx-auto">
-            สมัครสมาชิกเพื่อรับข้อมูลข่าวสารและโปรโมชั่นพิเศษจากเรา
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="อีเมลของคุณ"
-              className="flex-1 px-4 py-2 rounded-lg text-gray-900"
-            />
-            <Button className="bg-white text-nature-600 hover:bg-gray-100">
-              สมัครเลย
+            <Button asChild variant="outline" size="lg" className="rounded-full">
+              <Link to="/products">View All Products</Link>
             </Button>
           </div>
         </div>

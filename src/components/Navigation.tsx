@@ -10,36 +10,35 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { href: "/", label: "หน้าแรก", labelEn: "Home" },
-    { href: "/products", label: "สินค้า", labelEn: "Products" },
-    { href: "/categories", label: "หมวดหมู่", labelEn: "Categories" },
-    { href: "/affiliate", label: "แอฟฟิลิเอท", labelEn: "Affiliate" },
-    { href: "/about", label: "เกี่ยวกับเรา", labelEn: "About" },
+    { href: "/", label: "Home", labelTh: "หน้าแรก" },
+    { href: "/products", label: "Supplements", labelTh: "อาหารเสริม" },
+    { href: "/affiliate", label: "Affiliate", labelTh: "แอฟฟิลิเอท" },
+    { href: "/about", label: "About Us", labelTh: "เกี่ยวกับเรา" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover-scale">
-            <div className="flex items-center justify-center w-8 h-8 bg-nature-500 rounded-full">
+            <div className="flex items-center justify-center w-8 h-8 bg-green-500 rounded-full">
               <Leaf className="h-5 w-5 text-white" />
             </div>
-            <span className="font-semibold text-xl text-nature-700">NaturalHealth</span>
+            <span className="font-semibold text-xl text-gray-800">NaturalHealth</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-nature-600 ${
+                className={`text-sm font-medium transition-colors hover:text-green-600 ${
                   isActive(item.href)
-                    ? "text-nature-600 border-b-2 border-nature-500"
+                    ? "text-green-600"
                     : "text-gray-700"
                 }`}
               >
@@ -49,7 +48,7 @@ const Navigation = () => {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             <Button variant="ghost" size="sm" className="hidden sm:flex">
               <Search className="h-4 w-4" />
             </Button>
@@ -74,11 +73,11 @@ const Navigation = () => {
                       key={item.href}
                       to={item.href}
                       onClick={() => setIsOpen(false)}
-                      className={`text-lg font-medium transition-colors hover:text-nature-600 py-2 ${
-                        isActive(item.href) ? "text-nature-600" : "text-gray-700"
+                      className={`text-lg font-medium transition-colors hover:text-green-600 py-2 ${
+                        isActive(item.href) ? "text-green-600" : "text-gray-700"
                       }`}
                     >
-                      {item.label}
+                      {item.labelTh}
                     </Link>
                   ))}
                   <div className="pt-4 border-t">
