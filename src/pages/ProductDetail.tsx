@@ -31,9 +31,9 @@ const ProductDetail = () => {
         price: "$35",
         originalPrice: "$42",
         images: [
-          "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=600&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1434381432520-e7dceec00317?w=600&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop"
+          "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
+          "/lovable-uploads/aacbb27e-cd19-495a-865d-a1dbbe6d2e3b.png",
+          "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png"
         ],
         rating: 4.9,
         reviews: 256,

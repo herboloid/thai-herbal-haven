@@ -38,7 +38,7 @@ const Index = () => {
       name: "TChrome — Weight Loss & Detox Capsules",
       price: "$35",
       originalPrice: "$42",
-      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop",
+      image: "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
       rating: 4.9,
       reviews: 256,
       badge: "🌟 New"
