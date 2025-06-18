@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,7 @@ const Index = () => {
       <section className="relative overflow-hidden py-20 px-4">
         <div className="container mx-auto text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-terracotta-600 to-olive-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-coral-600 to-sage-600 bg-clip-text text-transparent">
               Premium Natural Supplements
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -21,7 +20,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-terracotta-500 hover:bg-terracotta-600 text-white px-8 py-3 text-lg"
+                className="bg-coral-500 hover:bg-coral-600 text-white px-8 py-3 text-lg"
                 asChild
               >
                 <Link to="/products">Shop Now</Link>
@@ -29,7 +28,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-terracotta-500 text-terracotta-600 hover:bg-terracotta-50 px-8 py-3 text-lg"
+                className="border-coral-500 text-coral-600 hover:bg-coral-50 px-8 py-3 text-lg"
                 asChild
               >
                 <Link to="/about">Learn More</Link>
@@ -61,12 +60,12 @@ const Index = () => {
                     />
                   </div>
                   <h3 className="font-semibold text-lg mb-2 text-gray-800">{product.name}</h3>
-                  <p className="text-olive-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+                  <p className="text-sage-600 text-sm mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-terracotta-600">${product.price}</span>
+                    <span className="text-2xl font-bold text-coral-600">${product.price}</span>
                     <Button 
                       size="sm" 
-                      className="bg-terracotta-500 hover:bg-terracotta-600"
+                      className="bg-coral-500 hover:bg-coral-600"
                       asChild
                     >
                       <Link to={`/product/${product.id}`}>View Details</Link>
@@ -92,11 +91,11 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-terracotta-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-terracotta-200 transition-colors">
-                  <feature.icon className="h-8 w-8 text-terracotta-600" />
+                <div className="w-16 h-16 bg-coral-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-coral-200 transition-colors">
+                  <feature.icon className="h-8 w-8 text-coral-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">{feature.title}</h3>
-                <p className="text-olive-600 leading-relaxed">{feature.description}</p>
+                <p className="text-sage-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -104,17 +103,17 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-terracotta-600 to-olive-600">
+      <section className="py-16 px-4 bg-gradient-to-r from-coral-600 to-sage-600">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Ready to Start Your Wellness Journey?
           </h2>
-          <p className="text-terracotta-100 mb-8 text-lg max-w-2xl mx-auto">
+          <p className="text-coral-100 mb-8 text-lg max-w-2xl mx-auto">
             Join thousands of satisfied customers who have transformed their health with our premium supplements
           </p>
           <Button 
             size="lg" 
-            className="bg-white text-terracotta-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+            className="bg-white text-coral-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
             asChild
           >
             <Link to="/products">Explore All Products</Link>

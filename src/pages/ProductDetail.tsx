@@ -145,9 +145,9 @@ const ProductDetail = () => {
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-nature-600">Home</Link>
+            <Link to="/" className="hover:text-coral-600">Home</Link>
             <span>/</span>
-            <Link to="/products" className="hover:text-nature-600">Products</Link>
+            <Link to="/products" className="hover:text-coral-600">Products</Link>
             <span>/</span>
             <span className="text-gray-900">{product.name}</span>
           </div>
@@ -174,7 +174,7 @@ const ProductDetail = () => {
                 }`}
               />
               {product.badge && (
-                <Badge className="absolute top-4 left-4 bg-nature-600 text-white">
+                <Badge className="absolute top-4 left-4 bg-coral-600 text-white">
                   {product.badge}
                 </Badge>
               )}
@@ -185,7 +185,7 @@ const ProductDetail = () => {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-nature-600' : 'border-gray-200'
+                    selectedImage === index ? 'border-coral-600' : 'border-gray-200'
                   }`}
                 >
                   <img 
@@ -208,7 +208,7 @@ const ProductDetail = () => {
 
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
-                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                <Star className="h-5 w-5 fill-honey-400 text-honey-400" />
                 <span className="ml-1 font-semibold">{product.rating}</span>
                 <span className="ml-1 text-gray-600">({product.reviews} reviews)</span>
               </div>
@@ -218,7 +218,7 @@ const ProductDetail = () => {
             </div>
 
             <div className="flex items-center space-x-3">
-              <span className="text-3xl font-bold text-nature-600">{product.price}</span>
+              <span className="text-3xl font-bold text-coral-600">{product.price}</span>
               {product.originalPrice && (
                 <span className="text-xl text-gray-400 line-through">{product.originalPrice}</span>
               )}
@@ -236,7 +236,7 @@ const ProductDetail = () => {
               <ul className="space-y-1">
                 {product.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-center text-sm text-gray-700">
-                    <span className="w-2 h-2 bg-nature-500 rounded-full mr-2"></span>
+                    <span className="w-2 h-2 bg-coral-500 rounded-full mr-2"></span>
                     {benefit}
                   </li>
                 ))}
@@ -249,7 +249,7 @@ const ProductDetail = () => {
                 <ul className="space-y-1">
                   {product.idealFor.map((item, index) => (
                     <li key={index} className="flex items-center text-sm text-gray-700">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                      <span className="w-2 h-2 bg-sage-500 rounded-full mr-2"></span>
                       {item}
                     </li>
                   ))}
@@ -280,7 +280,7 @@ const ProductDetail = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button className="flex-1 bg-nature-600 hover:bg-nature-700">
+                <Button className="flex-1 bg-coral-600 hover:bg-coral-700">
                   <ShoppingCart className="h-4 w-4 mr-2" />
                   Add to Cart
                 </Button>
@@ -298,15 +298,15 @@ const ProductDetail = () => {
             {/* Guarantees */}
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
-                <Truck className="h-6 w-6 mx-auto text-nature-600 mb-1" />
+                <Truck className="h-6 w-6 mx-auto text-coral-600 mb-1" />
                 <p className="text-xs text-gray-600">Free Shipping</p>
               </div>
               <div className="text-center">
-                <Shield className="h-6 w-6 mx-auto text-nature-600 mb-1" />
+                <Shield className="h-6 w-6 mx-auto text-coral-600 mb-1" />
                 <p className="text-xs text-gray-600">Quality Guarantee</p>
               </div>
               <div className="text-center">
-                <Award className="h-6 w-6 mx-auto text-nature-600 mb-1" />
+                <Award className="h-6 w-6 mx-auto text-coral-600 mb-1" />
                 <p className="text-xs text-gray-600">Certified Standards</p>
               </div>
             </div>
@@ -364,7 +364,7 @@ const ProductDetail = () => {
                             <Star
                               key={i}
                               className={`h-4 w-4 ${
-                                i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                                i < review.rating ? 'fill-honey-400 text-honey-400' : 'text-gray-300'
                               }`}
                             />
                           ))}
@@ -396,9 +396,9 @@ const ProductDetail = () => {
                 <CardContent className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-nature-600">{product.price}</span>
+                    <span className="font-bold text-coral-600">{product.price}</span>
                     <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-honey-400 text-honey-400" />
                       <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
                     </div>
                   </div>
