@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -127,8 +128,8 @@ const Auth = () => {
       <div className="relative z-10 flex items-center justify-center py-12 px-4 min-h-screen">
         <div className="max-w-md w-full">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Siam Healthy</h1>
-            <p className="text-gray-600 mt-2">Личный кабинет</p>
+            <h1 className="text-3xl font-bold text-green-700">Siam Healthy</h1>
+            <p className="text-green-600 mt-2">Личный кабинет</p>
           </div>
 
           <Card className="backdrop-blur-sm bg-white/80 border-white/20 shadow-xl">
@@ -140,15 +141,15 @@ const Auth = () => {
 
               <TabsContent value="login">
                 <CardHeader>
-                  <CardTitle>Вход в аккаунт</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-green-700">Вход в аккаунт</CardTitle>
+                  <CardDescription className="text-green-600">
                     Введите ваши данные для входа
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleLogin} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="login-email">Email</Label>
+                      <Label htmlFor="login-email" className="text-green-700">Email</Label>
                       <Input
                         id="login-email"
                         name="email"
@@ -160,7 +161,7 @@ const Auth = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="login-password">Пароль</Label>
+                      <Label htmlFor="login-password" className="text-green-700">Пароль</Label>
                       <div className="relative">
                         <Input
                           id="login-password"
@@ -192,8 +193,8 @@ const Auth = () => {
 
               <TabsContent value="register">
                 <CardHeader>
-                  <CardTitle>Создать аккаунт</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-green-700">Создать аккаунт</CardTitle>
+                  <CardDescription className="text-green-600">
                     Заполните форму для регистрации
                   </CardDescription>
                 </CardHeader>
@@ -201,7 +202,7 @@ const Auth = () => {
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">Имя</Label>
+                        <Label htmlFor="firstName" className="text-green-700">Имя</Label>
                         <Input
                           id="firstName"
                           name="firstName"
@@ -212,7 +213,7 @@ const Auth = () => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Фамилия</Label>
+                        <Label htmlFor="lastName" className="text-green-700">Фамилия</Label>
                         <Input
                           id="lastName"
                           name="lastName"
@@ -224,7 +225,7 @@ const Auth = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="register-email">Email</Label>
+                      <Label htmlFor="register-email" className="text-green-700">Email</Label>
                       <Input
                         id="register-email"
                         name="email"
@@ -236,7 +237,7 @@ const Auth = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Телефон (необязательно)</Label>
+                      <Label htmlFor="phone" className="text-green-700">Телефон (необязательно)</Label>
                       <Input
                         id="phone"
                         name="phone"
@@ -247,7 +248,7 @@ const Auth = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="register-password">Пароль</Label>
+                      <Label htmlFor="register-password" className="text-green-700">Пароль</Label>
                       <div className="relative">
                         <Input
                           id="register-password"
