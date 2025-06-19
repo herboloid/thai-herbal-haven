@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,8 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, Bot, Send, User } from "lucide-react";
 import { allProducts, getProductsByKeywords, getComboRecommendations, Product } from "@/utils/productData";
 import ChatProductCard from "./ChatProductCard";
+import SmartHotButtons from "./SmartHotButtons";
 import { useNavigate } from "react-router-dom";
 import { getCategoryColors } from "@/utils/categoryColors";
+import { getSmartButtons, HotButton } from "@/utils/hotButtonScenarios";
 
 interface Message {
   id: string;
@@ -18,6 +19,7 @@ interface Message {
   followUpQuestions?: string[];
   showCombo?: boolean;
   category?: string;
+  stage?: string;
 }
 
 const AISupplementChat = () => {
@@ -27,18 +29,21 @@ const AISupplementChat = () => {
       type: 'ai',
       content: 'Hello! I\'ll help you find the perfect supplements for your needs. Tell me about your health concerns or goals you want to achieve?',
       timestamp: new Date(),
-      followUpQuestions: [
-        "Vision problems",
-        "I want to lose weight", 
-        "Skin health and beauty",
-        "Body detox"
-      ]
+      stage: 'initial'
     }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [userContext, setUserContext] = useState<{age?: string, budget?: string, symptoms: string[]}>({
-    symptoms: []
+  const [userContext, setUserContext] = useState<{
+    age?: string, 
+    budget?: string, 
+    symptoms: string[], 
+    stage: string,
+    hasProducts?: boolean,
+    productCount?: number
+  }>({
+    symptoms: [],
+    stage: 'initial'
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -64,8 +69,30 @@ const AISupplementChat = () => {
     return "";
   };
 
-  const getPersonalizedResponse = (query: string, products: Product[], category: string): string => {
+  const getPersonalizedResponse = (query: string, products: Product[], category: string, buttonId?: string): string => {
     const queryLower = query.toLowerCase();
+    
+    // Handle specific button actions
+    if (buttonId) {
+      switch (buttonId) {
+        case 'budget-low':
+          return "Perfect! I'll focus on affordable options under ฿500. Let me find the best value supplements for your needs.";
+        case 'budget-mid':
+          return "Great budget range! I can recommend some excellent mid-tier supplements with good quality-price ratio.";
+        case 'budget-high':
+          return "Excellent! With this budget, I can show you premium supplements with the best ingredients and effectiveness.";
+        case 'budget-premium':
+          return "Perfect! I'll recommend only the highest quality, most effective supplements regardless of price.";
+        case 'compare':
+          return "Here's a detailed comparison of your options. Let me highlight the key differences:";
+        case 'cheapest':
+          return "Here's the most affordable option that still meets your quality standards:";
+        case 'highest-rated':
+          return "This is our highest-rated product for your needs:";
+        case 'add-cart':
+          return "Great choice! I'll add this to your cart. Would you like to see complementary products?";
+      }
+    }
     
     if (products.length === 0) {
       if (queryLower.includes("heart") || queryLower.includes("pressure") || queryLower.includes("cardiovascular")) {
@@ -86,29 +113,28 @@ const AISupplementChat = () => {
     return `I found ${products.length} suitable products. Let's choose the most appropriate one for you:`;
   };
 
-  const getFollowUpQuestions = (query: string, products: Product[]): string[] => {
-    const queryLower = query.toLowerCase();
-    
-    if (products.length > 1) {
-      return [
-        "What's your preferred budget?",
-        "Do you have any chronic conditions?",
-        "Are you taking other medications?"
-      ];
+  const determineNextStage = (currentStage: string, userInput: string, buttonId?: string): string => {
+    if (buttonId) {
+      if (buttonId.startsWith('budget-')) return 'products';
+      if (['add-cart', 'checkout'].includes(buttonId)) return 'final';
+      if (['compare', 'cheapest', 'highest-rated'].includes(buttonId)) return 'products';
     }
-    
-    if (products.length === 1) {
-      const combos = getComboRecommendations(products[0].id);
-      if (combos.length > 0) {
-        return ["Show combo offer with discount"];
-      }
-      return ["Add to cart", "Learn more about ingredients"];
+
+    switch (currentStage) {
+      case 'initial':
+        return userContext.symptoms.length > 0 ? 'clarifying' : 'initial';
+      case 'clarifying':
+        return 'budget';
+      case 'budget':
+        return 'products';
+      case 'products':
+        return 'final';
+      default:
+        return currentStage;
     }
-    
-    return [];
   };
 
-  const handleSendMessage = async (messageText?: string) => {
+  const handleSendMessage = async (messageText?: string, buttonId?: string) => {
     const text = messageText || inputValue.trim();
     if (!text) return;
 
@@ -128,13 +154,28 @@ const AISupplementChat = () => {
     if (!newSymptoms.includes(text.toLowerCase())) {
       newSymptoms.push(text.toLowerCase());
     }
-    setUserContext(prev => ({ ...prev, symptoms: newSymptoms }));
+
+    // Update budget if button indicates budget selection
+    let newBudget = userContext.budget;
+    if (buttonId?.startsWith('budget-')) {
+      newBudget = buttonId;
+    }
+
+    const currentStage = userContext.stage;
+    const nextStage = determineNextStage(currentStage, text, buttonId);
+
+    const updatedContext = { 
+      ...userContext, 
+      symptoms: newSymptoms,
+      budget: newBudget,
+      stage: nextStage
+    };
+    setUserContext(updatedContext);
 
     setTimeout(() => {
       const category = getCategoryFromQuery(text);
       const recommendedProducts = getProductsByKeywords(text).slice(0, 3);
-      const aiResponse = getPersonalizedResponse(text, recommendedProducts, category);
-      const followUp = getFollowUpQuestions(text, recommendedProducts);
+      const aiResponse = getPersonalizedResponse(text, recommendedProducts, category, buttonId);
 
       // Check for combo offer request
       const isComboRequest = text.includes("combo") || text.includes("discount") || text.includes("offer");
@@ -146,15 +187,23 @@ const AISupplementChat = () => {
         showCombo = true;
       }
 
+      // Update context with product information
+      const finalContext = {
+        ...updatedContext,
+        hasProducts: recommendedProducts.length > 0,
+        productCount: recommendedProducts.length
+      };
+      setUserContext(finalContext);
+
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
         content: aiResponse,
         timestamp: new Date(),
         products: showCombo ? [...recommendedProducts, ...comboProducts] : recommendedProducts,
-        followUpQuestions: followUp,
         showCombo,
-        category
+        category,
+        stage: nextStage
       };
 
       setMessages(prev => [...prev, aiMessage]);
@@ -178,18 +227,13 @@ const AISupplementChat = () => {
     }
   };
 
-  const handleFollowUpClick = (question: string) => {
-    if (question === "Go to checkout") {
+  const handleFollowUpClick = (question: string, buttonId?: string) => {
+    if (question === "Go to checkout" || buttonId === "checkout") {
       navigate('/cart');
       return;
     }
     
-    if (question.includes("combo") || question.includes("discount") || question.includes("offer")) {
-      handleSendMessage("Show combo offer with discount");
-      return;
-    }
-    
-    handleSendMessage(question);
+    handleSendMessage(question, buttonId);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -197,6 +241,10 @@ const AISupplementChat = () => {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  const getContextualButtons = (): HotButton[] => {
+    return getSmartButtons(userContext);
   };
 
   return (
@@ -236,21 +284,13 @@ const AISupplementChat = () => {
                         <p className="text-sm leading-relaxed">{message.content}</p>
                       </div>
                       
-                      {/* Follow-up Questions */}
-                      {message.followUpQuestions && message.followUpQuestions.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          {message.followUpQuestions.map((question, index) => (
-                            <Button
-                              key={index}
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handleFollowUpClick(question)}
-                              className={`text-xs h-6 transition-all hover:scale-105 ${colors ? `${colors.bg} hover:${colors.hover} ${colors.text} ${colors.border}` : 'bg-nature-50 hover:bg-nature-100 text-nature-700 border-nature-200'}`}
-                            >
-                              {question}
-                            </Button>
-                          ))}
-                        </div>
+                      {/* Smart Hot Buttons */}
+                      {message.type === 'ai' && (
+                        <SmartHotButtons
+                          buttons={getContextualButtons()}
+                          onButtonClick={handleFollowUpClick}
+                          disabled={isTyping}
+                        />
                       )}
                       
                       {/* Product Cards */}
