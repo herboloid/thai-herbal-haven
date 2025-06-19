@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 11,
+      name: "Black Rhino — Male Performance & Testosterone Booster",
+      price: "$48",
+      originalPrice: "$55",
+      image: "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
+      rating: 4.8,
+      reviews: 89,
+      badge: "🌟 New",
+      category: "mens-health"
+    },
+    {
       id: 10,
       name: "BackPro — Prostate Health & Urinary Function Support",
       price: "$45",
@@ -129,6 +140,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "mens-health", label: "Men's Health" },
     { value: "prostate-health", label: "Prostate Health" },
     { value: "bone-joint", label: "Bone & Joint Health" },
     { value: "heart-health", label: "Heart Health" },
@@ -227,7 +239,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (

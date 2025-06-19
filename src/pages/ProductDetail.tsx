@@ -26,6 +26,43 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "11") {
+      return {
+        id: 11,
+        name: "Black Rhino — Male Performance & Testosterone Booster",
+        price: "$48",
+        originalPrice: "$55",
+        images: [
+          "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
+          "/lovable-uploads/e58f4d37-0777-4368-a630-dd1811a0d807.png",
+          "/lovable-uploads/5a345917-fccc-4229-bd59-9eb9e83485d0.png"
+        ],
+        rating: 4.8,
+        reviews: 89,
+        badge: "🌟 New",
+        inStock: true,
+        description: "Black Rhino helps naturally increase testosterone levels in men, boosting libido, enhancing sexual desire, and improving overall sexual performance. Supports longer, stronger erections, delays ejaculation, and improves stamina. Also promotes overall vitality, energy, and well-being.",
+        benefits: [
+          "Enhances sexual performance and desire",
+          "Boosts libido and sexual arousal",
+          "Reduces symptoms of prostatitis and prostate enlargement",
+          "Balances male hormones",
+          "Increases energy, strength, and endurance"
+        ],
+        ingredients: "L-Arginine, Cordyceps Powder, Siberian Ginseng Extract, Ginkgo Biloba Extract, Korean Ginseng Extract, Oyster Extract, Zinc Amino Acid Chelate, Hawthorn Powder, Selenium-Enriched Yeast",
+        dosage: "Take 1 capsule with breakfast and 1 capsule with dinner",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "10 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-06353-1-01328",
+        idealFor: [
+          "Men with sexual performance issues",
+          "Men struggling with premature ejaculation",
+          "Older men with declining testosterone levels",
+          "Anyone wanting to improve blood flow to the genital area"
+        ]
+      };
+    }
+    
     if (productId === "10") {
       return {
         id: 10,
@@ -254,19 +291,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
+      comment: id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
+      comment: id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -301,7 +338,7 @@ const ProductDetail = () => {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className={`w-full h-96 rounded-lg ${
-                  id === "7" || id === "8" || id === "9" || id === "10" ? 'object-contain bg-white p-4' : 'object-cover'
+                  id === "7" || id === "8" || id === "9" || id === "10" || id === "11" ? 'object-contain bg-white p-4' : 'object-cover'
                 }`}
               />
               {product.badge && (
@@ -323,7 +360,7 @@ const ProductDetail = () => {
                     src={image} 
                     alt="" 
                     className={`w-full h-full ${
-                      id === "7" || id === "8" || id === "9" || id === "10" ? 'object-contain bg-white p-1' : 'object-cover'
+                      id === "7" || id === "8" || id === "9" || id === "10" || id === "11" ? 'object-contain bg-white p-1' : 'object-cover'
                     }`} 
                   />
                 </button>
