@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -66,23 +65,23 @@ const About = () => {
   const certifications = [
     {
       name: "FDA",
-      description: "FDA Certification",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=100&h=100&fit=crop"
+      description: "FDA Approved",
+      image: "/lovable-uploads/79c7131b-160f-42de-ae83-6348662413d8.png"
     },
     {
       name: "GMP",
       description: "Good Manufacturing Practice",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=100&h=100&fit=crop"
+      image: "/lovable-uploads/e799d33b-9141-44f6-8755-34adcf2e1727.png"
     },
     {
       name: "ISO 22000",
       description: "Food Safety Standard",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=100&h=100&fit=crop"
+      image: "/lovable-uploads/4cee8723-c786-4988-b097-b814d2e6a564.png"
     },
     {
-      name: "Organic",
-      description: "Organic Certification",
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=100&h=100&fit=crop"
+      name: "Natural",
+      description: "Natural Ingredients",
+      image: "/lovable-uploads/6c462123-78a1-4022-ab2e-9949900f8571.png"
     }
   ];
 
