@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,10 +9,28 @@ import { Star, Search, Filter } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 
 const Products = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
   const [sortBy, setSortBy] = useState("popular");
   const [filterCategory, setFilterCategory] = useState("all");
   const { addItem } = useCart();
+
+  // Update search term when URL params change
+  useEffect(() => {
+    const searchFromUrl = searchParams.get("search") || "";
+    setSearchTerm(searchFromUrl);
+  }, [searchParams]);
+
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (value.trim()) {
+      newSearchParams.set("search", value);
+    } else {
+      newSearchParams.delete("search");
+    }
+    setSearchParams(newSearchParams);
+  };
 
   const products = [
     {
@@ -214,6 +232,21 @@ const Products = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortBy) {
+      case "price-low":
+        return parseInt(a.price.replace(/[^\d]/g, '')) - parseInt(b.price.replace(/[^\d]/g, ''));
+      case "price-high":
+        return parseInt(b.price.replace(/[^\d]/g, '')) - parseInt(a.price.replace(/[^\d]/g, ''));
+      case "rating":
+        return b.rating - a.rating;
+      case "newest":
+        return b.id - a.id;
+      default:
+        return b.reviews - a.reviews; // popularity
+    }
+  });
+
   const handleAddToCart = (product: typeof products[0]) => {
     addItem({
       id: product.id,
@@ -229,7 +262,9 @@ const Products = () => {
       {/* Header */}
       <section className="bg-white border-b">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">All Products</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {searchTerm ? `Search Results for "${searchTerm}"` : "All Products"}
+          </h1>
           <p className="text-gray-600">High-quality natural dietary supplements for better health</p>
         </div>
       </section>
@@ -244,7 +279,7 @@ const Products = () => {
                 <Input
                   placeholder="Search products..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   className="pl-10"
                 />
               </div>
@@ -283,12 +318,13 @@ const Products = () => {
         <div className="container mx-auto px-4">
           <div className="mb-6">
             <p className="text-gray-600">
-              Showing {filteredProducts.length} of {products.length} products
+              Showing {sortedProducts.length} of {products.length} products
+              {searchTerm && ` for "${searchTerm}"`}
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
+            {sortedProducts.map((product) => (
               <Card key={product.id} className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white">
                 <div className="relative overflow-hidden">
                   <img
@@ -339,18 +375,24 @@ const Products = () => {
             ))}
           </div>
 
-          {filteredProducts.length === 0 && (
+          {sortedProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No products found matching your search</p>
+              <p className="text-gray-500 text-lg">
+                {searchTerm 
+                  ? `No products found for "${searchTerm}"`
+                  : "No products found matching your filters"
+                }
+              </p>
               <Button 
                 variant="outline" 
                 className="mt-4"
                 onClick={() => {
                   setSearchTerm("");
                   setFilterCategory("all");
+                  setSearchParams({});
                 }}
               >
-                Show All Products
+                {searchTerm ? "Clear Search" : "Show All Products"}
               </Button>
             </div>
           )}

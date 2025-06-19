@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -22,6 +21,7 @@ const Navigation = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { state: cartState } = useCart();
 
@@ -37,7 +37,7 @@ const Navigation = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      window.location.href = `/products?search=${encodeURIComponent(searchTerm)}`;
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
       setIsSearchOpen(false);
       setSearchTerm("");
     }

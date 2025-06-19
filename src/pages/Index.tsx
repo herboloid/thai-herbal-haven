@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,6 +7,16 @@ import { Search, Star } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+
   const categories = [
     {
       id: 1,
@@ -107,21 +118,24 @@ const Index = () => {
             </h1>
             
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-8">
+            <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
               <div className="relative">
                 <Input
                   type="text"
                   placeholder="Search for supplements"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full h-14 pl-6 pr-16 text-lg rounded-full border-0 shadow-lg bg-white/90 backdrop-blur-sm"
                 />
                 <Button 
+                  type="submit"
                   size="icon"
                   className="absolute right-2 top-2 h-10 w-10 rounded-full bg-gray-800 hover:bg-gray-700"
                 >
                   <Search className="h-5 w-5" />
                 </Button>
               </div>
-            </div>
+            </form>
 
             <Button 
               asChild 
