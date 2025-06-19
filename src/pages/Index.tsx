@@ -27,13 +27,23 @@ const Index = () => {
     },
     {
       id: 4,
-      name: "Weight Management",
-      image: "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png", 
-      description: "Weight loss & detox support"
+      name: "Detox & Cleanse",
+      image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png", 
+      description: "Body cleanse & toxin removal"
     }
   ];
 
   const featuredProducts = [
+    {
+      id: 17,
+      name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
+      price: "$28",
+      originalPrice: "$33",
+      image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
+      rating: 4.9,
+      reviews: 187,
+      badge: "🌟 New"
+    },
     {
       id: 16,
       name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
@@ -42,16 +52,6 @@ const Index = () => {
       image: "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
       rating: 4.8,
       reviews: 156,
-      badge: "🌟 New"
-    },
-    {
-      id: 15,
-      name: "Genesis Caps — Hearing Restoration & Ear Health Support",
-      price: "$38",
-      originalPrice: "$45",
-      image: "/lovable-uploads/a4aea223-69b4-4f7a-b244-3c5d71392fe0.png",
-      rating: 4.7,
-      reviews: 164,
       badge: "🌟 New"
     },
     {

@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 17,
+      name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
+      price: "$28",
+      originalPrice: "$33",
+      image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
+      rating: 4.9,
+      reviews: 187,
+      badge: "🌟 New",
+      category: "detox-health"
+    },
+    {
       id: 16,
       name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
       price: "$26",
@@ -129,6 +140,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "detox-health", label: "Detox & Body Cleanse" },
     { value: "digestive-health", label: "Digestive Health" },
     { value: "skin-health", label: "Skin Health" },
     { value: "hearing-health", label: "Hearing Health" },
