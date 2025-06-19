@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search, Star } from "lucide-react";
+import InteractiveBackground from "@/components/InteractiveBackground";
 
 const Index = () => {
   const categories = [
@@ -93,6 +94,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <InteractiveBackground />
+      
       {/* Hero Section with Search */}
       <section className="relative bg-gradient-to-br from-green-50 via-green-100 to-green-200 py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-300/20 to-green-400/20"></div>
@@ -132,7 +135,7 @@ const Index = () => {
       </section>
 
       {/* Categories Grid */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category) => (
@@ -168,7 +171,7 @@ const Index = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-light text-gray-800 mb-4">Featured Products</h2>
