@@ -75,7 +75,8 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 const calculateTotals = (state: CartState): CartState => {
   const totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = state.items.reduce((total, item) => {
-    const price = parseFloat(item.price.replace('$', ''));
+    // Handle both $ and ฿ currency symbols
+    const price = parseFloat(item.price.replace('$', '').replace('฿', '').replace(',', ''));
     return total + (price * item.quantity);
   }, 0);
   

@@ -75,7 +75,7 @@ const Cart = () => {
     console.log('Order data:', { ...data, items: state.items, total: totalWithDelivery });
     
     setTimeout(() => {
-      alert(`Order for $${totalWithDelivery.toFixed(2)} has been placed! Thank you for your purchase. Order details sent to ${data.email}`);
+      alert(`Order for ฿${totalWithDelivery.toFixed(2)} has been placed! Thank you for your purchase. Order details sent to ${data.email}`);
       clearCart();
       setIsCheckingOut(false);
       setShowCheckoutForm(false);
@@ -191,7 +191,7 @@ const Cart = () => {
                     </div>
                     <div className="text-right">
                       <div className="font-bold text-lg text-gray-900">
-                        ${(parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2)}
+                        ฿{(parseFloat(item.price.replace('฿', '').replace(',', '')) * item.quantity).toFixed(2)}
                       </div>
                       <Button
                         size="sm"
@@ -409,18 +409,18 @@ const Cart = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
                     <span>Items ({state.totalItems})</span>
-                    <span>${state.totalPrice.toFixed(2)}</span>
+                    <span>฿{state.totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>Shipping ({getDeliveryTime()})</span>
                     <span className={getDeliveryPrice() === 0 ? 'text-green-600' : ''}>
-                      {getDeliveryPrice() === 0 ? 'Free' : `$${getDeliveryPrice()}`}
+                      {getDeliveryPrice() === 0 ? 'Free' : `฿${getDeliveryPrice()}`}
                     </span>
                   </div>
                   <Separator />
                   <div className="flex justify-between text-lg font-bold text-gray-900">
                     <span>Total</span>
-                    <span>${totalWithDelivery.toFixed(2)}</span>
+                    <span>฿{totalWithDelivery.toFixed(2)}</span>
                   </div>
                 </div>
 
@@ -447,7 +447,7 @@ const Cart = () => {
                   </p>
                   <p className="flex items-center justify-center">
                     <Truck className="h-4 w-4 mr-1" />
-                    Free shipping over $50
+                    Free shipping over ฿50
                   </p>
                   <p className="flex items-center justify-center">
                     <MapPin className="h-4 w-4 mr-1" />
