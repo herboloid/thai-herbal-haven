@@ -45,7 +45,7 @@ const Cart = () => {
     defaultValues: {
       paymentMethod: 'card',
       deliveryMethod: 'standard',
-      country: 'United States'
+      country: 'Thailand'
     }
   });
 
