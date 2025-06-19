@@ -20,7 +20,7 @@ const Products = () => {
       name: "BackPro — Prostate Health & Urinary Function Support",
       price: "$45",
       originalPrice: "$52",
-      image: "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
+      image: "/lovable-uploads/cd55ad2c-2744-4f3f-bb08-aeaa1a47bcee.png",
       rating: 4.7,
       reviews: 173,
       badge: "🔥 New",
