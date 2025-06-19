@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,17 @@ const Products = () => {
   const { addItem } = useCart();
 
   const products = [
+    {
+      id: 9,
+      name: "Carthisin — Bone & Joint Health Support",
+      price: "$38",
+      originalPrice: "$45",
+      image: "/lovable-uploads/6142098d-8427-4f9a-845e-21570660ab73.png",
+      rating: 4.8,
+      reviews: 142,
+      badge: "🦴 Joint Health",
+      category: "bone-joint"
+    },
     {
       id: 8,
       name: "Diacard — Blood Pressure & Blood Sugar Support",
@@ -107,6 +119,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "bone-joint", label: "Bone & Joint Health" },
     { value: "heart-health", label: "Heart Health" },
     { value: "weight-loss", label: "Weight Loss" },
     { value: "vitamins", label: "Vitamins" },

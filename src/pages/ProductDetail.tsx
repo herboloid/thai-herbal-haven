@@ -26,6 +26,43 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "9") {
+      return {
+        id: 9,
+        name: "Carthisin — Bone & Joint Health Support",
+        price: "$38",
+        originalPrice: "$45",
+        images: [
+          "/lovable-uploads/6142098d-8427-4f9a-845e-21570660ab73.png",
+          "/lovable-uploads/7cc33d76-2c30-4d3c-a0a1-6b69aead89ea.png",
+          "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png"
+        ],
+        rating: 4.8,
+        reviews: 142,
+        badge: "🦴 Joint Health",
+        inStock: true,
+        description: "Carthisin helps repair and regenerate bones, tendons, and joints throughout the body. Increases essential calcium for joints, promotes the production of synovial fluid, and relieves chronic pain, swelling, and inflammation caused by various bone and joint disorders.",
+        benefits: [
+          "Increases bone density, helping reduce the risk of osteoporosis",
+          "Protects joint cartilage and boosts synovial fluid production",
+          "Strengthens and improves joint flexibility",
+          "Reduces friction and impact stress on joints",
+          "Eases inflammation, pain, swelling, or burning caused by bone and joint diseases"
+        ],
+        ingredients: "New Zealand Green-Lipped Mussel Powder, Magnesium Oxide, Zinc Gluconate, L-Carnitine L-Tartrate, L-Cysteine, Astragalus Powder, L-Arginine, L-Proline, Beta-Glucan from Oats, Peppermint Powder, Reishi Mushroom Extract, Schisandra Powder, Fish Oil Powder, Vitamin C, Ginkgo Biloba Extract, Grape Seed Extract, Taurine, Alpha Lipoic Acid, Alfalfa Powder, Licorice Root Powder, Dong Quai Extract, Rosehip Extract, Siberian Ginseng Extract, Black Currant Extract, Gotu Kola Powder, Selenium-Enriched Yeast, Coenzyme Q10, Niacin, Natural Vitamin E (D-alpha tocopheryl acetate) 6.8 IU, Pine Bark Extract, Copper Gluconate, Calcium D-Pantothenate, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12 (0.1%), Vitamin D3 (100 IU per mg)",
+        dosage: "Take 2 capsules daily with breakfast",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "10 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-18157-1-0126",
+        idealFor: [
+          "Individuals with spinal curvature or displaced bones",
+          "People with trigger finger or office syndrome",
+          "Those experiencing joint and bone pain, swelling, or inflammation",
+          "Individuals with chronic musculoskeletal pain from repetitive strain (heavy lifting, prolonged sitting/standing, poor posture, etc.)"
+        ]
+      };
+    }
+    
     if (productId === "8") {
       return {
         id: 8,
@@ -178,19 +215,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
+      comment: id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
+      comment: id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
