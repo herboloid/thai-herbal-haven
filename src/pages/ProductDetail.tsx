@@ -33,8 +33,8 @@ const ProductDetail = () => {
         price: "$45",
         originalPrice: "$52",
         images: [
-          "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
           "/lovable-uploads/b99a13ac-aec8-45e4-975b-d6e1c5618f9b.png",
+          "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
           "/lovable-uploads/cd55ad2c-2744-4f3f-bb08-aeaa1a47bcee.png"
         ],
         rating: 4.7,
@@ -74,8 +74,8 @@ const ProductDetail = () => {
         price: "$38",
         originalPrice: "$45",
         images: [
-          "/lovable-uploads/6142098d-8427-4f9a-845e-21570660ab73.png",
           "/lovable-uploads/7cc33d76-2c30-4d3c-a0a1-6b69aead89ea.png",
+          "/lovable-uploads/6142098d-8427-4f9a-845e-21570660ab73.png",
           "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png"
         ],
         rating: 4.8,
@@ -111,8 +111,8 @@ const ProductDetail = () => {
         price: "$42",
         originalPrice: "$48",
         images: [
-          "/lovable-uploads/9b2eb6c3-28af-48cf-8349-aaf12a98e55f.png",
           "/lovable-uploads/eb417a32-9a3f-479a-8427-bd90fc6aa3fe.png",
+          "/lovable-uploads/9b2eb6c3-28af-48cf-8349-aaf12a98e55f.png",
           "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png"
         ],
         rating: 4.9,
@@ -150,8 +150,8 @@ const ProductDetail = () => {
         price: "$35",
         originalPrice: "$42",
         images: [
-          "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
           "/lovable-uploads/aacbb27e-cd19-495a-865d-a1dbbe6d2e3b.png",
+          "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
           "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png"
         ],
         rating: 4.9,
