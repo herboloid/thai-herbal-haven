@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -36,8 +37,8 @@ const Auth = () => {
     
     if (!formData.email || !formData.password) {
       toast({
-        title: "Ошибка",
-        description: "Заполните все поля",
+        title: "Error",
+        description: "Please fill in all fields",
         variant: "destructive"
       });
       return;
@@ -47,14 +48,14 @@ const Auth = () => {
     
     if (success) {
       toast({
-        title: "Добро пожаловать!",
-        description: "Вы успешно вошли в систему"
+        title: "Welcome!",
+        description: "You have successfully logged in"
       });
       navigate('/profile');
     } else {
       toast({
-        title: "Ошибка входа",
-        description: "Неверный email или пароль",
+        title: "Login Error",
+        description: "Invalid email or password",
         variant: "destructive"
       });
     }
@@ -65,8 +66,8 @@ const Auth = () => {
     
     if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
       toast({
-        title: "Ошибка",
-        description: "Заполните все обязательные поля",
+        title: "Error",
+        description: "Please fill in all required fields",
         variant: "destructive"
       });
       return;
@@ -74,8 +75,8 @@ const Auth = () => {
 
     if (formData.password.length < 6) {
       toast({
-        title: "Ошибка",
-        description: "Пароль должен содержать минимум 6 символов",
+        title: "Error",
+        description: "Password must be at least 6 characters",
         variant: "destructive"
       });
       return;
@@ -85,14 +86,14 @@ const Auth = () => {
     
     if (success) {
       toast({
-        title: "Регистрация успешна!",
-        description: "Добро пожаловать в Siam Healthy"
+        title: "Registration Successful!",
+        description: "Welcome to Siam Healthy"
       });
       navigate('/profile');
     } else {
       toast({
-        title: "Ошибка регистрации",
-        description: "Попробуйте еще раз",
+        title: "Registration Error",
+        description: "Please try again",
         variant: "destructive"
       });
     }
@@ -128,21 +129,21 @@ const Auth = () => {
         <div className="max-w-md w-full">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-green-700">Siam Healthy</h1>
-            <p className="text-green-600 mt-2">Личный кабинет</p>
+            <p className="text-green-600 mt-2">Personal Account</p>
           </div>
 
           <Card className="backdrop-blur-sm bg-white/80 border-white/20 shadow-xl">
             <Tabs value={isLogin ? "login" : "register"} onValueChange={(value) => setIsLogin(value === "login")}>
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login" className="text-green-700 data-[state=active]:text-green-800">Вход</TabsTrigger>
-                <TabsTrigger value="register" className="text-green-700 data-[state=active]:text-green-800">Регистрация</TabsTrigger>
+                <TabsTrigger value="login" className="text-green-700 data-[state=active]:text-green-800">Login</TabsTrigger>
+                <TabsTrigger value="register" className="text-green-700 data-[state=active]:text-green-800">Register</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login">
                 <CardHeader>
-                  <CardTitle className="text-green-700">Вход в аккаунт</CardTitle>
+                  <CardTitle className="text-green-700">Login to Account</CardTitle>
                   <CardDescription className="text-green-600">
-                    Введите ваши данные для входа
+                    Enter your credentials to login
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -160,13 +161,13 @@ const Auth = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="login-password" className="text-green-700">Пароль</Label>
+                      <Label htmlFor="login-password" className="text-green-700">Password</Label>
                       <div className="relative">
                         <Input
                           id="login-password"
                           name="password"
                           type={showPassword ? "text" : "password"}
-                          placeholder="Введите пароль"
+                          placeholder="Enter password"
                           value={formData.password}
                           onChange={handleInputChange}
                           required
@@ -184,7 +185,7 @@ const Auth = () => {
                     </div>
                     <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
                       {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Войти
+                      Login
                     </Button>
                   </form>
                 </CardContent>
@@ -192,31 +193,31 @@ const Auth = () => {
 
               <TabsContent value="register">
                 <CardHeader>
-                  <CardTitle className="text-green-700">Создать аккаунт</CardTitle>
+                  <CardTitle className="text-green-700">Create Account</CardTitle>
                   <CardDescription className="text-green-600">
-                    Заполните форму для регистрации
+                    Fill out the form to register
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName" className="text-green-700">Имя</Label>
+                        <Label htmlFor="firstName" className="text-green-700">First Name</Label>
                         <Input
                           id="firstName"
                           name="firstName"
-                          placeholder="Иван"
+                          placeholder="John"
                           value={formData.firstName}
                           onChange={handleInputChange}
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName" className="text-green-700">Фамилия</Label>
+                        <Label htmlFor="lastName" className="text-green-700">Last Name</Label>
                         <Input
                           id="lastName"
                           name="lastName"
-                          placeholder="Петров"
+                          placeholder="Doe"
                           value={formData.lastName}
                           onChange={handleInputChange}
                           required
@@ -236,24 +237,24 @@ const Auth = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-green-700">Телефон (необязательно)</Label>
+                      <Label htmlFor="phone" className="text-green-700">Phone (optional)</Label>
                       <Input
                         id="phone"
                         name="phone"
                         type="tel"
-                        placeholder="+7 (999) 123-45-67"
+                        placeholder="+1 (555) 123-4567"
                         value={formData.phone}
                         onChange={handleInputChange}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="register-password" className="text-green-700">Пароль</Label>
+                      <Label htmlFor="register-password" className="text-green-700">Password</Label>
                       <div className="relative">
                         <Input
                           id="register-password"
                           name="password"
                           type={showPassword ? "text" : "password"}
-                          placeholder="Минимум 6 символов"
+                          placeholder="At least 6 characters"
                           value={formData.password}
                           onChange={handleInputChange}
                           required
@@ -271,7 +272,7 @@ const Auth = () => {
                     </div>
                     <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
                       {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Зарегистрироваться
+                      Register
                     </Button>
                   </form>
                 </CardContent>
