@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,8 +42,8 @@ const Index = () => {
     {
       id: 22,
       name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
-      price: "$29",
-      originalPrice: "$34",
+      price: "฿970",
+      originalPrice: "฿1,190",
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
       rating: 4.9,
       reviews: 156,
@@ -53,8 +52,8 @@ const Index = () => {
     {
       id: 21,
       name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
-      price: "$36",
-      originalPrice: "$42",
+      price: "฿999",
+      originalPrice: "฿1,470",
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
       rating: 4.9,
       reviews: 198,
@@ -63,8 +62,8 @@ const Index = () => {
     {
       id: 20,
       name: "Philola — Eye Health & Vision Support Capsules",
-      price: "$34",
-      originalPrice: "$40",
+      price: "฿1,190",
+      originalPrice: "฿1,400",
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       rating: 4.9,
       reviews: 167,
@@ -73,8 +72,8 @@ const Index = () => {
     {
       id: 19,
       name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
-      price: "$38",
-      originalPrice: "$45",
+      price: "฿890",
+      originalPrice: "฿1,575",
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
       rating: 4.8,
       reviews: 175,
@@ -83,8 +82,8 @@ const Index = () => {
     {
       id: 18,
       name: "Oclarizin — Eye Health & Vision Support Capsules",
-      price: "$32",
-      originalPrice: "$38",
+      price: "฿930",
+      originalPrice: "฿1,330",
       image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
       rating: 4.9,
       reviews: 143,

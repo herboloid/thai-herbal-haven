@@ -30,8 +30,8 @@ const ProductDetail = () => {
       return {
         id: 22,
         name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
-        price: "$29",
-        originalPrice: "$34",
+        price: "฿970",
+        originalPrice: "฿1,190",
         images: [
           "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
           "/lovable-uploads/40155595-5386-4664-a528-009daee3f97b.png",
@@ -70,8 +70,8 @@ const ProductDetail = () => {
       return {
         id: 21,
         name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
-        price: "$36",
-        originalPrice: "$42",
+        price: "฿999",
+        originalPrice: "฿1,470",
         images: [
           "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
           "/lovable-uploads/17adaf7c-d212-4bcb-aa60-4454f1dcb783.png",
@@ -107,8 +107,8 @@ const ProductDetail = () => {
       return {
         id: 20,
         name: "Philola — Eye Health & Vision Support Capsules",
-        price: "$34",
-        originalPrice: "$40",
+        price: "฿1,190",
+        originalPrice: "฿1,400",
         images: [
           "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
           "/lovable-uploads/7b5f959e-05d1-48d3-9bc6-caebab5246c2.png",
@@ -147,8 +147,8 @@ const ProductDetail = () => {
       return {
         id: 19,
         name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
-        price: "$38",
-        originalPrice: "$45",
+        price: "฿890",
+        originalPrice: "฿1,575",
         images: [
           "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
           "/lovable-uploads/013fa274-90a0-4ed6-868f-66b8c21ba022.png",
@@ -185,8 +185,8 @@ const ProductDetail = () => {
       return {
         id: 18,
         name: "Oclarizin — Eye Health & Vision Support Capsules",
-        price: "$32",
-        originalPrice: "$38",
+        price: "฿930",
+        originalPrice: "฿1,330",
         images: [
           "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
           "/lovable-uploads/bc9940ab-eea7-40f0-b7a3-bec3d1e74a28.png",
@@ -225,8 +225,8 @@ const ProductDetail = () => {
       return {
         id: 17,
         name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
-        price: "$28",
-        originalPrice: "$33",
+        price: "฿980",
+        originalPrice: "฿1,155",
         images: [
           "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
           "/lovable-uploads/6310a0be-3128-4547-84bf-26eeba049c4c.png",
@@ -265,8 +265,8 @@ const ProductDetail = () => {
       return {
         id: 16,
         name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
-        price: "$26",
-        originalPrice: "$31",
+        price: "฿950",
+        originalPrice: "฿1,085",
         images: [
           "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
           "/lovable-uploads/867d3781-6d51-456d-9009-b009290b631f.png",
@@ -303,8 +303,8 @@ const ProductDetail = () => {
       return {
         id: 15,
         name: "Genesis Caps — Hearing Restoration & Ear Health Support",
-        price: "$38",
-        originalPrice: "$45",
+        price: "฿873",
+        originalPrice: "฿1,575",
         images: [
           "/lovable-uploads/a4aea223-69b4-4f7a-b244-3c5d71392fe0.png",
           "/lovable-uploads/430db4bb-4acf-4d04-94ac-038596a91158.png",
@@ -340,8 +340,8 @@ const ProductDetail = () => {
       return {
         id: 14,
         name: "Turbine — Prostate & Sexual Health Support",
-        price: "$42",
-        originalPrice: "$49",
+        price: "฿940",
+        originalPrice: "฿1,715",
         images: [
           "/lovable-uploads/7e5ab9ec-c4af-456d-b2da-f7a95ed6efa5.png",
           "/lovable-uploads/3fa6070e-dced-481a-a89b-b1169d829599.png",
@@ -378,8 +378,8 @@ const ProductDetail = () => {
       return {
         id: 13,
         name: "Elsie — Skin Restoration & Fungal Infection Support",
-        price: "$35",
-        originalPrice: "$42",
+        price: "฿940",
+        originalPrice: "฿1,470",
         images: [
           "/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png",
           "/lovable-uploads/eb38b4fc-a654-4d1b-9403-76464303b1fe.png",
@@ -414,8 +414,8 @@ const ProductDetail = () => {
       return {
         id: 12,
         name: "Andicellix — Hearing Support & Ear Nerve Protection",
-        price: "$40",
-        originalPrice: "$47",
+        price: "฿990",
+        originalPrice: "฿1,645",
         images: [
           "/lovable-uploads/1d68a6b5-de0a-4b8b-8fcc-4faebf7de5d3.png",
           "/lovable-uploads/76d935e5-5b80-4180-a9d3-943a9ec07118.png",
@@ -452,8 +452,8 @@ const ProductDetail = () => {
       return {
         id: 11,
         name: "Black Rhino — Male Performance & Testosterone Booster",
-        price: "$48",
-        originalPrice: "$55",
+        price: "฿855",
+        originalPrice: "฿1,450",
         images: [
           "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
           "/lovable-uploads/e58f4d37-0777-4368-a630-dd1811a0d807.png",
@@ -489,8 +489,8 @@ const ProductDetail = () => {
       return {
         id: 10,
         name: "BackPro — Prostate Health & Urinary Function Support",
-        price: "$45",
-        originalPrice: "$52",
+        price: "฿950",
+        originalPrice: "฿1,820",
         images: [
           "/lovable-uploads/b99a13ac-aec8-45e4-975b-d6e1c5618f9b.png",
           "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
@@ -530,8 +530,8 @@ const ProductDetail = () => {
       return {
         id: 9,
         name: "Carthisin — Bone & Joint Health Support",
-        price: "$38",
-        originalPrice: "$45",
+        price: "฿970",
+        originalPrice: "฿1,990",
         images: [
           "/lovable-uploads/7cc33d76-2c30-4d3c-a0a1-6b69aead89ea.png",
           "/lovable-uploads/6142098d-8427-4f9a-845e-21570660ab73.png",
@@ -567,8 +567,8 @@ const ProductDetail = () => {
       return {
         id: 8,
         name: "Diacard — Blood Pressure & Blood Sugar Support",
-        price: "$42",
-        originalPrice: "$48",
+        price: "฿890",
+        originalPrice: "฿1,680",
         images: [
           "/lovable-uploads/eb417a32-9a3f-479a-8427-bd90fc6aa3fe.png",
           "/lovable-uploads/9b2eb6c3-28af-48cf-8349-aaf12a98e55f.png",
@@ -606,8 +606,8 @@ const ProductDetail = () => {
     return {
       id: 7,
       name: "TChrome — Weight Loss & Detox Capsules",
-      price: "$35",
-      originalPrice: "$42",
+      price: "฿990",
+      originalPrice: "฿1,990",
       images: [
         "/lovable-uploads/aacbb27e-cd19-495a-865d-a1dbbe6d2e3b.png",
         "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
@@ -658,21 +658,21 @@ const ProductDetail = () => {
     {
       id: 22,
       name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
-      price: "$29",
+      price: "฿970",
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
       rating: 4.9
     },
     {
       id: 21,
       name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
-      price: "$36",
+      price: "฿999",
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
       rating: 4.9
     },
     {
       id: 20,
       name: "Philola — Eye Health & Vision Support Capsules",
-      price: "$34",
+      price: "฿1,190",
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       rating: 4.9
     }
@@ -780,7 +780,7 @@ const ProductDetail = () => {
               )}
               {product.originalPrice && (
                 <Badge className="bg-red-100 text-red-800">
-                  Save ${parseInt(product.originalPrice.replace('$', '')) - parseInt(product.price.replace('$', ''))}
+                  Save ฿{parseInt(product.originalPrice.replace('฿', '').replace(',', '')) - parseInt(product.price.replace('฿', '').replace(',', ''))}
                 </Badge>
               )}
             </div>
