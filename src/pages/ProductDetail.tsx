@@ -26,6 +26,44 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "14") {
+      return {
+        id: 14,
+        name: "Turbine — Prostate & Sexual Health Support",
+        price: "$42",
+        originalPrice: "$49",
+        images: [
+          "/lovable-uploads/7e5ab9ec-c4af-456d-b2da-f7a95ed6efa5.png",
+          "/lovable-uploads/3fa6070e-dced-481a-a89b-b1169d829599.png",
+          "/lovable-uploads/48778494-8bf5-4dc3-acce-eae6989bb523.png"
+        ],
+        rating: 4.8,
+        reviews: 142,
+        badge: "🌟 New",
+        inStock: true,
+        description: "Turbine helps reduce prostate inflammation, improves blood flow to the male genital area and pelvic region, and restores normal urinary function. It supports reproductive system strength, balances male hormone levels, and enhances overall male health.",
+        benefits: [
+          "Improves blood circulation in the pelvic and genital area",
+          "Restores prostate function and reduces prostate enlargement",
+          "Prevents urinary tract infections and eases urination problems",
+          "Strengthens the male reproductive system",
+          "Helps balance testosterone levels",
+          "Promotes overall male health"
+        ],
+        ingredients: "L-Arginine, Cordyceps Powder, Ginkgo Biloba Extract, Siberian Ginseng Extract, Korean Ginseng Extract, Taurine, Zinc Amino Acid Chelate, Oyster Extract, Ascorbic Acid (Vitamin C), Selenium-Enriched Yeast, Niacin, Pyridoxine Hydrochloride (Vitamin B6)",
+        dosage: "Take 2 capsules daily: 1 capsule with breakfast and 1 capsule with dinner",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "10 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-06353-1-0312",
+        idealFor: [
+          "Men with enlarged prostate",
+          "Individuals with urination problems (slow stream, burning, incomplete emptying)",
+          "Men with erectile dysfunction",
+          "Men seeking hormone balance and vitality"
+        ]
+      };
+    }
+    
     if (productId === "13") {
       return {
         id: 13,
@@ -365,19 +403,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "13" ? "Elsie has been amazing for my skin issues! After 6 weeks of use, my eczema has significantly improved and the itching has almost completely stopped. My skin looks healthier than it has in years!" : id === "12" ? "Andicellix has been amazing for my hearing! After 6 weeks of use, the constant ringing in my ears has significantly reduced and I can hear conversations much clearer now. Highly recommend!" : id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "14" ? "Turbine has been amazing for my prostate health! After 4 weeks of use, my urination flow has improved significantly and the nighttime trips to the bathroom have reduced dramatically. Highly recommend!" : id === "13" ? "Elsie has been amazing for my skin issues! After 6 weeks of use, my eczema has significantly improved and the itching has almost completely stopped. My skin looks healthier than it has in years!" : id === "12" ? "Andicellix has been amazing for my hearing! After 6 weeks of use, the constant ringing in my ears has significantly reduced and I can hear conversations much clearer now. Highly recommend!" : id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "13" ? "Great product for skin health! My psoriasis patches have reduced dramatically and the inflammation has calmed down significantly. Very satisfied with the results after 5 weeks." : id === "12" ? "Great product for hearing health! My tinnitus has improved dramatically and the dizzy spells I used to get have almost completely stopped. Very satisfied with the results." : id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
+      comment: id === "14" ? "Great product for prostate health! My pelvic discomfort has reduced dramatically and my overall energy levels have improved. Very satisfied with the results after 5 weeks." : id === "13" ? "Great product for skin health! My psoriasis patches have reduced dramatically and the inflammation has calmed down significantly. Very satisfied with the results after 5 weeks." : id === "12" ? "Great product for hearing health! My tinnitus has improved dramatically and the dizzy spells I used to get have almost completely stopped. Very satisfied with the results." : id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "13" ? "Good quality supplement for skin health. Noticed improvements in my nail fungus and overall skin texture after 4 weeks of consistent use. The burning sensation has reduced significantly." : id === "12" ? "Good quality supplement for hearing health. Noticed improvements in my ability to follow conversations and less ear fullness after 4 weeks of consistent use." : id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
+      comment: id === "14" ? "Good quality supplement for prostate health. Noticed improvements in bladder function and reduced burning sensation after 3 weeks of consistent use." : id === "13" ? "Good quality supplement for skin health. Noticed improvements in my nail fungus and overall skin texture after 4 weeks of consistent use. The burning sensation has reduced significantly." : id === "12" ? "Good quality supplement for hearing health. Noticed improvements in my ability to follow conversations and less ear fullness after 4 weeks of consistent use." : id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -412,7 +450,7 @@ const ProductDetail = () => {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className={`w-full h-96 rounded-lg ${
-                  id === "7" || id === "8" || id === "9" || id === "10" || id === "11" || id === "12" || id === "13" ? 'object-contain bg-white p-4' : 'object-cover'
+                  id === "7" || id === "8" || id === "9" || id === "10" || id === "11" || id === "12" || id === "13" || id === "14" ? 'object-contain bg-white p-4' : 'object-cover'
                 }`}
               />
               {product.badge && (
@@ -434,7 +472,7 @@ const ProductDetail = () => {
                     src={image} 
                     alt="" 
                     className={`w-full h-full ${
-                      id === "7" || id === "8" || id === "9" || id === "10" || id === "11" || id === "12" || id === "13" ? 'object-contain bg-white p-1' : 'object-cover'
+                      id === "7" || id === "8" || id === "9" || id === "10" || id === "11" || id === "12" || id === "13" || id === "14" ? 'object-contain bg-white p-1' : 'object-cover'
                     }`} 
                   />
                 </button>

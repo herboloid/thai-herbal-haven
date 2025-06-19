@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 14,
+      name: "Turbine — Prostate & Sexual Health Support",
+      price: "$42",
+      originalPrice: "$49",
+      image: "/lovable-uploads/7e5ab9ec-c4af-456d-b2da-f7a95ed6efa5.png",
+      rating: 4.8,
+      reviews: 142,
+      badge: "🌟 New",
+      category: "prostate-health"
+    },
+    {
       id: 13,
       name: "Elsie — Skin Restoration & Fungal Infection Support",
       price: "$35",
@@ -263,7 +274,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 || product.id === 14 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (
