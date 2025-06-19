@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -109,12 +108,9 @@ const Affiliate = () => {
               Create additional income by recommending high-quality natural supplements. 
               Earn up to 25% commission on every sale.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Button size="lg" className="bg-white text-nature-600 hover:bg-gray-100">
                 Join Now - Free!
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-nature-600">
-                Learn More
               </Button>
             </div>
           </div>
