@@ -45,7 +45,7 @@ const Cart = () => {
     defaultValues: {
       paymentMethod: 'card',
       deliveryMethod: 'standard',
-      country: 'Россия'
+      country: 'United States'
     }
   });
 
@@ -62,9 +62,9 @@ const Cart = () => {
 
   const getDeliveryTime = () => {
     switch (deliveryMethod) {
-      case 'express': return '1-2 рабочих дня';
-      case 'pickup': return 'Сегодня';
-      default: return '3-5 рабочих дней';
+      case 'express': return '1-2 business days';
+      case 'pickup': return 'Today';
+      default: return '3-5 business days';
     }
   };
 
@@ -75,7 +75,7 @@ const Cart = () => {
     console.log('Order data:', { ...data, items: state.items, total: totalWithDelivery });
     
     setTimeout(() => {
-      alert(`Заказ на сумму $${totalWithDelivery.toFixed(2)} оформлен! Спасибо за покупку. Данные заказа отправлены на ${data.email}`);
+      alert(`Order for $${totalWithDelivery.toFixed(2)} has been placed! Thank you for your purchase. Order details sent to ${data.email}`);
       clearCart();
       setIsCheckingOut(false);
       setShowCheckoutForm(false);
@@ -89,14 +89,14 @@ const Cart = () => {
           <div className="text-center py-16">
             <ShoppingCart className="h-24 w-24 text-gray-300 mx-auto mb-6" />
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Ваша корзина пуста
+              Your cart is empty
             </h1>
             <p className="text-gray-600 mb-8">
-              Добавьте товары в корзину, чтобы продолжить покупки
+              Add products to your cart to continue shopping
             </p>
             <Button asChild className="bg-nature-600 hover:bg-nature-700">
               <Link to="/products">
-                Перейти к покупкам
+                Continue Shopping
               </Link>
             </Button>
           </div>
@@ -114,13 +114,13 @@ const Cart = () => {
             <Button asChild variant="ghost">
               <Link to="/products">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Продолжить покупки
+                Continue Shopping
               </Link>
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Корзина</h1>
+              <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
               <p className="text-gray-600">
-                {state.totalItems} {state.totalItems === 1 ? 'товар' : 'товаров'} в корзине
+                {state.totalItems} {state.totalItems === 1 ? 'item' : 'items'} in your cart
               </p>
             </div>
           </div>
@@ -130,7 +130,7 @@ const Cart = () => {
             className="text-red-600 hover:text-red-700"
           >
             <Trash2 className="h-4 w-4 mr-2" />
-            Очистить корзину
+            Clear Cart
           </Button>
         </div>
 
@@ -142,7 +142,7 @@ const Cart = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <ShoppingCart className="h-5 w-5 mr-2" />
-                  Товары в корзине
+                  Cart Items
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -213,7 +213,7 @@ const Cart = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <User className="h-5 w-5 mr-2" />
-                    Данные для доставки
+                    Shipping Information
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -221,10 +221,10 @@ const Cart = () => {
                     {/* Personal Info */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="firstName">Имя *</Label>
+                        <Label htmlFor="firstName">First Name *</Label>
                         <Input
                           id="firstName"
-                          {...register('firstName', { required: 'Имя обязательно' })}
+                          {...register('firstName', { required: 'First name is required' })}
                           className={errors.firstName ? 'border-red-500' : ''}
                         />
                         {errors.firstName && (
@@ -232,10 +232,10 @@ const Cart = () => {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="lastName">Фамилия *</Label>
+                        <Label htmlFor="lastName">Last Name *</Label>
                         <Input
                           id="lastName"
-                          {...register('lastName', { required: 'Фамилия обязательна' })}
+                          {...register('lastName', { required: 'Last name is required' })}
                           className={errors.lastName ? 'border-red-500' : ''}
                         />
                         {errors.lastName && (
@@ -251,10 +251,10 @@ const Cart = () => {
                           id="email"
                           type="email"
                           {...register('email', { 
-                            required: 'Email обязателен',
+                            required: 'Email is required',
                             pattern: {
                               value: /^\S+@\S+$/i,
-                              message: 'Некорректный email'
+                              message: 'Invalid email address'
                             }
                           })}
                           className={errors.email ? 'border-red-500' : ''}
@@ -264,10 +264,10 @@ const Cart = () => {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="phone">Телефон *</Label>
+                        <Label htmlFor="phone">Phone *</Label>
                         <Input
                           id="phone"
-                          {...register('phone', { required: 'Телефон обязателен' })}
+                          {...register('phone', { required: 'Phone number is required' })}
                           className={errors.phone ? 'border-red-500' : ''}
                         />
                         {errors.phone && (
@@ -278,10 +278,10 @@ const Cart = () => {
 
                     {/* Address */}
                     <div>
-                      <Label htmlFor="address">Адрес *</Label>
+                      <Label htmlFor="address">Address *</Label>
                       <Input
                         id="address"
-                        {...register('address', { required: 'Адрес обязателен' })}
+                        {...register('address', { required: 'Address is required' })}
                         className={errors.address ? 'border-red-500' : ''}
                       />
                       {errors.address && (
@@ -291,10 +291,10 @@ const Cart = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
-                        <Label htmlFor="city">Город *</Label>
+                        <Label htmlFor="city">City *</Label>
                         <Input
                           id="city"
-                          {...register('city', { required: 'Город обязателен' })}
+                          {...register('city', { required: 'City is required' })}
                           className={errors.city ? 'border-red-500' : ''}
                         />
                         {errors.city && (
@@ -302,10 +302,10 @@ const Cart = () => {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="postalCode">Индекс *</Label>
+                        <Label htmlFor="postalCode">Postal Code *</Label>
                         <Input
                           id="postalCode"
-                          {...register('postalCode', { required: 'Индекс обязателен' })}
+                          {...register('postalCode', { required: 'Postal code is required' })}
                           className={errors.postalCode ? 'border-red-500' : ''}
                         />
                         {errors.postalCode && (
@@ -313,7 +313,7 @@ const Cart = () => {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="country">Страна</Label>
+                        <Label htmlFor="country">Country</Label>
                         <Input
                           id="country"
                           {...register('country')}
@@ -325,12 +325,12 @@ const Cart = () => {
 
                     {/* Delivery Method */}
                     <div>
-                      <Label className="text-base font-semibold mb-3 block">Способ доставки</Label>
+                      <Label className="text-base font-semibold mb-3 block">Delivery Method</Label>
                       <div className="space-y-3">
                         {[
-                          { value: 'standard', label: 'Стандартная доставка', time: '3-5 рабочих дней', price: state.totalPrice >= 50 ? 0 : 5 },
-                          { value: 'express', label: 'Экспресс доставка', time: '1-2 рабочих дня', price: 15 },
-                          { value: 'pickup', label: 'Самовывоз', time: 'Сегодня', price: 0 }
+                          { value: 'standard', label: 'Standard Delivery', time: '3-5 business days', price: state.totalPrice >= 50 ? 0 : 5 },
+                          { value: 'express', label: 'Express Delivery', time: '1-2 business days', price: 15 },
+                          { value: 'pickup', label: 'Store Pickup', time: 'Today', price: 0 }
                         ].map((method) => (
                           <label key={method.value} className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
                             <input
@@ -345,7 +345,7 @@ const Cart = () => {
                               <div className="text-sm text-gray-600">{method.time}</div>
                             </div>
                             <div className="font-bold">
-                              {method.price === 0 ? 'Бесплатно' : `$${method.price}`}
+                              {method.price === 0 ? 'Free' : `$${method.price}`}
                             </div>
                           </label>
                         ))}
@@ -354,12 +354,12 @@ const Cart = () => {
 
                     {/* Payment Method */}
                     <div>
-                      <Label className="text-base font-semibold mb-3 block">Способ оплаты</Label>
+                      <Label className="text-base font-semibold mb-3 block">Payment Method</Label>
                       <div className="space-y-3">
                         {[
-                          { value: 'card', label: 'Банковская карта', icon: CreditCard },
+                          { value: 'card', label: 'Credit Card', icon: CreditCard },
                           { value: 'paypal', label: 'PayPal', icon: CreditCard },
-                          { value: 'bank', label: 'Банковский перевод', icon: CreditCard }
+                          { value: 'bank', label: 'Bank Transfer', icon: CreditCard }
                         ].map((method) => (
                           <label key={method.value} className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
                             <input
@@ -382,14 +382,14 @@ const Cart = () => {
                         onClick={() => setShowCheckoutForm(false)}
                         className="flex-1"
                       >
-                        Назад
+                        Back
                       </Button>
                       <Button
                         type="submit"
                         disabled={isCheckingOut}
                         className="flex-1 bg-nature-600 hover:bg-nature-700"
                       >
-                        {isCheckingOut ? "Обработка..." : "Подтвердить заказ"}
+                        {isCheckingOut ? "Processing..." : "Place Order"}
                       </Button>
                     </div>
                   </form>
@@ -402,23 +402,23 @@ const Cart = () => {
           <div className="lg:col-span-1">
             <Card className="sticky top-4">
               <CardHeader>
-                <CardTitle>Итого по заказу</CardTitle>
+                <CardTitle>Order Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
-                    <span>Товары ({state.totalItems})</span>
+                    <span>Items ({state.totalItems})</span>
                     <span>${state.totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
-                    <span>Доставка ({getDeliveryTime()})</span>
+                    <span>Shipping ({getDeliveryTime()})</span>
                     <span className={getDeliveryPrice() === 0 ? 'text-green-600' : ''}>
-                      {getDeliveryPrice() === 0 ? 'Бесплатно' : `$${getDeliveryPrice()}`}
+                      {getDeliveryPrice() === 0 ? 'Free' : `$${getDeliveryPrice()}`}
                     </span>
                   </div>
                   <Separator />
                   <div className="flex justify-between text-lg font-bold text-gray-900">
-                    <span>Итого</span>
+                    <span>Total</span>
                     <span>${totalWithDelivery.toFixed(2)}</span>
                   </div>
                 </div>
@@ -429,12 +429,12 @@ const Cart = () => {
                     onClick={() => setShowCheckoutForm(true)}
                   >
                     <CreditCard className="h-4 w-4 mr-2" />
-                    Оформить заказ
+                    Proceed to Checkout
                   </Button>
                 ) : (
                   <div className="space-y-2">
                     <div className="text-sm text-gray-600 text-center">
-                      Заполните форму для завершения заказа
+                      Fill out the form to complete your order
                     </div>
                   </div>
                 )}
@@ -442,15 +442,15 @@ const Cart = () => {
                 <div className="text-center text-sm text-gray-500 space-y-1">
                   <p className="flex items-center justify-center">
                     <CreditCard className="h-4 w-4 mr-1" />
-                    Безопасная оплата
+                    Secure Payment
                   </p>
                   <p className="flex items-center justify-center">
                     <Truck className="h-4 w-4 mr-1" />
-                    Бесплатная доставка от $50
+                    Free shipping over $50
                   </p>
                   <p className="flex items-center justify-center">
                     <MapPin className="h-4 w-4 mr-1" />
-                    Доставка по всей России
+                    Worldwide delivery
                   </p>
                 </div>
               </CardContent>
