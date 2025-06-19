@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 15,
+      name: "Genesis Caps — Hearing Restoration & Ear Health Support",
+      price: "$38",
+      originalPrice: "$45",
+      image: "/lovable-uploads/a4aea223-69b4-4f7a-b244-3c5d71392fe0.png",
+      rating: 4.7,
+      reviews: 164,
+      badge: "🌟 New",
+      category: "hearing-health"
+    },
+    {
       id: 14,
       name: "Turbine — Prostate & Sexual Health Support",
       price: "$42",
@@ -274,7 +285,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 || product.id === 14 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 || product.id === 14 || product.id === 15 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (
