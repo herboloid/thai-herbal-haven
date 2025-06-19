@@ -13,37 +13,37 @@ const Index = () => {
   const categories = [
     {
       id: "beauty",
-      name: "Красота и Антивозрастной Уход",
+      name: "Beauty and Anti-Aging Care",
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
-      description: "Осветление кожи и поддержка антивозрастного ухода",
+      description: "Skin brightening and anti-aging support",
       icon: Sparkles
     },
     {
       id: "weight",
-      name: "Контроль Веса и Коррекция Фигуры",
+      name: "Weight Control and Body Shaping",
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
-      description: "Сжигание жира и поддержка метаболизма",
+      description: "Fat burning and metabolism support",
       icon: Zap
     },
     {
       id: "vision",
-      name: "Здоровье Глаз и Зрение",
+      name: "Eye Health and Vision",
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
-      description: "Поддержка зрения и защита глаз",
+      description: "Vision support and eye protection",
       icon: Eye
     },
     {
       id: "heart",
-      name: "Здоровье Сердца",
+      name: "Heart Health",
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
-      description: "Поддержка артериального давления и сердечно-сосудистой системы",
+      description: "Blood pressure and cardiovascular system support",
       icon: Heart
     },
     {
       id: "detox",
-      name: "Детокс и Очищение",
+      name: "Detox and Cleansing",
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png", 
-      description: "Очищение организма и выведение токсинов",
+      description: "Body cleansing and toxin removal",
       icon: Leaf
     }
   ];
@@ -51,57 +51,57 @@ const Index = () => {
   const featuredProducts = [
     {
       id: 22,
-      name: "Extera — Капсулы для Детокса Кишечника и Удаления Папиллом",
+      name: "Extera — Capsules for Intestinal Detox and Papilloma Removal",
       price: "฿970",
       originalPrice: "฿1,190",
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
       rating: 4.9,
       reviews: 156,
-      badge: "🌟 Новинка",
+      badge: "🌟 New",
       category: "detox"
     },
     {
       id: 21,
-      name: "S-Complex — Капсулы для Антивозрастного Ухода, Осветления и Упругости Кожи",
+      name: "S-Complex — Capsules for Anti-Aging Care, Skin Brightening and Firmness",
       price: "฿999",
       originalPrice: "฿1,470",
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
       rating: 4.9,
       reviews: 198,
-      badge: "🌟 Новинка",
+      badge: "🌟 New",
       category: "beauty"
     },
     {
       id: 20,
-      name: "Philola — Капсулы для Здоровья Глаз и Поддержки Зрения",
+      name: "Philola — Capsules for Eye Health and Vision Support",
       price: "฿1,190",
       originalPrice: "฿1,400",
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       rating: 4.9,
       reviews: 167,
-      badge: "🌟 Новинка",
+      badge: "🌟 New",
       category: "vision"
     },
     {
       id: 19,
-      name: "Onix — Капсулы для Контроля Веса, Сжигания Жира и Коррекции Фигуры",
+      name: "Onix — Capsules for Weight Control, Fat Burning and Body Shaping",
       price: "฿890",
       originalPrice: "฿1,575",
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
       rating: 4.8,
       reviews: 175,
-      badge: "🌟 Новинка",
+      badge: "🌟 New",
       category: "weight"
     },
     {
       id: 18,
-      name: "Oclarizin — Капсулы для Здоровья Глаз и Поддержки Зрения",
+      name: "Oclarizin — Capsules for Eye Health and Vision Support",
       price: "฿930",
       originalPrice: "฿1,330",
       image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
       rating: 4.9,
       reviews: 143,
-      badge: "🌟 Новинка",
+      badge: "🌟 New",
       category: "vision"
     }
   ];
@@ -116,8 +116,8 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-6 leading-tight">
-              Натуральные<br />
-              <span className="font-normal text-gray-700">Биодобавки</span>
+              Natural<br />
+              <span className="font-normal text-gray-700">Supplements</span>
             </h1>
             
             {/* AI Consultant Button Section */}
@@ -128,16 +128,16 @@ const Index = () => {
                 </div>
               </div>
               <h2 className="text-2xl font-semibold text-gray-800 mb-3">
-                Получите Персональные Рекомендации
+                Get Personalized Recommendations
               </h2>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                Наш AI-консультант анализирует ваши цели здоровья и рекомендует идеальные добавки для ваших потребностей. 
-                Получите экспертное руководство в поиске правильных продуктов для вашего пути к здоровью.
+                Our AI consultant analyzes your health goals and recommends the perfect supplements for your needs. 
+                Get expert guidance in finding the right products for your wellness journey.
               </p>
               <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-gray-600">
-                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">💊 Персональный Подбор</span>
-                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">🎯 Подбор по Целям</span>
-                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">⚡ Мгновенные Рекомендации</span>
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">💊 Personal Selection</span>
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">🎯 Goal-Based Matching</span>
+                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">⚡ Instant Recommendations</span>
               </div>
               <Button 
                 asChild 
@@ -146,7 +146,7 @@ const Index = () => {
               >
                 <Link to="/ai-consultant" className="flex items-center space-x-2">
                   <MessageCircle className="h-5 w-5" />
-                  <span>Начать AI Консультацию</span>
+                  <span>Start AI Consultation</span>
                 </Link>
               </Button>
             </div>
@@ -156,7 +156,7 @@ const Index = () => {
               size="lg" 
               className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              <Link to="/products">Каталог БАДов</Link>
+              <Link to="/products">Shop Supplements</Link>
             </Button>
           </div>
         </div>
@@ -166,9 +166,9 @@ const Index = () => {
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-light text-gray-800 mb-4">Категории Продуктов</h2>
+            <h2 className="text-3xl font-light text-gray-800 mb-4">Product Categories</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Выберите категорию, которая соответствует вашим потребностям
+              Choose a category that matches your health needs
             </p>
           </div>
           
@@ -210,7 +210,7 @@ const Index = () => {
                       size="sm"
                       className={`rounded-full ${colors.border} ${colors.text} hover:${colors.bg} hover:${colors.hover} transition-all hover:scale-105`}
                     >
-                      <Link to="/products">Смотреть</Link>
+                      <Link to="/products">View</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -224,9 +224,9 @@ const Index = () => {
       <section className="py-16 bg-gray-50 relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-light text-gray-800 mb-4">Рекомендуемые Продукты</h2>
+            <h2 className="text-3xl font-light text-gray-800 mb-4">Featured Products</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Качественные продукты, популярные среди наших клиентов
+              High-quality products popular among our customers
             </p>
           </div>
           
@@ -288,7 +288,7 @@ const Index = () => {
                         className={`rounded-full text-xs ${colors.border} ${colors.text} hover:${colors.bg} hover:${colors.hover} transition-all hover:scale-105`}
                       >
                         <Link to={`/product/${product.id}`}>
-                          Купить
+                          Buy
                         </Link>
                       </Button>
                     </div>
@@ -300,7 +300,7 @@ const Index = () => {
           
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="lg" className="rounded-full border-gray-300 hover:bg-gray-50 transition-all hover:scale-105">
-              <Link to="/products">Все Продукты</Link>
+              <Link to="/products">All Products</Link>
             </Button>
           </div>
         </div>
