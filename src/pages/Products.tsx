@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 12,
+      name: "Andicellix — Hearing Support & Ear Nerve Protection",
+      price: "$40",
+      originalPrice: "$47",
+      image: "/lovable-uploads/1d68a6b5-de0a-4b8b-8fcc-4faebf7de5d3.png",
+      rating: 4.8,
+      reviews: 127,
+      badge: "🌟 New",
+      category: "hearing-health"
+    },
+    {
       id: 11,
       name: "Black Rhino — Male Performance & Testosterone Booster",
       price: "$48",
@@ -31,7 +42,7 @@ const Products = () => {
       name: "BackPro — Prostate Health & Urinary Function Support",
       price: "$45",
       originalPrice: "$52",
-      image: "/lovable-uploads/b99a13ac-aec8-45e4-975b-d6e1c5618f9b.png",
+      image: "/lovable-uploads/cd55ad2c-2744-4f3f-bb08-aeaa1a47bcee.png",
       rating: 4.7,
       reviews: 173,
       badge: "🔥 New",
@@ -42,7 +53,7 @@ const Products = () => {
       name: "Carthisin — Bone & Joint Health Support",
       price: "$38",
       originalPrice: "$45",
-      image: "/lovable-uploads/7cc33d76-2c30-4d3c-a0a1-6b69aead89ea.png",
+      image: "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png",
       rating: 4.8,
       reviews: 142,
       badge: "🦴 Joint Health",
@@ -53,7 +64,7 @@ const Products = () => {
       name: "Diacard — Blood Pressure & Blood Sugar Support",
       price: "$42",
       originalPrice: "$48",
-      image: "/lovable-uploads/eb417a32-9a3f-479a-8427-bd90fc6aa3fe.png",
+      image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       rating: 4.9,
       reviews: 189,
       badge: "🔥 Hot",
@@ -64,7 +75,7 @@ const Products = () => {
       name: "TChrome — Weight Loss & Detox Capsules",
       price: "$35",
       originalPrice: "$42",
-      image: "/lovable-uploads/aacbb27e-cd19-495a-865d-a1dbbe6d2e3b.png",
+      image: "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png",
       rating: 4.9,
       reviews: 256,
       badge: "🌟 New",
@@ -140,6 +151,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "hearing-health", label: "Hearing Health" },
     { value: "mens-health", label: "Men's Health" },
     { value: "prostate-health", label: "Prostate Health" },
     { value: "bone-joint", label: "Bone & Joint Health" },
@@ -239,7 +251,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (

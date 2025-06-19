@@ -26,6 +26,44 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "12") {
+      return {
+        id: 12,
+        name: "Andicellix — Hearing Support & Ear Nerve Protection",
+        price: "$40",
+        originalPrice: "$47",
+        images: [
+          "/lovable-uploads/1d68a6b5-de0a-4b8b-8fcc-4faebf7de5d3.png",
+          "/lovable-uploads/76d935e5-5b80-4180-a9d3-943a9ec07118.png",
+          "/lovable-uploads/51976c1c-7378-45d1-ba3d-6f2260a4664d.png"
+        ],
+        rating: 4.8,
+        reviews: 127,
+        badge: "🌟 New",
+        inStock: true,
+        description: "Andicellix helps stimulate hearing ability and improves auditory nerve function. Effectively relieves symptoms related to ear conditions such as tinnitus, hearing loss, ear fullness, ear pressure, and age-related hearing decline. Also supports balance and helps reduce dizziness and vertigo caused by inner ear imbalances.",
+        benefits: [
+          "Naturally restores and improves hearing",
+          "Stimulates auditory nerves and slows hearing deterioration",
+          "Reduces symptoms of tinnitus, ear fullness, blocked ears, and ringing sounds",
+          "Eases dizziness, vertigo, and balance issues caused by inner ear fluid imbalance"
+        ],
+        ingredients: "Astragalus Powder, Dong Quai Extract, Beta-Glucan from Oats, Reishi Mushroom Extract, Ho Shou Wu (Fo-Ti) Powder, Grape Seed Extract, Zinc Amino Acid Chelate (15%), L-Cysteine, Taurine, Broccoli Powder, Licorice Extract, Cordyceps Powder, Korean Ginseng Extract, Goji Berry Extract, Green Tea Extract, Pomegranate Seed Extract, Shiitake Mushroom Extract, Turmeric Powder, Vitamin C, Fish Oil Powder, Alpha Lipoic Acid, Garlic Extract, Ginger Extract, Kelp Extract, Blueberry Extract, Selenium-Enriched Yeast, Coenzyme Q10, Natural Vitamin E, Copper Gluconate, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12, Vitamin D3, Chromium Picolinate, Folic Acid",
+        dosage: "Take 2 capsules daily with breakfast",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "10 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-18157-1-0077",
+        idealFor: [
+          "Individuals experiencing reduced hearing (near or far)",
+          "People who struggle with conversation clarity or unconsciously speak louder",
+          "Those with ear fullness, ear pain, ear ringing, or buzzing",
+          "Frequent headphone users or those exposed to loud environments",
+          "People with a history of head, brain, or ear injuries",
+          "Individuals with family history of hearing loss"
+        ]
+      };
+    }
+    
     if (productId === "11") {
       return {
         id: 11,
@@ -291,19 +329,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "12" ? "Andicellix has been amazing for my hearing! After 6 weeks of use, the constant ringing in my ears has significantly reduced and I can hear conversations much clearer now. Highly recommend!" : id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
+      comment: id === "12" ? "Great product for hearing health! My tinnitus has improved dramatically and the dizzy spells I used to get have almost completely stopped. Very satisfied with the results." : id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
+      comment: id === "12" ? "Good quality supplement for hearing health. Noticed improvements in my ability to follow conversations and less ear fullness after 4 weeks of consistent use." : id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -338,7 +376,7 @@ const ProductDetail = () => {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className={`w-full h-96 rounded-lg ${
-                  id === "7" || id === "8" || id === "9" || id === "10" || id === "11" ? 'object-contain bg-white p-4' : 'object-cover'
+                  id === "7" || id === "8" || id === "9" || id === "10" || id === "11" || id === "12" ? 'object-contain bg-white p-4' : 'object-cover'
                 }`}
               />
               {product.badge && (
@@ -360,7 +398,7 @@ const ProductDetail = () => {
                     src={image} 
                     alt="" 
                     className={`w-full h-full ${
-                      id === "7" || id === "8" || id === "9" || id === "10" || id === "11" ? 'object-contain bg-white p-1' : 'object-cover'
+                      id === "7" || id === "8" || id === "9" || id === "10" || id === "11" || id === "12" ? 'object-contain bg-white p-1' : 'object-cover'
                     }`} 
                   />
                 </button>
