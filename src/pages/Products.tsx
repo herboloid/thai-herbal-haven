@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -216,7 +217,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (

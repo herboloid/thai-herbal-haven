@@ -262,7 +262,7 @@ const ProductDetail = () => {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className={`w-full h-96 rounded-lg ${
-                  id === "7" || id === "8" ? 'object-contain bg-white p-4' : 'object-cover'
+                  id === "7" || id === "8" || id === "9" ? 'object-contain bg-white p-4' : 'object-cover'
                 }`}
               />
               {product.badge && (
@@ -284,7 +284,7 @@ const ProductDetail = () => {
                     src={image} 
                     alt="" 
                     className={`w-full h-full ${
-                      id === "7" || id === "8" ? 'object-contain bg-white p-1' : 'object-cover'
+                      id === "7" || id === "8" || id === "9" ? 'object-contain bg-white p-1' : 'object-cover'
                     }`} 
                   />
                 </button>
