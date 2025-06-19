@@ -26,6 +26,47 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "10") {
+      return {
+        id: 10,
+        name: "BackPro — Prostate Health & Urinary Function Support",
+        price: "$45",
+        originalPrice: "$52",
+        images: [
+          "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
+          "/lovable-uploads/b99a13ac-aec8-45e4-975b-d6e1c5618f9b.png",
+          "/lovable-uploads/cd55ad2c-2744-4f3f-bb08-aeaa1a47bcee.png"
+        ],
+        rating: 4.7,
+        reviews: 173,
+        badge: "🔥 New",
+        inStock: true,
+        description: "BackPro helps slow the enlargement of prostate cells and improves blood circulation in the male reproductive system. It restores normal urinary function, reduces painful or difficult urination, and supports overall prostate health — helping to lower the risk of future prostatitis.",
+        benefits: [
+          "Prevents prostate enlargement and prostatitis",
+          "Promotes smooth and easy urination",
+          "Relieves burning, weak stream, incomplete emptying, or frequent urination",
+          "Reduces bladder inflammation",
+          "Helps prevent urinary tract infections",
+          "Anti-inflammatory effect on the prostate",
+          "Reduces pelvic and testicular pain or discomfort",
+          "Improves blood flow in the pelvic region"
+        ],
+        ingredients: "L-Arginine, Cordyceps Powder, Ginkgo Biloba Extract, Zinc Gluconate, Siberian Ginseng Extract, Hawthorn Powder, Korean Ginseng Extract, Oyster Extract, Soy Lecithin, Goji Berry Extract, Ascorbic Acid (Vitamin C), Reishi Mushroom Extract, Black Galingale (Kaempferia parviflora) Powder, Niacin, Selenium Yeast (2000 ppm), Pyridoxine Hydrochloride (Vitamin B6)",
+        dosage: "Take 1 capsule with breakfast and 1 capsule with dinner",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "15 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-06353-1-0142",
+        idealFor: [
+          "Men aged 40 and above",
+          "Individuals with blood in urine or painful urination",
+          "Men with urinary difficulties or weak flow",
+          "People experiencing painful or strained urination",
+          "Men with frequent nighttime urination"
+        ]
+      };
+    }
+    
     if (productId === "9") {
       return {
         id: 9,
@@ -171,8 +212,6 @@ const ProductDetail = () => {
 
   const product = getProductData(id || "1");
 
-  // ... keep existing code (handleAddToCart function)
-
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
       addItem({
@@ -215,19 +254,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
+      comment: id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
+      comment: id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -262,7 +301,7 @@ const ProductDetail = () => {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className={`w-full h-96 rounded-lg ${
-                  id === "7" || id === "8" || id === "9" ? 'object-contain bg-white p-4' : 'object-cover'
+                  id === "7" || id === "8" || id === "9" || id === "10" ? 'object-contain bg-white p-4' : 'object-cover'
                 }`}
               />
               {product.badge && (
@@ -284,7 +323,7 @@ const ProductDetail = () => {
                     src={image} 
                     alt="" 
                     className={`w-full h-full ${
-                      id === "7" || id === "8" || id === "9" ? 'object-contain bg-white p-1' : 'object-cover'
+                      id === "7" || id === "8" || id === "9" || id === "10" ? 'object-contain bg-white p-1' : 'object-cover'
                     }`} 
                   />
                 </button>

@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -17,6 +15,17 @@ const Products = () => {
   const { addItem } = useCart();
 
   const products = [
+    {
+      id: 10,
+      name: "BackPro — Prostate Health & Urinary Function Support",
+      price: "$45",
+      originalPrice: "$52",
+      image: "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
+      rating: 4.7,
+      reviews: 173,
+      badge: "🔥 New",
+      category: "prostate-health"
+    },
     {
       id: 9,
       name: "Carthisin — Bone & Joint Health Support",
@@ -120,6 +129,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "prostate-health", label: "Prostate Health" },
     { value: "bone-joint", label: "Bone & Joint Health" },
     { value: "heart-health", label: "Heart Health" },
     { value: "weight-loss", label: "Weight Loss" },
@@ -217,7 +227,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (
