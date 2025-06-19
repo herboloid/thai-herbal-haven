@@ -1,21 +1,14 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Search, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
+import AISupplementChat from "@/components/AISupplementChat";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
-    }
-  };
 
   const categories = [
     {
@@ -107,7 +100,7 @@ const Index = () => {
     <div className="min-h-screen">
       <InteractiveBackground />
       
-      {/* Hero Section with Search */}
+      {/* Hero Section with AI Chat */}
       <section className="relative bg-gradient-to-br from-green-50 via-green-100 to-green-200 py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-300/20 to-green-400/20"></div>
         <div className="container mx-auto px-4 relative z-10">
@@ -117,25 +110,10 @@ const Index = () => {
               <span className="font-normal text-gray-700">Supplements</span>
             </h1>
             
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Search for supplements"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full h-14 pl-6 pr-16 text-lg rounded-full border-0 shadow-lg bg-white/90 backdrop-blur-sm"
-                />
-                <Button 
-                  type="submit"
-                  size="icon"
-                  className="absolute right-2 top-2 h-10 w-10 rounded-full bg-gray-800 hover:bg-gray-700"
-                >
-                  <Search className="h-5 w-5" />
-                </Button>
-              </div>
-            </form>
+            {/* AI Chat Component */}
+            <div className="mb-8">
+              <AISupplementChat />
+            </div>
 
             <Button 
               asChild 
