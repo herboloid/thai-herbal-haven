@@ -3,9 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, Bot, MessageCircle } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
-import AISupplementChat from "@/components/AISupplementChat";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -100,7 +99,7 @@ const Index = () => {
     <div className="min-h-screen">
       <InteractiveBackground />
       
-      {/* Hero Section with AI Chat */}
+      {/* Hero Section with AI Consultant Button */}
       <section className="relative bg-gradient-to-br from-green-50 via-green-100 to-green-200 py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-300/20 to-green-400/20"></div>
         <div className="container mx-auto px-4 relative z-10">
@@ -110,9 +109,35 @@ const Index = () => {
               <span className="font-normal text-gray-700">Supplements</span>
             </h1>
             
-            {/* AI Chat Component */}
-            <div className="mb-8">
-              <AISupplementChat />
+            {/* AI Consultant Button Section */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-lg border border-white/20">
+              <div className="flex items-center justify-center mb-4">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full">
+                  <Bot className="h-8 w-8 text-white" />
+                </div>
+              </div>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+                Get Personalized Recommendations
+              </h2>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Our AI consultant analyzes your health goals and recommends the perfect supplements for your needs. 
+                Get expert guidance in finding the right products for your wellness journey.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-gray-600">
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">💊 Personalized Selection</span>
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">🎯 Goal-Based Matching</span>
+                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">⚡ Instant Recommendations</span>
+              </div>
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-medium"
+              >
+                <Link to="/ai-consultant" className="flex items-center space-x-2">
+                  <MessageCircle className="h-5 w-5" />
+                  <span>Start AI Consultation</span>
+                </Link>
+              </Button>
             </div>
 
             <Button 

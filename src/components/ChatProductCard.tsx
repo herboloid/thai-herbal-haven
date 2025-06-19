@@ -40,7 +40,7 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
             />
             {product.inStock <= 5 && (
               <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
-                {product.inStock} шт
+                {product.inStock} left
               </div>
             )}
           </div>
@@ -85,7 +85,7 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
                   className="h-7 px-2 text-xs"
                 >
                   <Eye className="h-3 w-3 mr-1" />
-                  Подробнее
+                  Details
                 </Button>
                 <Button
                   onClick={handleAddToCart}
@@ -93,7 +93,7 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
                   className="h-7 px-2 text-xs bg-green-600 hover:bg-green-700"
                 >
                   <ShoppingCart className="h-3 w-3 mr-1" />
-                  В корзину
+                  Add to Cart
                 </Button>
               </div>
             </div>

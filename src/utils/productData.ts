@@ -23,10 +23,10 @@ export const allProducts: Product[] = [
     image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
     rating: 4.9,
     reviews: 156,
-    description: "Эффективная формула для очищения кишечника и поддержки детоксикации",
-    keywords: ["детокс", "очищение", "кишечник", "токсины", "папилломы", "бородавки"],
+    description: "Effective formula for intestinal cleansing and detox support",
+    keywords: ["detox", "cleanse", "intestinal", "toxins", "papillomas", "warts", "skin tags", "body cleanse", "digestive health"],
     category: "Detox & Cleanse",
-    benefits: ["Очищает от токсинов", "Улучшает пищеварение", "Поддерживает здоровье кожи"],
+    benefits: ["Cleanses toxins", "Improves digestion", "Supports skin health"],
     inStock: 12
   },
   {
@@ -37,10 +37,10 @@ export const allProducts: Product[] = [
     image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
     rating: 4.9,
     reviews: 198,
-    description: "Комплекс для омоложения, осветления и укрепления кожи",
-    keywords: ["омоложение", "кожа", "антиэйдж", "красота", "упругость", "морщины", "пигментация"],
+    description: "Complex for anti-aging, skin brightening and firming",
+    keywords: ["anti-aging", "skin", "beauty", "firming", "wrinkles", "pigmentation", "brightening", "collagen", "youth"],
     category: "Beauty & Anti-Aging",
-    benefits: ["Уменьшает морщины", "Повышает упругость кожи", "Осветляет пигментацию"],
+    benefits: ["Reduces wrinkles", "Improves skin firmness", "Brightens pigmentation"],
     inStock: 8
   },
   {
@@ -51,10 +51,10 @@ export const allProducts: Product[] = [
     image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
     rating: 4.9,
     reviews: 167,
-    description: "Комплексная поддержка здоровья глаз и улучшение зрения",
-    keywords: ["зрение", "глаза", "здоровье глаз", "усталость глаз", "близорукость", "дальнозоркость"],
+    description: "Comprehensive eye health and vision improvement support",
+    keywords: ["vision", "eyes", "eye health", "eye strain", "myopia", "farsightedness", "sight", "visual", "eye protection"],
     category: "Eye Health & Vision",
-    benefits: ["Улучшает остроту зрения", "Снижает усталость глаз", "Защищает от синего света"],
+    benefits: ["Improves visual acuity", "Reduces eye fatigue", "Protects from blue light"],
     inStock: 15
   },
   {
@@ -65,10 +65,10 @@ export const allProducts: Product[] = [
     image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
     rating: 4.8,
     reviews: 175,
-    description: "Эффективный комплекс для контроля веса и жиросжигания",
-    keywords: ["похудение", "вес", "жиросжигание", "фигура", "метаболизм", "аппетит", "целлюлит"],
+    description: "Effective complex for weight control and fat burning",
+    keywords: ["weight loss", "weight", "fat burning", "body shaping", "metabolism", "appetite", "cellulite", "slimming", "diet"],
     category: "Weight Control & Body Shaping",
-    benefits: ["Ускоряет метаболизм", "Сжигает жиры", "Подавляет аппетит"],
+    benefits: ["Boosts metabolism", "Burns fat", "Suppresses appetite"],
     inStock: 6
   },
   {
@@ -79,10 +79,10 @@ export const allProducts: Product[] = [
     image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
     rating: 4.9,
     reviews: 143,
-    description: "Премиальная формула для поддержки зрения и здоровья глаз",
-    keywords: ["зрение", "глаза", "здоровье глаз", "катаракта", "глаукома", "сетчатка"],
+    description: "Premium formula for vision support and eye health",
+    keywords: ["vision", "eyes", "eye health", "cataract", "glaucoma", "retina", "sight", "visual health", "eye care"],
     category: "Eye Health & Vision",
-    benefits: ["Защищает сетчатку", "Предотвращает катаракту", "Улучшает ночное зрение"],
+    benefits: ["Protects retina", "Prevents cataracts", "Improves night vision"],
     inStock: 10
   }
 ];
@@ -115,11 +115,11 @@ export const getComboRecommendations = (productId: number): Product[] => {
   const mainProduct = allProducts.find(p => p.id === productId);
   if (!mainProduct) return [];
   
-  // Логика комбо-предложений
+  // Combo recommendation logic
   const combos: { [key: number]: number[] } = {
-    21: [22], // S-Complex + Extera (красота + детокс)
-    19: [22], // Onix + Extera (похудение + детокс)
-    20: [18], // Philola + Oclarizin (комплекс для глаз)
+    21: [22], // S-Complex + Extera (beauty + detox)
+    19: [22], // Onix + Extera (weight loss + detox)
+    20: [18], // Philola + Oclarizin (eye health combo)
   };
   
   const comboIds = combos[productId] || [];

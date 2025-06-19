@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,13 +23,13 @@ const AISupplementChat = () => {
     {
       id: '1',
       type: 'ai',
-      content: 'Привет! Я помогу подобрать идеальные БАДы для ваших потребностей. Расскажите, что вас беспокоит или какую цель хотите достичь?',
+      content: 'Hello! I\'ll help you find the perfect supplements for your needs. Tell me what concerns you have or what health goals you want to achieve?',
       timestamp: new Date(),
       followUpQuestions: [
-        "Проблемы со зрением",
-        "Хочу похудеть", 
-        "Здоровье и красота кожи",
-        "Детокс организма"
+        "Vision problems",
+        "Want to lose weight", 
+        "Skin health and beauty",
+        "Body detox"
       ]
     }
   ]);
@@ -52,22 +53,22 @@ const AISupplementChat = () => {
     const queryLower = query.toLowerCase();
     
     if (products.length === 0) {
-      if (queryLower.includes("сердц") || queryLower.includes("давлен")) {
-        return "К сожалению, специализированных БАДов для сердца сейчас нет в наличии. Рекомендую проконсультироваться с врачом. А пока могу предложить детокс для общего оздоровления организма.";
+      if (queryLower.includes("heart") || queryLower.includes("blood pressure")) {
+        return "Unfortunately, we don't have specialized heart supplements in stock right now. I recommend consulting with a doctor. Meanwhile, I can suggest a detox for overall body wellness.";
       }
-      return "Расскажите подробнее о ваших потребностях. Возможно, я смогу предложить что-то подходящее из нашего ассортимента.";
+      return "Tell me more about your specific needs. I might be able to suggest something suitable from our range.";
     }
 
     if (products.length === 1) {
       const product = products[0];
-      return `Отличный выбор! ${product.name} - это именно то, что вам нужно. Этот продукт имеет рейтинг ${product.rating} звезд и ${product.reviews} положительных отзывов. ${product.inStock <= 5 ? `⚠️ Внимание: осталось всего ${product.inStock} упаковок!` : ''}`;
+      return `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating and ${product.reviews} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: Only ${product.inStock} units left in stock!` : ''}`;
     }
 
     if (products.length === 2) {
-      return "У меня есть 2 отличных варианта для вас. Какой больше подходит по бюджету и потребностям?";
+      return "I have 2 great options for you. Which one better fits your budget and needs?";
     }
 
-    return `Нашел ${products.length} подходящих продукта. Давайте выберем наиболее подходящий именно для вас:`;
+    return `I found ${products.length} suitable products. Let's choose the most appropriate one for you:`;
   };
 
   const getFollowUpQuestions = (query: string, products: Product[]): string[] => {
@@ -75,18 +76,18 @@ const AISupplementChat = () => {
     
     if (products.length > 1) {
       return [
-        "Какой бюджет предпочтительнее?",
-        "Есть ли хронические заболевания?",
-        "Принимаете ли другие препараты?"
+        "What's your preferred budget?",
+        "Do you have any chronic conditions?",
+        "Are you taking other medications?"
       ];
     }
     
     if (products.length === 1) {
       const combos = getComboRecommendations(products[0].id);
       if (combos.length > 0) {
-        return ["Показать комплексное решение со скидкой"];
+        return ["Show combo deal with discount"];
       }
-      return ["Добавить в корзину", "Узнать больше о составе"];
+      return ["Add to cart", "Learn more about ingredients"];
     }
     
     return [];
@@ -107,7 +108,7 @@ const AISupplementChat = () => {
     setInputValue('');
     setIsTyping(true);
 
-    // Обновляем контекст пользователя
+    // Update user context
     const newSymptoms = [...userContext.symptoms];
     if (!newSymptoms.includes(text.toLowerCase())) {
       newSymptoms.push(text.toLowerCase());
@@ -119,8 +120,8 @@ const AISupplementChat = () => {
       const aiResponse = getPersonalizedResponse(text, recommendedProducts);
       const followUp = getFollowUpQuestions(text, recommendedProducts);
 
-      // Проверяем на комбо-предложение
-      const isComboRequest = text.includes("комплекс") || text.includes("скидк");
+      // Check for combo offer request
+      const isComboRequest = text.includes("combo") || text.includes("discount");
       let showCombo = false;
       let comboProducts: Product[] = [];
 
@@ -145,15 +146,15 @@ const AISupplementChat = () => {
   };
 
   const handleAddToCart = (productId: number) => {
-    // Имитация добавления в корзину
+    // Simulate adding to cart
     const product = allProducts.find(p => p.id === productId);
     if (product) {
       const successMessage: Message = {
         id: Date.now().toString(),
         type: 'ai',
-        content: `✅ ${product.name} добавлен в корзину! Хотите оформить заказ или добавить что-то еще?`,
+        content: `✅ ${product.name} added to cart! Would you like to checkout or add something else?`,
         timestamp: new Date(),
-        followUpQuestions: ["Перейти к оформлению", "Посмотреть сопутствующие товары", "Продолжить покупки"]
+        followUpQuestions: ["Go to checkout", "View related products", "Continue shopping"]
       };
       
       setMessages(prev => [...prev, successMessage]);
@@ -161,13 +162,13 @@ const AISupplementChat = () => {
   };
 
   const handleFollowUpClick = (question: string) => {
-    if (question === "Перейти к оформлению") {
+    if (question === "Go to checkout") {
       navigate('/cart');
       return;
     }
     
-    if (question.includes("комплекс") || question.includes("скидк")) {
-      handleSendMessage("Показать комплексное решение со скидкой");
+    if (question.includes("combo") || question.includes("discount")) {
+      handleSendMessage("Show combo deal with discount");
       return;
     }
     
@@ -190,8 +191,8 @@ const AISupplementChat = () => {
             <Bot className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-gray-800">AI Консультант</h3>
-            <p className="text-sm text-gray-600">Персональный подбор БАДов</p>
+            <h3 className="font-semibold text-gray-800">AI Consultant</h3>
+            <p className="text-sm text-gray-600">Personalized Supplement Selection</p>
           </div>
         </div>
       </div>
@@ -240,15 +241,15 @@ const AISupplementChat = () => {
                             key={product.id}
                             product={product}
                             reason={
-                              product.keywords.some(k => ["зрение", "глаза"].includes(k)) ? 
-                              "Специально для здоровья глаз" :
-                              product.keywords.some(k => ["похудение", "вес"].includes(k)) ? 
-                              "Эффективное жиросжигание" :
-                              product.keywords.some(k => ["омоложение", "кожа"].includes(k)) ? 
-                              "Омоложение и красота кожи" :
-                              product.keywords.includes("детокс") ? 
-                              "Глубокое очищение организма" : 
-                              "Рекомендуется для ваших потребностей"
+                              product.keywords.some(k => ["vision", "eyes"].includes(k)) ? 
+                              "Specially for eye health" :
+                              product.keywords.some(k => ["weight loss", "weight"].includes(k)) ? 
+                              "Effective fat burning" :
+                              product.keywords.some(k => ["anti-aging", "skin"].includes(k)) ? 
+                              "Anti-aging and skin beauty" :
+                              product.keywords.includes("detox") ? 
+                              "Deep body cleansing" : 
+                              "Recommended for your needs"
                             }
                             onAddToCart={handleAddToCart}
                             showCombo={message.showCombo && index > 0}
@@ -285,7 +286,7 @@ const AISupplementChat = () => {
       {/* Chat Input */}
       <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
         <Input
-          placeholder="Опишите ваши потребности..."
+          placeholder="Describe your needs..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
