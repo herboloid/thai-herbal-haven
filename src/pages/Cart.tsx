@@ -317,6 +317,7 @@ const Cart = () => {
                         <Input
                           id="country"
                           {...register('country')}
+                          value="Thailand"
                           readOnly
                           className="bg-gray-100"
                         />
