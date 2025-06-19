@@ -135,24 +135,21 @@ const InteractiveBackground: React.FC = () => {
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    const rect = canvasRef.current?.getBoundingClientRect();
-    if (rect) {
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    mouseRef.current = { x, y };
+    
+    // Create particles on mouse movement
+    if (Math.random() < 0.3) {
+      const newParticles = Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () =>
+        createParticle(x + (Math.random() - 0.5) * 20, y + (Math.random() - 0.5) * 20)
+      );
       
-      mouseRef.current = { x, y };
-      
-      // Create particles on mouse movement
-      if (Math.random() < 0.3) {
-        const newParticles = Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () =>
-          createParticle(x + (Math.random() - 0.5) * 20, y + (Math.random() - 0.5) * 20)
-        );
-        
-        setParticles(prev => {
-          const updated = [...prev, ...newParticles];
-          return updated.length > 100 ? updated.slice(-100) : updated;
-        });
-      }
+      setParticles(prev => {
+        const updated = [...prev, ...newParticles];
+        return updated.length > 100 ? updated.slice(-100) : updated;
+      });
     }
   };
 
