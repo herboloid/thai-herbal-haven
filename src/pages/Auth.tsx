@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -135,8 +134,8 @@ const Auth = () => {
           <Card className="backdrop-blur-sm bg-white/80 border-white/20 shadow-xl">
             <Tabs value={isLogin ? "login" : "register"} onValueChange={(value) => setIsLogin(value === "login")}>
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Вход</TabsTrigger>
-                <TabsTrigger value="register">Регистрация</TabsTrigger>
+                <TabsTrigger value="login" className="text-green-700 data-[state=active]:text-green-800">Вход</TabsTrigger>
+                <TabsTrigger value="register" className="text-green-700 data-[state=active]:text-green-800">Регистрация</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login">
@@ -183,7 +182,7 @@ const Auth = () => {
                         </Button>
                       </div>
                     </div>
-                    <Button type="submit" className="w-full" disabled={isLoading}>
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
                       {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                       Войти
                     </Button>
@@ -270,7 +269,7 @@ const Auth = () => {
                         </Button>
                       </div>
                     </div>
-                    <Button type="submit" className="w-full" disabled={isLoading}>
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
                       {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                       Зарегистрироваться
                     </Button>
