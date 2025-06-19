@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 19,
+      name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
+      price: "$38",
+      originalPrice: "$45",
+      image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
+      rating: 4.8,
+      reviews: 175,
+      badge: "🌟 New",
+      category: "weight-loss"
+    },
+    {
       id: 18,
       name: "Oclarizin — Eye Health & Vision Support Capsules",
       price: "$32",
@@ -151,6 +162,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "weight-loss", label: "Weight Control & Body Shaping" },
     { value: "eye-health", label: "Eye Health & Vision Support" },
     { value: "detox-health", label: "Detox & Body Cleanse" },
     { value: "digestive-health", label: "Digestive Health" },
@@ -159,8 +171,7 @@ const Products = () => {
     { value: "mens-health", label: "Men's Health" },
     { value: "prostate-health", label: "Prostate Health" },
     { value: "bone-joint", label: "Bone & Joint Health" },
-    { value: "heart-health", label: "Heart Health" },
-    { value: "weight-loss", label: "Weight Loss" }
+    { value: "heart-health", label: "Heart Health" }
   ];
 
   const filteredProducts = products.filter(product => {

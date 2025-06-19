@@ -8,21 +8,21 @@ const Index = () => {
   const categories = [
     {
       id: 1,
+      name: "Weight Control & Body Shaping",
+      image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
+      description: "Fat burning & metabolism support"
+    },
+    {
+      id: 2,
       name: "Eye Health & Vision",
       image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
       description: "Vision support & eye protection"
     },
     {
-      id: 2,
+      id: 3,
       name: "Heart Health",
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       description: "Blood pressure & cardiovascular support"
-    },
-    {
-      id: 3,
-      name: "Joint & Bone Health",
-      image: "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png",
-      description: "Strengthen joints and bones"
     },
     {
       id: 4,
@@ -33,6 +33,16 @@ const Index = () => {
   ];
 
   const featuredProducts = [
+    {
+      id: 19,
+      name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
+      price: "$38",
+      originalPrice: "$45",
+      image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
+      rating: 4.8,
+      reviews: 175,
+      badge: "🌟 New"
+    },
     {
       id: 18,
       name: "Oclarizin — Eye Health & Vision Support Capsules",
@@ -62,16 +72,6 @@ const Index = () => {
       rating: 4.9,
       reviews: 189,
       badge: "🔥 Hot"
-    },
-    {
-      id: 7,
-      name: "TChrome — Weight Loss & Detox Capsules",
-      price: "$35",
-      originalPrice: "$42",
-      image: "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png",
-      rating: 4.9,
-      reviews: 256,
-      badge: "🌟 New"
     }
   ];
 
