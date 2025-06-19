@@ -25,13 +25,13 @@ const AISupplementChat = () => {
     {
       id: '1',
       type: 'ai',
-      content: 'Привет! Я помогу вам найти идеальные добавки для ваших потребностей. Расскажите мне, какие у вас проблемы со здоровьем или какие цели вы хотите достичь?',
+      content: 'Hello! I\'ll help you find the perfect supplements for your needs. Tell me about your health concerns or goals you want to achieve?',
       timestamp: new Date(),
       followUpQuestions: [
-        "Проблемы со зрением",
-        "Хочу похудеть", 
-        "Здоровье кожи и красота",
-        "Детокс организма"
+        "Vision problems",
+        "I want to lose weight", 
+        "Skin health and beauty",
+        "Body detox"
       ]
     }
   ]);
@@ -53,14 +53,14 @@ const AISupplementChat = () => {
 
   const getCategoryFromQuery = (query: string): string => {
     const queryLower = query.toLowerCase();
-    if (queryLower.includes("зрение") || queryLower.includes("глаза")) return "vision";
-    if (queryLower.includes("вес") || queryLower.includes("похудеть")) return "weight";
-    if (queryLower.includes("кожа") || queryLower.includes("красота")) return "beauty";
-    if (queryLower.includes("детокс") || queryLower.includes("очищение")) return "detox";
-    if (queryLower.includes("сердце") || queryLower.includes("давление")) return "heart";
-    if (queryLower.includes("энергия") || queryLower.includes("усталость")) return "energy";
-    if (queryLower.includes("иммунитет") || queryLower.includes("простуда")) return "immunity";
-    if (queryLower.includes("мозг") || queryLower.includes("память")) return "brain";
+    if (queryLower.includes("vision") || queryLower.includes("eyes") || queryLower.includes("sight")) return "vision";
+    if (queryLower.includes("weight") || queryLower.includes("lose") || queryLower.includes("diet")) return "weight";
+    if (queryLower.includes("skin") || queryLower.includes("beauty") || queryLower.includes("anti-aging")) return "beauty";
+    if (queryLower.includes("detox") || queryLower.includes("cleanse") || queryLower.includes("toxins")) return "detox";
+    if (queryLower.includes("heart") || queryLower.includes("pressure") || queryLower.includes("cardiovascular")) return "heart";
+    if (queryLower.includes("energy") || queryLower.includes("fatigue") || queryLower.includes("tired")) return "energy";
+    if (queryLower.includes("immune") || queryLower.includes("immunity") || queryLower.includes("cold")) return "immunity";
+    if (queryLower.includes("brain") || queryLower.includes("memory") || queryLower.includes("focus")) return "brain";
     return "";
   };
 
@@ -68,22 +68,22 @@ const AISupplementChat = () => {
     const queryLower = query.toLowerCase();
     
     if (products.length === 0) {
-      if (queryLower.includes("сердце") || queryLower.includes("давление")) {
-        return "К сожалению, у нас сейчас нет специализированных добавок для сердца. Рекомендую проконсультироваться с врачом. А пока могу предложить детокс для общего оздоровления организма.";
+      if (queryLower.includes("heart") || queryLower.includes("pressure") || queryLower.includes("cardiovascular")) {
+        return "Unfortunately, we don't have specialized heart supplements available right now. I recommend consulting with a doctor. Meanwhile, I can suggest detox supplements for overall health improvement.";
       }
-      return "Расскажите подробнее о ваших конкретных потребностях. Возможно, я смогу предложить что-то подходящее из нашего ассортимента.";
+      return "Please tell me more about your specific needs. I might be able to suggest something suitable from our range.";
     }
 
     if (products.length === 1) {
       const product = products[0];
-      return `Отличный выбор! ${product.name} - это именно то, что вам нужно. У этого продукта рейтинг ${product.rating} звезд и ${product.reviews} положительных отзывов. ${product.inStock <= 5 ? `⚠️ Внимание: осталось всего ${product.inStock} единиц на складе!` : ''}`;
+      return `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviews} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
     }
 
     if (products.length === 2) {
-      return "У меня есть 2 отличных варианта для вас. Какой лучше подходит под ваш бюджет и потребности?";
+      return "I have 2 excellent options for you. Which one better fits your budget and needs?";
     }
 
-    return `Я нашел ${products.length} подходящих продуктов. Давайте выберем наиболее подходящий именно для вас:`;
+    return `I found ${products.length} suitable products. Let's choose the most appropriate one for you:`;
   };
 
   const getFollowUpQuestions = (query: string, products: Product[]): string[] => {
@@ -91,18 +91,18 @@ const AISupplementChat = () => {
     
     if (products.length > 1) {
       return [
-        "Какой у вас предпочтительный бюджет?",
-        "Есть ли у вас хронические заболевания?",
-        "Принимаете ли другие лекарства?"
+        "What's your preferred budget?",
+        "Do you have any chronic conditions?",
+        "Are you taking other medications?"
       ];
     }
     
     if (products.length === 1) {
       const combos = getComboRecommendations(products[0].id);
       if (combos.length > 0) {
-        return ["Показать комбо-предложение со скидкой"];
+        return ["Show combo offer with discount"];
       }
-      return ["Добавить в корзину", "Узнать больше о составе"];
+      return ["Add to cart", "Learn more about ingredients"];
     }
     
     return [];
@@ -137,7 +137,7 @@ const AISupplementChat = () => {
       const followUp = getFollowUpQuestions(text, recommendedProducts);
 
       // Check for combo offer request
-      const isComboRequest = text.includes("комбо") || text.includes("скидка");
+      const isComboRequest = text.includes("combo") || text.includes("discount") || text.includes("offer");
       let showCombo = false;
       let comboProducts: Product[] = [];
 
@@ -169,9 +169,9 @@ const AISupplementChat = () => {
       const successMessage: Message = {
         id: Date.now().toString(),
         type: 'ai',
-        content: `✅ ${product.name} добавлен в корзину! Хотите оформить заказ или добавить что-то еще?`,
+        content: `✅ ${product.name} added to cart! Would you like to checkout or add something else?`,
         timestamp: new Date(),
-        followUpQuestions: ["Перейти к оформлению", "Посмотреть похожие товары", "Продолжить покупки"]
+        followUpQuestions: ["Go to checkout", "View similar products", "Continue shopping"]
       };
       
       setMessages(prev => [...prev, successMessage]);
@@ -179,13 +179,13 @@ const AISupplementChat = () => {
   };
 
   const handleFollowUpClick = (question: string) => {
-    if (question === "Перейти к оформлению") {
+    if (question === "Go to checkout") {
       navigate('/cart');
       return;
     }
     
-    if (question.includes("комбо") || question.includes("скидка")) {
-      handleSendMessage("Показать комбо-предложение со скидкой");
+    if (question.includes("combo") || question.includes("discount") || question.includes("offer")) {
+      handleSendMessage("Show combo offer with discount");
       return;
     }
     
@@ -203,13 +203,13 @@ const AISupplementChat = () => {
     <div className="max-w-4xl mx-auto">
       {/* Chat Header */}
       <div className="flex items-center justify-center mb-6">
-        <div className="flex items-center space-x-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-green-200">
-          <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-sm">
+        <div className="flex items-center space-x-3 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-nature-200">
+          <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full shadow-sm">
             <Bot className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-gray-800">AI Консультант</h3>
-            <p className="text-sm text-green-600">Персональный подбор БАДов</p>
+            <h3 className="font-semibold text-gray-800">AI Consultant</h3>
+            <p className="text-sm text-nature-600">Personalized Supplement Selection</p>
           </div>
         </div>
       </div>
@@ -224,7 +224,7 @@ const AISupplementChat = () => {
               return (
                 <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`flex items-start space-x-2 max-w-xs lg:max-w-md ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                    <div className={`flex items-center justify-center w-8 h-8 rounded-full shadow-sm ${message.type === 'user' ? 'bg-gradient-to-br from-gray-600 to-gray-700' : colors ? `bg-gradient-to-br from-${colors.bg.replace('bg-', '')} to-${colors.icon.replace('text-', '')}` : 'bg-gradient-to-br from-green-500 to-green-600'}`}>
+                    <div className={`flex items-center justify-center w-8 h-8 rounded-full shadow-sm ${message.type === 'user' ? 'bg-gradient-to-br from-gray-600 to-gray-700' : colors ? `bg-gradient-to-br from-${colors.bg.replace('bg-', '')} to-${colors.icon.replace('text-', '')}` : 'bg-gradient-to-br from-nature-500 to-nature-600'}`}>
                       {message.type === 'user' ? (
                         <User className="h-4 w-4 text-white" />
                       ) : (
@@ -245,7 +245,7 @@ const AISupplementChat = () => {
                               variant="outline"
                               size="sm"
                               onClick={() => handleFollowUpClick(question)}
-                              className={`text-xs h-6 transition-all hover:scale-105 ${colors ? `${colors.bg} hover:${colors.hover} ${colors.text} ${colors.border}` : 'bg-green-50 hover:bg-green-100 text-green-700 border-green-200'}`}
+                              className={`text-xs h-6 transition-all hover:scale-105 ${colors ? `${colors.bg} hover:${colors.hover} ${colors.text} ${colors.border}` : 'bg-nature-50 hover:bg-nature-100 text-nature-700 border-nature-200'}`}
                             >
                               {question}
                             </Button>
@@ -262,14 +262,14 @@ const AISupplementChat = () => {
                               product={product}
                               reason={
                                 product.keywords.some(k => ["vision", "eyes"].includes(k)) ? 
-                                "Специально для здоровья глаз" :
+                                "Specially for eye health" :
                                 product.keywords.some(k => ["weight loss", "weight"].includes(k)) ? 
-                                "Эффективное жиросжигание" :
+                                "Effective fat burning" :
                                 product.keywords.some(k => ["anti-aging", "skin"].includes(k)) ? 
-                                "Антивозрастной уход и красота кожи" :
+                                "Anti-aging care and skin beauty" :
                                 product.keywords.includes("detox") ? 
-                                "Глубокое очищение организма" : 
-                                "Рекомендовано для ваших потребностей"
+                                "Deep body cleansing" : 
+                                "Recommended for your needs"
                               }
                               onAddToCart={handleAddToCart}
                               showCombo={message.showCombo && index > 0}
@@ -286,14 +286,14 @@ const AISupplementChat = () => {
             {isTyping && (
               <div className="flex justify-start">
                 <div className="flex items-start space-x-2">
-                  <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-sm">
+                  <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full shadow-sm">
                     <Bot className="h-4 w-4 text-white" />
                   </div>
                   <div className="bg-gray-50 rounded-2xl px-4 py-3 border border-gray-200 shadow-sm">
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 bg-nature-400 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-nature-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-nature-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -307,7 +307,7 @@ const AISupplementChat = () => {
       {/* Chat Input */}
       <div className="flex items-center space-x-2 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-lg border border-gray-200/50">
         <Input
-          placeholder="Опишите ваши потребности..."
+          placeholder="Describe your needs..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
@@ -316,7 +316,7 @@ const AISupplementChat = () => {
         <Button
           onClick={() => handleSendMessage()}
           size="icon"
-          className="h-10 w-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-sm transition-all hover:scale-105"
+          className="h-10 w-10 rounded-full bg-gradient-to-br from-nature-500 to-nature-600 hover:from-nature-600 hover:to-nature-700 shadow-sm transition-all hover:scale-105"
           disabled={!inputValue.trim() || isTyping}
         >
           <Send className="h-4 w-4" />
