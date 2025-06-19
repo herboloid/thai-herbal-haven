@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,12 +34,22 @@ const Index = () => {
     {
       id: 5,
       name: "Detox & Cleanse",
-      image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png", 
+      image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png", 
       description: "Body cleanse & toxin removal"
     }
   ];
 
   const featuredProducts = [
+    {
+      id: 22,
+      name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
+      price: "$29",
+      originalPrice: "$34",
+      image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
+      rating: 4.9,
+      reviews: 156,
+      badge: "🌟 New"
+    },
     {
       id: 21,
       name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
@@ -77,16 +88,6 @@ const Index = () => {
       image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
       rating: 4.9,
       reviews: 143,
-      badge: "🌟 New"
-    },
-    {
-      id: 17,
-      name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
-      price: "$28",
-      originalPrice: "$33",
-      image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
-      rating: 4.9,
-      reviews: 187,
       badge: "🌟 New"
     }
   ];

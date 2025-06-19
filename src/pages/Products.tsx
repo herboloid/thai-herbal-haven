@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 22,
+      name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
+      price: "$29",
+      originalPrice: "$34",
+      image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
+      rating: 4.9,
+      reviews: 156,
+      badge: "🌟 New",
+      category: "detox-health"
+    },
+    {
       id: 21,
       name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
       price: "$36",
