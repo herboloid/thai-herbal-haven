@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -129,8 +130,8 @@ const About = () => {
               About Us
             </Badge>
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Leaders in
-              <span className="text-nature-600 block">Natural Supplements</span>
+              Your Trusted Partner
+              <span className="text-nature-600 block">in Natural Health</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
               We are specialists in natural dietary supplements committed to providing high-quality products 

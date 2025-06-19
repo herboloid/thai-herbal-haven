@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -116,8 +115,8 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-6 leading-tight">
-              Natural<br />
-              <span className="font-normal text-gray-700">Supplements</span>
+              Leaders in<br />
+              <span className="font-normal text-gray-700">Natural Supplements</span>
             </h1>
             
             {/* AI Consultant Button Section */}
