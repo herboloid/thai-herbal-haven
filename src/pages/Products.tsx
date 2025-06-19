@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 13,
+      name: "Elsie — Skin Restoration & Fungal Infection Support",
+      price: "$35",
+      originalPrice: "$42",
+      image: "/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png",
+      rating: 4.9,
+      reviews: 198,
+      badge: "🌟 New",
+      category: "skin-health"
+    },
+    {
       id: 12,
       name: "Andicellix — Hearing Support & Ear Nerve Protection",
       price: "$40",
@@ -151,6 +162,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "skin-health", label: "Skin Health" },
     { value: "hearing-health", label: "Hearing Health" },
     { value: "mens-health", label: "Men's Health" },
     { value: "prostate-health", label: "Prostate Health" },
@@ -251,7 +263,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (
