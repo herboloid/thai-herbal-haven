@@ -1,8 +1,10 @@
+import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Users, 
   TrendingUp, 
@@ -12,10 +14,115 @@ import {
   CheckCircle,
   Calculator,
   Heart,
-  Share2
+  Share2,
+  Loader2
 } from "lucide-react";
 
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  marketingChannel: string;
+  websiteLink: string;
+  motivation: string;
+  agreeToTerms: boolean;
+}
+
 const Affiliate = () => {
+  const { toast } = useToast();
+  const formRef = useRef<HTMLDivElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    marketingChannel: '',
+    websiteLink: '',
+    motivation: '',
+    agreeToTerms: false
+  });
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<FormData> = {};
+
+    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email format is invalid';
+    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.marketingChannel) newErrors.marketingChannel = 'Marketing channel is required';
+    if (!formData.agreeToTerms) newErrors.agreeToTerms = 'You must agree to terms and conditions';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      toast({
+        title: "Form validation failed",
+        description: "Please check the required fields and try again.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      toast({
+        title: "Application submitted successfully!",
+        description: "We'll review your application and get back to you within 2-3 business days.",
+      });
+
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        marketingChannel: '',
+        websiteLink: '',
+        motivation: '',
+        agreeToTerms: false
+      });
+    } catch (error) {
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const benefits = [
     {
       icon: DollarSign,
@@ -109,7 +216,11 @@ const Affiliate = () => {
               Earn up to 25% commission on every sale.
             </p>
             <div className="flex justify-center">
-              <Button size="lg" className="bg-white text-nature-600 hover:bg-gray-100">
+              <Button 
+                size="lg" 
+                className="bg-white text-nature-600 hover:bg-gray-100"
+                onClick={scrollToForm}
+              >
                 Join Now - Free!
               </Button>
             </div>
@@ -249,7 +360,10 @@ const Affiliate = () => {
                     <span>$9,000</span>
                   </div>
                 </div>
-                <Button className="w-full bg-nature-600 hover:bg-nature-700">
+                <Button 
+                  className="w-full bg-nature-600 hover:bg-nature-700"
+                  onClick={scrollToForm}
+                >
                   Apply Now
                 </Button>
               </CardContent>
@@ -259,7 +373,7 @@ const Affiliate = () => {
       </section>
 
       {/* Application Form */}
-      <section className="py-16 bg-white">
+      <section ref={formRef} className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
@@ -267,21 +381,37 @@ const Affiliate = () => {
               <p className="text-gray-600">Fill out the form below to start your partnership with us</p>
             </div>
             
-            <Card>
+            <Card className="shadow-lg">
               <CardContent className="p-6">
-                <form className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         First Name *
                       </label>
-                      <Input placeholder="Your first name" />
+                      <Input 
+                        placeholder="Your first name"
+                        value={formData.firstName}
+                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                        className={errors.firstName ? 'border-red-500' : ''}
+                      />
+                      {errors.firstName && (
+                        <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Last Name *
                       </label>
-                      <Input placeholder="Your last name" />
+                      <Input 
+                        placeholder="Your last name"
+                        value={formData.lastName}
+                        onChange={(e) => handleInputChange('lastName', e.target.value)}
+                        className={errors.lastName ? 'border-red-500' : ''}
+                      />
+                      {errors.lastName && (
+                        <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
+                      )}
                     </div>
                   </div>
                   
@@ -289,37 +419,65 @@ const Affiliate = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Email *
                     </label>
-                    <Input type="email" placeholder="Your email address" />
+                    <Input 
+                      type="email" 
+                      placeholder="Your email address"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className={errors.email ? 'border-red-500' : ''}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                    )}
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Phone Number *
                     </label>
-                    <Input placeholder="Your phone number" />
+                    <Input 
+                      placeholder="Your phone number"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      className={errors.phone ? 'border-red-500' : ''}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                    )}
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Primary Marketing Channel *
                     </label>
-                    <select className="w-full p-2 border rounded-md">
-                      <option>Select channel</option>
-                      <option>Facebook</option>
-                      <option>Instagram</option>
-                      <option>TikTok</option>
-                      <option>YouTube</option>
-                      <option>Personal Website</option>
-                      <option>Line</option>
-                      <option>Other</option>
+                    <select 
+                      className={`w-full p-2 border rounded-md ${errors.marketingChannel ? 'border-red-500' : ''}`}
+                      value={formData.marketingChannel}
+                      onChange={(e) => handleInputChange('marketingChannel', e.target.value)}
+                    >
+                      <option value="">Select channel</option>
+                      <option value="facebook">Facebook</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="tiktok">TikTok</option>
+                      <option value="youtube">YouTube</option>
+                      <option value="website">Personal Website</option>
+                      <option value="line">Line</option>
+                      <option value="other">Other</option>
                     </select>
+                    {errors.marketingChannel && (
+                      <p className="text-red-500 text-xs mt-1">{errors.marketingChannel}</p>
+                    )}
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Social Media or Website Link
                     </label>
-                    <Input placeholder="https://..." />
+                    <Input 
+                      placeholder="https://..."
+                      value={formData.websiteLink}
+                      onChange={(e) => handleInputChange('websiteLink', e.target.value)}
+                    />
                   </div>
                   
                   <div>
@@ -329,19 +487,40 @@ const Affiliate = () => {
                     <Textarea 
                       placeholder="Tell us about your experience or interest in health and wellness..."
                       rows={4}
+                      value={formData.motivation}
+                      onChange={(e) => handleInputChange('motivation', e.target.value)}
                     />
                   </div>
                   
                   <div className="flex items-start space-x-2">
-                    <input type="checkbox" className="mt-1" />
+                    <input 
+                      type="checkbox" 
+                      className="mt-1"
+                      checked={formData.agreeToTerms}
+                      onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
+                    />
                     <label className="text-sm text-gray-600">
                       I agree to the <a href="#" className="text-nature-600 hover:underline">Terms and Conditions</a> 
-                      and <a href="#" className="text-nature-600 hover:underline">Privacy Policy</a>
+                      and <a href="#" className="text-nature-600 hover:underline">Privacy Policy</a> *
                     </label>
                   </div>
+                  {errors.agreeToTerms && (
+                    <p className="text-red-500 text-xs">{errors.agreeToTerms}</p>
+                  )}
                   
-                  <Button className="w-full bg-nature-600 hover:bg-nature-700 text-lg py-3">
-                    Submit Application
+                  <Button 
+                    type="submit"
+                    className="w-full bg-nature-600 hover:bg-nature-700 text-lg py-3"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Submitting Application...
+                      </>
+                    ) : (
+                      'Submit Application'
+                    )}
                   </Button>
                 </form>
               </CardContent>
