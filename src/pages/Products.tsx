@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 16,
+      name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
+      price: "$26",
+      originalPrice: "$31",
+      image: "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
+      rating: 4.8,
+      reviews: 156,
+      badge: "🌟 New",
+      category: "digestive-health"
+    },
+    {
       id: 15,
       name: "Genesis Caps — Hearing Restoration & Ear Health Support",
       price: "$38",
@@ -184,6 +195,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "digestive-health", label: "Digestive Health" },
     { value: "skin-health", label: "Skin Health" },
     { value: "hearing-health", label: "Hearing Health" },
     { value: "mens-health", label: "Men's Health" },
@@ -285,7 +297,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 || product.id === 14 || product.id === 15 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 || product.id === 14 || product.id === 15 || product.id === 16 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (
