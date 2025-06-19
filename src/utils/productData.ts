@@ -12,6 +12,7 @@ export interface Product {
   category: string;
   benefits: string[];
   inStock: number;
+  badge?: string;
 }
 
 export const allProducts: Product[] = [
