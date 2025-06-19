@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 21,
+      name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
+      price: "$36",
+      originalPrice: "$42",
+      image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
+      rating: 4.9,
+      reviews: 198,
+      badge: "🌟 New",
+      category: "beauty-supplement"
+    },
+    {
       id: 20,
       name: "Philola — Eye Health & Vision Support Capsules",
       price: "$34",
@@ -173,6 +184,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "beauty-supplement", label: "Beauty & Anti-Aging" },
     { value: "weight-loss", label: "Weight Control & Body Shaping" },
     { value: "eye-health", label: "Eye Health & Vision Support" },
     { value: "detox-health", label: "Detox & Body Cleanse" },

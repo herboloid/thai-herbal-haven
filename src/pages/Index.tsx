@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,24 +8,30 @@ const Index = () => {
   const categories = [
     {
       id: 1,
+      name: "Beauty & Anti-Aging",
+      image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
+      description: "Skin brightening & anti-aging support"
+    },
+    {
+      id: 2,
       name: "Weight Control & Body Shaping",
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
       description: "Fat burning & metabolism support"
     },
     {
-      id: 2,
+      id: 3,
       name: "Eye Health & Vision",
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       description: "Vision support & eye protection"
     },
     {
-      id: 3,
+      id: 4,
       name: "Heart Health",
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       description: "Blood pressure & cardiovascular support"
     },
     {
-      id: 4,
+      id: 5,
       name: "Detox & Cleanse",
       image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png", 
       description: "Body cleanse & toxin removal"
@@ -34,6 +39,16 @@ const Index = () => {
   ];
 
   const featuredProducts = [
+    {
+      id: 21,
+      name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
+      price: "$36",
+      originalPrice: "$42",
+      image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
+      rating: 4.9,
+      reviews: 198,
+      badge: "🌟 New"
+    },
     {
       id: 20,
       name: "Philola — Eye Health & Vision Support Capsules",
