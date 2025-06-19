@@ -5,8 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, Search, Filter } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Star, Search, Sparkles, Scale, Eye, Heart, Leaf, Zap, Shield, Brain, Users, Activity, Ear } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { getCategoryColors } from "@/utils/categoryColors";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -212,19 +214,27 @@ const Products = () => {
   ];
 
   const categories = [
-    { value: "all", label: "All Categories" },
-    { value: "beauty-supplement", label: "Beauty & Anti-Aging" },
-    { value: "weight-loss", label: "Weight Control & Body Shaping" },
-    { value: "eye-health", label: "Eye Health & Vision Support" },
-    { value: "detox-health", label: "Detox & Body Cleanse" },
-    { value: "digestive-health", label: "Digestive Health" },
-    { value: "skin-health", label: "Skin Health" },
-    { value: "hearing-health", label: "Hearing Health" },
-    { value: "mens-health", label: "Men's Health" },
-    { value: "prostate-health", label: "Prostate Health" },
-    { value: "bone-joint", label: "Bone & Joint Health" },
-    { value: "heart-health", label: "Heart Health" }
+    { value: "all", label: "All Categories", icon: Activity, count: 0 },
+    { value: "beauty-supplement", label: "Beauty & Anti-Aging", icon: Sparkles, count: 0 },
+    { value: "weight-loss", label: "Weight Control", icon: Scale, count: 0 },
+    { value: "eye-health", label: "Eye Health", icon: Eye, count: 0 },
+    { value: "detox-health", label: "Detox & Cleanse", icon: Leaf, count: 0 },
+    { value: "digestive-health", label: "Digestive Health", icon: Heart, count: 0 },
+    { value: "skin-health", label: "Skin Health", icon: Sparkles, count: 0 },
+    { value: "hearing-health", label: "Hearing Health", icon: Ear, count: 0 },
+    { value: "mens-health", label: "Men's Health", icon: Users, count: 0 },
+    { value: "prostate-health", label: "Prostate Health", icon: Shield, count: 0 },
+    { value: "bone-joint", label: "Bone & Joint", icon: Activity, count: 0 },
+    { value: "heart-health", label: "Heart Health", icon: Heart, count: 0 }
   ];
+
+  // Update category counts
+  const categoriesWithCounts = categories.map(category => ({
+    ...category,
+    count: category.value === "all" 
+      ? products.length 
+      : products.filter(product => product.category === category.value).length
+  }));
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -269,33 +279,18 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Filters and Search */}
+      {/* Search and Sort */}
       <section className="bg-white border-b">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="flex flex-col sm:flex-row gap-4 flex-1">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <Input
-                  placeholder="Search products..."
-                  value={searchTerm}
-                  onChange={(e) => handleSearchChange(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              <Select value={filterCategory} onValueChange={setFilterCategory}>
-                <SelectTrigger className="w-full sm:w-48">
-                  <Filter className="h-4 w-4 mr-2" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category.value} value={category.value}>
-                      {category.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="pl-10"
+              />
             </div>
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-full sm:w-48">
@@ -310,6 +305,39 @@ const Products = () => {
               </SelectContent>
             </Select>
           </div>
+        </div>
+      </section>
+
+      {/* Category Tabs */}
+      <section className="bg-white border-b">
+        <div className="container mx-auto px-4 py-4">
+          <Tabs value={filterCategory} onValueChange={setFilterCategory} className="w-full">
+            <TabsList className="w-full justify-start overflow-x-auto bg-transparent p-0 h-auto">
+              {categoriesWithCounts.map((category) => {
+                const colors = getCategoryColors(category.value);
+                const Icon = category.icon;
+                return (
+                  <TabsTrigger
+                    key={category.value}
+                    value={category.value}
+                    className={`
+                      flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all
+                      ${colors.bg} ${colors.text} ${colors.border} ${colors.hover}
+                      data-[state=active]:bg-gradient-to-r data-[state=active]:from-white data-[state=active]:to-gray-50
+                      data-[state=active]:shadow-md data-[state=active]:border-2
+                      border whitespace-nowrap
+                    `}
+                  >
+                    <Icon className={`h-4 w-4 ${colors.icon}`} />
+                    <span>{category.label}</span>
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {category.count}
+                    </Badge>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+          </Tabs>
         </div>
       </section>
 
