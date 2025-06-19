@@ -124,72 +124,6 @@ const Products = () => {
       reviews: 256,
       badge: "🌟 New",
       category: "weight-loss"
-    },
-    {
-      id: 1,
-      name: "Natural Vitamin C",
-      price: "$19",
-      originalPrice: "$23",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop",
-      rating: 4.8,
-      reviews: 124,
-      badge: "Best Seller",
-      category: "vitamins"
-    },
-    {
-      id: 2,
-      name: "Omega-3 Fish Oil",
-      price: "$28",
-      originalPrice: null,
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=400&fit=crop",
-      rating: 4.9,
-      reviews: 89,
-      badge: "Recommended",
-      category: "omega"
-    },
-    {
-      id: 3,
-      name: "Natural Probiotics",
-      price: "$24",
-      originalPrice: "$27",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=400&fit=crop",
-      rating: 4.7,
-      reviews: 156,
-      badge: "New",
-      category: "probiotics"
-    },
-    {
-      id: 4,
-      name: "Turmeric Extract",
-      price: "$15",
-      originalPrice: null,
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=400&fit=crop",
-      rating: 4.6,
-      reviews: 203,
-      badge: null,
-      category: "herbs"
-    },
-    {
-      id: 5,
-      name: "Vitamin D3 + K2",
-      price: "$22",
-      originalPrice: null,
-      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=400&h=400&fit=crop",
-      rating: 4.5,
-      reviews: 92,
-      badge: null,
-      category: "vitamins"
-    },
-    {
-      id: 6,
-      name: "Natural Magnesium",
-      price: "$17",
-      originalPrice: "$19",
-      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=400&fit=crop",
-      rating: 4.4,
-      reviews: 167,
-      badge: "Sale",
-      category: "minerals"
     }
   ];
 
@@ -202,12 +136,7 @@ const Products = () => {
     { value: "prostate-health", label: "Prostate Health" },
     { value: "bone-joint", label: "Bone & Joint Health" },
     { value: "heart-health", label: "Heart Health" },
-    { value: "weight-loss", label: "Weight Loss" },
-    { value: "vitamins", label: "Vitamins" },
-    { value: "omega", label: "Omega" },
-    { value: "probiotics", label: "Probiotics" },
-    { value: "herbs", label: "Herbs" },
-    { value: "minerals", label: "Minerals" }
+    { value: "weight-loss", label: "Weight Loss" }
   ];
 
   const filteredProducts = products.filter(product => {
@@ -296,9 +225,7 @@ const Products = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 || product.id === 8 || product.id === 9 || product.id === 10 || product.id === 11 || product.id === 12 || product.id === 13 || product.id === 14 || product.id === 15 || product.id === 16 ? 'object-contain bg-white p-2' : 'object-cover'
-                    }`}
+                    className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
                   />
                   {product.badge && (
                     <Badge className="absolute top-2 left-2 bg-nature-600 text-white">

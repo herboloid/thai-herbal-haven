@@ -9,67 +9,70 @@ const Index = () => {
   const categories = [
     {
       id: 1,
-      name: "Energy Boosters",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
-      description: "Natural energy enhancement"
+      name: "Heart Health",
+      image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
+      description: "Blood pressure & cardiovascular support"
     },
     {
       id: 2,
-      name: "Immunity Support",
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=300&h=300&fit=crop",
-      description: "Strengthen immune system"
+      name: "Joint & Bone Health",
+      image: "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png",
+      description: "Strengthen joints and bones"
     },
     {
       id: 3,
-      name: "Beauty & Wellness",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
-      description: "Beauty and wellness support"
+      name: "Men's Health",
+      image: "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
+      description: "Prostate & performance support"
     },
     {
       id: 4,
-      name: "Joint Health",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&h=300&fit=crop", 
-      description: "Joint and bone care"
+      name: "Weight Management",
+      image: "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png", 
+      description: "Weight loss & detox support"
     }
   ];
 
   const featuredProducts = [
     {
+      id: 16,
+      name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
+      price: "$26",
+      originalPrice: "$31",
+      image: "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
+      rating: 4.8,
+      reviews: 156,
+      badge: "🌟 New"
+    },
+    {
+      id: 15,
+      name: "Genesis Caps — Hearing Restoration & Ear Health Support",
+      price: "$38",
+      originalPrice: "$45",
+      image: "/lovable-uploads/a4aea223-69b4-4f7a-b244-3c5d71392fe0.png",
+      rating: 4.7,
+      reviews: 164,
+      badge: "🌟 New"
+    },
+    {
+      id: 8,
+      name: "Diacard — Blood Pressure & Blood Sugar Support",
+      price: "$42",
+      originalPrice: "$48",
+      image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
+      rating: 4.9,
+      reviews: 189,
+      badge: "🔥 Hot"
+    },
+    {
       id: 7,
       name: "TChrome — Weight Loss & Detox Capsules",
       price: "$35",
       originalPrice: "$42",
-      image: "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
+      image: "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png",
       rating: 4.9,
       reviews: 256,
       badge: "🌟 New"
-    },
-    {
-      id: 1,
-      name: "Natural Vitamin C",
-      price: "$19",
-      originalPrice: "$23",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=400&fit=crop",
-      rating: 4.8,
-      reviews: 124
-    },
-    {
-      id: 2,
-      name: "Omega-3 Fish Oil",
-      price: "$28",
-      originalPrice: null,
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=400&fit=crop",
-      rating: 4.9,
-      reviews: 89
-    },
-    {
-      id: 3,
-      name: "Natural Probiotics",
-      price: "$24",
-      originalPrice: "$27",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=400&fit=crop",
-      rating: 4.7,
-      reviews: 156
     }
   ];
 
@@ -123,7 +126,7 @@ const Index = () => {
                   <img
                     src={category.image}
                     alt={category.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 object-contain bg-white p-2 group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 right-4">
                     <Button variant="ghost" size="icon" className="bg-white/80 hover:bg-white rounded-full h-8 w-8">
@@ -140,7 +143,7 @@ const Index = () => {
                     size="sm"
                     className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
                   >
-                    <Link to="/categories">Best Sellers</Link>
+                    <Link to="/products">Shop Now</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -166,9 +169,7 @@ const Index = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 ? 'object-contain bg-white p-2' : 'object-cover'
-                    }`}
+                    className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute top-4 right-4">
                     <Button variant="ghost" size="icon" className="bg-white/80 hover:bg-white rounded-full h-8 w-8">
@@ -201,7 +202,7 @@ const Index = () => {
                       className="rounded-full bg-gray-800 text-white border-gray-800 hover:bg-gray-700 hover:border-gray-700"
                     >
                       <Link to={`/product/${product.id}`}>
-                        {product.badge || "Best Seller"}
+                        {product.badge || "View"}
                       </Link>
                     </Button>
                   </div>
