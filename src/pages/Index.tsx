@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,21 +8,21 @@ const Index = () => {
   const categories = [
     {
       id: 1,
+      name: "Eye Health & Vision",
+      image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
+      description: "Vision support & eye protection"
+    },
+    {
+      id: 2,
       name: "Heart Health",
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       description: "Blood pressure & cardiovascular support"
     },
     {
-      id: 2,
+      id: 3,
       name: "Joint & Bone Health",
       image: "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png",
       description: "Strengthen joints and bones"
-    },
-    {
-      id: 3,
-      name: "Men's Health",
-      image: "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
-      description: "Prostate & performance support"
     },
     {
       id: 4,
@@ -35,6 +34,16 @@ const Index = () => {
 
   const featuredProducts = [
     {
+      id: 18,
+      name: "Oclarizin — Eye Health & Vision Support Capsules",
+      price: "$32",
+      originalPrice: "$38",
+      image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
+      rating: 4.9,
+      reviews: 143,
+      badge: "🌟 New"
+    },
+    {
       id: 17,
       name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
       price: "$28",
@@ -42,16 +51,6 @@ const Index = () => {
       image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
       rating: 4.9,
       reviews: 187,
-      badge: "🌟 New"
-    },
-    {
-      id: 16,
-      name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
-      price: "$26",
-      originalPrice: "$31",
-      image: "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
-      rating: 4.8,
-      reviews: 156,
       badge: "🌟 New"
     },
     {

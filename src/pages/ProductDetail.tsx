@@ -26,6 +26,46 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "18") {
+      return {
+        id: 18,
+        name: "Oclarizin — Eye Health & Vision Support Capsules",
+        price: "$32",
+        originalPrice: "$38",
+        images: [
+          "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
+          "/lovable-uploads/bc9940ab-eea7-40f0-b7a3-bec3d1e74a28.png",
+          "/lovable-uploads/79340eee-1b99-4327-b5bd-2b2d9110597e.png"
+        ],
+        rating: 4.9,
+        reviews: 143,
+        badge: "🌟 New",
+        inStock: true,
+        description: "Oclarizin helps slow retinal degeneration and improves visual acuity during both day and night. It helps prevent eye disorders such as cataracts, glaucoma, pterygium, nearsightedness, and farsightedness. It also relieves blurry vision, dry eyes, eye strain, and fatigue caused by prolonged screen time.",
+        benefits: [
+          "Prevents age-related retinal degeneration",
+          "Reduces risk of cataracts, pterygium, pinguecula, glaucoma",
+          "Restores clearer vision",
+          "Protects eyes from blue light and UV radiation",
+          "Relieves dry eyes, eye pain, and eye fatigue"
+        ],
+        ingredients: "Bilberry Extract, Apple Extract, Astragalus Extract, L-Cysteine, Marigold (Lutein) Extract, Grape Seed Extract, Grape Skin Extract, Grapefruit Extract, Vitamin C, Selenium-Enriched Yeast, Zinc Citrate, Black Pepper Extract",
+        dosage: "Take 2 capsules daily before bedtime",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "15 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-06353-5-0008",
+        idealFor: [
+          "People with existing eye conditions",
+          "Those who wear glasses or contact lenses daily",
+          "Individuals with heavy screen usage (computer/phone)",
+          "Outdoor workers exposed to strong sunlight",
+          "People experiencing eye pain, dryness, burning, or blurry vision",
+          "Those with impaired night vision",
+          "Individuals with a history of eye or facial injury"
+        ]
+      };
+    }
+    
     if (productId === "17") {
       return {
         id: 17,
@@ -407,43 +447,6 @@ const ProductDetail = () => {
       };
     }
     
-    if (productId === "7") {
-      return {
-        id: 7,
-        name: "TChrome — Weight Loss & Detox Capsules",
-        price: "$35",
-        originalPrice: "$42",
-        images: [
-          "/lovable-uploads/aacbb27e-cd19-495a-865d-a1dbbe6d2e3b.png",
-          "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
-          "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png"
-        ],
-        rating: 4.9,
-        reviews: 256,
-        badge: "🌟 New",
-        inStock: true,
-        description: "TChrome is an innovative dietary supplement for weight management. It helps burn fat, detoxify the body, restore healthy digestion, and reduce appetite. Effectively blocks the accumulation of new fat and supports a lean physique.",
-        benefits: [
-          "Boosts fat burning",
-          "Blocks fat absorption", 
-          "Improves bowel movement",
-          "Controls appetite",
-          "Stimulates metabolism"
-        ],
-        ingredients: "Garcinia Cambogia Extract, Green Tea Extract, Calcium Pyruvate, White Kidney Bean Extract, Chitosan, Kelp Extract, Black Pepper Powder, Ginger Extract, Chromium Picolinate",
-        dosage: "Take 2 capsules daily: 1 capsule with breakfast, 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "60 capsules per bottle",
-        registration: "FDA Thailand Registration No.: 11-106353-1-0137",
-        idealFor: [
-          "Individuals with excess weight",
-          "People with poor digestion or constipation", 
-          "Those with slow metabolism",
-          "Anyone looking to lose 5 kg or more"
-        ]
-      };
-    }
-    
     // Default fallback - redirect to product 7 if invalid ID
     return {
       id: 7,
@@ -498,6 +501,13 @@ const ProductDetail = () => {
 
   const relatedProducts = [
     {
+      id: 18,
+      name: "Oclarizin — Eye Health & Vision Support Capsules",
+      price: "$32",
+      image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
+      rating: 4.9
+    },
+    {
       id: 17,
       name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
       price: "$28",
@@ -510,13 +520,6 @@ const ProductDetail = () => {
       price: "$42",
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       rating: 4.9
-    },
-    {
-      id: 9,
-      name: "Carthisin — Bone & Joint Health Support", 
-      price: "$38",
-      image: "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png",
-      rating: 4.8
     }
   ];
 
@@ -525,19 +528,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "17" ? "Helmina has been amazing for my digestive health! After 4 weeks of use, my bloating has significantly reduced and my bowel movements are much more regular. The skin tags I had are also starting to fade!" : id === "16" ? "Geralox has been amazing for my hemorrhoid issues! After 4 weeks of use, the pain and swelling have significantly reduced and my digestion has improved dramatically. No more constipation issues!" : id === "15" ? "Genesis Caps has been amazing for my hearing! After 5 weeks of use, the constant ringing in my ears has significantly reduced and I can follow conversations much better now. Highly recommend!" : id === "14" ? "Turbine has been amazing for my prostate health! After 4 weeks of use, my urination flow has improved significantly and the nighttime trips to the bathroom have reduced dramatically. Highly recommend!" : id === "13" ? "Elsie has been amazing for my skin issues! After 6 weeks of use, my eczema has significantly improved and the itching has almost completely stopped. My skin looks healthier than it has in years!" : id === "12" ? "Andicellix has been amazing for my hearing! After 6 weeks of use, the constant ringing in my ears has significantly reduced and I can hear conversations much clearer now. Highly recommend!" : id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic."
+      comment: id === "18" ? "Oclarizin has been amazing for my eye health! After 5 weeks of use, my dry eyes have significantly improved and my night vision is much clearer. No more eye strain from computer work!" : id === "17" ? "Helmina has been amazing for my digestive health! After 4 weeks of use, my bloating has significantly reduced and my bowel movements are much more regular. The skin tags I had are also starting to fade!" : id === "16" ? "Geralox has been amazing for my hemorrhoid issues! After 4 weeks of use, the pain and swelling have significantly reduced and my digestion has improved dramatically. No more constipation issues!" : id === "15" ? "Genesis Caps has been amazing for my hearing! After 5 weeks of use, the constant ringing in my ears has significantly reduced and I can follow conversations much better now. Highly recommend!" : id === "14" ? "Turbine has been amazing for my prostate health! After 4 weeks of use, my urination flow has improved significantly and the nighttime trips to the bathroom have reduced dramatically. Highly recommend!" : id === "13" ? "Elsie has been amazing for my skin issues! After 6 weeks of use, my eczema has significantly improved and the itching has almost completely stopped. My skin looks healthier than it has in years!" : id === "12" ? "Andicellix has been amazing for my hearing! After 6 weeks of use, the constant ringing in my ears has significantly reduced and I can hear conversations much clearer now. Highly recommend!" : id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic."
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "17" ? "Great product for digestive detox! My gut health has improved dramatically and the uncomfortable skin tags I had are almost gone. Very satisfied with the results after 5 weeks." : id === "16" ? "Great product for digestive health! My hemorrhoid symptoms have reduced dramatically and I no longer struggle with bowel movements. Very satisfied with the results after 5 weeks." : id === "15" ? "Great product for hearing health! My ear fullness has reduced dramatically and I don't need to ask people to repeat themselves as often. Very satisfied with the results after 4 weeks." : id === "14" ? "Great product for prostate health! My pelvic discomfort has reduced dramatically and my overall energy levels have improved. Very satisfied with the results after 5 weeks." : id === "13" ? "Great product for skin health! My psoriasis patches have reduced dramatically and the inflammation has calmed down significantly. Very satisfied with the results after 5 weeks." : id === "12" ? "Great product for hearing health! My tinnitus has improved dramatically and the dizzy spells I used to get have almost completely stopped. Very satisfied with the results." : id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!"
+      comment: id === "18" ? "Great product for eye health! My blurry vision has improved dramatically and I no longer experience burning eyes after long screen sessions. Very satisfied with the results after 4 weeks." : id === "17" ? "Great product for digestive detox! My gut health has improved dramatically and the uncomfortable skin tags I had are almost gone. Very satisfied with the results after 5 weeks." : id === "16" ? "Great product for digestive health! My hemorrhoid symptoms have reduced dramatically and I no longer struggle with bowel movements. Very satisfied with the results after 5 weeks." : id === "15" ? "Great product for hearing health! My ear fullness has reduced dramatically and I don't need to ask people to repeat themselves as often. Very satisfied with the results after 4 weeks." : id === "14" ? "Great product for prostate health! My pelvic discomfort has reduced dramatically and my overall energy levels have improved. Very satisfied with the results after 5 weeks." : id === "13" ? "Great product for skin health! My psoriasis patches have reduced dramatically and the inflammation has calmed down significantly. Very satisfied with the results after 5 weeks." : id === "12" ? "Great product for hearing health! My tinnitus has improved dramatically and the dizzy spells I used to get have almost completely stopped. Very satisfied with the results." : id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!"
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "17" ? "Good quality supplement for detox. Noticed improvements in my digestion and less bloating after 3 weeks of consistent use. The skin tags are slowly getting smaller too." : id === "16" ? "Good quality supplement for digestive health. Noticed improvements in my bowel movements and less abdominal discomfort after 3 weeks of consistent use. The bloating has reduced significantly." : id === "15" ? "Good quality supplement for hearing health. Noticed improvements in conversation clarity and less ear buzzing after 3 weeks of consistent use." : id === "14" ? "Good quality supplement for prostate health. Noticed improvements in bladder function and reduced burning sensation after 3 weeks of consistent use." : id === "13" ? "Good quality supplement for skin health. Noticed improvements in my nail fungus and overall skin texture after 4 weeks of consistent use. The burning sensation has reduced significantly." : id === "12" ? "Good quality supplement for hearing health. Noticed improvements in my ability to follow conversations and less ear fullness after 4 weeks of consistent use." : id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using."
+      comment: id === "18" ? "Good quality supplement for eye health. Noticed improvements in my vision clarity and less eye fatigue after 3 weeks of consistent use. The protective effects against blue light are noticeable." : id === "17" ? "Good quality supplement for detox. Noticed improvements in my digestion and less bloating after 3 weeks of consistent use. The skin tags are slowly getting smaller too." : id === "16" ? "Good quality supplement for digestive health. Noticed improvements in my bowel movements and less abdominal discomfort after 3 weeks of consistent use. The bloating has reduced significantly." : id === "15" ? "Good quality supplement for hearing health. Noticed improvements in conversation clarity and less ear buzzing after 3 weeks of consistent use." : id === "14" ? "Good quality supplement for prostate health. Noticed improvements in bladder function and reduced burning sensation after 3 weeks of consistent use." :  id === "13" ? "Good quality supplement for skin health. Noticed improvements in my nail fungus and overall skin texture after 4 weeks of consistent use. The burning sensation has reduced significantly." : id === "12" ? "Good quality supplement for hearing health. Noticed improvements in my ability to follow conversations and less ear fullness after 4 weeks of consistent use." : id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using."
     }
   ];
 

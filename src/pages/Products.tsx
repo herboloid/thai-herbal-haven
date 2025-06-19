@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 18,
+      name: "Oclarizin — Eye Health & Vision Support Capsules",
+      price: "$32",
+      originalPrice: "$38",
+      image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
+      rating: 4.9,
+      reviews: 143,
+      badge: "🌟 New",
+      category: "eye-health"
+    },
+    {
       id: 17,
       name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
       price: "$28",
@@ -140,6 +151,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "eye-health", label: "Eye Health & Vision Support" },
     { value: "detox-health", label: "Detox & Body Cleanse" },
     { value: "digestive-health", label: "Digestive Health" },
     { value: "skin-health", label: "Skin Health" },
