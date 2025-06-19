@@ -353,7 +353,7 @@ const About = () => {
             <Button asChild size="lg" className="bg-white text-nature-600 hover:bg-gray-100">
               <Link to="/products">Shop Products</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-nature-600">
+            <Button asChild size="lg" variant="outline" className="border-white text-nature-600 hover:bg-white hover:text-nature-600">
               <Link to="/affiliate">Join Affiliate Program</Link>
             </Button>
           </div>
