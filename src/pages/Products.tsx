@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,17 @@ const Products = () => {
   const { addItem } = useCart();
 
   const products = [
+    {
+      id: 8,
+      name: "Diacard — Blood Pressure & Blood Sugar Support",
+      price: "$42",
+      originalPrice: "$48",
+      image: "/lovable-uploads/9b2eb6c3-28af-48cf-8349-aaf12a98e55f.png",
+      rating: 4.9,
+      reviews: 189,
+      badge: "🔥 Hot",
+      category: "heart-health"
+    },
     {
       id: 7,
       name: "TChrome — Weight Loss & Detox Capsules",
@@ -97,6 +107,7 @@ const Products = () => {
 
   const categories = [
     { value: "all", label: "All Categories" },
+    { value: "heart-health", label: "Heart Health" },
     { value: "weight-loss", label: "Weight Loss" },
     { value: "vitamins", label: "Vitamins" },
     { value: "omega", label: "Omega" },
@@ -192,7 +203,7 @@ const Products = () => {
                     src={product.image}
                     alt={product.name}
                     className={`w-full h-48 transition-transform duration-300 group-hover:scale-105 ${
-                      product.id === 7 ? 'object-contain bg-white p-2' : 'object-cover'
+                      product.id === 7 || product.id === 8 ? 'object-contain bg-white p-2' : 'object-cover'
                     }`}
                   />
                   {product.badge && (

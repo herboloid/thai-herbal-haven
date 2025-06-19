@@ -26,6 +26,45 @@ const ProductDetail = () => {
 
   // Get product data based on ID
   const getProductData = (productId: string) => {
+    if (productId === "8") {
+      return {
+        id: 8,
+        name: "Diacard — Blood Pressure & Blood Sugar Support",
+        price: "$42",
+        originalPrice: "$48",
+        images: [
+          "/lovable-uploads/9b2eb6c3-28af-48cf-8349-aaf12a98e55f.png",
+          "/lovable-uploads/eb417a32-9a3f-479a-8427-bd90fc6aa3fe.png",
+          "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png"
+        ],
+        rating: 4.9,
+        reviews: 189,
+        badge: "🔥 Hot",
+        inStock: true,
+        description: "Diacard helps stimulate pancreatic function to naturally regulate blood sugar levels. It improves blood circulation, strengthens blood vessels, and helps cleanse arteries of excess cholesterol. Supports balanced blood pressure and reduces the risk of future heart disease.",
+        benefits: [
+          "Balances blood sugar levels",
+          "Increases insulin sensitivity and reduces insulin resistance",
+          "Normalizes blood pressure", 
+          "Lowers the risk of heart disease",
+          "Reduces excess cholesterol in blood vessels",
+          "Enhances circulation and vascular health"
+        ],
+        ingredients: "L-Cysteine, Magnesium Oxide, L-Arginine, L-Carnitine L-Tartrate, L-Lysine Hydrochloride, L-Methionine, Bitter Melon Powder, Artichoke Powder, Astragalus Powder, Cordyceps Powder, Fenugreek Powder, Grape Seed Extract, Zinc Amino Acid Chelate (15%), Taurine, Fish Oil Powder, Korean Ginseng Extract, Black Currant Extract, Rosehip Extract, Vitamin C, Dandelion Powder, Broccoli Powder, Dong Quai Extract, Garcinia Cambogia Extract, Goji Berry Extract, Tomato Extract, Alpha Lipoic Acid, Selenium Yeast, Coenzyme Q10, Niacin, D-Biotin, Vitamin E, Copper Gluconate, Calcium D-Pantothenate, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12, Vitamin D3, Manganese, Chromium Picolinate, Folic Acid",
+        dosage: "Take 1 capsule with breakfast, lunch, and dinner (3 capsules daily)",
+        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
+        size: "15 capsules per box",
+        registration: "FDA Thailand Registration No.: 11-1-18157-1-0143",
+        idealFor: [
+          "Diabetics or those with high sugar intake",
+          "Individuals with high cholesterol or blood lipids", 
+          "People with high or unstable blood pressure",
+          "Overweight individuals",
+          "Those with a family history of heart disease, diabetes, or hypertension"
+        ]
+      };
+    }
+    
     if (productId === "7") {
       return {
         id: 7,
@@ -67,7 +106,7 @@ const ProductDetail = () => {
     return {
       id: 1,
       name: "Natural Vitamin C",
-      price: "$19",
+      price: "$19", 
       originalPrice: "$23",
       images: [
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=600&fit=crop",
@@ -94,6 +133,8 @@ const ProductDetail = () => {
   };
 
   const product = getProductData(id || "1");
+
+  // ... keep existing code (handleAddToCart function)
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -137,19 +178,19 @@ const ProductDetail = () => {
       name: "Sarah Johnson",
       rating: 5,
       date: "December 15, 2024",
-      comment: id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
+      comment: id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : id === "7" ? "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic." : "Feel refreshed after taking this. Rarely get sick now. Highly recommend!"
     },
     {
       name: "Mike Chen", 
       rating: 5,
       date: "December 10, 2024",
-      comment: id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
+      comment: id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : id === "7" ? "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!" : "My skin looks much better. Been taking for 2 months, will continue buying."
     },
     {
       name: "Lisa Wilson",
       rating: 4,
       date: "December 5, 2024", 
-      comment: id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
+      comment: id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : id === "7" ? "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using." : "Good quality product, reasonable price, fast delivery"
     }
   ];
 
@@ -184,7 +225,7 @@ const ProductDetail = () => {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className={`w-full h-96 rounded-lg ${
-                  id === "7" ? 'object-contain bg-white p-4' : 'object-cover'
+                  id === "7" || id === "8" ? 'object-contain bg-white p-4' : 'object-cover'
                 }`}
               />
               {product.badge && (
@@ -206,7 +247,7 @@ const ProductDetail = () => {
                     src={image} 
                     alt="" 
                     className={`w-full h-full ${
-                      id === "7" ? 'object-contain bg-white p-1' : 'object-cover'
+                      id === "7" || id === "8" ? 'object-contain bg-white p-1' : 'object-cover'
                     }`} 
                   />
                 </button>
