@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, ShoppingCart, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Product } from "@/utils/productData";
+import { getStatusColor } from "@/utils/categoryColors";
 
 interface ChatProductCardProps {
   product: Product;
@@ -28,6 +29,14 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
   const discount = product.originalPrice ? 
     Math.round((1 - parseFloat(product.price.replace('฿', '')) / parseFloat(product.originalPrice.replace('฿', ''))) * 100) : 0;
 
+  const getStockStatus = () => {
+    if (product.inStock === 0) return { status: 'out-of-stock', text: 'Out of Stock', color: 'bg-red-500' };
+    if (product.inStock <= 5) return { status: 'low-stock', text: `${product.inStock} left`, color: 'bg-orange-500' };
+    return { status: 'in-stock', text: 'In Stock', color: 'bg-green-500' };
+  };
+
+  const stockInfo = getStockStatus();
+
   return (
     <Card className={`border hover:shadow-md transition-all cursor-pointer ${showCombo ? 'border-green-300 bg-green-50' : 'border-gray-200'}`}>
       <CardContent className="p-4">
@@ -39,8 +48,8 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
               className="w-16 h-16 object-contain bg-white rounded"
             />
             {product.inStock <= 5 && (
-              <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
-                {product.inStock} left
+              <div className={`absolute -top-1 -right-1 ${stockInfo.color} text-white text-xs px-1 rounded-full`}>
+                {stockInfo.text}
               </div>
             )}
           </div>
@@ -63,8 +72,13 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
                 <span className="text-xs text-gray-400 ml-1">({product.reviews})</span>
               </div>
               {discount > 0 && (
-                <span className="ml-2 text-xs bg-red-100 text-red-600 px-1 rounded">
-                  -{discount}%
+                <span className="ml-2 text-xs bg-red-100 text-red-600 px-1 rounded font-medium">
+                  -{discount}% OFF
+                </span>
+              )}
+              {product.badge && (
+                <span className="ml-2 text-xs bg-purple-100 text-purple-600 px-1 rounded font-medium">
+                  {product.badge}
                 </span>
               )}
             </div>
@@ -82,7 +96,7 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
                   variant="outline"
                   size="sm"
                   onClick={handleViewProduct}
-                  className="h-7 px-2 text-xs"
+                  className="h-7 px-2 text-xs hover:bg-gray-50"
                 >
                   <Eye className="h-3 w-3 mr-1" />
                   Details
@@ -90,10 +104,11 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
                 <Button
                   onClick={handleAddToCart}
                   size="sm"
-                  className="h-7 px-2 text-xs bg-green-600 hover:bg-green-700"
+                  disabled={product.inStock === 0}
+                  className="h-7 px-2 text-xs bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                   <ShoppingCart className="h-3 w-3 mr-1" />
-                  Add to Cart
+                  {product.inStock === 0 ? 'Sold Out' : 'Add'}
                 </Button>
               </div>
             </div>

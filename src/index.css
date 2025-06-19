@@ -69,4 +69,62 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Category color utilities */
+  .category-beauty {
+    @apply bg-beauty-100 text-beauty-800 border-beauty-200;
+  }
+  
+  .category-weight {
+    @apply bg-weight-100 text-weight-800 border-weight-200;
+  }
+  
+  .category-vision {
+    @apply bg-vision-100 text-vision-800 border-vision-200;
+  }
+  
+  .category-heart {
+    @apply bg-heart-100 text-heart-800 border-heart-200;
+  }
+  
+  .category-detox {
+    @apply bg-detox-100 text-detox-800 border-detox-200;
+  }
+  
+  .category-energy {
+    @apply bg-energy-100 text-energy-800 border-energy-200;
+  }
+  
+  .category-immunity {
+    @apply bg-immunity-100 text-immunity-800 border-immunity-200;
+  }
+  
+  .category-brain {
+    @apply bg-brain-100 text-brain-800 border-brain-200;
+  }
+
+  /* Status indicators */
+  .status-in-stock {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-low-stock {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-out-of-stock {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-new {
+    @apply bg-purple-100 text-purple-800;
+  }
+  
+  .status-sale {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-popular {
+    @apply bg-orange-100 text-orange-800;
+  }
 }

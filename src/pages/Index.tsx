@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Bot, MessageCircle } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
+import { getCategoryColors } from "@/utils/categoryColors";
 
 const Index = () => {
   const navigate = useNavigate();
