@@ -109,39 +109,39 @@ const Index = () => {
     <div className="min-h-screen">
       <InteractiveBackground />
       
-      {/* Hero Section with AI Consultant Button */}
-      <section className="relative bg-gradient-to-br from-green-50 via-green-100 to-green-200 py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-300/20 to-green-400/20"></div>
+      {/* Hero Section with updated nature/earth styling */}
+      <section className="relative bg-gradient-to-br from-nature-50 via-nature-100 to-earth-100 py-20 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-nature-300/20 to-earth-300/20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Leaders in<br />
-              <span className="font-normal text-gray-700">Natural Supplements</span>
+              <span className="font-bold text-nature-700">Natural Supplements</span>
             </h1>
             
-            {/* AI Consultant Button Section */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl border border-green-200/50">
+            {/* AI Consultant Button Section with updated styling */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl border border-nature-200/50">
               <div className="flex items-center justify-center mb-4">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-lg">
+                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full shadow-lg">
                   <Bot className="h-8 w-8 text-white" />
                 </div>
               </div>
-              <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
                 Get Personalized Recommendations
               </h2>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed">
                 Our AI consultant analyzes your health goals and recommends the perfect supplements for your needs. 
                 Get expert guidance in finding the right products for your wellness journey.
               </p>
               <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-gray-600">
-                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">💊 Personal Selection</span>
-                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">🎯 Goal-Based Matching</span>
-                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">⚡ Instant Recommendations</span>
+                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">💊 Personal Selection</span>
+                <span className="bg-earth-100 text-earth-700 px-3 py-1 rounded-full font-medium">🎯 Goal-Based Matching</span>
+                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">⚡ Instant Recommendations</span>
               </div>
               <Button 
                 asChild 
                 size="lg" 
-                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                className="bg-gradient-to-r from-nature-600 to-nature-700 hover:from-nature-700 hover:to-nature-800 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
               >
                 <Link to="/ai-consultant" className="flex items-center space-x-2">
                   <MessageCircle className="h-5 w-5" />
@@ -153,7 +153,7 @@ const Index = () => {
             <Button 
               asChild 
               size="lg" 
-              className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className="bg-earth-700 hover:bg-earth-800 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <Link to="/products">Shop Supplements</Link>
             </Button>
@@ -161,12 +161,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories Grid */}
+      {/* Categories Grid with updated styling */}
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-light text-gray-800 mb-4">Product Categories</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Product Categories</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Choose a category that matches your health needs
             </p>
           </div>
@@ -174,10 +174,9 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => {
               const Icon = category.icon;
-              const colors = getCategoryColors(category.id);
               
               return (
-                <Card key={category.id} className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg overflow-hidden h-full ${colors.hover}`}>
+                <Card key={category.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-none shadow-sm overflow-hidden h-full">
                   <div className="relative">
                     <img
                       src={category.image}
@@ -186,8 +185,8 @@ const Index = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute top-4 left-4">
-                      <div className={`w-10 h-10 ${colors.bg} rounded-full flex items-center justify-center shadow-lg border-2 border-white/50`}>
-                        <Icon className={`h-5 w-5 ${colors.icon}`} />
+                      <div className="w-10 h-10 bg-nature-100 rounded-full flex items-center justify-center shadow-lg border-2 border-white/50">
+                        <Icon className="h-5 w-5 text-nature-600" />
                       </div>
                     </div>
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -197,17 +196,17 @@ const Index = () => {
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <h3 className={`font-semibold text-gray-900 mb-2 group-hover:${colors.text} transition-colors`}>
+                    <h3 className="font-bold text-gray-900 mb-2 group-hover:text-nature-700 transition-colors">
                       {category.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
                       {category.description}
                     </p>
                     <Button 
                       asChild
                       variant="outline" 
                       size="sm"
-                      className={`rounded-full ${colors.border} ${colors.text} hover:${colors.bg} hover:${colors.hover} transition-all hover:scale-105`}
+                      className="rounded-full border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
                     >
                       <Link to="/products">View</Link>
                     </Button>
@@ -219,12 +218,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-16 bg-gray-50 relative z-10">
+      {/* Featured Products with updated styling */}
+      <section className="py-16 bg-nature-50 relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-light text-gray-800 mb-4">Featured Products</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
               High-quality products popular among our customers
             </p>
           </div>
@@ -236,7 +235,7 @@ const Index = () => {
                 Math.round((1 - parseFloat(product.price.replace('฿', '')) / parseFloat(product.originalPrice.replace('฿', ''))) * 100) : 0;
               
               return (
-                <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg overflow-hidden bg-white">
+                <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-none shadow-sm overflow-hidden bg-white">
                   <div className="relative overflow-hidden">
                     <img
                       src={product.image}
@@ -249,7 +248,7 @@ const Index = () => {
                           -{discount}%
                         </span>
                       )}
-                      <div className={`${colors.bg} ${colors.text} px-2 py-1 rounded-full text-xs font-medium shadow-lg border ${colors.border}`}>
+                      <div className="bg-nature-100 text-nature-700 px-2 py-1 rounded-full text-xs font-medium shadow-lg border border-nature-200">
                         {product.category === 'beauty' ? '💄' : 
                          product.category === 'weight' ? '⚡' : 
                          product.category === 'vision' ? '👁️' : 
@@ -284,7 +283,7 @@ const Index = () => {
                         asChild
                         variant="outline" 
                         size="sm"
-                        className={`rounded-full text-xs ${colors.border} ${colors.text} hover:${colors.bg} hover:${colors.hover} transition-all hover:scale-105`}
+                        className="rounded-full text-xs border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
                       >
                         <Link to={`/product/${product.id}`}>
                           Buy
@@ -298,7 +297,7 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-8">
-            <Button asChild variant="outline" size="lg" className="rounded-full border-gray-300 hover:bg-gray-50 transition-all hover:scale-105">
+            <Button asChild variant="outline" size="lg" className="rounded-full border-nature-300 hover:bg-nature-50 transition-all hover:scale-105">
               <Link to="/products">All Products</Link>
             </Button>
           </div>

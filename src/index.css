@@ -14,24 +14,24 @@
     --popover: 255 255 255;
     --popover-foreground: 39 39 42;
 
-    --primary: 34 197 94;
+    --primary: 74 155 74;
     --primary-foreground: 255 255 255;
 
-    --secondary: 240 253 244;
-    --secondary-foreground: 22 101 52;
+    --secondary: 240 249 240;
+    --secondary-foreground: 34 101 34;
 
     --muted: 248 250 252;
     --muted-foreground: 100 116 139;
 
-    --accent: 240 253 244;
-    --accent-foreground: 22 101 52;
+    --accent: 240 249 240;
+    --accent-foreground: 34 101 34;
 
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
     --border: 226 232 240;
     --input: 226 232 240;
-    --ring: 34 197 94;
+    --ring: 74 155 74;
 
     --radius: 1rem;
   }
@@ -70,46 +70,46 @@
     overflow: hidden;
   }
 
-  /* Category color utilities */
+  /* Updated category color utilities using nature palette */
   .category-beauty {
-    @apply bg-beauty-100 text-beauty-800 border-beauty-200;
+    @apply bg-nature-100 text-nature-800 border-nature-200;
   }
   
   .category-weight {
-    @apply bg-weight-100 text-weight-800 border-weight-200;
+    @apply bg-earth-100 text-earth-800 border-earth-200;
   }
   
   .category-vision {
-    @apply bg-vision-100 text-vision-800 border-vision-200;
+    @apply bg-nature-100 text-nature-800 border-nature-200;
   }
   
   .category-heart {
-    @apply bg-heart-100 text-heart-800 border-heart-200;
+    @apply bg-earth-100 text-earth-800 border-earth-200;
   }
   
   .category-detox {
-    @apply bg-detox-100 text-detox-800 border-detox-200;
+    @apply bg-nature-100 text-nature-800 border-nature-200;
   }
   
   .category-energy {
-    @apply bg-energy-100 text-energy-800 border-energy-200;
+    @apply bg-earth-100 text-earth-800 border-earth-200;
   }
   
   .category-immunity {
-    @apply bg-immunity-100 text-immunity-800 border-immunity-200;
+    @apply bg-nature-100 text-nature-800 border-nature-200;
   }
   
   .category-brain {
-    @apply bg-brain-100 text-brain-800 border-brain-200;
+    @apply bg-earth-100 text-earth-800 border-earth-200;
   }
 
   /* Status indicators */
   .status-in-stock {
-    @apply bg-green-100 text-green-800;
+    @apply bg-nature-100 text-nature-800;
   }
   
   .status-low-stock {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply bg-earth-100 text-earth-800;
   }
   
   .status-out-of-stock {
@@ -117,7 +117,7 @@
   }
   
   .status-new {
-    @apply bg-purple-100 text-purple-800;
+    @apply bg-nature-100 text-nature-800;
   }
   
   .status-sale {
@@ -125,6 +125,6 @@
   }
   
   .status-popular {
-    @apply bg-orange-100 text-orange-800;
+    @apply bg-earth-100 text-earth-800;
   }
 }
