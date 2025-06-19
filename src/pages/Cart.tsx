@@ -2,29 +2,83 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/contexts/CartContext";
+import { useForm } from "react-hook-form";
 import { 
   ShoppingCart, 
   Minus, 
   Plus, 
   Trash2, 
   ArrowLeft,
-  CreditCard
+  CreditCard,
+  Truck,
+  MapPin,
+  User,
+  Mail,
+  Phone
 } from "lucide-react";
+
+interface CheckoutForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+  paymentMethod: 'card' | 'paypal' | 'bank';
+  deliveryMethod: 'standard' | 'express' | 'pickup';
+}
 
 const Cart = () => {
   const { state, removeItem, updateQuantity, clearCart } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<CheckoutForm>({
+    defaultValues: {
+      paymentMethod: 'card',
+      deliveryMethod: 'standard',
+      country: 'Россия'
+    }
+  });
 
-  const handleCheckout = () => {
+  const deliveryMethod = watch('deliveryMethod');
+  const paymentMethod = watch('paymentMethod');
+
+  const getDeliveryPrice = () => {
+    switch (deliveryMethod) {
+      case 'express': return 15;
+      case 'pickup': return 0;
+      default: return state.totalPrice >= 50 ? 0 : 5;
+    }
+  };
+
+  const getDeliveryTime = () => {
+    switch (deliveryMethod) {
+      case 'express': return '1-2 рабочих дня';
+      case 'pickup': return 'Сегодня';
+      default: return '3-5 рабочих дней';
+    }
+  };
+
+  const totalWithDelivery = state.totalPrice + getDeliveryPrice();
+
+  const onSubmit = (data: CheckoutForm) => {
     setIsCheckingOut(true);
-    // Simulate checkout process
+    console.log('Order data:', { ...data, items: state.items, total: totalWithDelivery });
+    
     setTimeout(() => {
-      alert(`Заказ на сумму $${state.totalPrice.toFixed(2)} оформлен! Спасибо за покупку.`);
+      alert(`Заказ на сумму $${totalWithDelivery.toFixed(2)} оформлен! Спасибо за покупку. Данные заказа отправлены на ${data.email}`);
       clearCart();
       setIsCheckingOut(false);
+      setShowCheckoutForm(false);
     }, 2000);
   };
 
@@ -82,15 +136,22 @@ const Cart = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
-            {state.items.map((item) => (
-              <Card key={item.id} className="overflow-hidden">
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-4">
+          <div className="lg:col-span-2 space-y-6">
+            {/* Items List */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <ShoppingCart className="h-5 w-5 mr-2" />
+                  Товары в корзине
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {state.items.map((item) => (
+                  <div key={item.id} className="flex items-center space-x-4 p-4 border rounded-lg">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className={`w-20 h-20 rounded-lg ${
+                      className={`w-16 h-16 rounded-lg ${
                         item.id === 7 ? 'object-contain bg-white p-1' : 'object-cover'
                       }`}
                     />
@@ -98,7 +159,7 @@ const Cart = () => {
                       <h3 className="font-semibold text-gray-900 mb-1">
                         {item.name}
                       </h3>
-                      <div className="flex items-center space-x-2 mb-2">
+                      <div className="flex items-center space-x-2">
                         <span className="font-bold text-nature-600">
                           {item.price}
                         </span>
@@ -117,7 +178,7 @@ const Cart = () => {
                       >
                         <Minus className="h-4 w-4" />
                       </Button>
-                      <span className="w-12 text-center font-medium">
+                      <span className="w-8 text-center font-medium">
                         {item.quantity}
                       </span>
                       <Button
@@ -142,48 +203,255 @@ const Cart = () => {
                       </Button>
                     </div>
                   </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Checkout Form */}
+            {showCheckoutForm && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <User className="h-5 w-5 mr-2" />
+                    Данные для доставки
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    {/* Personal Info */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="firstName">Имя *</Label>
+                        <Input
+                          id="firstName"
+                          {...register('firstName', { required: 'Имя обязательно' })}
+                          className={errors.firstName ? 'border-red-500' : ''}
+                        />
+                        {errors.firstName && (
+                          <span className="text-red-500 text-sm">{errors.firstName.message}</span>
+                        )}
+                      </div>
+                      <div>
+                        <Label htmlFor="lastName">Фамилия *</Label>
+                        <Input
+                          id="lastName"
+                          {...register('lastName', { required: 'Фамилия обязательна' })}
+                          className={errors.lastName ? 'border-red-500' : ''}
+                        />
+                        {errors.lastName && (
+                          <span className="text-red-500 text-sm">{errors.lastName.message}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="email">Email *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          {...register('email', { 
+                            required: 'Email обязателен',
+                            pattern: {
+                              value: /^\S+@\S+$/i,
+                              message: 'Некорректный email'
+                            }
+                          })}
+                          className={errors.email ? 'border-red-500' : ''}
+                        />
+                        {errors.email && (
+                          <span className="text-red-500 text-sm">{errors.email.message}</span>
+                        )}
+                      </div>
+                      <div>
+                        <Label htmlFor="phone">Телефон *</Label>
+                        <Input
+                          id="phone"
+                          {...register('phone', { required: 'Телефон обязателен' })}
+                          className={errors.phone ? 'border-red-500' : ''}
+                        />
+                        {errors.phone && (
+                          <span className="text-red-500 text-sm">{errors.phone.message}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Address */}
+                    <div>
+                      <Label htmlFor="address">Адрес *</Label>
+                      <Input
+                        id="address"
+                        {...register('address', { required: 'Адрес обязателен' })}
+                        className={errors.address ? 'border-red-500' : ''}
+                      />
+                      {errors.address && (
+                        <span className="text-red-500 text-sm">{errors.address.message}</span>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <Label htmlFor="city">Город *</Label>
+                        <Input
+                          id="city"
+                          {...register('city', { required: 'Город обязателен' })}
+                          className={errors.city ? 'border-red-500' : ''}
+                        />
+                        {errors.city && (
+                          <span className="text-red-500 text-sm">{errors.city.message}</span>
+                        )}
+                      </div>
+                      <div>
+                        <Label htmlFor="postalCode">Индекс *</Label>
+                        <Input
+                          id="postalCode"
+                          {...register('postalCode', { required: 'Индекс обязателен' })}
+                          className={errors.postalCode ? 'border-red-500' : ''}
+                        />
+                        {errors.postalCode && (
+                          <span className="text-red-500 text-sm">{errors.postalCode.message}</span>
+                        )}
+                      </div>
+                      <div>
+                        <Label htmlFor="country">Страна</Label>
+                        <Input
+                          id="country"
+                          {...register('country')}
+                          readOnly
+                          className="bg-gray-100"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Delivery Method */}
+                    <div>
+                      <Label className="text-base font-semibold mb-3 block">Способ доставки</Label>
+                      <div className="space-y-3">
+                        {[
+                          { value: 'standard', label: 'Стандартная доставка', time: '3-5 рабочих дней', price: state.totalPrice >= 50 ? 0 : 5 },
+                          { value: 'express', label: 'Экспресс доставка', time: '1-2 рабочих дня', price: 15 },
+                          { value: 'pickup', label: 'Самовывоз', time: 'Сегодня', price: 0 }
+                        ].map((method) => (
+                          <label key={method.value} className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input
+                              type="radio"
+                              value={method.value}
+                              {...register('deliveryMethod')}
+                              className="text-nature-600"
+                            />
+                            <Truck className="h-4 w-4 text-gray-600" />
+                            <div className="flex-1">
+                              <div className="font-medium">{method.label}</div>
+                              <div className="text-sm text-gray-600">{method.time}</div>
+                            </div>
+                            <div className="font-bold">
+                              {method.price === 0 ? 'Бесплатно' : `$${method.price}`}
+                            </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Payment Method */}
+                    <div>
+                      <Label className="text-base font-semibold mb-3 block">Способ оплаты</Label>
+                      <div className="space-y-3">
+                        {[
+                          { value: 'card', label: 'Банковская карта', icon: CreditCard },
+                          { value: 'paypal', label: 'PayPal', icon: CreditCard },
+                          { value: 'bank', label: 'Банковский перевод', icon: CreditCard }
+                        ].map((method) => (
+                          <label key={method.value} className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input
+                              type="radio"
+                              value={method.value}
+                              {...register('paymentMethod')}
+                              className="text-nature-600"
+                            />
+                            <method.icon className="h-4 w-4 text-gray-600" />
+                            <span className="font-medium">{method.label}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-4">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setShowCheckoutForm(false)}
+                        className="flex-1"
+                      >
+                        Назад
+                      </Button>
+                      <Button
+                        type="submit"
+                        disabled={isCheckingOut}
+                        className="flex-1 bg-nature-600 hover:bg-nature-700"
+                      >
+                        {isCheckingOut ? "Обработка..." : "Подтвердить заказ"}
+                      </Button>
+                    </div>
+                  </form>
                 </CardContent>
               </Card>
-            ))}
+            )}
           </div>
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <Card className="sticky top-4">
-              <CardContent className="p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">
-                  Итого по заказу
-                </h2>
-                
-                <div className="space-y-3 mb-6">
+              <CardHeader>
+                <CardTitle>Итого по заказу</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
                     <span>Товары ({state.totalItems})</span>
                     <span>${state.totalPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
-                    <span>Доставка</span>
-                    <span className="text-green-600">Бесплатно</span>
+                    <span>Доставка ({getDeliveryTime()})</span>
+                    <span className={getDeliveryPrice() === 0 ? 'text-green-600' : ''}>
+                      {getDeliveryPrice() === 0 ? 'Бесплатно' : `$${getDeliveryPrice()}`}
+                    </span>
                   </div>
-                  <div className="border-t pt-3">
-                    <div className="flex justify-between text-lg font-bold text-gray-900">
-                      <span>Итого</span>
-                      <span>${state.totalPrice.toFixed(2)}</span>
-                    </div>
+                  <Separator />
+                  <div className="flex justify-between text-lg font-bold text-gray-900">
+                    <span>Итого</span>
+                    <span>${totalWithDelivery.toFixed(2)}</span>
                   </div>
                 </div>
 
-                <Button 
-                  className="w-full bg-nature-600 hover:bg-nature-700 mb-3"
-                  onClick={handleCheckout}
-                  disabled={isCheckingOut}
-                >
-                  <CreditCard className="h-4 w-4 mr-2" />
-                  {isCheckingOut ? "Обработка..." : "Оформить заказ"}
-                </Button>
+                {!showCheckoutForm ? (
+                  <Button 
+                    className="w-full bg-nature-600 hover:bg-nature-700"
+                    onClick={() => setShowCheckoutForm(true)}
+                  >
+                    <CreditCard className="h-4 w-4 mr-2" />
+                    Оформить заказ
+                  </Button>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="text-sm text-gray-600 text-center">
+                      Заполните форму для завершения заказа
+                    </div>
+                  </div>
+                )}
 
-                <div className="text-center text-sm text-gray-500">
-                  <p>Безопасная оплата</p>
-                  <p>Бесплатная доставка от $50</p>
+                <div className="text-center text-sm text-gray-500 space-y-1">
+                  <p className="flex items-center justify-center">
+                    <CreditCard className="h-4 w-4 mr-1" />
+                    Безопасная оплата
+                  </p>
+                  <p className="flex items-center justify-center">
+                    <Truck className="h-4 w-4 mr-1" />
+                    Бесплатная доставка от $50
+                  </p>
+                  <p className="flex items-center justify-center">
+                    <MapPin className="h-4 w-4 mr-1" />
+                    Доставка по всей России
+                  </p>
                 </div>
               </CardContent>
             </Card>
