@@ -9,10 +9,10 @@ import { useCart } from "@/contexts/CartContext";
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
-  const { items } = useCart();
+  const { state } = useCart();
   const location = useLocation();
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
 
   const isActive = (path: string) => location.pathname === path;
 
