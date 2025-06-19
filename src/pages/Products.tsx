@@ -16,6 +16,17 @@ const Products = () => {
 
   const products = [
     {
+      id: 20,
+      name: "Philola — Eye Health & Vision Support Capsules",
+      price: "$34",
+      originalPrice: "$40",
+      image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
+      rating: 4.9,
+      reviews: 167,
+      badge: "🌟 New",
+      category: "eye-health"
+    },
+    {
       id: 19,
       name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
       price: "$38",

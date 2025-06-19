@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,7 +16,7 @@ const Index = () => {
     {
       id: 2,
       name: "Eye Health & Vision",
-      image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
+      image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       description: "Vision support & eye protection"
     },
     {
@@ -33,6 +34,16 @@ const Index = () => {
   ];
 
   const featuredProducts = [
+    {
+      id: 20,
+      name: "Philola — Eye Health & Vision Support Capsules",
+      price: "$34",
+      originalPrice: "$40",
+      image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
+      rating: 4.9,
+      reviews: 167,
+      badge: "🌟 New"
+    },
     {
       id: 19,
       name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
@@ -62,16 +73,6 @@ const Index = () => {
       rating: 4.9,
       reviews: 187,
       badge: "🌟 New"
-    },
-    {
-      id: 8,
-      name: "Diacard — Blood Pressure & Blood Sugar Support",
-      price: "$42",
-      originalPrice: "$48",
-      image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
-      rating: 4.9,
-      reviews: 189,
-      badge: "🔥 Hot"
     }
   ];
 
