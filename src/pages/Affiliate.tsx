@@ -29,6 +29,17 @@ interface FormData {
   agreeToTerms: boolean;
 }
 
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  marketingChannel?: string;
+  websiteLink?: string;
+  motivation?: string;
+  agreeToTerms?: string;
+}
+
 const Affiliate = () => {
   const { toast } = useToast();
   const formRef = useRef<HTMLDivElement>(null);
@@ -43,7 +54,7 @@ const Affiliate = () => {
     motivation: '',
     agreeToTerms: false
   });
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ 
@@ -53,7 +64,7 @@ const Affiliate = () => {
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
@@ -73,10 +84,10 @@ const Affiliate = () => {
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
-    if (errors[field]) {
+    if (errors[field as keyof FormErrors]) {
       setErrors(prev => {
         const newErrors = { ...prev };
-        delete newErrors[field];
+        delete newErrors[field as keyof FormErrors];
         return newErrors;
       });
     }
