@@ -18,6 +18,8 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import AIConsultant from "./pages/AIConsultant";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +41,8 @@ const App = () => (
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/categories" element={<Categories />} />
                   <Route path="/ai-consultant" element={<AIConsultant />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/affiliate" element={<Affiliate />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/auth" element={<Auth />} />

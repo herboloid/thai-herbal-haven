@@ -59,6 +59,14 @@ const Navigation = () => {
               <span>AI Consultant</span>
             </Link>
             <Link 
+              to="/blog" 
+              className={`text-sm font-medium transition-colors ${
+                isActive('/blog') || location.pathname.startsWith('/blog/') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Blog
+            </Link>
+            <Link 
               to="/affiliate" 
               className={`text-sm font-medium transition-colors ${
                 isActive('/affiliate') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
@@ -158,6 +166,15 @@ const Navigation = () => {
                 <span>AI Consultant</span>
               </Link>
               <Link
+                to="/blog"
+                className={`block px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive('/blog') || location.pathname.startsWith('/blog/') ? 'text-nature-600 bg-nature-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
                 to="/affiliate"
                 className={`block px-3 py-2 text-sm font-medium transition-colors ${
                   isActive('/affiliate') ? 'text-nature-600 bg-nature-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -215,4 +232,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-

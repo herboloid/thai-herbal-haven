@@ -1,14 +1,15 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Bot, MessageCircle, Sparkles, Heart, Eye, Zap, Leaf } from "lucide-react";
+import { Star, Bot, MessageCircle, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
+import { getLatestPosts } from "@/utils/blogData";
 
 const Index = () => {
   const navigate = useNavigate();
+  const latestPosts = getLatestPosts(5);
 
   const categories = [
     {
@@ -105,6 +106,13 @@ const Index = () => {
       category: "vision"
     }
   ];
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric'
+    });
+  };
 
   return (
     <div className="min-h-screen">
@@ -313,9 +321,82 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Latest Blog Posts */}
+      <section className="py-16 bg-white relative z-10">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Health Insights</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Expert advice from nutritionists, doctors, and wellness practitioners
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {latestPosts.map((post) => (
+              <Card key={post.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-none shadow-sm overflow-hidden bg-white">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-nature-600 text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">
+                      {post.category}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="ghost" size="icon" className="bg-white/90 hover:bg-white rounded-full h-8 w-8 shadow-lg">
+                      <span className="text-sm">→</span>
+                    </Button>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-sm leading-tight">{post.title}</h3>
+                  
+                  <div className="flex items-center mb-3 text-xs text-gray-500">
+                    <Calendar className="h-3 w-3 mr-1" />
+                    <span>{formatDate(post.publishedAt)}</span>
+                    <span className="mx-2">•</span>
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>{post.readTime} min</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <img
+                        src={post.author.avatar}
+                        alt={post.author.name}
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                      <span className="text-xs text-gray-600 font-medium">{post.author.name}</span>
+                    </div>
+                    <Button 
+                      asChild
+                      variant="outline" 
+                      size="sm"
+                      className="rounded-full text-xs border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
+                    >
+                      <Link to={`/blog/${post.slug}`}>
+                        Read
+                      </Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg" className="rounded-full border-nature-300 hover:bg-nature-50 transition-all hover:scale-105">
+              <Link to="/blog">View All Posts</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
 
 export default Index;
-
