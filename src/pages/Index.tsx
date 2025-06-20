@@ -128,7 +128,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
                 alt="SIAM HEALTHY" 
-                className="w-20 h-20 object-contain"
+                className="w-60 h-60 object-contain"
               />
             </div>
             
