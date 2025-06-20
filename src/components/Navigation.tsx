@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -20,10 +21,10 @@ const Navigation = () => {
     <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Updated Logo with SIAM HEALTHY branding */}
+          {/* Updated Logo with new SIAM HEALTHY icon */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png" 
+              src="/lovable-uploads/0d58cb87-2e4d-4845-a6a9-3e5bfd24d03c.png" 
               alt="SIAM HEALTHY" 
               className="w-10 h-10 object-contain"
             />
@@ -214,3 +215,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

@@ -114,10 +114,10 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-nature-300/20 to-earth-300/20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            {/* Updated brand logo in hero */}
+            {/* Updated brand logo in hero with new icon */}
             <div className="flex justify-center mb-8">
               <img 
-                src="/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png" 
+                src="/lovable-uploads/0d58cb87-2e4d-4845-a6a9-3e5bfd24d03c.png" 
                 alt="SIAM HEALTHY" 
                 className="w-20 h-20 object-contain"
               />
