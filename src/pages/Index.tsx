@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -114,10 +115,10 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-nature-300/20 to-earth-300/20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            {/* Updated brand logo in hero with new icon */}
+            {/* Updated brand logo in hero with new leaf icon */}
             <div className="flex justify-center mb-8">
               <img 
-                src="/lovable-uploads/0d58cb87-2e4d-4845-a6a9-3e5bfd24d03c.png" 
+                src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
                 alt="SIAM HEALTHY" 
                 className="w-20 h-20 object-contain"
               />
@@ -317,3 +318,4 @@ const Index = () => {
 };
 
 export default Index;
+

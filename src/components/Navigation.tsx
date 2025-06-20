@@ -21,10 +21,10 @@ const Navigation = () => {
     <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Updated Logo with new SIAM HEALTHY icon */}
+          {/* Updated Logo with new leaf icon */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/0d58cb87-2e4d-4845-a6a9-3e5bfd24d03c.png" 
+              src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
               alt="SIAM HEALTHY" 
               className="w-10 h-10 object-contain"
             />
