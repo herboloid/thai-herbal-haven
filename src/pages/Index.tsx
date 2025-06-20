@@ -109,14 +109,23 @@ const Index = () => {
     <div className="min-h-screen">
       <InteractiveBackground />
       
-      {/* Hero Section with updated nature/earth styling */}
+      {/* Hero Section with updated SIAM HEALTHY branding */}
       <section className="relative bg-gradient-to-br from-nature-50 via-nature-100 to-earth-100 py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-nature-300/20 to-earth-300/20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
+            {/* Updated brand logo in hero */}
+            <div className="flex justify-center mb-8">
+              <img 
+                src="/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png" 
+                alt="SIAM HEALTHY" 
+                className="w-20 h-20 object-contain"
+              />
+            </div>
+            
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Leaders in<br />
-              <span className="font-bold text-nature-700">Natural Supplements</span>
+              <span className="font-bold text-nature-700">SIAM HEALTHY</span><br />
+              Premium Natural Supplements
             </h1>
             
             {/* AI Consultant Button Section with updated styling */}
