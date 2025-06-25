@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,6 +20,7 @@ import AIConsultant from "./pages/AIConsultant";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
+import FloatingAIWidget from "./components/FloatingAIWidget";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +52,7 @@ const App = () => (
                 </Routes>
               </main>
               <Footer />
+              <FloatingAIWidget />
             </div>
           </BrowserRouter>
         </CartProvider>
