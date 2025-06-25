@@ -118,9 +118,15 @@ const Index = () => {
     <div className="min-h-screen">
       <InteractiveBackground />
       
-      {/* Hero Section with updated SIAM HEALTHY branding */}
-      <section className="relative bg-gradient-to-br from-nature-50 via-nature-100 to-earth-100 py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-nature-300/20 to-earth-300/20"></div>
+      {/* Hero Section with natural supplements background */}
+      <section className="relative py-20 lg:py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/lovable-uploads/b3f5e681-c31e-4f83-bfc0-c5a19353e221.png')`
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             {/* Updated brand logo in hero with new leaf icon */}
@@ -132,13 +138,13 @@ const Index = () => {
               />
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              <span className="font-bold text-nature-700">SIAM HEALTHY</span><br />
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <span className="font-bold text-white drop-shadow-lg">SIAM HEALTHY</span><br />
               Premium Natural Supplements
             </h1>
             
             {/* AI Consultant Button Section with updated styling */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl border border-nature-200/50">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl border border-white/20">
               <div className="flex items-center justify-center mb-4">
                 <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full shadow-lg">
                   <Bot className="h-8 w-8 text-white" />
@@ -171,7 +177,7 @@ const Index = () => {
             <Button 
               asChild 
               size="lg" 
-              className="bg-earth-700 hover:bg-earth-800 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className="bg-white/90 hover:bg-white text-gray-900 px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <Link to="/products">Shop Supplements</Link>
             </Button>
