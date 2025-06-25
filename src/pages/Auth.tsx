@@ -1,284 +1,207 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/contexts/AuthContext";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Users, Shield, Zap } from "lucide-react";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: ''
-  });
-
-  const { login, register, isLoading } = useAuth();
-  const { toast } = useToast();
-  const navigate = useNavigate();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.email || !formData.password) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const success = await login(formData.email, formData.password);
-    
-    if (success) {
-      toast({
-        title: "Welcome!",
-        description: "You have successfully logged in"
-      });
-      navigate('/profile');
-    } else {
-      toast({
-        title: "Login Error",
-        description: "Invalid email or password",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast({
-        title: "Error",
-        description: "Password must be at least 6 characters",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const success = await register(formData);
-    
-    if (success) {
-      toast({
-        title: "Registration Successful!",
-        description: "Welcome to Siam Healthy"
-      });
-      navigate('/profile');
-    } else {
-      toast({
-        title: "Registration Error",
-        description: "Please try again",
-        variant: "destructive"
-      });
-    }
-  };
+  const [activeTab, setActiveTab] = useState("signin");
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Organic Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-        {/* Organic shapes */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-green-200/30 to-emerald-300/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-gradient-to-bl from-teal-200/25 to-green-300/20 rounded-full blur-3xl transform translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-to-tr from-emerald-200/30 to-green-200/25 rounded-full blur-3xl transform translate-y-1/3"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-tl from-teal-300/20 to-emerald-200/25 rounded-full blur-2xl"></div>
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        {/* Animated background elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-indigo-300/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-gradient-to-bl from-purple-200/25 to-indigo-300/20 rounded-full blur-3xl transform translate-x-1/3 animate-pulse delay-1000"></div>
+        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-to-tr from-indigo-200/30 to-blue-200/25 rounded-full blur-3xl transform translate-y-1/3 animate-pulse delay-2000"></div>
         
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-10">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="organic-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                <circle cx="20" cy="20" r="1" fill="currentColor" className="text-green-600"/>
-                <circle cx="10" cy="10" r="0.5" fill="currentColor" className="text-emerald-600"/>
-                <circle cx="30" cy="30" r="0.5" fill="currentColor" className="text-teal-600"/>
+              <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" className="text-indigo-600"/>
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#organic-pattern)"/>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
           </svg>
         </div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center py-12 px-4 min-h-screen">
-        <div className="max-w-md w-full">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-green-700">Siam Healthy</h1>
-            <p className="text-green-600 mt-2">Personal Account</p>
+        <div className="max-w-4xl w-full">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Добро пожаловать в TaskFlow</h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Современное приложение для управления проектами и задачами. 
+              Войдите в систему или создайте аккаунт, чтобы начать.
+            </p>
           </div>
 
-          <Card className="backdrop-blur-sm bg-white/80 border-white/20 shadow-xl">
-            <Tabs value={isLogin ? "login" : "register"} onValueChange={(value) => setIsLogin(value === "login")}>
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login" className="text-green-700 data-[state=active]:text-green-800">Login</TabsTrigger>
-                <TabsTrigger value="register" className="text-green-700 data-[state=active]:text-green-800">Register</TabsTrigger>
-              </TabsList>
+          <SignedOut>
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              {/* Features Section */}
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                      <Shield className="h-6 w-6 text-indigo-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Безопасная аутентификация</h3>
+                      <p className="text-gray-600">Защищённый вход с помощью современных технологий Clerk</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                      <Zap className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Быстрая регистрация</h3>
+                      <p className="text-gray-600">Создайте аккаунт за несколько секунд и начните работать</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <Users className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Управление профилем</h3>
+                      <p className="text-gray-600">Полный контроль над вашими данными и настройками</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <TabsContent value="login">
-                <CardHeader>
-                  <CardTitle className="text-green-700">Login to Account</CardTitle>
-                  <CardDescription className="text-green-600">
-                    Enter your credentials to login
-                  </CardDescription>
+              {/* Auth Section */}
+              <div>
+                <Card className="backdrop-blur-sm bg-white/90 border-white/20 shadow-2xl">
+                  <Tabs value={activeTab} onValueChange={setActiveTab}>
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="signin" className="text-indigo-700 data-[state=active]:text-indigo-800">
+                        Вход
+                      </TabsTrigger>
+                      <TabsTrigger value="signup" className="text-indigo-700 data-[state=active]:text-indigo-800">
+                        Регистрация
+                      </TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="signin">
+                      <CardHeader className="text-center">
+                        <CardTitle className="text-2xl text-gray-900">Войти в аккаунт</CardTitle>
+                        <CardDescription className="text-gray-600">
+                          Введите свои данные для входа в систему
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-6">
+                        <SignInButton 
+                          fallbackRedirectUrl="/"
+                          forceRedirectUrl="/"
+                        >
+                          <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                            <span className="flex items-center justify-center space-x-2">
+                              <span>Войти</span>
+                              <ArrowRight className="h-4 w-4" />
+                            </span>
+                          </Button>
+                        </SignInButton>
+                        
+                        <div className="text-center text-sm text-gray-500">
+                          Нет аккаунта?{" "}
+                          <button 
+                            onClick={() => setActiveTab("signup")}
+                            className="text-indigo-600 hover:text-indigo-700 font-medium"
+                          >
+                            Зарегистрируйтесь
+                          </button>
+                        </div>
+                      </CardContent>
+                    </TabsContent>
+
+                    <TabsContent value="signup">
+                      <CardHeader className="text-center">
+                        <CardTitle className="text-2xl text-gray-900">Создать аккаунт</CardTitle>
+                        <CardDescription className="text-gray-600">
+                          Присоединяйтесь к нам и начните управлять проектами
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-6">
+                        <SignUpButton 
+                          fallbackRedirectUrl="/"
+                          forceRedirectUrl="/"
+                        >
+                          <Button className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                            <span className="flex items-center justify-center space-x-2">
+                              <span>Создать аккаунт</span>
+                              <ArrowRight className="h-4 w-4" />
+                            </span>
+                          </Button>
+                        </SignUpButton>
+                        
+                        <div className="text-center text-sm text-gray-500">
+                          Уже есть аккаунт?{" "}
+                          <button 
+                            onClick={() => setActiveTab("signin")}
+                            className="text-indigo-600 hover:text-indigo-700 font-medium"
+                          >
+                            Войдите
+                          </button>
+                        </div>
+                      </CardContent>
+                    </TabsContent>
+                  </Tabs>
+                </Card>
+              </div>
+            </div>
+          </SignedOut>
+
+          <SignedIn>
+            <div className="text-center">
+              <Card className="backdrop-blur-sm bg-white/90 border-white/20 shadow-2xl max-w-md mx-auto">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-2xl text-gray-900 mb-4">Добро пожаловать!</CardTitle>
+                  <div className="flex justify-center mb-4">
+                    <UserButton 
+                      afterSignOutUrl="/auth"
+                      appearance={{
+                        elements: {
+                          avatarBox: "w-16 h-16"
+                        }
+                      }}
+                    />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleLogin} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="login-email" className="text-green-700">Email</Label>
-                      <Input
-                        id="login-email"
-                        name="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="login-password" className="text-green-700">Password</Label>
-                      <div className="relative">
-                        <Input
-                          id="login-password"
-                          name="password"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="Enter password"
-                          value={formData.password}
-                          onChange={handleInputChange}
-                          required
-                        />
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
-                      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Login
-                    </Button>
-                  </form>
+                  <p className="text-gray-600 mb-6">
+                    Вы успешно вошли в систему. Теперь вы можете управлять своими проектами и задачами.
+                  </p>
+                  <Button 
+                    asChild
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                  >
+                    <a href="/">
+                      <span className="flex items-center justify-center space-x-2">
+                        <span>Перейти к приложению</span>
+                        <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </a>
+                  </Button>
                 </CardContent>
-              </TabsContent>
-
-              <TabsContent value="register">
-                <CardHeader>
-                  <CardTitle className="text-green-700">Create Account</CardTitle>
-                  <CardDescription className="text-green-600">
-                    Fill out the form to register
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleRegister} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName" className="text-green-700">First Name</Label>
-                        <Input
-                          id="firstName"
-                          name="firstName"
-                          placeholder="John"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName" className="text-green-700">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          name="lastName"
-                          placeholder="Doe"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="register-email" className="text-green-700">Email</Label>
-                      <Input
-                        id="register-email"
-                        name="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-green-700">Phone (optional)</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="+1 (555) 123-4567"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="register-password" className="text-green-700">Password</Label>
-                      <div className="relative">
-                        <Input
-                          id="register-password"
-                          name="password"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="At least 6 characters"
-                          value={formData.password}
-                          onChange={handleInputChange}
-                          required
-                        />
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
-                      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Register
-                    </Button>
-                  </form>
-                </CardContent>
-              </TabsContent>
-            </Tabs>
-          </Card>
+              </Card>
+            </div>
+          </SignedIn>
         </div>
       </div>
     </div>
