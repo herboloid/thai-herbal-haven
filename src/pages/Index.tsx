@@ -1,8 +1,9 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Bot, MessageCircle, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock } from "lucide-react";
+import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
@@ -143,37 +144,6 @@ const Index = () => {
               Premium Natural Supplements
             </h1>
             
-            {/* AI Consultant Button Section with updated styling */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl border border-white/20">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full shadow-lg">
-                  <Bot className="h-8 w-8 text-white" />
-                </div>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                Get Personalized Recommendations
-              </h2>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed">
-                Our AI consultant analyzes your health goals and recommends the perfect supplements for your needs. 
-                Get expert guidance in finding the right products for your wellness journey.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-gray-600">
-                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">💊 Personal Selection</span>
-                <span className="bg-earth-100 text-earth-700 px-3 py-1 rounded-full font-medium">🎯 Goal-Based Matching</span>
-                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">⚡ Instant Recommendations</span>
-              </div>
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-gradient-to-r from-nature-600 to-nature-700 hover:from-nature-700 hover:to-nature-800 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
-              >
-                <Link to="/ai-consultant" className="flex items-center space-x-2">
-                  <MessageCircle className="h-5 w-5" />
-                  <span>Start AI Consultation</span>
-                </Link>
-              </Button>
-            </div>
-
             <Button 
               asChild 
               size="lg" 
