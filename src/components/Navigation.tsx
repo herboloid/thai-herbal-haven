@@ -98,7 +98,7 @@ const Navigation = () => {
               <Switch
                 checked={language === 'th'}
                 onCheckedChange={handleLanguageToggle}
-                className="data-[state=checked]:bg-nature-600"
+                className="bg-nature-600 data-[state=unchecked]:bg-nature-600"
               />
               <span className="text-sm font-medium text-gray-600">TH</span>
             </div>
@@ -216,7 +216,7 @@ const Navigation = () => {
                 <Switch
                   checked={language === 'th'}
                   onCheckedChange={handleLanguageToggle}
-                  className="data-[state=checked]:bg-nature-600"
+                  className="bg-nature-600 data-[state=unchecked]:bg-nature-600"
                 />
                 <span className="text-sm font-medium text-gray-600">TH</span>
               </div>
