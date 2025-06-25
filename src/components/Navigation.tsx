@@ -1,33 +1,27 @@
 
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { ShoppingCart, User, Menu, X, Bot } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { state } = useCart();
-  const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
 
   const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
 
   const isActive = (path: string) => location.pathname === path;
 
-  const handleLanguageToggle = (checked: boolean) => {
-    setLanguage(checked ? 'th' : 'en');
-  };
-
   return (
     <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Updated Logo with new leaf icon */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
@@ -37,7 +31,7 @@ const Navigation = () => {
             <span className="font-bold text-xl text-gray-900">SIAM HEALTHY</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation with updated active states */}
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/" 
@@ -45,7 +39,7 @@ const Navigation = () => {
                 isActive('/') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              {t('nav.home')}
+              Home
             </Link>
             <Link 
               to="/products" 
@@ -53,7 +47,7 @@ const Navigation = () => {
                 isActive('/products') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              {t('nav.supplements')}
+              Supplements
             </Link>
             <Link 
               to="/ai-consultant" 
@@ -62,7 +56,7 @@ const Navigation = () => {
               }`}
             >
               <Bot className="h-4 w-4" />
-              <span>{t('nav.ai_consultant')}</span>
+              <span>AI Consultant</span>
             </Link>
             <Link 
               to="/blog" 
@@ -70,7 +64,7 @@ const Navigation = () => {
                 isActive('/blog') || location.pathname.startsWith('/blog/') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              {t('nav.blog')}
+              Blog
             </Link>
             <Link 
               to="/affiliate" 
@@ -78,7 +72,7 @@ const Navigation = () => {
                 isActive('/affiliate') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              {t('nav.affiliate')}
+              Affiliate
             </Link>
             <Link 
               to="/about" 
@@ -86,23 +80,12 @@ const Navigation = () => {
                 isActive('/about') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              {t('nav.about')}
+              About
             </Link>
           </div>
 
-          {/* Right side - Language switcher, Cart and User */}
+          {/* Right side - Cart and User with updated colors */}
           <div className="flex items-center space-x-4">
-            {/* Language Switcher */}
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium text-gray-600">EN</span>
-              <Switch
-                checked={language === 'th'}
-                onCheckedChange={handleLanguageToggle}
-                className="bg-nature-600 data-[state=unchecked]:bg-nature-600"
-              />
-              <span className="text-sm font-medium text-gray-600">TH</span>
-            </div>
-
             <Link to="/cart" className="relative">
               <Button variant="ghost" size="icon">
                 <ShoppingCart className="h-5 w-5" />
@@ -127,13 +110,13 @@ const Navigation = () => {
                   onClick={logout}
                   className="hidden md:inline-flex"
                 >
-                  {t('nav.logout')}
+                  Logout
                 </Button>
               </div>
             ) : (
               <Link to="/auth">
                 <Button variant="outline" size="sm" className="hidden md:inline-flex">
-                  {t('nav.sign_in')}
+                  Sign In
                 </Button>
               </Link>
             )}
@@ -150,7 +133,7 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation with updated active states */}
         {isMenuOpen && (
           <div className="md:hidden border-t bg-white">
             <div className="px-2 pt-2 pb-3 space-y-1">
@@ -161,7 +144,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.home')}
+                Home
               </Link>
               <Link
                 to="/products"
@@ -170,7 +153,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.supplements')}
+                Supplements
               </Link>
               <Link
                 to="/ai-consultant"
@@ -180,7 +163,7 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Bot className="h-4 w-4" />
-                <span>{t('nav.ai_consultant')}</span>
+                <span>AI Consultant</span>
               </Link>
               <Link
                 to="/blog"
@@ -189,7 +172,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.blog')}
+                Blog
               </Link>
               <Link
                 to="/affiliate"
@@ -198,7 +181,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.affiliate')}
+                Affiliate
               </Link>
               <Link
                 to="/about"
@@ -207,19 +190,8 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t('nav.about')}
+                About
               </Link>
-
-              {/* Mobile Language Switcher */}
-              <div className="flex items-center justify-center space-x-2 px-3 py-2">
-                <span className="text-sm font-medium text-gray-600">EN</span>
-                <Switch
-                  checked={language === 'th'}
-                  onCheckedChange={handleLanguageToggle}
-                  className="bg-nature-600 data-[state=unchecked]:bg-nature-600"
-                />
-                <span className="text-sm font-medium text-gray-600">TH</span>
-              </div>
 
               {user ? (
                 <div className="border-t pt-2">
@@ -228,7 +200,7 @@ const Navigation = () => {
                     className="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {t('nav.profile')}
+                    Profile
                   </Link>
                   <button
                     onClick={() => {
@@ -237,7 +209,7 @@ const Navigation = () => {
                     }}
                     className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                   >
-                    {t('nav.logout')}
+                    Logout
                   </button>
                 </div>
               ) : (
@@ -247,7 +219,7 @@ const Navigation = () => {
                     className="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {t('nav.sign_in')}
+                    Sign In
                   </Link>
                 </div>
               )}

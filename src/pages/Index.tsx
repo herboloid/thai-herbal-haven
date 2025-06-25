@@ -6,47 +6,45 @@ import { Star, Bot, MessageCircle, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Cl
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
   const navigate = useNavigate();
   const latestPosts = getLatestPosts(5);
-  const { t } = useLanguage();
 
   const categories = [
     {
       id: "beauty",
-      name: t('categories.beauty'),
+      name: "Beauty and Anti-Aging Care",
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
-      description: t('categories.beauty_desc'),
+      description: "Skin brightening and anti-aging support",
       icon: Sparkles
     },
     {
       id: "weight",
-      name: t('categories.weight'),
+      name: "Weight Control and Body Shaping",
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
-      description: t('categories.weight_desc'),
+      description: "Fat burning and metabolism support",
       icon: Zap
     },
     {
       id: "vision",
-      name: t('categories.vision'),
+      name: "Eye Health and Vision",
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
-      description: t('categories.vision_desc'),
+      description: "Vision support and eye protection",
       icon: Eye
     },
     {
       id: "heart",
-      name: t('categories.heart'),
+      name: "Heart Health",
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
-      description: t('categories.heart_desc'),
+      description: "Blood pressure and cardiovascular system support",
       icon: Heart
     },
     {
       id: "detox",
-      name: t('categories.detox'),
+      name: "Detox and Cleansing",
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png", 
-      description: t('categories.detox_desc'),
+      description: "Body cleansing and toxin removal",
       icon: Leaf
     }
   ];
@@ -135,8 +133,8 @@ const Index = () => {
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              <span className="font-bold text-nature-700">{t('home.hero_title')}</span><br />
-              {t('home.hero_subtitle')}
+              <span className="font-bold text-nature-700">SIAM HEALTHY</span><br />
+              Premium Natural Supplements
             </h1>
             
             {/* AI Consultant Button Section with updated styling */}
@@ -147,15 +145,16 @@ const Index = () => {
                 </div>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                {t('home.ai_recommendations_title')}
+                Get Personalized Recommendations
               </h2>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto leading-relaxed">
-                {t('home.ai_recommendations_description')}
+                Our AI consultant analyzes your health goals and recommends the perfect supplements for your needs. 
+                Get expert guidance in finding the right products for your wellness journey.
               </p>
               <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-gray-600">
-                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">{t('home.ai_personal_selection')}</span>
-                <span className="bg-earth-100 text-earth-700 px-3 py-1 rounded-full font-medium">{t('home.ai_goal_matching')}</span>
-                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">{t('home.ai_instant_recommendations')}</span>
+                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">💊 Personal Selection</span>
+                <span className="bg-earth-100 text-earth-700 px-3 py-1 rounded-full font-medium">🎯 Goal-Based Matching</span>
+                <span className="bg-nature-100 text-nature-700 px-3 py-1 rounded-full font-medium">⚡ Instant Recommendations</span>
               </div>
               <Button 
                 asChild 
@@ -164,7 +163,7 @@ const Index = () => {
               >
                 <Link to="/ai-consultant" className="flex items-center space-x-2">
                   <MessageCircle className="h-5 w-5" />
-                  <span>{t('home.start_ai_consultation')}</span>
+                  <span>Start AI Consultation</span>
                 </Link>
               </Button>
             </div>
@@ -174,7 +173,7 @@ const Index = () => {
               size="lg" 
               className="bg-earth-700 hover:bg-earth-800 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              <Link to="/products">{t('home.shop_supplements')}</Link>
+              <Link to="/products">Shop Supplements</Link>
             </Button>
           </div>
         </div>
@@ -184,9 +183,9 @@ const Index = () => {
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('home.product_categories')}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Product Categories</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              {t('home.categories_description')}
+              Choose a category that matches your health needs
             </p>
           </div>
           
@@ -227,7 +226,7 @@ const Index = () => {
                       size="sm"
                       className="rounded-full border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
                     >
-                      <Link to="/products">{t('home.view')}</Link>
+                      <Link to="/products">View</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -241,9 +240,9 @@ const Index = () => {
       <section className="py-16 bg-nature-50 relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('home.featured_products')}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              {t('home.featured_description')}
+              High-quality products popular among our customers
             </p>
           </div>
           
@@ -317,7 +316,7 @@ const Index = () => {
           
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="lg" className="rounded-full border-nature-300 hover:bg-nature-50 transition-all hover:scale-105">
-              <Link to="/products">{t('home.all_products')}</Link>
+              <Link to="/products">All Products</Link>
             </Button>
           </div>
         </div>
@@ -327,9 +326,9 @@ const Index = () => {
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('home.latest_insights')}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Health Insights</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              {t('home.insights_description')}
+              Expert advice from nutritionists, doctors, and wellness practitioners
             </p>
           </div>
           
@@ -391,7 +390,7 @@ const Index = () => {
           
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="lg" className="rounded-full border-nature-300 hover:bg-nature-50 transition-all hover:scale-105">
-              <Link to="/blog">{t('home.view_all_posts')}</Link>
+              <Link to="/blog">View All Posts</Link>
             </Button>
           </div>
         </div>

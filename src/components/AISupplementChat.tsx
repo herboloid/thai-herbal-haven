@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getSmartButtons, HotButton } from "@/utils/hotButtonScenarios";
 import { supabase } from "@/integrations/supabase/client";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Message {
   id: string;
@@ -26,12 +24,11 @@ interface Message {
 }
 
 const AISupplementChat = () => {
-  const { language, t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       type: 'ai',
-      content: t('ai.initial_message'),
+      content: 'Привет! Я помогу вам найти идеальные добавки для ваших потребностей. Расскажите о ваших проблемах со здоровьем или целях, которых хотите достичь?',
       timestamp: new Date(),
       stage: 'initial'
     }
@@ -44,23 +41,13 @@ const AISupplementChat = () => {
     symptoms: string[], 
     stage: string,
     hasProducts?: boolean,
-    productCount?: number,
-    language: string
+    productCount?: number
   }>({
     symptoms: [],
-    stage: 'initial',
-    language: language
+    stage: 'initial'
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
-  // Update initial message when language changes
-  useEffect(() => {
-    setMessages(prev => prev.map((msg, index) => 
-      index === 0 ? { ...msg, content: t('ai.initial_message') } : msg
-    ));
-    setUserContext(prev => ({ ...prev, language }));
-  }, [language, t]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -91,13 +78,13 @@ const AISupplementChat = () => {
 
       if (error) {
         console.error('Supabase function error:', error);
-        return language === 'th' ? 'ขออภัย เกิดขึ้นผิดพลาด กรุณาลองใหม่อีกครั้ง' : 'Sorry, an error occurred. Please try again.';
+        return 'Извините, произошла ошибка. Попробуйте снова.';
       }
 
-      return data?.response || (language === 'th' ? 'ขออภัย ไม่สามารถรับคำตอบได้' : 'Sorry, could not get a response.');
+      return data?.response || 'Извините, не удалось получить ответ.';
     } catch (error) {
       console.error('Error calling OpenAI:', error);
-      return language === 'th' ? 'ขออภัย เกิดข้อผิดพลาดในการเชื่อมต่อกับ AI' : 'Sorry, there was an error connecting to AI.';
+      return 'Извините, произошла ошибка при обращении к AI.';
     }
   };
 
@@ -108,45 +95,41 @@ const AISupplementChat = () => {
     if (buttonId) {
       switch (buttonId) {
         case 'budget-low':
-          return language === 'th' ? "สมบูรณ์แบบ! ฉันจะเน้นตัวเลือกที่ราคาไม่แพงภายใต้ ฿500 ให้ฉันค้นหาอาหารเสริมที่ดีที่สุดสำหรับความต้องการของคุณ" : "Perfect! I'll focus on affordable options under ฿500. Let me find the best value supplements for your needs.";
+          return "Perfect! I'll focus on affordable options under ฿500. Let me find the best value supplements for your needs.";
         case 'budget-mid':
-          return language === 'th' ? "ช่วงงบประมาณที่ดี! ฉันสามารถแนะนำอาหารเสริมระดับกลางที่มีคุณภาพดีในราคาที่เหมาะสม" : "Great budget range! I can recommend some excellent mid-tier supplements with good quality-price ratio.";
+          return "Great budget range! I can recommend some excellent mid-tier supplements with good quality-price ratio.";
         case 'budget-high':
-          return language === 'th' ? "ยอดเยี่ยม! ด้วยงบประมาณนี้ ฉันสามารถแสดงให้คุณเห็นอาหารเสริมพรีเมียมที่มีส่วนผสมและประสิทธิภาพที่ดีที่สุด" : "Excellent! With this budget, I can show you premium supplements with the best ingredients and effectiveness.";
+          return "Excellent! With this budget, I can show you premium supplements with the best ingredients and effectiveness.";
         case 'budget-premium':
-          return language === 'th' ? "สมบูรณ์แบบ! ฉันจะแนะนำเฉพาะอาหารเสริมคุณภาพสูงสุดและมีประสิทธิภาพมากที่สุดโดยไม่คำนึงถึงราคา" : "Perfect! I'll recommend only the highest quality, most effective supplements regardless of price.";
+          return "Perfect! I'll recommend only the highest quality, most effective supplements regardless of price.";
         case 'compare':
-          return language === 'th' ? "นี่คือการเปรียบเทียบรายละเอียดของสินค้าของคุณ ฉันจะชี้แจงความแตกต่างที่สำคัญ:" : "Here's a detailed comparison of your options. Let me highlight the key differences:";
+          return "Here's a detailed comparison of your options. Let me highlight the key differences:";
         case 'cheapest':
-          return language === 'th' ? "นี่คือสินค้าที่ถูกที่สุดที่ยังคงสอดคล้องกับคุณภาพของคุณ:" : "Here's the most affordable option that still meets your quality standards:";
+          return "Here's the most affordable option that still meets your quality standards:";
         case 'highest-rated':
-          return language === 'th' ? "นี่คือสินค้าที่ได้รับการให้คะแนนสูงที่สุดสำหรับความต้องการของคุณ:" : "This is our highest-rated product for your needs:";
+          return "This is our highest-rated product for your needs:";
         case 'add-cart':
-          return language === 'th' ? "ตัวเลือกที่ยอดเยี่ยม! ฉันจะเพิ่มสินค้านี้ไปในตะกร้าของคุณ. ต้องการที่จะดูสินค้าอื่นหรือสินค้าที่คล้ายกัน?" : "Great choice! I'll add this to your cart. Would you like to see complementary products?";
+          return "Great choice! I'll add this to your cart. Would you like to see complementary products?";
       }
     }
     
     if (products.length === 0) {
       if (queryLower.includes("heart") || queryLower.includes("pressure") || queryLower.includes("cardiovascular")) {
-        return language === 'th' ? " unfortunately, เราไม่มีอาหารเสริมเฉพาะสำหรับโรคหัวใจที่สามารถใช้ได้ในขณะนี้. ฉันขอแนะนำให้คุณปรึกษาแพทย์. ขณะนี้, ฉันสามารถแนะนำอาหารเสริมสำหรับการล้างพิษร่างกายเพื่อการดูแลสุขภาพทั่วไป." : "Unfortunately, we don't have specialized heart supplements available right now. I recommend consulting with a doctor. Meanwhile, I can suggest detox supplements for overall health improvement.";
+        return "Unfortunately, we don't have specialized heart supplements available right now. I recommend consulting with a doctor. Meanwhile, I can suggest detox supplements for overall health improvement.";
       }
-      return language === 'th' ? "กรุณาบอกฉันเพิ่มเติมเกี่ยวกับความต้องการเฉพาะของคุณ ฉันอาจสามารถแนะนำสิ่งที่เหมาะสมจากผลิตภัณฑ์ของเรา" : "Please tell me more about your specific needs. I might be able to suggest something suitable from our range.";
+      return "Please tell me more about your specific needs. I might be able to suggest something suitable from our range.";
     }
 
     if (products.length === 1) {
       const product = products[0];
-      return language === 'th' ? 
-        `ตัวเลือกที่ยอดเยี่ยม! ${product.name} คือสิ่งที่คุณต้องการ ผลิตภัณฑ์นี้มีคะแนน ${product.rating} ดาว พร้อมรีวิวเชิงบวก ${product.reviewCount} รายการ ${product.inStock <= 5 ? `⚠️ ความสนใจ: เหลือเพียง ${product.inStock} หน่วยในสต็อก!` : ''}` :
-        `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviewCount} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
+      return `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviews} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
     }
 
     if (products.length === 2) {
-      return language === 'th' ? "ฉันมี 2 ตัวเลือกที่ยอดเยี่ยมสำหรับคุณ อันไหนเหมาะกับงบประมาณและความต้องการของคุณมากกว่า?" : "I have 2 excellent options for you. Which one better fits your budget and needs?";
+      return "I have 2 excellent options for you. Which one better fits your budget and needs?";
     }
 
-    return language === 'th' ? 
-      `ฉันพบ ${products.length} ผลิตภัณฑ์ที่เหมาะสม มาเลือกที่เหมาะสมที่สุดสำหรับคุณ:` :
-      `I found ${products.length} suitable products. Let's choose the most appropriate one for you:`;
+    return `I found ${products.length} suitable products. Let's choose the most appropriate one for you:`;
   };
 
   const determineNextStage = (currentStage: string, userInput: string, buttonId?: string): string => {
@@ -204,16 +187,15 @@ const AISupplementChat = () => {
       ...userContext, 
       symptoms: newSymptoms,
       budget: newBudget,
-      stage: nextStage,
-      language: language
+      stage: nextStage
     };
     setUserContext(updatedContext);
 
     try {
-      // Get AI response
+      // Получаем ответ от OpenAI
       const aiResponse = await callOpenAI(text, updatedContext);
       
-      // Get recommended products based on query
+      // Получаем рекомендованные продукты на основе запроса
       const category = getCategoryFromQuery(text);
       const recommendedProducts = getProductsByKeywords(text).slice(0, 3);
 
@@ -252,7 +234,7 @@ const AISupplementChat = () => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
-        content: language === 'th' ? 'ขออภัย เกิดข้อผิดพลาด กรุณาลองอีกครั้ง' : 'Sorry, an error occurred. Please try again.',
+        content: 'Извините, произошла ошибка. Попробуйте еще раз.',
         timestamp: new Date(),
         stage: nextStage
       };
@@ -262,19 +244,15 @@ const AISupplementChat = () => {
     }
   };
 
-  const handleAddToCart = (productId: string) => {
+  const handleAddToCart = (productId: number) => {
     const product = allProducts.find(p => p.id === productId);
     if (product) {
       const successMessage: Message = {
         id: Date.now().toString(),
         type: 'ai',
-        content: language === 'th' ? 
-          `✅ ${product.name} เพิ่มในตะกร้าแล้ว! ต้องการไปที่หน้าชำระเงินหรือเพิ่มสินค้าอื่น?` :
-          `✅ ${product.name} added to cart! Want to go to checkout or add something else?`,
+        content: `✅ ${product.name} добавлен в корзину! Хотите перейти к оформлению или добавить что-то еще?`,
         timestamp: new Date(),
-        followUpQuestions: language === 'th' ? 
-          ["ไปที่หน้าชำระเงิน", "ดูสินค้าที่คล้ายกัน", "ช้อปต่อ"] :
-          ["Go to checkout", "View similar products", "Continue shopping"]
+        followUpQuestions: ["Перейти к оформлению", "Посмотреть похожие товары", "Продолжить покупки"]
       };
       
       setMessages(prev => [...prev, successMessage]);
@@ -282,7 +260,7 @@ const AISupplementChat = () => {
   };
 
   const handleFollowUpClick = (question: string, buttonId?: string) => {
-    if (question === "Go to checkout" || question === "ไปที่หน้าชำระเงิน" || buttonId === "checkout") {
+    if (question === "Перейти к оформлению" || buttonId === "checkout") {
       navigate('/cart');
       return;
     }
@@ -310,8 +288,8 @@ const AISupplementChat = () => {
             <Bot className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-gray-800">{t('ai.consultant_name')}</h3>
-            <p className="text-sm text-nature-600">{t('ai.consultant_subtitle')}</p>
+            <h3 className="font-semibold text-gray-800">AI Консультант</h3>
+            <p className="text-sm text-nature-600">Персонализированный подбор добавок</p>
           </div>
         </div>
       </div>
@@ -353,11 +331,20 @@ const AISupplementChat = () => {
                           {message.products.map((product, index) => (
                             <ChatProductCard
                               key={product.id}
-                              product={{
-                                ...product,
-                                inStock: product.inStock > 0
-                              }}
-                              onViewProduct={(productId: string) => navigate(`/product/${productId}`)}
+                              product={product}
+                              reason={
+                                product.keywords.some(k => ["vision", "eyes"].includes(k)) ? 
+                                "Специально для здоровья глаз" :
+                                product.keywords.some(k => ["weight loss", "weight"].includes(k)) ? 
+                                "Эффективное жиросжигание" :
+                                product.keywords.some(k => ["anti-aging", "skin"].includes(k)) ? 
+                                "Антивозрастной уход и красота кожи" :
+                                product.keywords.includes("detox") ? 
+                                "Глубокое очищение организма" : 
+                                "Рекомендовано для ваших потребностей"
+                              }
+                              onAddToCart={handleAddToCart}
+                              showCombo={message.showCombo && index > 0}
                             />
                           ))}
                         </div>
@@ -392,7 +379,7 @@ const AISupplementChat = () => {
       {/* Chat Input */}
       <div className="flex items-center space-x-2 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-lg border border-gray-200/50">
         <Input
-          placeholder={t('ai.input_placeholder')}
+          placeholder="Опишите ваши потребности..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}

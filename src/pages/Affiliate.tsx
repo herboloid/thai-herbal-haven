@@ -1,10 +1,10 @@
+
 import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   DollarSign, 
   Users, 
@@ -30,7 +30,6 @@ interface FormErrors {
 
 const Affiliate = () => {
   const { toast } = useToast();
-  const { t } = useLanguage();
   const formRef = useRef<HTMLDivElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -80,7 +79,7 @@ const Affiliate = () => {
     
     if (!validateForm()) {
       toast({
-        title: t('common.error'),
+        title: "Please check your information",
         description: "Make sure all required fields are filled correctly.",
         variant: "destructive"
       });
@@ -93,7 +92,7 @@ const Affiliate = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       toast({
-        title: t('common.success'),
+        title: "Application submitted!",
         description: "We'll get back to you within 2 business days.",
       });
 
@@ -105,7 +104,7 @@ const Affiliate = () => {
       });
     } catch (error) {
       toast({
-        title: t('common.error'),
+        title: "Something went wrong",
         description: "Please try again in a moment.",
         variant: "destructive"
       });
@@ -117,36 +116,36 @@ const Affiliate = () => {
   const benefits = [
     {
       icon: DollarSign,
-      title: t('affiliate.high_commission'),
-      description: t('affiliate.high_commission_desc')
+      title: "High Commission",
+      description: "Earn up to 25% on every sale you make"
     },
     {
       icon: Users,
-      title: t('affiliate.full_support'),
-      description: t('affiliate.full_support_desc')
+      title: "Full Support",
+      description: "Get help from our dedicated team"
     },
     {
       icon: Gift,
-      title: t('affiliate.free_products'),
-      description: t('affiliate.free_products_desc')
+      title: "Free Products",
+      description: "Receive samples to test and review"
     }
   ];
 
   const steps = [
     {
       step: "1",
-      title: t('affiliate.step_apply'),
-      description: t('affiliate.step_apply_desc')
+      title: "Apply",
+      description: "Fill out the simple form below"
     },
     {
       step: "2", 
-      title: t('affiliate.step_approved'),
-      description: t('affiliate.step_approved_desc')
+      title: "Get Approved",
+      description: "We'll review and approve within 2 days"
     },
     {
       step: "3",
-      title: t('affiliate.step_earn'),
-      description: t('affiliate.step_earn_desc')
+      title: "Start Earning",
+      description: "Share your links and earn money"
     }
   ];
 
@@ -160,17 +159,17 @@ const Affiliate = () => {
             Partner Program
           </Badge>
           <h1 className="text-5xl lg:text-7xl font-bold mb-8">
-            {t('affiliate.hero_title')}
+            Become Our Partner
           </h1>
           <p className="text-2xl text-nature-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-            {t('affiliate.hero_description')}
+            Share natural supplements you believe in and earn up to 25% commission on every sale.
           </p>
           <Button 
             size="lg" 
             className="bg-white text-nature-600 hover:bg-gray-100 text-lg px-8 py-4 h-auto"
             onClick={scrollToForm}
           >
-            {t('affiliate.start_earning')}
+            Start Earning Today - It's Free!
           </Button>
         </div>
       </section>
@@ -179,9 +178,9 @@ const Affiliate = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('affiliate.why_partner_title')}</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Why Partner With Us?</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {t('affiliate.benefits_description')}
+              Everything you need to succeed as our affiliate partner
             </p>
           </div>
           
@@ -208,8 +207,8 @@ const Affiliate = () => {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('affiliate.how_it_works')}</h2>
-            <p className="text-xl text-gray-600">{t('affiliate.steps_description')}</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">How It Works</h2>
+            <p className="text-xl text-gray-600">Get started in 3 simple steps</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-12 max-w-4xl mx-auto">
@@ -231,8 +230,8 @@ const Affiliate = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('affiliate.join_program')}</h2>
-              <p className="text-xl text-gray-600">{t('affiliate.join_description')}</p>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Join Our Partner Program</h2>
+              <p className="text-xl text-gray-600">Ready to start earning? It takes less than 2 minutes.</p>
             </div>
             
             <Card className="shadow-xl border-0">
@@ -240,7 +239,7 @@ const Affiliate = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="block text-lg font-medium text-gray-700 mb-2">
-                      {t('affiliate.your_name')} *
+                      Your Name *
                     </label>
                     <Input 
                       placeholder="Enter your full name"
@@ -255,7 +254,7 @@ const Affiliate = () => {
                   
                   <div>
                     <label className="block text-lg font-medium text-gray-700 mb-2">
-                      {t('affiliate.email_address')} *
+                      Email Address *
                     </label>
                     <Input 
                       type="email" 
@@ -271,14 +270,14 @@ const Affiliate = () => {
                   
                   <div>
                     <label className="block text-lg font-medium text-gray-700 mb-2">
-                      {t('affiliate.promote_where')} *
+                      Where will you promote? *
                     </label>
                     <select 
                       className={`w-full p-4 h-12 text-lg border rounded-md ${errors.marketingChannel ? 'border-red-500' : 'border-green-300'}`}
                       value={formData.marketingChannel}
                       onChange={(e) => handleInputChange('marketingChannel', e.target.value)}
                     >
-                      <option value="">{t('affiliate.choose_platform')}</option>
+                      <option value="">Choose your platform</option>
                       <option value="facebook">Facebook</option>
                       <option value="instagram">Instagram</option>
                       <option value="tiktok">TikTok</option>
@@ -300,7 +299,7 @@ const Affiliate = () => {
                       onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
                     />
                     <label className="text-gray-600">
-                      {t('affiliate.agree_terms')} *
+                      I agree to the <a href="#" className="text-nature-600 hover:underline font-medium">Terms and Conditions</a> *
                     </label>
                   </div>
                   {errors.agreeToTerms && (
@@ -315,10 +314,10 @@ const Affiliate = () => {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        {t('affiliate.submitting')}
+                        Submitting...
                       </>
                     ) : (
-                      t('affiliate.submit_application')
+                      'Submit Application'
                     )}
                   </Button>
                 </form>
@@ -332,22 +331,22 @@ const Affiliate = () => {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('affiliate.quick_questions')}</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Quick Questions</h2>
           </div>
           
           <div className="max-w-3xl mx-auto space-y-6">
             {[
               {
-                question: t('affiliate.how_much_earn'),
-                answer: t('affiliate.how_much_earn_answer')
+                question: "How much can I earn?",
+                answer: "You earn up to 25% commission on every sale. The more you sell, the higher your rate."
               },
               {
-                question: t('affiliate.when_paid'),
-                answer: t('affiliate.when_paid_answer')
+                question: "When do I get paid?",
+                answer: "Commissions are paid monthly on the 15th, directly to your bank account."
               },
               {
-                question: t('affiliate.really_free'),
-                answer: t('affiliate.really_free_answer')
+                question: "Is it really free?",
+                answer: "Yes! There are no fees to join. You start earning immediately after approval."
               }
             ].map((faq, index) => (
               <Card key={index} className="shadow-sm">
