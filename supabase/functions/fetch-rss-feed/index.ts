@@ -6,16 +6,6 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface RSSItem {
-  title: string;
-  link: string;
-  description: string;
-  pubDate: string;
-  category?: string;
-  author?: string;
-  guid?: string;
-}
-
 interface BlogPost {
   id: string;
   slug: string;
@@ -33,6 +23,37 @@ interface BlogPost {
   readTime: number;
   isExternal: boolean;
   externalUrl?: string;
+}
+
+// Helper function to extract text between XML tags
+function extractXmlValue(xml: string, tag: string): string | null {
+  const regex = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i');
+  const match = xml.match(regex);
+  return match ? match[1].trim() : null;
+}
+
+// Helper function to extract all items from XML
+function extractXmlItems(xml: string): string[] {
+  const items: string[] = [];
+  const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
+  let match;
+  
+  while ((match = itemRegex.exec(xml)) !== null) {
+    items.push(match[1]);
+  }
+  
+  return items;
+}
+
+// Helper function to clean HTML from text
+function cleanHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').trim();
+}
+
+// Helper function to extract image URL from HTML content
+function extractImageUrl(html: string): string {
+  const imgMatch = html.match(/<img[^>]+src="([^"]+)"/i);
+  return imgMatch ? imgMatch[1] : '/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png';
 }
 
 serve(async (req) => {
@@ -60,27 +81,23 @@ serve(async (req) => {
     const rssText = await response.text();
     console.log('RSS response received, length:', rssText.length);
 
-    // Parse XML
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(rssText, 'text/xml');
-    
-    const items = xmlDoc.querySelectorAll('item');
-    console.log('Found items:', items.length);
+    // Extract items using regex
+    const itemsXml = extractXmlItems(rssText);
+    console.log('Found items:', itemsXml.length);
 
-    const blogPosts: BlogPost[] = Array.from(items).slice(0, 20).map((item, index) => {
-      const title = item.querySelector('title')?.textContent || 'Без названия';
-      const link = item.querySelector('link')?.textContent || '';
-      const description = item.querySelector('description')?.textContent || '';
-      const pubDate = item.querySelector('pubDate')?.textContent || new Date().toISOString();
-      const category = item.querySelector('category')?.textContent || 'Здоровье';
-      const guid = item.querySelector('guid')?.textContent || `rss-${index}`;
+    const blogPosts: BlogPost[] = itemsXml.slice(0, 20).map((itemXml, index) => {
+      const title = extractXmlValue(itemXml, 'title') || 'Без названия';
+      const link = extractXmlValue(itemXml, 'link') || '';
+      const description = extractXmlValue(itemXml, 'description') || '';
+      const pubDate = extractXmlValue(itemXml, 'pubDate') || new Date().toISOString();
+      const category = extractXmlValue(itemXml, 'category') || 'Здоровье';
+      const guid = extractXmlValue(itemXml, 'guid') || `rss-${index}`;
 
       // Extract image from description if available
-      const imgMatch = description.match(/<img[^>]+src="([^"]+)"/);
-      const image = imgMatch ? imgMatch[1] : '/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png';
+      const image = extractImageUrl(description);
 
       // Clean description from HTML
-      const cleanDescription = description.replace(/<[^>]*>/g, '').substring(0, 200);
+      const cleanDescription = cleanHtml(description).substring(0, 200);
 
       return {
         id: guid,
