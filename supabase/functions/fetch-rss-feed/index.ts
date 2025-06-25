@@ -1,59 +1,106 @@
 
-import { serve } from 'https://deno.land/std@0.208.0/http/server.ts'
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface BlogPost {
-  id: string;
-  slug: string;
+interface RSSItem {
   title: string;
-  excerpt: string;
-  content: string;
-  image: string;
-  author: {
-    name: string;
-    title: string;
-    avatar: string;
+  description: string;
+  link: string;
+  pubDate: string;
+  category?: string;
+  enclosure?: {
+    url: string;
+    type: string;
   };
-  category: string;
-  publishedAt: string;
-  readTime: number;
-  isExternal: boolean;
-  externalUrl?: string;
 }
 
-// Helper function to extract text between XML tags
-function extractXmlValue(xml: string, tag: string): string | null {
-  const regex = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i');
+interface RSSFeed {
+  title: string;
+  description: string;
+  items: RSSItem[];
+}
+
+async function fetchRSSFeed(): Promise<RSSFeed> {
+  const rssUrl = "https://www.inoreader.com/stream/user/1003983831/";
+  
+  try {
+    console.log('Fetching RSS feed from:', rssUrl);
+    const response = await fetch(rssUrl);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const xmlText = await response.text();
+    console.log('RSS feed fetched successfully');
+    
+    // Simple XML parsing for RSS
+    const items: RSSItem[] = [];
+    const itemMatches = xmlText.match(/<item[^>]*>[\s\S]*?<\/item>/gi) || [];
+    
+    for (const itemXml of itemMatches.slice(0, 20)) { // Limit to 20 items
+      const title = extractXmlContent(itemXml, 'title') || 'Untitled';
+      const description = extractXmlContent(itemXml, 'description') || '';
+      const link = extractXmlContent(itemXml, 'link') || '';
+      const pubDate = extractXmlContent(itemXml, 'pubDate') || new Date().toISOString();
+      const category = extractXmlContent(itemXml, 'category') || 'General';
+      
+      // Extract image from enclosure or description
+      const enclosureMatch = itemXml.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image[^"]*"/i);
+      const imgMatch = description.match(/<img[^>]+src="([^"]+)"/i);
+      
+      let imageUrl = '';
+      if (enclosureMatch) {
+        imageUrl = enclosureMatch[1];
+      } else if (imgMatch) {
+        imageUrl = imgMatch[1];
+      } else {
+        // Default health-related image
+        imageUrl = "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png";
+      }
+      
+      items.push({
+        title: cleanHtml(title),
+        description: cleanHtml(description).substring(0, 200) + '...',
+        link,
+        pubDate,
+        category: cleanHtml(category),
+        enclosure: imageUrl ? { url: imageUrl, type: 'image' } : undefined
+      });
+    }
+    
+    return {
+      title: extractXmlContent(xmlText, 'title') || 'Health News',
+      description: extractXmlContent(xmlText, 'description') || 'Latest health and wellness articles',
+      items
+    };
+    
+  } catch (error) {
+    console.error('Error fetching RSS feed:', error);
+    throw error;
+  }
+}
+
+function extractXmlContent(xml: string, tag: string): string | null {
+  const regex = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i');
   const match = xml.match(regex);
   return match ? match[1].trim() : null;
 }
 
-// Helper function to extract all items from XML
-function extractXmlItems(xml: string): string[] {
-  const items: string[] = [];
-  const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
-  let match;
-  
-  while ((match = itemRegex.exec(xml)) !== null) {
-    items.push(match[1]);
-  }
-  
-  return items;
-}
-
-// Helper function to clean HTML from text
-function cleanHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '').trim();
-}
-
-// Helper function to extract image URL from HTML content
-function extractImageUrl(html: string): string {
-  const imgMatch = html.match(/<img[^>]+src="([^"]+)"/i);
-  return imgMatch ? imgMatch[1] : '/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png';
+function cleanHtml(text: string): string {
+  return text
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .trim();
 }
 
 serve(async (req) => {
@@ -63,66 +110,10 @@ serve(async (req) => {
   }
 
   try {
-    const rssUrl = 'https://www.inoreader.com/stream/user/1003983831/tag/Thai%20%D0%97%D0%B4%D0%BE%D1%80%D0%BE%D0%B2%D1%8C%D0%B5';
+    const feed = await fetchRSSFeed();
     
-    console.log('Fetching RSS from:', rssUrl);
-    
-    const response = await fetch(rssUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; RSS Reader)',
-        'Accept': 'application/rss+xml, application/xml, text/xml',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch RSS: ${response.status} ${response.statusText}`);
-    }
-
-    const rssText = await response.text();
-    console.log('RSS response received, length:', rssText.length);
-
-    // Extract items using regex
-    const itemsXml = extractXmlItems(rssText);
-    console.log('Found items:', itemsXml.length);
-
-    const blogPosts: BlogPost[] = itemsXml.slice(0, 20).map((itemXml, index) => {
-      const title = extractXmlValue(itemXml, 'title') || 'Без названия';
-      const link = extractXmlValue(itemXml, 'link') || '';
-      const description = extractXmlValue(itemXml, 'description') || '';
-      const pubDate = extractXmlValue(itemXml, 'pubDate') || new Date().toISOString();
-      const category = extractXmlValue(itemXml, 'category') || 'Здоровье';
-      const guid = extractXmlValue(itemXml, 'guid') || `rss-${index}`;
-
-      // Extract image from description if available
-      const image = extractImageUrl(description);
-
-      // Clean description from HTML
-      const cleanDescription = cleanHtml(description).substring(0, 200);
-
-      return {
-        id: guid,
-        slug: `rss-${index}-${title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}`,
-        title,
-        excerpt: cleanDescription + '...',
-        content: description,
-        image,
-        author: {
-          name: 'RSS Feed',
-          title: 'Внешний источник',
-          avatar: '/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png'
-        },
-        category,
-        publishedAt: new Date(pubDate).toISOString().split('T')[0],
-        readTime: Math.ceil(cleanDescription.length / 200),
-        isExternal: true,
-        externalUrl: link
-      };
-    });
-
-    console.log('Processed blog posts:', blogPosts.length);
-
     return new Response(
-      JSON.stringify({ posts: blogPosts }),
+      JSON.stringify(feed),
       {
         headers: {
           ...corsHeaders,
@@ -130,15 +121,10 @@ serve(async (req) => {
         },
       }
     );
-
   } catch (error) {
-    console.error('Error fetching RSS:', error);
-    
+    console.error('Error in RSS function:', error);
     return new Response(
-      JSON.stringify({ 
-        error: 'Failed to fetch RSS feed',
-        details: error.message 
-      }),
+      JSON.stringify({ error: 'Failed to fetch RSS feed' }),
       {
         status: 500,
         headers: {

@@ -1,6 +1,8 @@
+// This file is now deprecated as we're using RSS feed data
+// Keeping for backward compatibility, but all data now comes from RSS
 
 export interface BlogPost {
-  id: string;
+  id: number;
   slug: string;
   title: string;
   excerpt: string;
@@ -14,23 +16,19 @@ export interface BlogPost {
   category: string;
   publishedAt: string;
   readTime: number;
-  isExternal?: boolean;
-  externalUrl?: string;
 }
 
-// Локальные посты удалены - теперь используется RSS лента
+// Empty array as we now use RSS data
 export const blogPosts: BlogPost[] = [];
 
 export const getLatestPosts = (count: number = 5): BlogPost[] => {
-  return blogPosts
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, count);
+  return [];
 };
 
 export const getPostBySlug = (slug: string): BlogPost | undefined => {
-  return blogPosts.find(post => post.slug === slug);
+  return undefined;
 };
 
 export const getPostsByCategory = (category: string): BlogPost[] => {
-  return blogPosts.filter(post => post.category.toLowerCase() === category.toLowerCase());
+  return [];
 };
