@@ -1,428 +1,288 @@
-import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Star, Search, Sparkles, Scale, Eye, Heart, Leaf, Zap, Shield, Brain, Users, Activity, Ear } from "lucide-react";
+import { Search, Filter, Star, ShoppingCart, Package } from "lucide-react";
+import { products, categories } from "@/utils/productData";
 import { useCart } from "@/contexts/CartContext";
-import { getCategoryColors } from "@/utils/categoryColors";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 
 const Products = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
-  const [sortBy, setSortBy] = useState("popular");
-  const [filterCategory, setFilterCategory] = useState("all");
-  const { addItem } = useCart();
+  const { t } = useLanguage();
+  const { dispatch } = useCart();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("popularity");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
-  // Update search term when URL params change
-  useEffect(() => {
-    const searchFromUrl = searchParams.get("search") || "";
-    setSearchTerm(searchFromUrl);
-  }, [searchParams]);
+  const filteredAndSortedProducts = useMemo(() => {
+    let filtered = products.filter(product => {
+      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           product.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
 
-  const handleSearchChange = (value: string) => {
-    setSearchTerm(value);
-    const newSearchParams = new URLSearchParams(searchParams);
-    if (value.trim()) {
-      newSearchParams.set("search", value);
-    } else {
-      newSearchParams.delete("search");
-    }
-    setSearchParams(newSearchParams);
+    // Sort products
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case "price-low":
+          return a.price - b.price;
+        case "price-high":
+          return b.price - a.price;
+        case "newest":
+          return new Date(b.createdAt || "").getTime() - new Date(a.createdAt || "").getTime();
+        case "popularity":
+        default:
+          return (b.rating || 0) - (a.rating || 0);
+      }
+    });
+
+    return filtered;
+  }, [searchTerm, selectedCategory, sortBy]);
+
+  const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProducts = filteredAndSortedProducts.slice(startIndex, startIndex + itemsPerPage);
+
+  const handleAddToCart = (product: any) => {
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      }
+    });
+    toast.success(`${product.name} ${t('chat.product_added')}`);
   };
 
-  const products = [
-    {
-      id: 22,
-      name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
-      price: "฿970",
-      originalPrice: "฿1,190",
-      image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
-      rating: 4.9,
-      reviews: 156,
-      badge: "🌟 New",
-      category: "detox-health"
-    },
-    {
-      id: 21,
-      name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
-      price: "฿999",
-      originalPrice: "฿1,470",
-      image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
-      rating: 4.9,
-      reviews: 198,
-      badge: "🌟 New",
-      category: "beauty-supplement"
-    },
-    {
-      id: 20,
-      name: "Philola — Eye Health & Vision Support Capsules",
-      price: "฿1,190",
-      originalPrice: "฿1,400",
-      image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
-      rating: 4.9,
-      reviews: 167,
-      badge: "🌟 New",
-      category: "eye-health"
-    },
-    {
-      id: 19,
-      name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
-      price: "฿890",
-      originalPrice: "฿1,575",
-      image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
-      rating: 4.8,
-      reviews: 175,
-      badge: "🌟 New",
-      category: "weight-loss"
-    },
-    {
-      id: 18,
-      name: "Oclarizin — Eye Health & Vision Support Capsules",
-      price: "฿930",
-      originalPrice: "฿1,330",
-      image: "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
-      rating: 4.9,
-      reviews: 143,
-      badge: "🌟 New",
-      category: "eye-health"
-    },
-    {
-      id: 17,
-      name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
-      price: "฿980",
-      originalPrice: "฿1,155",
-      image: "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
-      rating: 4.9,
-      reviews: 187,
-      badge: "🌟 New",
-      category: "detox-health"
-    },
-    {
-      id: 16,
-      name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
-      price: "฿950",
-      originalPrice: "฿1,085",
-      image: "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
-      rating: 4.8,
-      reviews: 156,
-      badge: "🌟 New",
-      category: "digestive-health"
-    },
-    {
-      id: 15,
-      name: "Genesis Caps — Hearing Restoration & Ear Health Support",
-      price: "฿873",
-      originalPrice: "฿1,575",
-      image: "/lovable-uploads/a4aea223-69b4-4f7a-b244-3c5d71392fe0.png",
-      rating: 4.7,
-      reviews: 164,
-      badge: "🌟 New",
-      category: "hearing-health"
-    },
-    {
-      id: 14,
-      name: "Turbine — Prostate & Sexual Health Support",
-      price: "฿940",
-      originalPrice: "฿1,715",
-      image: "/lovable-uploads/7e5ab9ec-c4af-456d-b2da-f7a95ed6efa5.png",
-      rating: 4.8,
-      reviews: 142,
-      badge: "🌟 New",
-      category: "prostate-health"
-    },
-    {
-      id: 13,
-      name: "Elsie — Skin Restoration & Fungal Infection Support",
-      price: "฿940",
-      originalPrice: "฿1,470",
-      image: "/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png",
-      rating: 4.9,
-      reviews: 198,
-      badge: "🌟 New",
-      category: "skin-health"
-    },
-    {
-      id: 12,
-      name: "Andicellix — Hearing Support & Ear Nerve Protection",
-      price: "฿990",
-      originalPrice: "฿1,645",
-      image: "/lovable-uploads/1d68a6b5-de0a-4b8b-8fcc-4faebf7de5d3.png",
-      rating: 4.8,
-      reviews: 127,
-      badge: "🌟 New",
-      category: "hearing-health"
-    },
-    {
-      id: 11,
-      name: "Black Rhino — Male Performance & Testosterone Booster",
-      price: "฿855",
-      originalPrice: "฿1,450",
-      image: "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
-      rating: 4.8,
-      reviews: 89,
-      badge: "🌟 New",
-      category: "mens-health"
-    },
-    {
-      id: 10,
-      name: "BackPro — Prostate Health & Urinary Function Support",
-      price: "฿950",
-      originalPrice: "฿1,820",
-      image: "/lovable-uploads/cd55ad2c-2744-4f3f-bb08-aeaa1a47bcee.png",
-      rating: 4.7,
-      reviews: 173,
-      badge: "🔥 New",
-      category: "prostate-health"
-    },
-    {
-      id: 9,
-      name: "Carthisin — Bone & Joint Health Support",
-      price: "฿970",
-      originalPrice: "฿1,990",
-      image: "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png",
-      rating: 4.8,
-      reviews: 142,
-      badge: "🦴 Joint Health",
-      category: "bone-joint"
-    },
-    {
-      id: 8,
-      name: "Diacard — Blood Pressure & Blood Sugar Support",
-      price: "฿890",
-      originalPrice: "฿1,680",
-      image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
-      rating: 4.9,
-      reviews: 189,
-      badge: "🔥 Hot",
-      category: "heart-health"
-    },
-    {
-      id: 7,
-      name: "TChrome — Weight Loss & Detox Capsules",
-      price: "฿990",
-      originalPrice: "฿1,990",
-      image: "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png",
-      rating: 4.9,
-      reviews: 256,
-      badge: "🌟 New",
-      category: "weight-loss"
-    }
-  ];
-
-  const categories = [
-    { value: "all", label: "All Categories", icon: Activity, count: 0 },
-    { value: "beauty-supplement", label: "Beauty & Anti-Aging", icon: Sparkles, count: 0 },
-    { value: "weight-loss", label: "Weight Control", icon: Scale, count: 0 },
-    { value: "eye-health", label: "Eye Health", icon: Eye, count: 0 },
-    { value: "detox-health", label: "Detox & Cleanse", icon: Leaf, count: 0 },
-    { value: "digestive-health", label: "Digestive Health", icon: Heart, count: 0 },
-    { value: "skin-health", label: "Skin Health", icon: Sparkles, count: 0 },
-    { value: "hearing-health", label: "Hearing Health", icon: Ear, count: 0 },
-    { value: "mens-health", label: "Men's Health", icon: Users, count: 0 },
-    { value: "prostate-health", label: "Prostate Health", icon: Shield, count: 0 },
-    { value: "bone-joint", label: "Bone & Joint", icon: Activity, count: 0 },
-    { value: "heart-health", label: "Heart Health", icon: Heart, count: 0 }
-  ];
-
-  // Update category counts
-  const categoriesWithCounts = categories.map(category => ({
-    ...category,
-    count: category.value === "all" 
-      ? products.length 
-      : products.filter(product => product.category === category.value).length
-  }));
-
-  const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = filterCategory === "all" || product.category === filterCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case "price-low":
-        return parseInt(a.price.replace(/[^\d]/g, '')) - parseInt(b.price.replace(/[^\d]/g, ''));
-      case "price-high":
-        return parseInt(b.price.replace(/[^\d]/g, '')) - parseInt(a.price.replace(/[^\d]/g, ''));
-      case "rating":
-        return b.rating - a.rating;
-      case "newest":
-        return b.id - a.id;
-      default:
-        return b.reviews - a.reviews; // popularity
-    }
-  });
-
-  const handleAddToCart = (product: typeof products[0]) => {
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      originalPrice: product.originalPrice || undefined,
-    });
+  const clearFilters = () => {
+    setSearchTerm("");
+    setSelectedCategory("all");
+    setSortBy("popularity");
+    setCurrentPage(1);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <section className="bg-white border-b">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {searchTerm ? `Search Results for "${searchTerm}"` : "All Products"}
-          </h1>
-          <p className="text-gray-600">High-quality natural dietary supplements for better health</p>
-        </div>
-      </section>
-
-      {/* Search and Sort */}
-      <section className="bg-white border-b">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                className="pl-10"
-              />
+    <div className="min-h-screen bg-nature-50">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-nature-100 to-earth-100 py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-nature-500 to-nature-600 rounded-full shadow-lg">
+                <Package className="h-8 w-8 text-white" />
+              </div>
             </div>
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full sm:w-48">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="popular">Popularity</SelectItem>
-                <SelectItem value="price-low">Price: Low to High</SelectItem>
-                <SelectItem value="price-high">Price: High to Low</SelectItem>
-                <SelectItem value="rating">Rating</SelectItem>
-                <SelectItem value="newest">Newest</SelectItem>
-              </SelectContent>
-            </Select>
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              {t('products.title')}
+            </h1>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              {t('products.description')}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Category Tabs */}
-      <section className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Tabs value={filterCategory} onValueChange={setFilterCategory} className="w-full">
-            <TabsList className="w-full justify-start overflow-x-auto bg-transparent p-0 h-auto">
-              {categoriesWithCounts.map((category) => {
-                const colors = getCategoryColors(category.value);
-                const Icon = category.icon;
-                return (
-                  <TabsTrigger
-                    key={category.value}
-                    value={category.value}
-                    className={`
-                      flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all
-                      ${colors.bg} ${colors.text} ${colors.border} ${colors.hover}
-                      data-[state=active]:bg-gradient-to-r data-[state=active]:from-white data-[state=active]:to-gray-50
-                      data-[state=active]:shadow-md data-[state=active]:border-2
-                      border whitespace-nowrap
-                    `}
-                  >
-                    <Icon className={`h-4 w-4 ${colors.icon}`} />
-                    <span>{category.label}</span>
-                    <Badge variant="secondary" className="ml-1 text-xs">
-                      {category.count}
-                    </Badge>
-                  </TabsTrigger>
-                );
-              })}
-            </TabsList>
-          </Tabs>
+      {/* Filters Section */}
+      <section className="py-8 bg-white border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            {/* Search */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder={t('products.search_placeholder')}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
+            {/* Filters */}
+            <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex items-center space-x-2">
+                <Filter className="h-4 w-4 text-gray-500" />
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder={t('products.filter_category')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{t('products.all_categories')}</SelectItem>
+                    {categories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder={t('products.sort_by')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="popularity">{t('products.popularity')}</SelectItem>
+                  <SelectItem value="price-low">{t('products.price_low_high')}</SelectItem>
+                  <SelectItem value="price-high">{t('products.price_high_low')}</SelectItem>
+                  <SelectItem value="newest">{t('products.newest')}</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {(searchTerm || selectedCategory !== "all") && (
+                <Button variant="outline" onClick={clearFilters} size="sm">
+                  {t('products.clear_filters')}
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Results Summary */}
+          <div className="mt-4 text-sm text-gray-600">
+            {t('products.showing')} {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredAndSortedProducts.length)} {t('products.of')} {filteredAndSortedProducts.length} {t('products.results')}
+          </div>
         </div>
       </section>
 
       {/* Products Grid */}
-      <section className="py-8">
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="mb-6">
-            <p className="text-gray-600">
-              Showing {sortedProducts.length} of {products.length} products
-              {searchTerm && ` for "${searchTerm}"`}
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {sortedProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
-                  />
-                  {product.badge && (
-                    <Badge className="absolute top-2 left-2 bg-nature-600 text-white">
-                      {product.badge}
-                    </Badge>
-                  )}
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                  
-                  <div className="flex items-center mb-3">
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
-                      <span className="text-sm text-gray-400 ml-1">({product.reviews})</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-bold text-nature-600 text-lg">{product.price}</span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
+          {currentProducts.length === 0 ? (
+            <div className="text-center py-16">
+              <Package className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('products.no_products')}</h3>
+              <p className="text-gray-600 mb-6">{t('products.no_products_desc')}</p>
+              <Button onClick={clearFilters}>{t('products.clear_filters')}</Button>
+            </div>
+          ) : (
+            <>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {currentProducts.map((product) => (
+                  <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden bg-white">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      {product.badge && (
+                        <div className="absolute top-2 left-2">
+                          <Badge variant="secondary" className="bg-nature-600 text-white">
+                            {product.badge}
+                          </Badge>
+                        </div>
+                      )}
+                      {product.discount && (
+                        <div className="absolute top-2 right-2">
+                          <Badge variant="destructive">
+                            -{product.discount}%
+                          </Badge>
+                        </div>
                       )}
                     </div>
-                  </div>
-                  
-                  <div className="flex flex-col gap-2">
-                    <Button asChild className="w-full bg-nature-600 hover:bg-nature-700">
-                      <Link to={`/product/${product.id}`}>View Details</Link>
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      Add to Cart
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-nature-700 transition-colors">
+                        {product.name}
+                      </h3>
+                      
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                        {product.description}
+                      </p>
+                      
+                      <div className="flex items-center mb-3">
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 ${
+                                i < Math.floor(product.rating || 0)
+                                  ? "text-yellow-400 fill-current"
+                                  : "text-gray-300"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-500 ml-2">
+                          ({product.reviewCount} {t('products.reviews')})
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-2xl font-bold text-nature-600">
+                            ฿{product.price.toLocaleString()}
+                          </span>
+                          {product.originalPrice && (
+                            <span className="text-sm text-gray-500 line-through">
+                              ฿{product.originalPrice.toLocaleString()}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col space-y-2">
+                        <Button
+                          onClick={() => handleAddToCart(product)}
+                          className="w-full bg-nature-600 hover:bg-nature-700 text-white"
+                          size="sm"
+                        >
+                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          {t('products.add_to_cart')}
+                        </Button>
+                        <Button asChild variant="outline" size="sm" className="w-full">
+                          <Link to={`/product/${product.id}`}>
+                            {t('products.view_details')}
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
 
-          {sortedProducts.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
-                {searchTerm 
-                  ? `No products found for "${searchTerm}"`
-                  : "No products found matching your filters"
-                }
-              </p>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  setSearchTerm("");
-                  setFilterCategory("all");
-                  setSearchParams({});
-                }}
-              >
-                {searchTerm ? "Clear Search" : "Show All Products"}
-              </Button>
-            </div>
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center mt-12 space-x-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                    disabled={currentPage === 1}
+                  >
+                    {t('common.previous')}
+                  </Button>
+                  
+                  {[...Array(totalPages)].map((_, i) => (
+                    <Button
+                      key={i}
+                      variant={currentPage === i + 1 ? "default" : "outline"}
+                      onClick={() => setCurrentPage(i + 1)}
+                      size="sm"
+                    >
+                      {i + 1}
+                    </Button>
+                  ))}
+                  
+                  <Button
+                    variant="outline"
+                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                    disabled={currentPage === totalPages}
+                  >
+                    {t('common.next')}
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
