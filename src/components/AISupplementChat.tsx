@@ -9,6 +9,7 @@ import SmartHotButtons from "./SmartHotButtons";
 import { useNavigate } from "react-router-dom";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getSmartButtons, HotButton } from "@/utils/hotButtonScenarios";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   id: string;
@@ -27,7 +28,7 @@ const AISupplementChat = () => {
     {
       id: '1',
       type: 'ai',
-      content: 'Hello! I\'ll help you find the perfect supplements for your needs. Tell me about your health concerns or goals you want to achieve?',
+      content: 'Привет! Я помогу вам найти идеальные добавки для ваших потребностей. Расскажите о ваших проблемах со здоровьем или целях, которых хотите достичь?',
       timestamp: new Date(),
       stage: 'initial'
     }
@@ -67,6 +68,24 @@ const AISupplementChat = () => {
     if (queryLower.includes("immune") || queryLower.includes("immunity") || queryLower.includes("cold")) return "immunity";
     if (queryLower.includes("brain") || queryLower.includes("memory") || queryLower.includes("focus")) return "brain";
     return "";
+  };
+
+  const callOpenAI = async (message: string, context: any): Promise<string> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('ai-supplement-chat', {
+        body: { message, context }
+      });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        return 'Извините, произошла ошибка. Попробуйте снова.';
+      }
+
+      return data?.response || 'Извините, не удалось получить ответ.';
+    } catch (error) {
+      console.error('Error calling OpenAI:', error);
+      return 'Извините, произошла ошибка при обращении к AI.';
+    }
   };
 
   const getPersonalizedResponse = (query: string, products: Product[], category: string, buttonId?: string): string => {
@@ -172,10 +191,13 @@ const AISupplementChat = () => {
     };
     setUserContext(updatedContext);
 
-    setTimeout(() => {
+    try {
+      // Получаем ответ от OpenAI
+      const aiResponse = await callOpenAI(text, updatedContext);
+      
+      // Получаем рекомендованные продукты на основе запроса
       const category = getCategoryFromQuery(text);
       const recommendedProducts = getProductsByKeywords(text).slice(0, 3);
-      const aiResponse = getPersonalizedResponse(text, recommendedProducts, category, buttonId);
 
       // Check for combo offer request
       const isComboRequest = text.includes("combo") || text.includes("discount") || text.includes("offer");
@@ -207,20 +229,30 @@ const AISupplementChat = () => {
       };
 
       setMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      console.error('Error in handleSendMessage:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'ai',
+        content: 'Извините, произошла ошибка. Попробуйте еще раз.',
+        timestamp: new Date(),
+        stage: nextStage
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleAddToCart = (productId: number) => {
-    // Simulate adding to cart
     const product = allProducts.find(p => p.id === productId);
     if (product) {
       const successMessage: Message = {
         id: Date.now().toString(),
         type: 'ai',
-        content: `✅ ${product.name} added to cart! Would you like to checkout or add something else?`,
+        content: `✅ ${product.name} добавлен в корзину! Хотите перейти к оформлению или добавить что-то еще?`,
         timestamp: new Date(),
-        followUpQuestions: ["Go to checkout", "View similar products", "Continue shopping"]
+        followUpQuestions: ["Перейти к оформлению", "Посмотреть похожие товары", "Продолжить покупки"]
       };
       
       setMessages(prev => [...prev, successMessage]);
@@ -228,7 +260,7 @@ const AISupplementChat = () => {
   };
 
   const handleFollowUpClick = (question: string, buttonId?: string) => {
-    if (question === "Go to checkout" || buttonId === "checkout") {
+    if (question === "Перейти к оформлению" || buttonId === "checkout") {
       navigate('/cart');
       return;
     }
@@ -256,8 +288,8 @@ const AISupplementChat = () => {
             <Bot className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-gray-800">AI Consultant</h3>
-            <p className="text-sm text-nature-600">Personalized Supplement Selection</p>
+            <h3 className="font-semibold text-gray-800">AI Консультант</h3>
+            <p className="text-sm text-nature-600">Персонализированный подбор добавок</p>
           </div>
         </div>
       </div>
@@ -302,14 +334,14 @@ const AISupplementChat = () => {
                               product={product}
                               reason={
                                 product.keywords.some(k => ["vision", "eyes"].includes(k)) ? 
-                                "Specially for eye health" :
+                                "Специально для здоровья глаз" :
                                 product.keywords.some(k => ["weight loss", "weight"].includes(k)) ? 
-                                "Effective fat burning" :
+                                "Эффективное жиросжигание" :
                                 product.keywords.some(k => ["anti-aging", "skin"].includes(k)) ? 
-                                "Anti-aging care and skin beauty" :
+                                "Антивозрастной уход и красота кожи" :
                                 product.keywords.includes("detox") ? 
-                                "Deep body cleansing" : 
-                                "Recommended for your needs"
+                                "Глубокое очищение организма" : 
+                                "Рекомендовано для ваших потребностей"
                               }
                               onAddToCart={handleAddToCart}
                               showCombo={message.showCombo && index > 0}
@@ -347,7 +379,7 @@ const AISupplementChat = () => {
       {/* Chat Input */}
       <div className="flex items-center space-x-2 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-lg border border-gray-200/50">
         <Input
-          placeholder="Describe your needs..."
+          placeholder="Опишите ваши потребности..."
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
