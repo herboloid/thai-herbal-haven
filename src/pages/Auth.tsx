@@ -1,104 +1,8 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/contexts/AuthContext";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { Navigate } from "react-router-dom";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: ''
-  });
-
-  const { login, register, isLoading } = useAuth();
-  const { toast } = useToast();
-  const navigate = useNavigate();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.email || !formData.password) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const success = await login(formData.email, formData.password);
-    
-    if (success) {
-      toast({
-        title: "Welcome!",
-        description: "You have successfully logged in"
-      });
-      navigate('/profile');
-    } else {
-      toast({
-        title: "Login Error",
-        description: "Invalid email or password",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast({
-        title: "Error",
-        description: "Password must be at least 6 characters",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const success = await register(formData);
-    
-    if (success) {
-      toast({
-        title: "Registration Successful!",
-        description: "Welcome to Siam Healthy"
-      });
-      navigate('/profile');
-    } else {
-      toast({
-        title: "Registration Error",
-        description: "Please try again",
-        variant: "destructive"
-      });
-    }
-  };
-
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Organic Background */}
@@ -126,160 +30,63 @@ const Auth = () => {
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center py-12 px-4 min-h-screen">
-        <div className="max-w-md w-full">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-green-700">Siam Healthy</h1>
-            <p className="text-green-600 mt-2">Personal Account</p>
+        <SignedIn>
+          <Navigate to="/" replace />
+        </SignedIn>
+        
+        <SignedOut>
+          <div className="max-w-md w-full">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-green-700">Siam Healthy</h1>
+              <p className="text-green-600 mt-2">Personal Account</p>
+            </div>
+
+            <div className="backdrop-blur-sm bg-white/80 border-white/20 shadow-xl rounded-lg p-6">
+              <div className="flex flex-col items-center space-y-6">
+                <div className="w-full">
+                  <SignIn 
+                    forceRedirectUrl="/"
+                    appearance={{
+                      elements: {
+                        formButtonPrimary: "bg-green-600 hover:bg-green-700 text-white",
+                        card: "shadow-none bg-transparent",
+                        headerTitle: "text-green-700",
+                        headerSubtitle: "text-green-600",
+                        socialButtonsBlockButton: "border-green-200 hover:bg-green-50",
+                        dividerLine: "bg-green-200",
+                        dividerText: "text-green-600",
+                        formFieldLabel: "text-green-700",
+                        footerActionLink: "text-green-600 hover:text-green-700"
+                      }
+                    }}
+                  />
+                </div>
+                
+                <div className="w-full border-t border-green-200 pt-6">
+                  <div className="text-center mb-4">
+                    <span className="text-green-600 text-sm">Don't have an account?</span>
+                  </div>
+                  <SignUp 
+                    forceRedirectUrl="/"
+                    appearance={{
+                      elements: {
+                        formButtonPrimary: "bg-green-600 hover:bg-green-700 text-white",
+                        card: "shadow-none bg-transparent",
+                        headerTitle: "text-green-700",
+                        headerSubtitle: "text-green-600",
+                        socialButtonsBlockButton: "border-green-200 hover:bg-green-50",
+                        dividerLine: "bg-green-200",
+                        dividerText: "text-green-600",
+                        formFieldLabel: "text-green-700",
+                        footerActionLink: "text-green-600 hover:text-green-700"
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-
-          <Card className="backdrop-blur-sm bg-white/80 border-white/20 shadow-xl">
-            <Tabs value={isLogin ? "login" : "register"} onValueChange={(value) => setIsLogin(value === "login")}>
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login" className="text-green-700 data-[state=active]:text-green-800">Login</TabsTrigger>
-                <TabsTrigger value="register" className="text-green-700 data-[state=active]:text-green-800">Register</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="login">
-                <CardHeader>
-                  <CardTitle className="text-green-700">Login to Account</CardTitle>
-                  <CardDescription className="text-green-600">
-                    Enter your credentials to login
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleLogin} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="login-email" className="text-green-700">Email</Label>
-                      <Input
-                        id="login-email"
-                        name="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="login-password" className="text-green-700">Password</Label>
-                      <div className="relative">
-                        <Input
-                          id="login-password"
-                          name="password"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="Enter password"
-                          value={formData.password}
-                          onChange={handleInputChange}
-                          required
-                        />
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
-                      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Login
-                    </Button>
-                  </form>
-                </CardContent>
-              </TabsContent>
-
-              <TabsContent value="register">
-                <CardHeader>
-                  <CardTitle className="text-green-700">Create Account</CardTitle>
-                  <CardDescription className="text-green-600">
-                    Fill out the form to register
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleRegister} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName" className="text-green-700">First Name</Label>
-                        <Input
-                          id="firstName"
-                          name="firstName"
-                          placeholder="John"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName" className="text-green-700">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          name="lastName"
-                          placeholder="Doe"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="register-email" className="text-green-700">Email</Label>
-                      <Input
-                        id="register-email"
-                        name="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-green-700">Phone (optional)</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="+1 (555) 123-4567"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="register-password" className="text-green-700">Password</Label>
-                      <div className="relative">
-                        <Input
-                          id="register-password"
-                          name="password"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="At least 6 characters"
-                          value={formData.password}
-                          onChange={handleInputChange}
-                          required
-                        />
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white" disabled={isLoading}>
-                      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Register
-                    </Button>
-                  </form>
-                </CardContent>
-              </TabsContent>
-            </Tabs>
-          </Card>
-        </div>
+        </SignedOut>
       </div>
     </div>
   );
