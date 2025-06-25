@@ -1,0 +1,80 @@
+
+{
+  "navigation": {
+    "home": "Home",
+    "supplements": "Supplements",
+    "blog": "Blog",
+    "affiliate": "Affiliate",
+    "about": "About",
+    "signIn": "Sign In",
+    "cart": "Cart"
+  },
+  "hero": {
+    "title": "SIAM HEALTHY",
+    "subtitle": "Premium Natural Supplements",
+    "description": "High-quality natural supplements for optimal health care with 100% natural ingredients",
+    "shopButton": "Shop Supplements"
+  },
+  "categories": {
+    "title": "Product Categories",
+    "subtitle": "Choose a category that matches your health needs",
+    "beauty": "Beauty and Anti-Aging Care",
+    "beautyDesc": "Skin brightening and anti-aging support",
+    "weight": "Weight Control and Body Shaping",
+    "weightDesc": "Fat burning and metabolism support",
+    "vision": "Eye Health and Vision",
+    "visionDesc": "Vision support and eye protection",
+    "heart": "Heart Health",
+    "heartDesc": "Blood pressure and cardiovascular system support",
+    "detox": "Detox and Cleansing",
+    "detoxDesc": "Body cleansing and toxin removal",
+    "viewButton": "View"
+  },
+  "products": {
+    "featured": "Featured Products",
+    "featuredDesc": "High-quality products popular among our customers",
+    "allProducts": "All Products",
+    "buy": "Buy",
+    "reviews": "reviews",
+    "originalPrice": "Original Price"
+  },
+  "blog": {
+    "title": "Health & Wellness Blog",
+    "subtitle": "Expert insights on healthy living, disease prevention, and natural wellness from nutritionists, doctors, and traditional medicine practitioners.",
+    "latestInsights": "Latest Health Insights",
+    "insightsDesc": "Expert advice from nutritionists, doctors, and wellness practitioners",
+    "readMore": "Read More",
+    "read": "Read",
+    "viewAllPosts": "View All Posts",
+    "categories": {
+      "all": "all",
+      "detox": "detox",
+      "anti-aging": "anti-aging",
+      "heart health": "heart health",
+      "eye health": "eye health",
+      "weight management": "weight management",
+      "immunity": "immunity",
+      "stress management": "stress management",
+      "digestive health": "digestive health"
+    },
+    "minRead": "min read"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error occurred",
+    "retry": "Retry",
+    "new": "New",
+    "sale": "Sale",
+    "discount": "Discount"
+  },
+  "footer": {
+    "description": "High-quality natural supplements online store for better health",
+    "quickLinks": "Quick Links",
+    "categories": "Categories",
+    "support": "Support",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "allRightsReserved": "All rights reserved"
+  }
+}

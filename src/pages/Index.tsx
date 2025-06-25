@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock } from "lucide-react";
@@ -10,42 +10,43 @@ import { getLatestPosts } from "@/utils/blogData";
 
 const Index = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const latestPosts = getLatestPosts(5);
 
   const categories = [
     {
       id: "beauty",
-      name: "Beauty and Anti-Aging Care",
+      name: t('categories.beauty'),
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
-      description: "Skin brightening and anti-aging support",
+      description: t('categories.beautyDesc'),
       icon: Sparkles
     },
     {
       id: "weight",
-      name: "Weight Control and Body Shaping",
+      name: t('categories.weight'),
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
-      description: "Fat burning and metabolism support",
+      description: t('categories.weightDesc'),
       icon: Zap
     },
     {
       id: "vision",
-      name: "Eye Health and Vision",
+      name: t('categories.vision'),
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
-      description: "Vision support and eye protection",
+      description: t('categories.visionDesc'),
       icon: Eye
     },
     {
       id: "heart",
-      name: "Heart Health",
+      name: t('categories.heart'),
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
-      description: "Blood pressure and cardiovascular system support",
+      description: t('categories.heartDesc'),
       icon: Heart
     },
     {
       id: "detox",
-      name: "Detox and Cleansing",
+      name: t('categories.detox'),
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png", 
-      description: "Body cleansing and toxin removal",
+      description: t('categories.detoxDesc'),
       icon: Leaf
     }
   ];
@@ -140,8 +141,8 @@ const Index = () => {
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              <span className="font-bold text-white drop-shadow-lg">SIAM HEALTHY</span><br />
-              Premium Natural Supplements
+              <span className="font-bold text-white drop-shadow-lg">{t('hero.title')}</span><br />
+              {t('hero.subtitle')}
             </h1>
             
             <Button 
@@ -149,7 +150,7 @@ const Index = () => {
               size="lg" 
               className="bg-white/90 hover:bg-white text-gray-900 px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              <Link to="/products">Shop Supplements</Link>
+              <Link to="/products">{t('hero.shopButton')}</Link>
             </Button>
           </div>
         </div>
@@ -159,9 +160,9 @@ const Index = () => {
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Product Categories</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('categories.title')}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Choose a category that matches your health needs
+              {t('categories.subtitle')}
             </p>
           </div>
           
@@ -202,7 +203,7 @@ const Index = () => {
                       size="sm"
                       className="rounded-full border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
                     >
-                      <Link to="/products">View</Link>
+                      <Link to="/products">{t('categories.viewButton')}</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -216,9 +217,9 @@ const Index = () => {
       <section className="py-16 bg-nature-50 relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('products.featured')}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              High-quality products popular among our customers
+              {t('products.featuredDesc')}
             </p>
           </div>
           
@@ -292,7 +293,7 @@ const Index = () => {
           
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="lg" className="rounded-full border-nature-300 hover:bg-nature-50 transition-all hover:scale-105">
-              <Link to="/products">All Products</Link>
+              <Link to="/products">{t('products.allProducts')}</Link>
             </Button>
           </div>
         </div>
@@ -302,9 +303,9 @@ const Index = () => {
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Health Insights</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('blog.latestInsights')}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Expert advice from nutritionists, doctors, and wellness practitioners
+              {t('blog.insightsDesc')}
             </p>
           </div>
           
@@ -336,7 +337,7 @@ const Index = () => {
                     <span>{formatDate(post.publishedAt)}</span>
                     <span className="mx-2">•</span>
                     <Clock className="h-3 w-3 mr-1" />
-                    <span>{post.readTime} min</span>
+                    <span>{post.readTime} {t('blog.minRead')}</span>
                   </div>
                   
                   <div className="flex items-center justify-between">
@@ -355,7 +356,7 @@ const Index = () => {
                       className="rounded-full text-xs border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
                     >
                       <Link to={`/blog/${post.slug}`}>
-                        Read
+                        {t('blog.read')}
                       </Link>
                     </Button>
                   </div>
@@ -366,7 +367,7 @@ const Index = () => {
           
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="lg" className="rounded-full border-nature-300 hover:bg-nature-50 transition-all hover:scale-105">
-              <Link to="/blog">View All Posts</Link>
+              <Link to="/blog">{t('blog.viewAllPosts')}</Link>
             </Button>
           </div>
         </div>

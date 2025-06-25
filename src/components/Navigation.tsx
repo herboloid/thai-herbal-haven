@@ -1,15 +1,18 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/clerk-react";
 import { useCart } from "@/contexts/CartContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { state } = useCart();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -37,7 +40,7 @@ const Navigation = () => {
                 isActive('/') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              Home
+              {t('navigation.home')}
             </Link>
             <Link 
               to="/products" 
@@ -45,7 +48,7 @@ const Navigation = () => {
                 isActive('/products') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              Supplements
+              {t('navigation.supplements')}
             </Link>
             <Link 
               to="/blog" 
@@ -53,7 +56,7 @@ const Navigation = () => {
                 isActive('/blog') || location.pathname.startsWith('/blog/') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              Blog
+              {t('navigation.blog')}
             </Link>
             <Link 
               to="/affiliate" 
@@ -61,7 +64,7 @@ const Navigation = () => {
                 isActive('/affiliate') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              Affiliate
+              {t('navigation.affiliate')}
             </Link>
             <Link 
               to="/about" 
@@ -69,12 +72,14 @@ const Navigation = () => {
                 isActive('/about') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              About
+              {t('navigation.about')}
             </Link>
           </div>
 
-          {/* Right side - Cart and User */}
+          {/* Right side - Language, Cart and User */}
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
+            
             <Link to="/cart" className="relative">
               <Button variant="ghost" size="icon">
                 <ShoppingCart className="h-5 w-5" />
@@ -100,7 +105,7 @@ const Navigation = () => {
             <SignedOut>
               <SignInButton mode="modal">
                 <Button variant="outline" size="sm" className="hidden md:inline-flex">
-                  Sign In
+                  {t('navigation.signIn')}
                 </Button>
               </SignInButton>
             </SignedOut>
@@ -128,7 +133,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                {t('navigation.home')}
               </Link>
               <Link
                 to="/products"
@@ -137,7 +142,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Supplements
+                {t('navigation.supplements')}
               </Link>
               <Link
                 to="/blog"
@@ -146,7 +151,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Blog
+                {t('navigation.blog')}
               </Link>
               <Link
                 to="/affiliate"
@@ -155,7 +160,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Affiliate
+                {t('navigation.affiliate')}
               </Link>
               <Link
                 to="/about"
@@ -164,7 +169,7 @@ const Navigation = () => {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
+                {t('navigation.about')}
               </Link>
 
               {/* Mobile Auth Section */}
@@ -187,7 +192,7 @@ const Navigation = () => {
                       className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Sign In
+                      {t('navigation.signIn')}
                     </button>
                   </SignInButton>
                 </SignedOut>
