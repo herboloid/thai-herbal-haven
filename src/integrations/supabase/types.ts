@@ -44,6 +44,45 @@ export type Database = {
           },
         ]
       }
+      ai_generated_news: {
+        Row: {
+          category: string
+          content: string
+          created_at: string | null
+          excerpt: string
+          id: string
+          image_url: string | null
+          language: string
+          published_at: string | null
+          source_hash: string
+          title: string
+        }
+        Insert: {
+          category: string
+          content: string
+          created_at?: string | null
+          excerpt: string
+          id?: string
+          image_url?: string | null
+          language?: string
+          published_at?: string | null
+          source_hash: string
+          title: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string | null
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          language?: string
+          published_at?: string | null
+          source_hash?: string
+          title?: string
+        }
+        Relationships: []
+      }
       calls: {
         Row: {
           agent_id: string | null
@@ -123,6 +162,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      news_generation_log: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          generated_count: number
+          id: string
+          success: boolean
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          generated_count?: number
+          id?: string
+          success?: boolean
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          generated_count?: number
+          id?: string
+          success?: boolean
+        }
+        Relationships: []
       }
       orders: {
         Row: {
