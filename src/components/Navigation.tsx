@@ -1,9 +1,8 @@
 
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, User, Menu, X, Bot } from "lucide-react";
+import { ShoppingCart, User, Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 
@@ -48,15 +47,6 @@ const Navigation = () => {
               }`}
             >
               Supplements
-            </Link>
-            <Link 
-              to="/ai-consultant" 
-              className={`text-sm font-medium transition-colors flex items-center space-x-1 ${
-                isActive('/ai-consultant') ? 'text-nature-600' : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <Bot className="h-4 w-4" />
-              <span>AI Consultant</span>
             </Link>
             <Link 
               to="/blog" 
@@ -154,16 +144,6 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Supplements
-              </Link>
-              <Link
-                to="/ai-consultant"
-                className={`block px-3 py-2 text-sm font-medium transition-colors flex items-center space-x-2 ${
-                  isActive('/ai-consultant') ? 'text-nature-600 bg-nature-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Bot className="h-4 w-4" />
-                <span>AI Consultant</span>
               </Link>
               <Link
                 to="/blog"
