@@ -1,8 +1,11 @@
 
 import InteractiveBackground from "@/components/InteractiveBackground";
 import AISupplementChat from "@/components/AISupplementChat";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const AIConsultant = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen">
       <InteractiveBackground />
@@ -12,12 +15,11 @@ const AIConsultant = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-              AI Supplement<br />
-              <span className="font-bold text-gray-700">Consultant</span>
+              {t('ai.title')}<br />
+              <span className="font-bold text-gray-700">{t('ai.subtitle')}</span>
             </h1>
             <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Get personalized supplement recommendations based on your health goals and needs. 
-              Our AI consultant will help you find the perfect products for your wellness journey.
+              {t('ai.description')}
             </p>
             
             <AISupplementChat />
