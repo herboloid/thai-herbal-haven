@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, User, BookOpen } from "lucide-react";
 import { blogPosts, BlogPost } from "@/utils/blogData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Blog = () => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   
   const categories = ["all", "detox", "anti-aging", "heart health", "eye health", "weight management", "immunity", "stress management", "digestive health"];
@@ -35,11 +37,10 @@ const Blog = () => {
               </div>
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Health & Wellness Blog
+              {t('blog.title')}
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Expert insights on healthy living, disease prevention, and natural wellness 
-              from nutritionists, doctors, and traditional medicine practitioners.
+              {t('blog.description')}
             </p>
           </div>
         </div>
@@ -57,7 +58,7 @@ const Blog = () => {
                 onClick={() => setSelectedCategory(category)}
                 className="rounded-full capitalize"
               >
-                {category}
+                {category === "all" ? t('blog.all') : category}
               </Button>
             ))}
           </div>
@@ -99,7 +100,7 @@ const Blog = () => {
                       </div>
                       <div className="flex items-center">
                         <Clock className="h-4 w-4 mr-1" />
-                        {post.readTime} min read
+                        {post.readTime} {t('blog.min_read')}
                       </div>
                     </div>
                   </div>
@@ -117,7 +118,7 @@ const Blog = () => {
                       </div>
                     </div>
                     <Button asChild variant="outline" size="sm" className="rounded-full">
-                      <Link to={`/blog/${post.slug}`}>Read More</Link>
+                      <Link to={`/blog/${post.slug}`}>{t('blog.read_more')}</Link>
                     </Button>
                   </div>
                 </CardContent>

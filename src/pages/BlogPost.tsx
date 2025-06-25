@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, ArrowLeft, User } from "lucide-react";
 import { getPostBySlug, getLatestPosts } from "@/utils/blogData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const BlogPost = () => {
+  const { t } = useLanguage();
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : null;
   const relatedPosts = getLatestPosts(3).filter(p => p.id !== post?.id);
@@ -14,10 +16,10 @@ const BlogPost = () => {
     return (
       <div className="min-h-screen bg-nature-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-          <p className="text-gray-600 mb-8">The blog post you're looking for doesn't exist.</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('blog.post_not_found')}</h1>
+          <p className="text-gray-600 mb-8">{t('blog.post_not_found_desc')}</p>
           <Button asChild>
-            <Link to="/blog">Back to Blog</Link>
+            <Link to="/blog">{t('blog.back_to_blog')}</Link>
           </Button>
         </div>
       </div>
@@ -40,7 +42,7 @@ const BlogPost = () => {
           <Button asChild variant="ghost" className="mb-6">
             <Link to="/blog" className="flex items-center space-x-2">
               <ArrowLeft className="h-4 w-4" />
-              <span>Back to Blog</span>
+              <span>{t('blog.back_to_blog')}</span>
             </Link>
           </Button>
         </div>
@@ -79,7 +81,7 @@ const BlogPost = () => {
                   </div>
                   <div className="flex items-center">
                     <Clock className="h-4 w-4 mr-2" />
-                    {post.readTime} min read
+                    {post.readTime} {t('blog.min_read')}
                   </div>
                 </div>
                 
@@ -114,7 +116,7 @@ const BlogPost = () => {
       {relatedPosts.length > 0 && (
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Related Articles</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t('blog.related_articles')}</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedPosts.map((relatedPost) => (
                 <Card key={relatedPost.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
@@ -133,7 +135,7 @@ const BlogPost = () => {
                       {relatedPost.excerpt}
                     </p>
                     <Button asChild variant="outline" size="sm" className="w-full rounded-full">
-                      <Link to={`/blog/${relatedPost.slug}`}>Read More</Link>
+                      <Link to={`/blog/${relatedPost.slug}`}>{t('blog.read_more')}</Link>
                     </Button>
                   </CardContent>
                 </Card>
