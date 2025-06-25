@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -50,10 +51,7 @@ const Products = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = filteredAndSortedProducts.slice(startIndex, startIndex + itemsPerPage);
 
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
-    e.preventDefault(); // Prevent navigation when clicking "Add to Cart"
-    e.stopPropagation();
-    
+  const handleAddToCart = (product: any) => {
     dispatch({
       type: 'ADD_ITEM',
       payload: {
@@ -171,86 +169,85 @@ const Products = () => {
             <>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {currentProducts.map((product) => (
-                  <Link 
-                    key={product.id} 
-                    to={`/product/${product.id}`}
-                    className="block"
-                  >
-                    <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden bg-white cursor-pointer h-full">
-                      <div className="relative overflow-hidden">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        {product.badge && (
-                          <div className="absolute top-2 left-2">
-                            <Badge variant="secondary" className="bg-nature-600 text-white">
-                              {product.badge}
-                            </Badge>
-                          </div>
-                        )}
-                        {product.discount && (
-                          <div className="absolute top-2 right-2">
-                            <Badge variant="destructive">
-                              -{product.discount}%
-                            </Badge>
-                          </div>
-                        )}
+                  <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden bg-white">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      {product.badge && (
+                        <div className="absolute top-2 left-2">
+                          <Badge variant="secondary" className="bg-nature-600 text-white">
+                            {product.badge}
+                          </Badge>
+                        </div>
+                      )}
+                      {product.discount && (
+                        <div className="absolute top-2 right-2">
+                          <Badge variant="destructive">
+                            -{product.discount}%
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-nature-700 transition-colors">
+                        {product.name}
+                      </h3>
+                      
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                        {product.description}
+                      </p>
+                      
+                      <div className="flex items-center mb-3">
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 ${
+                                i < Math.floor(product.rating || 0)
+                                  ? "text-yellow-400 fill-current"
+                                  : "text-gray-300"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-500 ml-2">
+                          ({product.reviewCount} {t('products.reviews')})
+                        </span>
                       </div>
-                      <CardContent className="p-4 flex flex-col h-full">
-                        <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-nature-700 transition-colors">
-                          {product.name}
-                        </h3>
-                        
-                        <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-grow">
-                          {product.description}
-                        </p>
-                        
-                        <div className="flex items-center mb-3">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-4 w-4 ${
-                                  i < Math.floor(product.rating || 0)
-                                    ? "text-yellow-400 fill-current"
-                                    : "text-gray-300"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-sm text-gray-500 ml-2">
-                            ({product.reviewCount} {t('products.reviews')})
+                      
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-2xl font-bold text-nature-600">
+                            ฿{product.price.toLocaleString()}
                           </span>
-                        </div>
-                        
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-2xl font-bold text-nature-600">
-                              ฿{product.price.toLocaleString()}
+                          {product.originalPrice && (
+                            <span className="text-sm text-gray-500 line-through">
+                              ฿{product.originalPrice.toLocaleString()}
                             </span>
-                            {product.originalPrice && (
-                              <span className="text-sm text-gray-500 line-through">
-                                ฿{product.originalPrice.toLocaleString()}
-                              </span>
-                            )}
-                          </div>
+                          )}
                         </div>
-                        
-                        <div className="mt-auto">
-                          <Button
-                            onClick={(e) => handleAddToCart(e, product)}
-                            className="w-full bg-nature-600 hover:bg-nature-700 text-white"
-                            size="sm"
-                          >
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            {t('products.add_to_cart')}
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                      </div>
+                      
+                      <div className="flex flex-col space-y-2">
+                        <Button
+                          onClick={() => handleAddToCart(product)}
+                          className="w-full bg-nature-600 hover:bg-nature-700 text-white"
+                          size="sm"
+                        >
+                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          {t('products.add_to_cart')}
+                        </Button>
+                        <Button asChild variant="outline" size="sm" className="w-full">
+                          <Link to={`/product/${product.id}`}>
+                            {t('products.view_details')}
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
 
