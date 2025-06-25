@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, User, Menu, X, Bot, Languages } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { ShoppingCart, User, Menu, X, Bot } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -18,8 +19,8 @@ const Navigation = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'th' : 'en');
+  const handleLanguageToggle = (checked: boolean) => {
+    setLanguage(checked ? 'th' : 'en');
   };
 
   return (
@@ -92,18 +93,15 @@ const Navigation = () => {
           {/* Right side - Language switcher, Cart and User */}
           <div className="flex items-center space-x-4">
             {/* Language Switcher */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleLanguage}
-              className="flex items-center space-x-1"
-              title={`Switch to ${language === 'en' ? 'Thai' : 'English'}`}
-            >
-              <Languages className="h-5 w-5" />
-              <span className="text-xs font-medium hidden sm:inline">
-                {language === 'en' ? 'TH' : 'EN'}
-              </span>
-            </Button>
+            <div className="flex items-center space-x-2">
+              <span className="text-sm font-medium text-gray-600">EN</span>
+              <Switch
+                checked={language === 'th'}
+                onCheckedChange={handleLanguageToggle}
+                className="data-[state=checked]:bg-nature-600"
+              />
+              <span className="text-sm font-medium text-gray-600">TH</span>
+            </div>
 
             <Link to="/cart" className="relative">
               <Button variant="ghost" size="icon">
@@ -211,6 +209,17 @@ const Navigation = () => {
               >
                 {t('nav.about')}
               </Link>
+
+              {/* Mobile Language Switcher */}
+              <div className="flex items-center justify-center space-x-2 px-3 py-2">
+                <span className="text-sm font-medium text-gray-600">EN</span>
+                <Switch
+                  checked={language === 'th'}
+                  onCheckedChange={handleLanguageToggle}
+                  className="data-[state=checked]:bg-nature-600"
+                />
+                <span className="text-sm font-medium text-gray-600">TH</span>
+              </div>
 
               {user ? (
                 <div className="border-t pt-2">
