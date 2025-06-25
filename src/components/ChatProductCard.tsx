@@ -17,7 +17,7 @@ interface Product {
   reviewCount?: number;
   badge?: string;
   description: string;
-  inStock?: boolean;
+  inStock?: boolean | number;
 }
 
 interface ChatProductCardProps {
@@ -29,8 +29,10 @@ const ChatProductCard = ({ product, onViewProduct }: ChatProductCardProps) => {
   const { t } = useLanguage();
   const { dispatch } = useCart();
 
+  const isInStock = typeof product.inStock === 'boolean' ? product.inStock : (product.inStock || 0) > 0;
+
   const handleAddToCart = () => {
-    if (!product.inStock) {
+    if (!isInStock) {
       toast.error(t('chat.out_of_stock'));
       return;
     }
@@ -83,15 +85,15 @@ const ChatProductCard = ({ product, onViewProduct }: ChatProductCardProps) => {
           )}
         </div>
         <div className="absolute top-2 right-2">
-          {product.inStock === false ? (
+          {!isInStock ? (
             <Badge variant="secondary" className="bg-red-100 text-red-800 text-xs">
               {t('chat.out_of_stock')}
             </Badge>
-          ) : product.inStock === true ? (
+          ) : (
             <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
               {t('chat.in_stock')}
             </Badge>
-          ) : null}
+          )}
         </div>
       </div>
       
@@ -156,7 +158,7 @@ const ChatProductCard = ({ product, onViewProduct }: ChatProductCardProps) => {
           </Button>
           <Button
             onClick={handleAddToCart}
-            disabled={product.inStock === false}
+            disabled={!isInStock}
             size="sm"
             className="flex-1 bg-nature-600 hover:bg-nature-700 text-white"
           >

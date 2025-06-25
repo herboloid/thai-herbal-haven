@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -135,8 +136,8 @@ const AISupplementChat = () => {
     if (products.length === 1) {
       const product = products[0];
       return language === 'th' ? 
-        `ตัวเลือกที่ยอดเยี่ยม! ${product.name} คือสิ่งที่คุณต้องการ ผลิตภัณฑ์นี้มีคะแนน ${product.rating} ดาว พร้อมรีวิวเชิงบวก ${product.reviews} รายการ ${product.inStock <= 5 ? `⚠️ ความสนใจ: เหลือเพียง ${product.inStock} หน่วยในสต็อก!` : ''}` :
-        `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviews} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
+        `ตัวเลือกที่ยอดเยี่ยม! ${product.name} คือสิ่งที่คุณต้องการ ผลิตภัณฑ์นี้มีคะแนน ${product.rating} ดาว พร้อมรีวิวเชิงบวก ${product.reviewCount} รายการ ${product.inStock <= 5 ? `⚠️ ความสนใจ: เหลือเพียง ${product.inStock} หน่วยในสต็อก!` : ''}` :
+        `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviewCount} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
     }
 
     if (products.length === 2) {
@@ -261,7 +262,7 @@ const AISupplementChat = () => {
     }
   };
 
-  const handleAddToCart = (productId: number) => {
+  const handleAddToCart = (productId: string) => {
     const product = allProducts.find(p => p.id === productId);
     if (product) {
       const successMessage: Message = {
@@ -352,20 +353,11 @@ const AISupplementChat = () => {
                           {message.products.map((product, index) => (
                             <ChatProductCard
                               key={product.id}
-                              product={product}
-                              reason={
-                                product.keywords.some(k => ["vision", "eyes"].includes(k)) ? 
-                                (language === 'th' ? "เฉพาะสำหรับสุขภาพดวงตา" : "Specifically for eye health") :
-                                product.keywords.some(k => ["weight loss", "weight"].includes(k)) ? 
-                                (language === 'th' ? "การเผาผลาญไขมันที่มีประสิทธิภาพ" : "Effective fat burning") :
-                                product.keywords.some(k => ["anti-aging", "skin"].includes(k)) ? 
-                                (language === 'th' ? "การดูแลต้านริ้วรอยและความงามของผิว" : "Anti-aging care and skin beauty") :
-                                product.keywords.includes("detox") ? 
-                                (language === 'th' ? "การล้างพิษร่างกายอย่างลึกซึ้ง" : "Deep body detox") : 
-                                (language === 'th' ? "แนะนำสำหรับความต้องการของคุณ" : "Recommended for your needs")
-                              }
-                              onAddToCart={handleAddToCart}
-                              showCombo={message.showCombo && index > 0}
+                              product={{
+                                ...product,
+                                inStock: product.inStock > 0
+                              }}
+                              onViewProduct={(productId: string) => navigate(`/product/${productId}`)}
                             />
                           ))}
                         </div>
