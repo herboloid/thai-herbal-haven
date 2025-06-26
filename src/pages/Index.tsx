@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
@@ -15,39 +16,44 @@ const Index = () => {
 
   const categories = [
     {
-      id: "beauty",
+      id: "beauty-supplement",
       name: t('categories.beauty'),
       image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
       description: t('categories.beautyDesc'),
-      icon: Sparkles
+      icon: Sparkles,
+      productCount: 3
     },
     {
-      id: "weight",
+      id: "weight-loss",
       name: t('categories.weight'),
       image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
       description: t('categories.weightDesc'),
-      icon: Zap
+      icon: Zap,
+      productCount: 2
     },
     {
-      id: "vision",
+      id: "eye-health",
       name: t('categories.vision'),
       image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       description: t('categories.visionDesc'),
-      icon: Eye
+      icon: Eye,
+      productCount: 2
     },
     {
-      id: "heart",
+      id: "heart-health",
       name: t('categories.heart'),
       image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       description: t('categories.heartDesc'),
-      icon: Heart
+      icon: Heart,
+      productCount: 1
     },
     {
-      id: "detox",
+      id: "detox-health",
       name: t('categories.detox'),
       image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png", 
       description: t('categories.detoxDesc'),
-      icon: Leaf
+      icon: Leaf,
+      productCount: 2
     }
   ];
 
@@ -155,7 +161,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories Grid with updated styling */}
+      {/* Enhanced Categories Grid */}
       <section className="py-16 bg-white relative z-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -168,44 +174,75 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => {
               const Icon = category.icon;
+              const colors = getCategoryColors(category.id);
               
               return (
-                <Card key={category.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-none shadow-sm overflow-hidden h-full">
-                  <div className="relative">
-                    <img
-                      src={category.image}
-                      alt={category.name}
-                      className="w-full h-56 object-contain bg-white p-3 group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-4 left-4">
-                      <div className="w-10 h-10 bg-nature-100 rounded-full flex items-center justify-center shadow-lg border-2 border-white/50">
-                        <Icon className="h-5 w-5 text-nature-600" />
+                <Link 
+                  key={category.id} 
+                  to={`/products?category=${category.id}`}
+                  className="block group"
+                >
+                  <Card className={`h-full hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-none shadow-lg overflow-hidden bg-gradient-to-br from-white to-gray-50/50 ${colors.hover} cursor-pointer relative`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative">
+                      <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white">
+                        <img
+                          src={category.image}
+                          alt={category.name}
+                          className="w-full h-64 object-contain p-6 group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        {/* Top badges */}
+                        <div className="absolute top-4 left-4">
+                          <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 group-hover:scale-110 transition-transform duration-300`}>
+                            <Icon className={`h-6 w-6 ${colors.icon}`} />
+                          </div>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4">
+                          <Badge className={`${colors.bg} ${colors.text} shadow-lg border border-white/20`}>
+                            {category.productCount} products
+                          </Badge>
+                        </div>
+                        
+                        {/* Bottom arrow - appears on hover */}
+                        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                          <div className={`w-10 h-10 ${colors.bg} rounded-full flex items-center justify-center shadow-lg border border-white/20`}>
+                            <ArrowRight className={`h-5 w-5 ${colors.icon}`} />
+                          </div>
+                        </div>
                       </div>
+                      
+                      <CardContent className="p-6 relative">
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className={`font-bold text-lg text-gray-900 group-hover:${colors.text} transition-colors duration-300 leading-tight`}>
+                            {category.name}
+                          </h3>
+                        </div>
+                        
+                        <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                          {category.description}
+                        </p>
+                        
+                        {/* Call to action */}
+                        <div className="flex items-center justify-between">
+                          <span className={`text-sm font-medium ${colors.text} opacity-80 group-hover:opacity-100 transition-opacity duration-300`}>
+                            Explore products
+                          </span>
+                          <div className="flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="text-xs text-gray-500">View all</span>
+                            <ArrowRight className="h-3 w-3 text-gray-400 group-hover:translate-x-0.5 transition-transform duration-300" />
+                          </div>
+                        </div>
+                        
+                        {/* Subtle gradient overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-t from-${colors.bg.split('-')[1]}-50/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg`} />
+                      </CardContent>
                     </div>
-                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button variant="ghost" size="icon" className="bg-white/90 hover:bg-white rounded-full h-8 w-8 shadow-lg">
-                        <span className="text-sm">→</span>
-                      </Button>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="font-bold text-gray-900 mb-2 group-hover:text-nature-700 transition-colors">
-                      {category.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
-                      {category.description}
-                    </p>
-                    <Button 
-                      asChild
-                      variant="outline" 
-                      size="sm"
-                      className="rounded-full border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
-                    >
-                      <Link to="/products">{t('categories.viewButton')}</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
+                  </Card>
+                </Link>
               );
             })}
           </div>
