@@ -10,10 +10,12 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="flex items-center justify-center w-8 h-8 bg-nature-500 rounded-full">
-                <Leaf className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-semibold text-lg text-nature-700">NaturalHealth</span>
+              <img 
+                src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
+                alt="SIAM HEALTHY" 
+                className="w-8 h-8 object-contain"
+              />
+              <span className="font-semibold text-lg text-nature-700">SIAM HEALTHY</span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
               Leading provider of high-quality natural dietary supplements for better health for you and your family
@@ -60,7 +62,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
                 <Mail className="h-4 w-4" />
-                <span>info@naturalhealth.com</span>
+                <span>info@siamhealthy.com</span>
               </div>
               <div className="flex items-start space-x-2 text-gray-600">
                 <MapPin className="h-4 w-4 mt-0.5" />
@@ -71,7 +73,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-200 mt-8 pt-6 text-center text-sm text-gray-500">
-          <p>&copy; 2024 NaturalHealth. All rights reserved</p>
+          <p>&copy; 2024 SIAM HEALTHY. All rights reserved</p>
         </div>
       </div>
     </footer>
