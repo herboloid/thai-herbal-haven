@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,12 +9,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Star, Search, Sparkles, Scale, Eye, Heart, Leaf, Zap, Shield, Brain, Users, Activity, Ear } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { getCategoryColors } from "@/utils/categoryColors";
+import { getCategoryBackground } from "@/utils/categoryBackgrounds";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
   const [sortBy, setSortBy] = useState("popular");
-  const [filterCategory, setFilterCategory] = useState(searchParams.get("category") || "all");
+  const [filterCategory, setFilterCategory] = useState("all");
   const { addItem } = useCart();
 
   // Update search term and category when URL params change
@@ -270,10 +270,20 @@ const Products = () => {
     });
   };
 
+  const backgroundImage = getCategoryBackground(filterCategory);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div 
+      className="min-h-screen transition-all duration-500 ease-in-out"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       {/* Header */}
-      <section className="bg-white border-b">
+      <section className="bg-white/90 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {searchTerm ? `Search Results for "${searchTerm}"` : "All Products"}
@@ -283,7 +293,7 @@ const Products = () => {
       </section>
 
       {/* Search and Sort */}
-      <section className="bg-white border-b">
+      <section className="bg-white/90 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative flex-1 max-w-md">
@@ -312,7 +322,7 @@ const Products = () => {
       </section>
 
       {/* Category Tabs */}
-      <section className="bg-white border-b">
+      <section className="bg-white/90 backdrop-blur-sm border-b">
         <div className="container mx-auto px-4 py-4">
           <Tabs value={filterCategory} onValueChange={(value) => {
             setFilterCategory(value);
@@ -357,7 +367,7 @@ const Products = () => {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="mb-6">
-            <p className="text-gray-600">
+            <p className="text-white">
               Showing {sortedProducts.length} of {products.length} products
               {searchTerm && ` for "${searchTerm}"`}
             </p>
@@ -366,7 +376,7 @@ const Products = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sortedProducts.map((product) => (
               <Link key={product.id} to={`/product/${product.id}`} className="block">
-                <Card className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white cursor-pointer">
+                <Card className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white/95 backdrop-blur-sm cursor-pointer">
                   <div className="relative overflow-hidden">
                     <img
                       src={product.image}
@@ -425,7 +435,7 @@ const Products = () => {
 
           {sortedProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
+              <p className="text-white text-lg">
                 {searchTerm 
                   ? `No products found for "${searchTerm}"`
                   : "No products found matching your filters"
@@ -433,7 +443,7 @@ const Products = () => {
               </p>
               <Button 
                 variant="outline" 
-                className="mt-4"
+                className="mt-4 bg-white/90 backdrop-blur-sm"
                 onClick={() => {
                   setSearchTerm("");
                   setFilterCategory("all");
