@@ -28,6 +28,18 @@
     "heartDesc": "Blood pressure and cardiovascular system support",
     "detox": "Detox and Cleansing",
     "detoxDesc": "Body cleansing and toxin removal",
+    "digestive": "Digestive Health",
+    "digestiveDesc": "Support for healthy digestion and gut health",
+    "skin": "Skin Health",
+    "skinDesc": "Skin care and dermatological support",
+    "hearing": "Hearing Health",
+    "hearingDesc": "Auditory support and hearing protection",
+    "mens": "Men's Health",
+    "mensDesc": "Specialized health support for men",
+    "prostate": "Prostate Health",
+    "prostateDesc": "Prostate care and urinary health",
+    "boneJoint": "Bone & Joint Health",
+    "boneJointDesc": "Bone strength and joint mobility support",
     "viewButton": "View"
   },
   "products": {

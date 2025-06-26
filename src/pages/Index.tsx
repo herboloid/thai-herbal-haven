@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight } from "lucide-react";
+import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight, Scale, Activity, Shield, Users } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
@@ -16,44 +16,81 @@ const Index = () => {
 
   const categories = [
     {
-      id: "beauty-supplement",
+      id: "beauty",
       name: t('categories.beauty'),
-      image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
       description: t('categories.beautyDesc'),
       icon: Sparkles,
       productCount: 3
     },
     {
-      id: "weight-loss",
+      id: "weight",
       name: t('categories.weight'),
-      image: "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
       description: t('categories.weightDesc'),
-      icon: Zap,
+      icon: Scale,
       productCount: 2
     },
     {
-      id: "eye-health",
+      id: "vision",
       name: t('categories.vision'),
-      image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
       description: t('categories.visionDesc'),
       icon: Eye,
       productCount: 2
     },
     {
-      id: "heart-health",
+      id: "heart",
       name: t('categories.heart'),
-      image: "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png",
       description: t('categories.heartDesc'),
       icon: Heart,
       productCount: 1
     },
     {
-      id: "detox-health",
+      id: "detox",
       name: t('categories.detox'),
-      image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png", 
       description: t('categories.detoxDesc'),
       icon: Leaf,
       productCount: 2
+    },
+    {
+      id: "digestive-health",
+      name: t('categories.digestive'),
+      description: t('categories.digestiveDesc'),
+      icon: Activity,
+      productCount: 1
+    },
+    {
+      id: "skin-health",
+      name: t('categories.skin'),
+      description: t('categories.skinDesc'),
+      icon: Sparkles,
+      productCount: 1
+    },
+    {
+      id: "hearing-health",
+      name: t('categories.hearing'),
+      description: t('categories.hearingDesc'),
+      icon: Activity,
+      productCount: 1
+    },
+    {
+      id: "mens-health",
+      name: t('categories.mens'),
+      description: t('categories.mensDesc'),
+      icon: Users,
+      productCount: 1
+    },
+    {
+      id: "prostate-health",
+      name: t('categories.prostate'),
+      description: t('categories.prostateDesc'),
+      icon: Shield,
+      productCount: 1
+    },
+    {
+      id: "bone-joint",
+      name: t('categories.boneJoint'),
+      description: t('categories.boneJointDesc'),
+      icon: Activity,
+      productCount: 1
     }
   ];
 
@@ -171,7 +208,7 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category) => {
               const Icon = category.icon;
               const colors = getCategoryColors(category.id);
@@ -186,21 +223,14 @@ const Index = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <div className="relative">
-                      <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-                        <img
-                          src={category.image}
-                          alt={category.name}
-                          className="w-full h-64 object-contain p-6 group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
-                        {/* Top badges */}
-                        <div className="absolute top-4 left-4">
-                          <div className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 group-hover:scale-110 transition-transform duration-300`}>
-                            <Icon className={`h-6 w-6 ${colors.icon}`} />
-                          </div>
+                      <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white h-48 flex items-center justify-center">
+                        <div className={`w-20 h-20 ${colors.bg} rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 group-hover:scale-110 transition-transform duration-300`}>
+                          <Icon className={`h-10 w-10 ${colors.icon}`} />
                         </div>
                         
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        {/* Top badge */}
                         <div className="absolute top-4 right-4">
                           <Badge className={`${colors.bg} ${colors.text} shadow-lg border border-white/20`}>
                             {category.productCount} products
