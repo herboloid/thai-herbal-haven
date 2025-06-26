@@ -1,10 +1,11 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight, Scale, Activity, Shield, Users } from "lucide-react";
+import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight, Scale, Activity, Shield, Users, Ear } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
@@ -16,35 +17,35 @@ const Index = () => {
 
   const categories = [
     {
-      id: "beauty",
+      id: "beauty-supplement",
       name: t('categories.beauty'),
       description: t('categories.beautyDesc'),
       icon: Sparkles,
       productCount: 3
     },
     {
-      id: "weight",
+      id: "weight-loss",
       name: t('categories.weight'),
       description: t('categories.weightDesc'),
       icon: Scale,
       productCount: 2
     },
     {
-      id: "vision",
+      id: "eye-health",
       name: t('categories.vision'),
       description: t('categories.visionDesc'),
       icon: Eye,
       productCount: 2
     },
     {
-      id: "heart",
+      id: "heart-health",
       name: t('categories.heart'),
       description: t('categories.heartDesc'),
       icon: Heart,
       productCount: 1
     },
     {
-      id: "detox",
+      id: "detox-health",
       name: t('categories.detox'),
       description: t('categories.detoxDesc'),
       icon: Leaf,
@@ -68,8 +69,8 @@ const Index = () => {
       id: "hearing-health",
       name: t('categories.hearing'),
       description: t('categories.hearingDesc'),
-      icon: Activity,
-      productCount: 1
+      icon: Ear,
+      productCount: 2
     },
     {
       id: "mens-health",
@@ -83,7 +84,7 @@ const Index = () => {
       name: t('categories.prostate'),
       description: t('categories.prostateDesc'),
       icon: Shield,
-      productCount: 1
+      productCount: 2
     },
     {
       id: "bone-joint",
@@ -104,7 +105,7 @@ const Index = () => {
       rating: 4.9,
       reviews: 156,
       badge: "🌟 New",
-      category: "detox"
+      category: "detox-health"
     },
     {
       id: 21,
@@ -115,7 +116,7 @@ const Index = () => {
       rating: 4.9,
       reviews: 198,
       badge: "🌟 New",
-      category: "beauty"
+      category: "beauty-supplement"
     },
     {
       id: 20,
@@ -126,7 +127,7 @@ const Index = () => {
       rating: 4.9,
       reviews: 167,
       badge: "🌟 New",
-      category: "vision"
+      category: "eye-health"
     },
     {
       id: 19,
@@ -137,7 +138,7 @@ const Index = () => {
       rating: 4.8,
       reviews: 175,
       badge: "🌟 New",
-      category: "weight"
+      category: "weight-loss"
     },
     {
       id: 18,
@@ -148,7 +149,7 @@ const Index = () => {
       rating: 4.9,
       reviews: 143,
       badge: "🌟 New",
-      category: "vision"
+      category: "eye-health"
     }
   ];
 

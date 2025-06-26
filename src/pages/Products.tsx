@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,13 +15,15 @@ const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
   const [sortBy, setSortBy] = useState("popular");
-  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterCategory, setFilterCategory] = useState(searchParams.get("category") || "all");
   const { addItem } = useCart();
 
-  // Update search term when URL params change
+  // Update search term and category when URL params change
   useEffect(() => {
     const searchFromUrl = searchParams.get("search") || "";
+    const categoryFromUrl = searchParams.get("category") || "all";
     setSearchTerm(searchFromUrl);
+    setFilterCategory(categoryFromUrl);
   }, [searchParams]);
 
   const handleSearchChange = (value: string) => {
@@ -311,7 +314,16 @@ const Products = () => {
       {/* Category Tabs */}
       <section className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
-          <Tabs value={filterCategory} onValueChange={setFilterCategory} className="w-full">
+          <Tabs value={filterCategory} onValueChange={(value) => {
+            setFilterCategory(value);
+            const newSearchParams = new URLSearchParams(searchParams);
+            if (value !== "all") {
+              newSearchParams.set("category", value);
+            } else {
+              newSearchParams.delete("category");
+            }
+            setSearchParams(newSearchParams);
+          }} className="w-full">
             <TabsList className="w-full justify-start overflow-x-auto bg-transparent p-0 h-auto">
               {categoriesWithCounts.map((category) => {
                 const colors = getCategoryColors(category.value);
