@@ -271,19 +271,22 @@ const Products = () => {
   };
 
   const backgroundImage = getCategoryBackground(filterCategory);
+  const isGradientBackground = backgroundImage.startsWith('linear-gradient');
 
   return (
     <div 
       className="min-h-screen transition-all duration-500 ease-in-out"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        background: isGradientBackground 
+          ? backgroundImage
+          : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
+        backgroundSize: isGradientBackground ? 'auto' : 'cover',
+        backgroundPosition: isGradientBackground ? 'center' : 'center',
+        backgroundAttachment: isGradientBackground ? 'scroll' : 'fixed'
       }}
     >
       {/* Header */}
-      <section className="bg-white/90 backdrop-blur-sm border-b">
+      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b`}>
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {searchTerm ? `Search Results for "${searchTerm}"` : "All Products"}
@@ -293,7 +296,7 @@ const Products = () => {
       </section>
 
       {/* Search and Sort */}
-      <section className="bg-white/90 backdrop-blur-sm border-b">
+      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b`}>
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative flex-1 max-w-md">
@@ -322,7 +325,7 @@ const Products = () => {
       </section>
 
       {/* Category Tabs */}
-      <section className="bg-white/90 backdrop-blur-sm border-b">
+      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b`}>
         <div className="container mx-auto px-4 py-4">
           <Tabs value={filterCategory} onValueChange={(value) => {
             setFilterCategory(value);
@@ -367,7 +370,7 @@ const Products = () => {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="mb-6">
-            <p className="text-white">
+            <p className={`${isGradientBackground ? 'text-gray-700' : 'text-white'}`}>
               Showing {sortedProducts.length} of {products.length} products
               {searchTerm && ` for "${searchTerm}"`}
             </p>

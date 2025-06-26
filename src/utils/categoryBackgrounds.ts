@@ -1,4 +1,5 @@
 
+
 export const getCategoryBackground = (category: string): string => {
   const backgrounds: Record<string, string> = {
     'heart-health': '/lovable-uploads/c5188663-7bff-4949-8cb4-4120057bc552.png',
@@ -12,8 +13,9 @@ export const getCategoryBackground = (category: string): string => {
     'mens-health': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1920&q=80',
     'prostate-health': 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?auto=format&fit=crop&w=1920&q=80',
     'bone-joint': 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&q=80',
-    'all': 'https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=1920&q=80'
+    'all': 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #f0fdf4 50%, #fef3c7 75%, #fce7f3 100%)'
   };
 
   return backgrounds[category] || backgrounds['all'];
 };
+
