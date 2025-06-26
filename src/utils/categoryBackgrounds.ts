@@ -1,9 +1,8 @@
 
-
 export const getCategoryBackground = (category: string): string => {
   const backgrounds: Record<string, string> = {
     'heart-health': '/lovable-uploads/c5188663-7bff-4949-8cb4-4120057bc552.png',
-    'beauty-supplement': 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=1920&q=80',
+    'beauty-supplement': '/lovable-uploads/5763807c-0502-4b5a-9e3d-13dff779cc79.png',
     'weight-loss': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1920&q=80',
     'eye-health': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1920&q=80',
     'detox-health': 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80',
@@ -18,4 +17,3 @@ export const getCategoryBackground = (category: string): string => {
 
   return backgrounds[category] || backgrounds['all'];
 };
-
