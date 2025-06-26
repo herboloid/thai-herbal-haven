@@ -10,6 +10,7 @@ import { Star, Search, Sparkles, Scale, Eye, Heart, Leaf, Zap, Shield, Brain, Us
 import { useCart } from "@/contexts/CartContext";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getCategoryBackground } from "@/utils/categoryBackgrounds";
+import InteractiveBackground from "@/components/InteractiveBackground";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -275,7 +276,7 @@ const Products = () => {
 
   return (
     <div 
-      className="min-h-screen transition-all duration-500 ease-in-out"
+      className="min-h-screen transition-all duration-500 ease-in-out relative"
       style={{
         background: isGradientBackground 
           ? backgroundImage
@@ -285,8 +286,15 @@ const Products = () => {
         backgroundAttachment: isGradientBackground ? 'scroll' : 'fixed'
       }}
     >
+      {/* Interactive Background for "All Categories" */}
+      {filterCategory === 'all' && (
+        <div className="absolute inset-0 z-0">
+          <InteractiveBackground />
+        </div>
+      )}
+
       {/* Header */}
-      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b`}>
+      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b relative z-10`}>
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {searchTerm ? `Search Results for "${searchTerm}"` : "All Products"}
@@ -296,7 +304,7 @@ const Products = () => {
       </section>
 
       {/* Search and Sort */}
-      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b`}>
+      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b relative z-10`}>
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative flex-1 max-w-md">
@@ -325,7 +333,7 @@ const Products = () => {
       </section>
 
       {/* Category Tabs */}
-      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b`}>
+      <section className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b relative z-10`}>
         <div className="container mx-auto px-4 py-4">
           <Tabs value={filterCategory} onValueChange={(value) => {
             setFilterCategory(value);
@@ -367,7 +375,7 @@ const Products = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="py-8">
+      <section className="py-8 relative z-10">
         <div className="container mx-auto px-4">
           <div className="mb-6">
             <p className={`${isGradientBackground ? 'text-gray-700' : 'text-white'}`}>
