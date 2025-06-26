@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -176,7 +177,7 @@ const Index = () => {
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-48 object-contain bg-white p-4 group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-56 object-contain bg-white p-3 group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute top-4 left-4">
@@ -235,7 +236,7 @@ const Index = () => {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-56 object-contain bg-white p-3 transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute top-3 right-3 flex flex-col gap-1">
                       {discount > 0 && (
