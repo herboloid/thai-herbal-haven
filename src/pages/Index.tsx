@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -132,7 +131,6 @@ const Index = () => {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            {/* Updated brand logo in hero with new leaf icon */}
             <div className="flex justify-center mb-8">
               <img 
                 src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
@@ -231,63 +229,63 @@ const Index = () => {
                 Math.round((1 - parseFloat(product.price.replace('฿', '')) / parseFloat(product.originalPrice.replace('฿', ''))) * 100) : 0;
               
               return (
-                <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-none shadow-sm overflow-hidden bg-white">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-56 object-contain bg-white p-3 transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 right-3 flex flex-col gap-1">
-                      {discount > 0 && (
-                        <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">
-                          -{discount}%
-                        </span>
-                      )}
-                      <div className="bg-nature-100 text-nature-700 px-2 py-1 rounded-full text-xs font-medium shadow-lg border border-nature-200">
-                        {product.category === 'beauty' ? '💄' : 
-                         product.category === 'weight' ? '⚡' : 
-                         product.category === 'vision' ? '👁️' : 
-                         product.category === 'detox' ? '🌿' : '💊'}
-                      </div>
-                    </div>
-                    <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button variant="ghost" size="icon" className="bg-white/90 hover:bg-white rounded-full h-8 w-8 shadow-lg">
-                        <span className="text-sm">→</span>
-                      </Button>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-sm leading-tight">{product.name}</h3>
-                    
-                    <div className="flex items-center mb-3">
-                      <div className="flex items-center">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm text-gray-600 ml-1 font-medium">{product.rating}</span>
-                        <span className="text-xs text-gray-400 ml-1">({product.reviews})</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <span className="font-bold text-gray-900">{product.price}</span>
-                        {product.originalPrice && (
-                          <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
+                <Link key={product.id} to={`/product/${product.id}`} className="block">
+                  <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-none shadow-sm overflow-hidden bg-white cursor-pointer">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-56 object-contain bg-white p-3 transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 right-3 flex flex-col gap-1">
+                        {discount > 0 && (
+                          <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">
+                            -{discount}%
+                          </span>
                         )}
+                        <div className="bg-nature-100 text-nature-700 px-2 py-1 rounded-full text-xs font-medium shadow-lg border border-nature-200">
+                          {product.category === 'beauty' ? '💄' : 
+                           product.category === 'weight' ? '⚡' : 
+                           product.category === 'vision' ? '👁️' : 
+                           product.category === 'detox' ? '🌿' : '💊'}
+                        </div>
                       </div>
-                      <Button 
-                        asChild
-                        variant="outline" 
-                        size="sm"
-                        className="rounded-full text-xs border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
-                      >
-                        <Link to={`/product/${product.id}`}>
-                          Buy
-                        </Link>
-                      </Button>
+                      <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <Button variant="ghost" size="icon" className="bg-white/90 hover:bg-white rounded-full h-8 w-8 shadow-lg">
+                          <span className="text-sm">→</span>
+                        </Button>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+                    <CardContent className="p-4">
+                      <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-sm leading-tight">{product.name}</h3>
+                      
+                      <div className="flex items-center mb-3">
+                        <div className="flex items-center">
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm text-gray-600 ml-1 font-medium">{product.rating}</span>
+                          <span className="text-xs text-gray-400 ml-1">({product.reviews})</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-bold text-gray-900">{product.price}</span>
+                          {product.originalPrice && (
+                            <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
+                          )}
+                        </div>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="rounded-full text-xs border-nature-300 text-nature-700 hover:bg-nature-100 hover:text-nature-800 transition-all hover:scale-105"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Buy
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               );
             })}
           </div>

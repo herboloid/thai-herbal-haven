@@ -353,53 +353,61 @@ const Products = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sortedProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
-                  />
-                  {product.badge && (
-                    <Badge className="absolute top-2 left-2 bg-nature-600 text-white">
-                      {product.badge}
-                    </Badge>
-                  )}
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                  
-                  <div className="flex items-center mb-3">
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
-                      <span className="text-sm text-gray-400 ml-1">({product.reviews})</span>
+              <Link key={product.id} to={`/product/${product.id}`} className="block">
+                <Card className="group hover:shadow-lg transition-shadow border-none overflow-hidden bg-white cursor-pointer">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
+                    />
+                    {product.badge && (
+                      <Badge className="absolute top-2 left-2 bg-nature-600 text-white">
+                        {product.badge}
+                      </Badge>
+                    )}
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
+                    
+                    <div className="flex items-center mb-3">
+                      <div className="flex items-center">
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
+                        <span className="text-sm text-gray-400 ml-1">({product.reviews})</span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-bold text-nature-600 text-lg">{product.price}</span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
-                      )}
+                    
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-2">
+                        <span className="font-bold text-nature-600 text-lg">{product.price}</span>
+                        {product.originalPrice && (
+                          <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="flex flex-col gap-2">
-                    <Button asChild className="w-full bg-nature-600 hover:bg-nature-700">
-                      <Link to={`/product/${product.id}`}>View Details</Link>
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => handleAddToCart(product)}
-                    >
-                      Add to Cart
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                    
+                    <div className="flex flex-col gap-2">
+                      <Button 
+                        className="w-full bg-nature-600 hover:bg-nature-700"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        View Details
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAddToCart(product);
+                        }}
+                      >
+                        Add to Cart
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 
