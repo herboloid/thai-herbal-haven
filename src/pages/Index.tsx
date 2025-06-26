@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -178,13 +177,13 @@ const Index = () => {
             <div className="flex justify-center mb-8">
               <img 
                 src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
-                alt="SIAM HEALTHY" 
+                alt="iHealth" 
                 className="w-60 h-60 object-contain"
               />
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              <span className="font-bold text-white drop-shadow-lg">{t('hero.title')}</span><br />
+              <span className="font-bold text-white drop-shadow-lg">iHealth</span><br />
               {t('hero.subtitle')}
             </h1>
             
