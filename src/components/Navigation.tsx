@@ -26,10 +26,10 @@ const Navigation = () => {
           <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
-              alt="SIAM HEALTHY" 
+              alt="iHealth" 
               className="w-10 h-10 object-contain"
             />
-            <span className="font-bold text-xl text-gray-900">SIAM HEALTHY</span>
+            <span className="font-bold text-xl text-gray-900">iHealth</span>
           </Link>
 
           {/* Desktop Navigation */}

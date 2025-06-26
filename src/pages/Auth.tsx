@@ -37,7 +37,7 @@ const Auth = () => {
         <SignedOut>
           <div className="max-w-md w-full">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-green-700">Siam Healthy</h1>
+              <h1 className="text-3xl font-bold text-green-700">iHealth</h1>
               <p className="text-green-600 mt-2">Personal Account</p>
             </div>
 

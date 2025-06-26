@@ -12,10 +12,10 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               <img 
                 src="/lovable-uploads/c1722a12-adf6-4917-b555-5bb7eb9d8656.png" 
-                alt="SIAM HEALTHY" 
+                alt="iHealth" 
                 className="w-8 h-8 object-contain"
               />
-              <span className="font-semibold text-lg text-nature-700">SIAM HEALTHY</span>
+              <span className="font-semibold text-lg text-nature-700">iHealth</span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
               Leading provider of high-quality natural dietary supplements for better health for you and your family
@@ -62,7 +62,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
                 <Mail className="h-4 w-4" />
-                <span>info@siamhealthy.com</span>
+                <span>info@ihealth.com</span>
               </div>
               <div className="flex items-start space-x-2 text-gray-600">
                 <MapPin className="h-4 w-4 mt-0.5" />
@@ -73,7 +73,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-200 mt-8 pt-6 text-center text-sm text-gray-500">
-          <p>&copy; 2024 SIAM HEALTHY. All rights reserved</p>
+          <p>&copy; 2024 iHealth. All rights reserved</p>
         </div>
       </div>
     </footer>
