@@ -2,7 +2,7 @@
 
 export const getCategoryBackground = (category: string): string => {
   const backgrounds: Record<string, string> = {
-    'heart-health': '/lovable-uploads/594c5b58-9855-4563-b163-e64106b65626.png',
+    'heart-health': '/lovable-uploads/c5188663-7bff-4949-8cb4-4120057bc552.png',
     'beauty-supplement': 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=1920&q=80',
     'weight-loss': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1920&q=80',
     'eye-health': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1920&q=80',
