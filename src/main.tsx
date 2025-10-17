@@ -1,8 +1,8 @@
-
 import { createRoot } from 'react-dom/client'
 import { ClerkProvider } from '@clerk/clerk-react'
 import App from './App.tsx'
 import './index.css'
+import './i18n'
 
 const PUBLISHABLE_KEY = "pk_test_Y3JlYXRpdmUtamFja2FsLTkxLmNsZXJrLmFjY291bnRzLmRldiQ"
 
