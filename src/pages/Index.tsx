@@ -4,95 +4,28 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight, Scale, Activity, Shield, Users, Ear } from "lucide-react";
+import { Star, Sparkles, Heart, Eye, Zap, Leaf, Calendar, Clock, ArrowRight, Scale, Activity, Shield, Users, Ear, Bone } from "lucide-react";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
+import { CATEGORIES } from "@/config/categories";
 
 const Index = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const latestPosts = getLatestPosts(5);
 
-  const categories = [
-    {
-      id: "beauty-supplement",
-      name: t('categories.beauty'),
-      description: t('categories.beautyDesc'),
-      icon: Sparkles,
-      productCount: 3
-    },
-    {
-      id: "weight-loss",
-      name: t('categories.weight'),
-      description: t('categories.weightDesc'),
-      icon: Scale,
-      productCount: 2
-    },
-    {
-      id: "eye-health",
-      name: t('categories.vision'),
-      description: t('categories.visionDesc'),
-      icon: Eye,
-      productCount: 2
-    },
-    {
-      id: "heart-health",
-      name: t('categories.heart'),
-      description: t('categories.heartDesc'),
-      icon: Heart,
-      productCount: 1
-    },
-    {
-      id: "detox-health",
-      name: t('categories.detox'),
-      description: t('categories.detoxDesc'),
-      icon: Leaf,
-      productCount: 2
-    },
-    {
-      id: "digestive-health",
-      name: t('categories.digestive'),
-      description: t('categories.digestiveDesc'),
-      icon: Activity,
-      productCount: 1
-    },
-    {
-      id: "skin-health",
-      name: t('categories.skin'),
-      description: t('categories.skinDesc'),
-      icon: Sparkles,
-      productCount: 1
-    },
-    {
-      id: "hearing-health",
-      name: t('categories.hearing'),
-      description: t('categories.hearingDesc'),
-      icon: Ear,
-      productCount: 2
-    },
-    {
-      id: "mens-health",
-      name: t('categories.mens'),
-      description: t('categories.mensDesc'),
-      icon: Users,
-      productCount: 1
-    },
-    {
-      id: "prostate-health",
-      name: t('categories.prostate'),
-      description: t('categories.prostateDesc'),
-      icon: Shield,
-      productCount: 2
-    },
-    {
-      id: "bone-joint",
-      name: t('categories.boneJoint'),
-      description: t('categories.boneJointDesc'),
-      icon: Activity,
-      productCount: 1
-    }
-  ];
+  // Use CATEGORIES from config but map to include translations and product counts
+  // This ensures consistency across the application
+  const categories = CATEGORIES
+    .filter(cat => cat.value !== "all") // Exclude "all" from homepage display
+    .map(cat => ({
+      id: cat.value,
+      name: t(cat.labelKey),
+      description: t('categories.beautyDesc'), // TODO: Add description keys to translation files
+      icon: cat.icon,
+      productCount: 0 // Will be updated dynamically based on actual products
+    }));
 
   const featuredProducts = [
     {

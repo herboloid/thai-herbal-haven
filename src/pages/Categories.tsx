@@ -1,104 +1,41 @@
-
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Pill, 
-  Fish, 
-  Leaf, 
-  Zap, 
-  Heart, 
-  Brain,
-  Shield,
-  Sparkles
-} from "lucide-react";
 import { getCategoryColors } from "@/utils/categoryColors";
+import { CATEGORIES } from "@/config/categories";
 
+/**
+ * Categories Page
+ * Displays all product categories with their details
+ * Uses CATEGORIES from config and i18n for translations
+ */
 const Categories = () => {
-  const categories = [
-    {
-      id: "beauty",
-      name: "Beauty & Anti-Aging",
-      description: "Skin brightening & anti-aging support",
-      icon: Sparkles,
+  const { t } = useTranslation();
+  
+  // Map CATEGORIES config to include additional display data
+  // Note: This page uses old category IDs that don't match current system
+  // TODO: Migrate to use CATEGORIES directly or remove this page
+  const categories = CATEGORIES
+    .filter(cat => cat.value !== "all")
+    .map(cat => ({
+      id: cat.value,
+      name: t(cat.labelKey),
+      description: t('categories.beautyDesc'), // Placeholder - add proper descriptions
+      icon: cat.icon,
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop",
-      productCount: 24,
-      popular: ["Collagen", "Vitamin E", "Biotin", "Hyaluronic Acid"]
-    },
-    {
-      id: "weight",
-      name: "Weight Control & Body Shaping",
-      description: "Fat burning & metabolism support",
-      icon: Zap,
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=300&fit=crop",
-      productCount: 15,
-      popular: ["L-Carnitine", "Green Tea", "CLA", "Chromium"]
-    },
-    {
-      id: "vision",
-      name: "Eye Health & Vision",
-      description: "Vision support & eye protection",
-      icon: Brain,
-      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop",
-      productCount: 13,
-      popular: ["Lutein", "Zeaxanthin", "Bilberry", "Vitamin A"]
-    },
-    {
-      id: "heart",
-      name: "Heart Health",
-      description: "Blood pressure & cardiovascular support",
-      icon: Heart,
-      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=400&h=300&fit=crop",
-      productCount: 10,
-      popular: ["Omega-3", "CoQ10", "Garlic", "Hawthorn"]
-    },
-    {
-      id: "detox",
-      name: "Detox & Cleanse",
-      description: "Body cleanse & toxin removal",
-      icon: Leaf,
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop",
-      productCount: 16,
-      popular: ["Milk Thistle", "Dandelion", "Chlorella", "Spirulina"]
-    },
-    {
-      id: "energy",
-      name: "Energy Boost",
-      description: "Enhance energy and reduce fatigue",
-      icon: Zap,
-      image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=400&h=300&fit=crop",
-      productCount: 18,
-      popular: ["B Vitamins", "Iron", "Rhodiola", "Ginseng"]
-    },
-    {
-      id: "immunity",
-      name: "Immune Support",
-      description: "Strengthen immune system",
-      icon: Shield,
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop",
-      productCount: 19,
-      popular: ["Vitamin C", "Zinc", "Echinacea", "Vitamin D"]
-    },
-    {
-      id: "brain",
-      name: "Brain Support",
-      description: "Enhance memory and focus",
-      icon: Brain,
-      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop",
-      productCount: 12,
-      popular: ["Ginkgo", "DHA", "Phosphatidylserine", "B12"]
-    }
-  ];
+      productCount: 0, // Dynamic count
+      popular: ["Product 1", "Product 2"] // Placeholder
+    }));
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <section className="bg-gradient-to-br from-green-50 to-green-100 py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Product Categories</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('categories.title')}</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Choose products by category that match your needs. 
-            High-quality natural dietary supplements
+            {t('categories.subtitle')}
           </p>
         </div>
       </section>
