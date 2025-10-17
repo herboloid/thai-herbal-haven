@@ -27,7 +27,7 @@ export const allProducts: Product[] = [
     reviews: 156,
     description: "Effective formula for intestinal cleansing and detox support",
     keywords: ["detox", "cleanse", "intestinal", "toxins", "papillomas", "warts", "skin tags", "body cleanse", "digestive health"],
-    category: "Detox & Cleanse",
+    category: "detox-health",
     benefits: ["Cleanses toxins", "Improves digestion", "Supports skin health"],
     inStock: 12,
     lineUrl: "https://lin.ee/gkFyIZ4"
@@ -42,7 +42,7 @@ export const allProducts: Product[] = [
     reviews: 198,
     description: "Complex for anti-aging, skin brightening and firming",
     keywords: ["anti-aging", "skin", "beauty", "firming", "wrinkles", "pigmentation", "brightening", "collagen", "youth"],
-    category: "Beauty & Anti-Aging",
+    category: "beauty-supplement",
     benefits: ["Reduces wrinkles", "Improves skin firmness", "Brightens pigmentation"],
     inStock: 8,
     lineUrl: "https://lin.ee/gGN1rXh"
@@ -57,7 +57,7 @@ export const allProducts: Product[] = [
     reviews: 167,
     description: "Comprehensive eye health and vision improvement support",
     keywords: ["vision", "eyes", "eye health", "eye strain", "myopia", "farsightedness", "sight", "visual", "eye protection"],
-    category: "Eye Health & Vision",
+    category: "eye-health",
     benefits: ["Improves visual acuity", "Reduces eye fatigue", "Protects from blue light"],
     inStock: 15,
     lineUrl: "https://lin.ee/ujbBjYd"
@@ -72,7 +72,7 @@ export const allProducts: Product[] = [
     reviews: 175,
     description: "Effective complex for weight control and fat burning",
     keywords: ["weight loss", "weight", "fat burning", "body shaping", "metabolism", "appetite", "cellulite", "slimming", "diet"],
-    category: "Weight Control & Body Shaping",
+    category: "weight-loss",
     benefits: ["Boosts metabolism", "Burns fat", "Suppresses appetite"],
     inStock: 6,
     lineUrl: "https://lin.ee/8OfKkNJ"
@@ -87,7 +87,7 @@ export const allProducts: Product[] = [
     reviews: 143,
     description: "Premium formula for vision support and eye health",
     keywords: ["vision", "eyes", "eye health", "cataract", "glaucoma", "retina", "sight", "visual health", "eye care"],
-    category: "Eye Health & Vision",
+    category: "eye-health",
     benefits: ["Protects retina", "Prevents cataracts", "Improves night vision"],
     inStock: 10,
     lineUrl: "https://lin.ee/jK1TEb0"

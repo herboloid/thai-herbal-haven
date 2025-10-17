@@ -9,6 +9,7 @@ import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
 import { CATEGORIES } from "@/config/categories";
+import { allProducts } from "@/utils/productData";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -19,13 +20,18 @@ const Index = () => {
   // This ensures consistency across the application
   const categories = CATEGORIES
     .filter(cat => cat.value !== "all") // Exclude "all" from homepage display
-    .map(cat => ({
-      id: cat.value,
-      name: t(cat.labelKey),
-      description: t('categories.beautyDesc'), // TODO: Add description keys to translation files
-      icon: cat.icon,
-      productCount: 0 // Will be updated dynamically based on actual products
-    }));
+    .map(cat => {
+      // Count products in this category
+      const productCount = allProducts.filter(product => product.category === cat.value).length;
+      
+      return {
+        id: cat.value,
+        name: t(cat.labelKey),
+        description: t('categories.beautyDesc'), // TODO: Add description keys to translation files
+        icon: cat.icon,
+        productCount
+      };
+    });
 
   const featuredProducts = [
     {
