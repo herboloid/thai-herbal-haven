@@ -1,25 +1,28 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { CATEGORIES } from "@/config/categories";
-import { allProducts } from "@/utils/productData";
+import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductCardSkeleton } from "@/components/products/ProductCardSkeleton";
 import { CategoryBackground } from "@/components/products/CategoryBackground";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { CategoriesNavigation } from "@/components/products/CategoriesNavigation";
 import { toast } from "@/hooks/use-toast";
+import { Plus } from "lucide-react";
 
 const Products = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
   const [sortBy, setSortBy] = useState("popular");
   const [filterCategory, setFilterCategory] = useState("all");
-  const [isLoading, setIsLoading] = useState(true);
   const { addItem } = useCart();
+  
+  const { data: allProducts = [], isLoading } = useProducts();
 
   // Update search term and category when URL params change
   useEffect(() => {
@@ -27,11 +30,6 @@ const Products = () => {
     const categoryFromUrl = searchParams.get("category") || "all";
     setSearchTerm(searchFromUrl);
     setFilterCategory(categoryFromUrl);
-    
-    // Simulate loading for skeleton
-    setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
   }, [searchParams]);
 
   const handleSearchChange = (value: string) => {
@@ -45,10 +43,7 @@ const Products = () => {
     setSearchParams(newSearchParams);
   };
 
-  const products = allProducts.map(p => ({
-    ...p,
-    badge: p.badge || "🌟 New"
-  }));
+  const products = allProducts;
 
 
   // Update category counts
@@ -103,10 +98,18 @@ const Products = () => {
       {/* Header */}
       <header className="bg-white/70 backdrop-blur-sm border-b relative z-10 transition-colors duration-500">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {searchTerm ? `Search Results for "${searchTerm}"` : "Natural Dietary Supplements"}
-          </h1>
-          <p className="text-gray-600">High-quality natural dietary supplements for better health</p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                {searchTerm ? `Search Results for "${searchTerm}"` : "Natural Dietary Supplements"}
+              </h1>
+              <p className="text-gray-600">High-quality natural dietary supplements for better health</p>
+            </div>
+            <Button onClick={() => navigate('/admin/products')} className="gap-2">
+              <Plus className="h-4 w-4" />
+              Add Product
+            </Button>
+          </div>
         </div>
       </header>
 

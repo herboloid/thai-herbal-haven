@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Star, 
   ShoppingCart, 
@@ -18,957 +17,232 @@ import {
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { RecommendedProducts } from "@/components/products/RecommendedProducts";
-import { allProducts } from "@/utils/productData";
+import { useProduct, useProducts } from "@/hooks/useProducts";
 import { toast } from "@/hooks/use-toast";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(0);
   const { addItem } = useCart();
+  
+  const { data: product, isLoading: productLoading } = useProduct(Number(id));
+  const { data: allProducts = [], isLoading: productsLoading } = useProducts();
 
-  // Get product data based on ID
-  const getProductData = (productId: string) => {
-    if (productId === "22") {
-      return {
-        id: 22,
-        name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
-        price: "฿970",
-        originalPrice: "฿1,190",
-        images: [
-          "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
-          "/lovable-uploads/40155595-5386-4664-a528-009daee3f97b.png",
-          "/lovable-uploads/a68038e3-baa9-4f40-9b34-23e7bf35a3e3.png"
-        ],
-        rating: 4.9,
-        reviews: 156,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Extera is a powerful detox supplement that helps cleanse the intestines, remove toxins and waste from the body, and balance the digestive system. It also helps prevent the formation of skin tags and warts, improves bowel movements, and supports a healthy gut flora — promoting overall well-being and immunity.",
-        benefits: [
-          "Removes toxins and waste from the body",
-          "Boosts beneficial gut bacteria",
-          "Restores digestive and bowel balance",
-          "Relieves bloating, flatulence, and constipation",
-          "Helps prevent skin tags and warts",
-          "Supports immune system function"
-        ],
-        ingredients: "Turmeric Powder, Grapefruit Powder, Sage Powder, Ginger Extract, Garlic Extract, Black Pepper Extract",
-        dosage: "Take 2 capsules daily before bedtime",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 1-106353-5-0003",
-        idealFor: [
-          "Individuals with skin tags or warts",
-          "Those consuming raw or improperly cooked foods",
-          "People suffering from constipation, hard stools, or irregular bowel movements",
-          "Individuals with bloating, indigestion, or intestinal inflammation",
-          "Those with poor eating habits and low fiber intake",
-          "People working outdoors or in unhygienic environments"
-        ]
-      };
-    }
-    
-    if (productId === "21") {
-      return {
-        id: 21,
-        name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
-        price: "฿999",
-        originalPrice: "฿1,470",
-        images: [
-          "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
-          "/lovable-uploads/17adaf7c-d212-4bcb-aa60-4454f1dcb783.png",
-          "/lovable-uploads/c3a0722b-04c9-4427-bf21-2ccebc93902a.png"
-        ],
-        rating: 4.9,
-        reviews: 198,
-        badge: "🌟 New",
-        inStock: true,
-        description: "S-Complex helps brighten and rejuvenate the skin, making it look healthier, firmer, and more youthful. It stimulates collagen and elastin production, accelerates skin cell turnover, reduces dark spots, freckles, and age spots, and helps prevent fine lines, wrinkles, crow's feet, and deep facial lines.",
-        benefits: [
-          "Slows premature skin aging",
-          "Firms and lifts the skin", 
-          "Brightens and evens out skin tone",
-          "Reduces dark spots, freckles, and age spots",
-          "Minimizes facial wrinkles and fine lines"
-        ],
-        ingredients: "L-Carnitine L-Tartrate, Chitosan, L-Cysteine, Konjac Powder, White Kidney Bean Extract, Fructooligosaccharides (FOS), Astragalus Powder, Zinc Amino Acid Chelate (15%), Alfalfa Powder, Artichoke Powder, Cinnamon Powder, Passion Fruit Powder, Reishi Mushroom Extract, Siberian Ginseng Extract, Green Tea Extract, Ho Shou Wu Powder, Taurine, Bitter Melon Powder, Dandelion Powder, Horsetail Powder, Sage Powder, Bilberry Extract, Licorice Extract, Ginger Extract, Kelp Extract, Black Pepper Powder, Wheatgrass Powder, Turmeric Powder, Chromium Picolinate",
-        dosage: "Take 2 capsules daily with breakfast",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-18157-1-0235",
-        idealFor: [
-          "People exposed to daily environmental pollutants (sun, dust, smoke)",
-          "Those noticing skin sagging or wrinkles due to aging",
-          "Individuals with uneven skin tone or dryness",
-          "Those with facial freckles, dark spots, or pigmentation issues"
-        ]
-      };
-    }
-    
-    if (productId === "20") {
-      return {
-        id: 20,
-        name: "Philola — Eye Health & Vision Support Capsules",
-        price: "฿1,190",
-        originalPrice: "฿1,400",
-        images: [
-          "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
-          "/lovable-uploads/7b5f959e-05d1-48d3-9bc6-caebab5246c2.png",
-          "/lovable-uploads/0c9b733d-9d3b-4f56-8cb7-5220871c2119.png"
-        ],
-        rating: 4.9,
-        reviews: 167,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Philola helps restore and improve visual clarity, supports retinal health, and protects against various eye conditions. It relieves blurry vision, cataracts, pterygium, glaucoma, optic neuritis, retinal degeneration, high eye pressure, and more. Also helps reduce dryness, irritation, and tearing, while shielding eyes from blue light and UV rays.",
-        benefits: [
-          "Nourishes and restores vision",
-          "Reduces risk of eye diseases",
-          "Improves visual clarity",
-          "Protects eyes from blue light and UV radiation",
-          "Relieves dry eyes, eye pain, irritation, and tearing"
-        ],
-        ingredients: "Goji Berry Extract, Green Tea Extract, Bilberry Extract, Black Currant Extract, Pine Bark Extract, Ginkgo Biloba Extract, Grape Seed Extract, Marigold (Lutein) Extract, Soy Lecithin, Ascorbic Acid (Vitamin C), Fish Oil Powder, Copper Gluconate, Natural Vitamin E (50%), Selenium-Enriched Yeast, Zinc Gluconate, Vitamin A Acetate Powder",
-        dosage: "Take 2 capsules daily before bedtime",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-1-0385",
-        idealFor: [
-          "Individuals with existing eye conditions",
-          "Those who wear glasses or contact lenses daily",
-          "People with heavy screen time (computer, phone)",
-          "Outdoor workers exposed to bright sunlight",
-          "Individuals with dry, irritated, or tired eyes",
-          "People with reduced night vision",
-          "Those with a history of eye or facial injury"
-        ]
-      };
-    }
-    
-    if (productId === "19") {
-      return {
-        id: 19,
-        name: "Onix — Weight Control, Fat Burning & Body Shaping Capsules",
-        price: "฿890",
-        originalPrice: "฿1,575",
-        images: [
-          "/lovable-uploads/8ce312af-10a2-43a6-a41d-16c4f9fa7d4b.png",
-          "/lovable-uploads/013fa274-90a0-4ed6-868f-66b8c21ba022.png",
-          "/lovable-uploads/45256388-cbcb-4570-af0b-2d887393c4fd.png"
-        ],
-        rating: 4.8,
-        reviews: 175,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Onix stimulates fat metabolism and helps break down stubborn fat stored throughout the body — including the abdomen, arms, thighs, and hips. It also slows the absorption of cholesterol and sugar from food, balances digestion and gut function, reduces appetite, and promotes a feeling of fullness — making it ideal for weight management.",
-        benefits: [
-          "Boosts fat metabolism",
-          "Breaks down old stored fat",
-          "Prevents the formation of new fat",
-          "Prolongs satiety and reduces cravings",
-          "Inhibits fat and sugar absorption"
-        ],
-        ingredients: "L-Carnitine L-Tartrate, Chitosan, L-Cysteine, Konjac Powder, White Kidney Bean Extract, Fructooligosaccharides (FOS), Astragalus Powder, Zinc Amino Acid Chelate (15%), Alfalfa Powder, Artichoke Powder, Green Coffee Bean Extract, Pumpkin Powder, Reishi Mushroom Extract, Di Huang Powder, Green Tea Extract, Ho Shou Wu Powder, Taurine, Bitter Melon Powder, Dandelion Powder, Horsetail Powder, Sage Powder, Bilberry Extract, Licorice Powder, Ginger Extract, Kelp Extract, Black Pepper Extract, Wheatgrass Powder, Turmeric Powder, Chromium Picolinate",
-        dosage: "Take 2 capsules daily: 1 capsule with breakfast and 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-18157-1-0244",
-        idealFor: [
-          "Individuals who are overweight or obese",
-          "Those with long-term fat accumulation",
-          "People looking to lose 5 kg or more",
-          "Individuals struggling with weight regain (yo-yo effect)",
-          "Those with little time to manage weight or fitness"
-        ]
-      };
-    }
-    
-    if (productId === "18") {
-      return {
-        id: 18,
-        name: "Oclarizin — Eye Health & Vision Support Capsules",
-        price: "฿930",
-        originalPrice: "฿1,330",
-        images: [
-          "/lovable-uploads/f42f278d-a261-4c8f-8912-19074cdb641d.png",
-          "/lovable-uploads/bc9940ab-eea7-40f0-b7a3-bec3d1e74a28.png",
-          "/lovable-uploads/79340eee-1b99-4327-b5bd-2b2d9110597e.png"
-        ],
-        rating: 4.9,
-        reviews: 143,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Oclarizin helps slow retinal degeneration and improves visual acuity during both day and night. It helps prevent eye disorders such as cataracts, glaucoma, pterygium, nearsightedness, and farsightedness. It also relieves blurry vision, dry eyes, eye strain, and fatigue caused by prolonged screen time.",
-        benefits: [
-          "Prevents age-related retinal degeneration",
-          "Reduces risk of cataracts, pterygium, pinguecula, glaucoma",
-          "Restores clearer vision",
-          "Protects eyes from blue light and UV radiation",
-          "Relieves dry eyes, eye pain, and eye fatigue"
-        ],
-        ingredients: "Bilberry Extract, Apple Extract, Astragalus Extract, L-Cysteine, Marigold (Lutein) Extract, Grape Seed Extract, Grape Skin Extract, Grapefruit Extract, Vitamin C, Selenium-Enriched Yeast, Zinc Citrate, Black Pepper Extract",
-        dosage: "Take 2 capsules daily before bedtime",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-5-0008",
-        idealFor: [
-          "People with existing eye conditions",
-          "Those who wear glasses or contact lenses daily",
-          "Individuals with heavy screen usage (computer/phone)",
-          "Outdoor workers exposed to strong sunlight",
-          "People experiencing eye pain, dryness, burning, or blurry vision",
-          "Those with impaired night vision",
-          "Individuals with a history of eye or facial injury"
-        ]
-      };
-    }
-    
-    if (productId === "17") {
-      return {
-        id: 17,
-        name: "Helmina — Intestinal Detox, Toxin Cleanse & Skin Tag Removal Support",
-        price: "฿980",
-        originalPrice: "฿1,155",
-        images: [
-          "/lovable-uploads/5b11406a-c72a-4900-af98-f63e310c5f46.png",
-          "/lovable-uploads/6310a0be-3128-4547-84bf-26eeba049c4c.png",
-          "/lovable-uploads/afe2a7cd-26f3-48cd-8974-ed715e646678.png"
-        ],
-        rating: 4.9,
-        reviews: 187,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Helmina is a detox supplement that helps eliminate toxins and waste from the body. It prevents the formation of skin tags, supports the growth of beneficial gut bacteria, balances the digestive system, and improves bowel movements for better overall gut health.",
-        benefits: [
-          "Removes toxins and waste from the body",
-          "Increases beneficial gut flora",
-          "Balances digestion and promotes regular bowel movements",
-          "Relieves bloating, flatulence, and constipation",
-          "Helps prevent skin tags and warts",
-          "Stimulates immune system function"
-        ],
-        ingredients: "Turmeric Powder, Grapefruit Powder, Sage Powder, Ginger Extract, Garlic Extract, Black Pepper Extract",
-        dosage: "Take 2 capsules daily before bedtime",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 1-106353-5-0003",
-        idealFor: [
-          "Individuals with skin tags or warts",
-          "Those who consume raw or improperly cooked foods",
-          "People suffering from constipation, hard stools, or low fiber intake",
-          "Those with bloating, indigestion, or intestinal inflammation",
-          "Individuals with poor diet and unhealthy eating habits",
-          "People exposed to unhygienic environments or who work outdoors"
-        ]
-      };
-    }
-    
-    if (productId === "16") {
-      return {
-        id: 16,
-        name: "Geralox — Hemorrhoid Relief & Digestive Health Support",
-        price: "฿950",
-        originalPrice: "฿1,085",
-        images: [
-          "/lovable-uploads/415e9400-5489-46fc-bbc8-c87a13ee3748.png",
-          "/lovable-uploads/867d3781-6d51-456d-9009-b009290b631f.png",
-          "/lovable-uploads/47530b00-b88e-4875-8a3e-6f0bb93c0acf.png"
-        ],
-        rating: 4.8,
-        reviews: 156,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Geralox helps relieve all types of hemorrhoids, prevents complications in the digestive and excretory systems, and addresses constipation and rectal bleeding. Strengthens blood vessels around the rectum, reduces inflammation, and helps relieve pain caused by hemorrhoids.",
-        benefits: [
-          "Strengthens blood vessels in the rectal area and reduces inflammation",
-          "Alleviates the severity of hemorrhoids — reduces swelling, redness, and irritation",
-          "Restores digestive system function and relieves chronic constipation",
-          "Stimulates bowel movement and softens stool for easier passage",
-          "Relieves bloating, flatulence, abdominal discomfort, and gas"
-        ],
-        ingredients: "Bilberry Extract, Gotu Kola Extract, Grapefruit Extract, Ginger Extract, Grape Seed Extract, Black Pepper Extract",
-        dosage: "Take 2 capsules daily: 1 capsule with breakfast and 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-5-0022",
-        idealFor: [
-          "Individuals with bowel movement issues or frequent constipation",
-          "People suffering from internal or external hemorrhoids",
-          "Those who strain or take a long time to defecate",
-          "People with anal itching or blood in the stool",
-          "Those who consume little fiber, fruits, vegetables, or drink little water"
-        ]
-      };
-    }
-    
-    if (productId === "15") {
-      return {
-        id: 15,
-        name: "Genesis Caps — Hearing Restoration & Ear Health Support",
-        price: "฿873",
-        originalPrice: "฿1,575",
-        images: [
-          "/lovable-uploads/a4aea223-69b4-4f7a-b244-3c5d71392fe0.png",
-          "/lovable-uploads/430db4bb-4acf-4d04-94ac-038596a91158.png",
-          "/lovable-uploads/cb11c722-9375-41f5-9a6a-ffc51ab226a5.png"
-        ],
-        rating: 4.7,
-        reviews: 164,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Genesis Caps help relieve hearing problems and reduce the risk of hearing nerve damage. They support the restoration of outer, middle, and inner ear function, improve hearing clarity, and relieve symptoms such as ear fullness, ear pain, ringing or noise in the ears, and inner ear fluid imbalance.",
-        benefits: [
-          "Restores hearing and nourishes auditory nerves",
-          "Slows hearing nerve degeneration",
-          "Reduces future risk of hearing loss",
-          "Relieves ear fullness, ear pain, hearing loss, and ringing sounds",
-          "Helps prevent earwax buildup and ear infections"
-        ],
-        ingredients: "L-Arginine, Cordyceps Powder, Ginkgo Biloba Extract, Siberian Ginseng Extract, Zinc Amino Acid Chelate, Hawthorn Powder, Korean Ginseng Extract, Taurine, Oyster Extract, Vitamin C, Selenium Yeast (2000 ppm)",
-        dosage: "Take 2 capsules daily with breakfast",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-1-0239",
-        idealFor: [
-          "Individuals experiencing reduced hearing (near or far)",
-          "People who struggle to follow conversations or unconsciously speak louder",
-          "Those with ear fullness, pain, ringing, or buzzing",
-          "Frequent headphone users or those working in noisy environments"
-        ]
-      };
-    }
-    
-    if (productId === "14") {
-      return {
-        id: 14,
-        name: "Turbine — Prostate & Sexual Health Support",
-        price: "฿940",
-        originalPrice: "฿1,715",
-        images: [
-          "/lovable-uploads/7e5ab9ec-c4af-456d-b2da-f7a95ed6efa5.png",
-          "/lovable-uploads/3fa6070e-dced-481a-a89b-b1169d829599.png",
-          "/lovable-uploads/48778494-8bf5-4dc3-acce-eae6989bb523.png"
-        ],
-        rating: 4.8,
-        reviews: 142,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Turbine helps reduce prostate inflammation, improves blood flow to the male genital area and pelvic region, and restores normal urinary function. It supports reproductive system strength, balances male hormone levels, and enhances overall male health.",
-        benefits: [
-          "Improves blood circulation in the pelvic and genital area",
-          "Restores prostate function and reduces prostate enlargement",
-          "Prevents urinary tract infections and eases urination problems",
-          "Strengthens the male reproductive system",
-          "Helps balance testosterone levels",
-          "Promotes overall male health"
-        ],
-        ingredients: "L-Arginine, Cordyceps Powder, Ginkgo Biloba Extract, Siberian Ginseng Extract, Korean Ginseng Extract, Taurine, Zinc Amino Acid Chelate, Oyster Extract, Ascorbic Acid (Vitamin C), Selenium-Enriched Yeast, Niacin, Pyridoxine Hydrochloride (Vitamin B6)",
-        dosage: "Take 2 capsules daily: 1 capsule with breakfast and 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-1-0312",
-        idealFor: [
-          "Men with enlarged prostate",
-          "Individuals with urination problems (slow stream, burning, incomplete emptying)",
-          "Men with erectile dysfunction",
-          "Men seeking hormone balance and vitality"
-        ]
-      };
-    }
-    
-    if (productId === "13") {
-      return {
-        id: 13,
-        name: "Elsie — Skin Restoration & Fungal Infection Support",
-        price: "฿940",
-        originalPrice: "฿1,470",
-        images: [
-          "/lovable-uploads/f4d1f76d-a661-4428-a1b3-04a1f64eee34.png",
-          "/lovable-uploads/eb38b4fc-a654-4d1b-9403-76464303b1fe.png",
-          "/lovable-uploads/240b1da8-88bc-44c9-b6aa-7549438e7b17.png"
-        ],
-        rating: 4.9,
-        reviews: 198,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Elsie helps repair skin cells damaged by various skin conditions such as eczema, psoriasis, nail fungus, rashes, and tinea. Provides anti-inflammatory effects and strengthens immune function to prevent the spread of skin bacteria and fungi.",
-        benefits: [
-          "Inhibits the growth of skin fungi and bacteria",
-          "Restores skin structure, reduces inflammation, and promotes healing",
-          "Alleviates skin inflammation, burning, itching, and pain",
-          "Boosts immunity and resistance to skin diseases"
-        ],
-        ingredients: "L-Cysteine, L-Glutamine, Bitter Orange Extract, L-Glutathione, Bilberry Extract, Grape Seed Extract, Zinc Amino Acid Chelate (15%), Glycine, Vitamin C, Grape Seed Extract, Pine Bark Extract, Selenium-Enriched Yeast, Natural Vitamin E, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12, Vitamin D3, Thiamine Monohydrate, Riboflavin",
-        dosage: "Take 1 capsule with breakfast and 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-18157-1-0001",
-        idealFor: [
-          "Individuals with various skin problems",
-          "Dry, flaky, peeling skin",
-          "Red, itchy, inflamed skin",
-          "Discoloration or deformity of fingernails or toenails"
-        ]
-      };
-    }
-    
-    if (productId === "12") {
-      return {
-        id: 12,
-        name: "Andicellix — Hearing Support & Ear Nerve Protection",
-        price: "฿990",
-        originalPrice: "฿1,645",
-        images: [
-          "/lovable-uploads/1d68a6b5-de0a-4b8b-8fcc-4faebf7de5d3.png",
-          "/lovable-uploads/76d935e5-5b80-4180-a9d3-943a9ec07118.png",
-          "/lovable-uploads/51976c1c-7378-45d1-ba3d-6f2260a4664d.png"
-        ],
-        rating: 4.8,
-        reviews: 127,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Andicellix helps stimulate hearing ability and improves auditory nerve function. Effectively relieves symptoms related to ear conditions such as tinnitus, hearing loss, ear fullness, ear pressure, and age-related hearing decline. Also supports balance and helps reduce dizziness and vertigo caused by inner ear imbalances.",
-        benefits: [
-          "Naturally restores and improves hearing",
-          "Stimulates auditory nerves and slows hearing deterioration",
-          "Reduces symptoms of tinnitus, ear fullness, blocked ears, and ringing sounds",
-          "Eases dizziness, vertigo, and balance issues caused by inner ear fluid imbalance"
-        ],
-        ingredients: "Astragalus Powder, Dong Quai Extract, Beta-Glucan from Oats, Reishi Mushroom Extract, Ho Shou Wu (Fo-Ti) Powder, Grape Seed Extract, Zinc Amino Acid Chelate (15%), L-Cysteine, Taurine, Broccoli Powder, Licorice Extract, Cordyceps Powder, Korean Ginseng Extract, Goji Berry Extract, Green Tea Extract, Pomegranate Seed Extract, Shiitake Mushroom Extract, Turmeric Powder, Vitamin C, Fish Oil Powder, Alpha Lipoic Acid, Garlic Extract, Ginger Extract, Kelp Extract, Blueberry Extract, Selenium-Enriched Yeast, Coenzyme Q10, Natural Vitamin E, Copper Gluconate, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12, Vitamin D3, Chromium Picolinate, Folic Acid",
-        dosage: "Take 2 capsules daily with breakfast",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-18157-1-0077",
-        idealFor: [
-          "Individuals experiencing reduced hearing (near or far)",
-          "People who struggle with conversation clarity or unconsciously speak louder",
-          "Those with ear fullness, pain, ringing, or buzzing sounds",
-          "Frequent headphone users or those exposed to loud environments",
-          "People with a history of head, brain, or ear injuries",
-          "Individuals with family history of hearing loss"
-        ]
-      };
-    }
-    
-    if (productId === "11") {
-      return {
-        id: 11,
-        name: "Black Rhino — Male Performance & Testosterone Booster",
-        price: "฿855",
-        originalPrice: "฿1,450",
-        images: [
-          "/lovable-uploads/30a54550-b6ae-4591-b827-2d061f202b88.png",
-          "/lovable-uploads/e58f4d37-0777-4368-a630-dd1811a0d807.png",
-          "/lovable-uploads/5a345917-fccc-4229-bd59-9eb9e83485d0.png"
-        ],
-        rating: 4.8,
-        reviews: 89,
-        badge: "🌟 New",
-        inStock: true,
-        description: "Black Rhino helps naturally increase testosterone levels in men, boosting libido, enhancing sexual desire, and improving overall sexual performance. Supports longer, stronger erections, delays ejaculation, and improves stamina. Also promotes overall vitality, energy, and well-being.",
-        benefits: [
-          "Enhances sexual performance and desire",
-          "Boosts libido and sexual arousal",
-          "Reduces symptoms of prostatitis and prostate enlargement",
-          "Balances male hormones",
-          "Increases energy, strength, and endurance"
-        ],
-        ingredients: "L-Arginine, Cordyceps Powder, Siberian Ginseng Extract, Ginkgo Biloba Extract, Korean Ginseng Extract, Oyster Extract, Zinc Amino Acid Chelate, Hawthorn Powder, Selenium-Enriched Yeast",
-        dosage: "Take 1 capsule with breakfast and 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-1-01328",
-        idealFor: [
-          "Men with sexual performance issues",
-          "Men struggling with premature ejaculation",
-          "Older men with declining testosterone levels",
-          "Anyone wanting to improve blood flow to the genital area"
-        ]
-      };
-    }
-    
-    if (productId === "10") {
-      return {
-        id: 10,
-        name: "BackPro — Prostate Health & Urinary Function Support",
-        price: "฿950",
-        originalPrice: "฿1,820",
-        images: [
-          "/lovable-uploads/b99a13ac-aec8-45e4-975b-d6e1c5618f9b.png",
-          "/lovable-uploads/6ae232f3-638c-4b31-a162-81726200c6b8.png",
-          "/lovable-uploads/cd55ad2c-2744-4f3f-bb08-aeaa1a47bcee.png"
-        ],
-        rating: 4.7,
-        reviews: 173,
-        badge: "🔥 New",
-        inStock: true,
-        description: "BackPro helps slow the enlargement of prostate cells and improves blood circulation in the male reproductive system. It restores normal urinary function, reduces painful or difficult urination, and supports overall prostate health — helping to lower the risk of future prostatitis.",
-        benefits: [
-          "Prevents prostate enlargement and prostatitis",
-          "Promotes smooth and easy urination",
-          "Relieves burning, weak stream, incomplete emptying, or frequent urination",
-          "Reduces bladder inflammation",
-          "Helps prevent urinary tract infections",
-          "Anti-inflammatory effect on the prostate",
-          "Reduces pelvic and testicular pain or discomfort",
-          "Improves blood flow in the pelvic region"
-        ],
-        ingredients: "L-Arginine, Cordyceps Powder, Ginkgo Biloba Extract, Zinc Gluconate, Siberian Ginseng Extract, Hawthorn Powder, Korean Ginseng Extract, Oyster Extract, Soy Lecithin, Goji Berry Extract, Ascorbic Acid (Vitamin C), Reishi Mushroom Extract, Black Galingale (Kaempferia parviflora) Powder, Niacin, Selenium Yeast (2000 ppm), Pyridoxine Hydrochloride (Vitamin B6)",
-        dosage: "Take 1 capsule with breakfast and 1 capsule with dinner",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-06353-1-0142",
-        idealFor: [
-          "Men aged 40 and above",
-          "Individuals with blood in urine or painful urination",
-          "Men with urinary difficulties or weak flow",
-          "People experiencing painful or strained urination",
-          "Men with frequent nighttime urination"
-        ]
-      };
-    }
-    
-    if (productId === "9") {
-      return {
-        id: 9,
-        name: "Carthisin — Bone & Joint Health Support",
-        price: "฿970",
-        originalPrice: "฿1,990",
-        images: [
-          "/lovable-uploads/7cc33d76-2c30-4d3c-a0a1-6b69aead89ea.png",
-          "/lovable-uploads/6142098d-8427-4f9a-845e-21570660ab73.png",
-          "/lovable-uploads/2836d04a-02d7-488b-9476-c6b3965d2063.png"
-        ],
-        rating: 4.8,
-        reviews: 142,
-        badge: "🦴 Joint Health",
-        inStock: true,
-        description: "Carthisin helps repair and regenerate bones, tendons, and joints throughout the body. Increases essential calcium for joints, promotes the production of synovial fluid, and relieves chronic pain, swelling, and inflammation caused by various bone and joint disorders.",
-        benefits: [
-          "Increases bone density, helping reduce the risk of osteoporosis",
-          "Protects joint cartilage and boosts synovial fluid production",
-          "Strengthens and improves joint flexibility",
-          "Reduces friction and impact stress on joints",
-          "Eases inflammation, pain, swelling, or burning caused by bone and joint diseases"
-        ],
-        ingredients: "New Zealand Green-Lipped Mussel Powder, Magnesium Oxide, Zinc Gluconate, L-Carnitine L-Tartrate, L-Cysteine, Astragalus Powder, L-Arginine, L-Proline, Beta-Glucan from Oats, Peppermint Powder, Reishi Mushroom Extract, Schisandra Powder, Fish Oil Powder, Vitamin C, Ginkgo Biloba Extract, Grape Seed Extract, Taurine, Alpha Lipoic Acid, Alfalfa Powder, Licorice Root Powder, Dong Quai Extract, Rosehip Extract, Siberian Ginseng Extract, Black Currant Extract, Gotu Kola Powder, Selenium-Enriched Yeast, Coenzyme Q10, Niacin, Natural Vitamin E (D-alpha tocopheryl acetate) 6.8 IU, Pine Bark Extract, Copper Gluconate, Calcium D-Pantothenate, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12 (0.1%), Vitamin D3 (100 IU per mg)",
-        dosage: "Take 2 capsules daily with breakfast",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "10 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-18157-1-0126",
-        idealFor: [
-          "Individuals with spinal curvature or displaced bones",
-          "People with trigger finger or office syndrome",
-          "Those experiencing joint and bone pain, swelling, or inflammation",
-          "Individuals with chronic musculoskeletal pain from repetitive strain (heavy lifting, prolonged sitting/standing, poor posture, etc.)"
-        ]
-      };
-    }
-    
-    if (productId === "8") {
-      return {
-        id: 8,
-        name: "Diacard — Blood Pressure & Blood Sugar Support",
-        price: "฿890",
-        originalPrice: "฿1,680",
-        images: [
-          "/lovable-uploads/eb417a32-9a3f-479a-8427-bd90fc6aa3fe.png",
-          "/lovable-uploads/9b2eb6c3-28af-48cf-8349-aaf12a98e55f.png",
-          "/lovable-uploads/f6fa8d1d-7bf6-46c6-94ea-bc3956d83d8c.png"
-        ],
-        rating: 4.9,
-        reviews: 189,
-        badge: "🔥 Hot",
-        inStock: true,
-        description: "Diacard helps stimulate pancreatic function to naturally regulate blood sugar levels. It improves blood circulation, strengthens blood vessels, and helps cleanse arteries of excess cholesterol. Supports balanced blood pressure and reduces the risk of future heart disease.",
-        benefits: [
-          "Balances blood sugar levels",
-          "Increases insulin sensitivity and reduces insulin resistance",
-          "Normalizes blood pressure", 
-          "Lowers the risk of heart disease",
-          "Reduces excess cholesterol in blood vessels",
-          "Enhances circulation and vascular health"
-        ],
-        ingredients: "L-Cysteine, Magnesium Oxide, L-Arginine, L-Carnitine L-Tartrate, L-Lysine Hydrochloride, L-Methionine, Bitter Melon Powder, Artichoke Powder, Astragalus Powder, Cordyceps Powder, Fenugreek Powder, Grape Seed Extract, Zinc Amino Acid Chelate (15%), Taurine, Fish Oil Powder, Korean Ginseng Extract, Black Currant Extract, Rosehip Extract, Vitamin C, Dandelion Powder, Broccoli Powder, Dong Quai Extract, Garcinia Cambogia Extract, Goji Berry Extract, Tomato Extract, Alpha Lipoic Acid, Selenium Yeast, Coenzyme Q10, Niacin, D-Biotin, Vitamin E, Copper Gluconate, Calcium D-Pantothenate, Pyridoxine Hydrochloride (Vitamin B6), Vitamin B12, Vitamin D3, Manganese, Chromium Picolinate, Folic Acid",
-        dosage: "Take 1 capsule with breakfast, lunch, and dinner (3 capsules daily)",
-        warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-        size: "15 capsules per box",
-        registration: "FDA Thailand Registration No.: 11-1-18157-1-0143",
-        idealFor: [
-          "Diabetics or those with high sugar intake",
-          "Individuals with high cholesterol or blood lipids", 
-          "People with high or unstable blood pressure",
-          "Overweight individuals",
-          "Those with a family history of heart disease, diabetes, or hypertension"
-        ]
-      };
-    }
-    
-    // Default fallback - redirect to product 7 if invalid ID
-    return {
-      id: 7,
-      name: "TChrome — Weight Loss & Detox Capsules",
-      price: "฿990",
-      originalPrice: "฿1,990",
-      images: [
-        "/lovable-uploads/aacbb27e-cd19-495a-865d-a1dbbe6d2e3b.png",
-        "/lovable-uploads/48b88798-0d32-4b8b-a25f-4d87e1a60f83.png",
-        "/lovable-uploads/35bcbd8d-63a2-4bc6-949f-fbb3ee34a09c.png"
-      ],
-      rating: 4.9,
-      reviews: 256,
-      badge: "🌟 New",
-      inStock: true,
-      description: "TChrome is an innovative dietary supplement for weight management. It helps burn fat, detoxify the body, restore healthy digestion, and reduce appetite. Effectively blocks the accumulation of new fat and supports a lean physique.",
-      benefits: [
-        "Boosts fat burning",
-        "Blocks fat absorption", 
-        "Improves bowel movement",
-        "Controls appetite",
-        "Stimulates metabolism"
-      ],
-      ingredients: "Garcinia Cambogia Extract, Green Tea Extract, Calcium Pyruvate, White Kidney Bean Extract, Chitosan, Kelp Extract, Black Pepper Powder, Ginger Extract, Chromium Picolinate",
-      dosage: "Take 2 capsules daily: 1 capsule with breakfast, 1 capsule with dinner",
-      warnings: "Consult your healthcare provider before use. Not recommended for pregnant or nursing women. Do not exceed recommended dosage.",
-      size: "60 capsules per bottle",
-      registration: "FDA Thailand Registration No.: 11-106353-1-0137",
-      idealFor: [
-        "Individuals with excess weight",
-        "People with poor digestion or constipation", 
-        "Those with slow metabolism",
-        "Anyone looking to lose 5 kg or more"
-      ]
-    };
-  };
+  if (productLoading || productsLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
 
-  const product = getProductData(id || "7");
-
-  const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addItem({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.images[0],
-        originalPrice: product.originalPrice,
-      });
-    }
-    setQuantity(1);
-  };
-
-  const relatedProducts = [
-    {
-      id: 22,
-      name: "Extera — Intestinal Detox & Skin Tag Removal Support Capsules",
-      price: "฿970",
-      image: "/lovable-uploads/8af81404-a41d-4ef0-b1be-13a5340f982e.png",
-      rating: 4.9
-    },
-    {
-      id: 21,
-      name: "S-Complex — Anti-Aging, Brightening & Skin Firming Capsules",
-      price: "฿999",
-      image: "/lovable-uploads/e43ecb1e-a5af-4b23-83ba-91b3c9573afc.png",
-      rating: 4.9
-    },
-    {
-      id: 20,
-      name: "Philola — Eye Health & Vision Support Capsules",
-      price: "฿1,190",
-      image: "/lovable-uploads/2371fff1-dd6d-4854-8501-aac3f2a11a82.png",
-      rating: 4.9
-    }
-  ];
-
-  const reviews = [
-    {
-      name: "Sarah Johnson",
-      rating: 5,
-      date: "December 15, 2024",
-      comment: id === "22" ? "Extera has been amazing for my digestive health! After 4 weeks of use, my bloating has significantly reduced and my bowel movements are much more regular. The skin tags I had are also starting to fade!" : id === "21" ? "S-Complex has been amazing for my skin health! After 4 weeks of use, my skin has significantly improved and I feel more youthful and radiant. The brightening and firming effects are really noticeable, especially on my face." : id === "20" ? "Philola has been amazing for my eye health! After 5 weeks of use, my vision clarity has significantly improved and my dry eyes are much better. The blue light protection is really noticeable when working on the computer!" : id === "19" ? "Onix has been amazing for my weight loss journey! After 6 weeks of use, I've lost 8 kg and my appetite is much better controlled. The fat burning effects are really noticeable, especially around my waist area!" : id === "18" ? "Oclarizin has been amazing for my eye health! After 5 weeks of use, my dry eyes have significantly improved and my night vision is much clearer. No more eye strain from computer work!" : id === "17" ? "Helmina has been amazing for my digestive health! After 4 weeks of use, my bloating has significantly reduced and my bowel movements are much more regular. The skin tags I had are also starting to fade!" : id === "16" ? "Geralox has been amazing for my hemorrhoid issues! After 4 weeks of use, the pain and swelling have significantly reduced and my digestion has improved dramatically. No more constipation issues!" : id === "15" ? "Genesis Caps has been amazing for my hearing! After 5 weeks of use, the constant ringing in my ears has significantly reduced and I can follow conversations much better now. Highly recommend!" : id === "14" ? "Turbine has been amazing for my prostate health! After 4 weeks of use, my urination flow has improved significantly and the nighttime trips to the bathroom have reduced dramatically. Highly recommend!" : id === "13" ? "Elsie has been amazing for my skin issues! After 6 weeks of use, my eczema has significantly improved and the itching has almost completely stopped. My skin looks healthier than it has in years!" : id === "12" ? "Andicellix has been amazing for my hearing! After 6 weeks of use, the constant ringing in my ears has significantly reduced and I can hear conversations much clearer now. Highly recommend!" : id === "11" ? "Amazing results! Black Rhino has significantly improved my partner's performance and energy levels. We're both very satisfied with the results after just 3 weeks of use!" : id === "10" ? "BackPro has been a lifesaver! After just 4 weeks of use, my urinary problems have significantly improved and I no longer wake up multiple times at night. Highly recommend for men over 40!" : id === "9" ? "Excellent results! After 6 weeks of using Carthisin, my joint pain has significantly reduced and I feel much more mobile. Great product for bone health!" : id === "8" ? "Outstanding results! My blood sugar levels have stabilized significantly since using Diacard. My doctor is impressed with the improvement in my overall cardiovascular health." : "Amazing results! Lost 8 kg in 2 months with TChrome. My digestion improved significantly and I feel more energetic."
-    },
-    {
-      name: "Mike Chen", 
-      rating: 5,
-      date: "December 10, 2024",
-      comment: id === "22" ? "Great product for detox! My gut health has improved dramatically and the uncomfortable skin tags I had are almost gone. Very satisfied with the results after 5 weeks." : id === "21" ? "Great product for skin health! My skin has improved dramatically and I feel more youthful and radiant. The brightening and firming effects are really noticeable, especially on my face." : id === "20" ? "Great product for eye health! My vision clarity has improved dramatically and I no longer experience eye fatigue after long screen sessions. Very satisfied with the results after 4 weeks." : id === "19" ? "Great product for weight control! My metabolism has improved dramatically and I'm losing weight steadily without feeling hungry all the time. Very satisfied with the results after 5 weeks." : id === "18" ? "Great product for eye health! My blurry vision has improved dramatically and I no longer experience burning eyes after long screen sessions. Very satisfied with the results after 4 weeks." : id === "17" ? "Great product for detox! My gut health has improved dramatically and the uncomfortable skin tags I had are almost gone. Very satisfied with the results after 5 weeks." : id === "16" ? "Great product for digestive health! My hemorrhoid symptoms have reduced dramatically and I no longer struggle with bowel movements. Very satisfied with the results after 5 weeks." : id === "15" ? "Great product for hearing health! My ear fullness has reduced dramatically and I don't need to ask people to repeat themselves as often. Very satisfied with the results after 4 weeks." : id === "14" ? "Great product for prostate health! My pelvic discomfort has reduced dramatically and my overall energy levels have improved. Very satisfied with the results after 5 weeks." : id === "13" ? "Great product for skin health! My psoriasis patches have reduced dramatically and the inflammation has calmed down significantly. Very satisfied with the results after 5 weeks." : id === "12" ? "Great product for hearing health! My tinnitus has improved dramatically and the dizzy spells I used to get have almost completely stopped. Very satisfied with the results." : id === "11" ? "Great product for men's health! My stamina and overall vitality have improved remarkably. Definitely helps with testosterone levels and overall well-being." : id === "10" ? "Great product for prostate health! My urination flow has improved dramatically and the pelvic discomfort I used to experience is almost gone. Very satisfied with the results." : id === "9" ? "Carthisin has been a game-changer for my office syndrome! My back pain and joint stiffness have improved remarkably after just 4 weeks of use." : id === "8" ? "Diacard has been a game-changer for managing my blood pressure. I feel more energetic and my cholesterol levels have improved remarkably!" : "TChrome really works! My appetite is much better controlled and I'm losing weight steadily. Great product!"
-    },
-    {
-      name: "Lisa Wilson",
-      rating: 4,
-      date: "December 5, 2024", 
-      comment: id === "22" ? "Good quality supplement for detox. Noticed improvements in my digestion and less bloating after 3 weeks of consistent use. The skin tags are slowly getting smaller too." : id === "21" ? "Good quality supplement for skin health. Noticed improvements in my skin tone and texture after 3 weeks of consistent use. The brightening effects are noticeable." : id === "20" ? "Good quality supplement for eye health. Noticed improvements in my vision sharpness and less eye strain after 3 weeks of consistent use. The protective effects against screen glare are noticeable." : id === "19" ? "Good quality supplement for weight management. Noticed improvements in my energy levels and reduced cravings after 4 weeks of consistent use. The fat burning effects are gradual but steady." : id === "18" ? "Good quality supplement for eye health. Noticed improvements in my vision clarity and less eye fatigue after 3 weeks of consistent use. The protective effects against blue light are noticeable." : id === "17" ? "Good quality supplement for detox. Noticed improvements in my digestion and less bloating after 3 weeks of consistent use. The skin tags are slowly getting smaller too." : id === "16" ? "Good quality supplement for digestive health. Noticed improvements in my bowel movements and less abdominal discomfort after 3 weeks of consistent use. The bloating has reduced significantly." : id === "15" ? "Good quality supplement for hearing health. Noticed improvements in conversation clarity and less ear buzzing after 3 weeks of consistent use." : id === "14" ? "Good quality supplement for prostate health. Noticed improvements in bladder function and reduced burning sensation after 3 weeks of consistent use." :  id === "13" ? "Good quality supplement for skin health. Noticed improvements in my nail fungus and overall skin texture after 4 weeks of consistent use. The burning sensation has reduced significantly." : id === "12" ? "Good quality supplement for hearing health. Noticed improvements in my ability to follow conversations and less ear fullness after 4 weeks of consistent use." : id === "11" ? "Good quality supplement for men's health. Noticed improvements in energy levels and overall performance after 4 weeks of consistent use." : id === "10" ? "Good quality supplement for men's health. Noticed improvements in bladder function and reduced nighttime trips to the bathroom after 3 weeks of consistent use." : id === "9" ? "Good quality supplement for joint health. Noticed improvements in flexibility and reduced morning stiffness after 3 weeks of consistent use." : id === "8" ? "Great supplement for heart health. Noticed improvements in circulation and overall energy levels after 4 weeks of consistent use." : "Good quality supplement. Noticed changes in my metabolism after 3 weeks. Will continue using."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Breadcrumb */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-nature-600">Home</Link>
-            <span>/</span>
-            <Link to="/products" className="hover:text-nature-600">Products</Link>
-            <span>/</span>
-            <span className="text-gray-900">{product.name}</span>
-          </div>
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Product not found</h1>
+          <Button onClick={() => navigate("/products")}>Back to Products</Button>
         </div>
       </div>
+    );
+  }
 
-      <div className="container mx-auto px-4 py-8">
-        <Button asChild variant="ghost" className="mb-6">
-          <Link to="/products">
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Back to Products
-          </Link>
+  const relatedProducts = allProducts
+    .filter(p => p.category === product.category && p.id !== product.id)
+    .slice(0, 4);
+
+  const handleAddToCart = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    });
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      {/* Back Button */}
+      <div className="container mx-auto px-4 py-6">
+        <Button
+          variant="ghost"
+          onClick={() => navigate(-1)}
+          className="mb-4 hover:bg-white/50"
+        >
+          <ChevronLeft className="mr-2 h-4 w-4" />
+          Back
         </Button>
+      </div>
 
+      {/* Product Detail */}
+      <div className="container mx-auto px-4 pb-12">
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* Product Images */}
+          {/* Product Image */}
           <div className="space-y-4">
-            <div className="relative overflow-hidden rounded-lg">
+            <Card className="overflow-hidden shadow-xl">
               <img
-                src={product.images[selectedImage]}
+                src={product.image}
                 alt={product.name}
-                className="w-full h-96 rounded-lg object-contain bg-white p-4"
+                className="w-full h-auto object-cover"
               />
-              {product.badge && (
-                <Badge className="absolute top-4 left-4 bg-nature-600 text-white">
-                  {product.badge}
-                </Badge>
-              )}
-            </div>
-            <div className="flex space-x-2">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-nature-600' : 'border-gray-200'
-                  }`}
-                >
-                  <img 
-                    src={image} 
-                    alt="" 
-                    className="w-full h-full object-contain bg-white p-1" 
-                  />
-                </button>
-              ))}
-            </div>
+            </Card>
           </div>
 
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center">
-                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                <span className="ml-1 font-semibold">{product.rating}</span>
-                <span className="ml-1 text-gray-600">({product.reviews} reviews)</span>
-              </div>
-              <span className={`text-sm ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
-                {product.inStock ? '✓ In Stock' : '✗ Out of Stock'}
-              </span>
-            </div>
-
-            <div className="flex items-center space-x-3">
-              <span className="text-3xl font-bold text-nature-600">{product.price}</span>
-              {product.originalPrice && (
-                <span className="text-xl text-gray-400 line-through">{product.originalPrice}</span>
+              {product.badge && (
+                <Badge className="mb-2">{product.badge}</Badge>
               )}
-              {product.originalPrice && (
-                <Badge className="bg-red-100 text-red-800">
-                  Save ฿{parseInt(product.originalPrice.replace('฿', '').replace(',', '')) - parseInt(product.price.replace('฿', '').replace(',', ''))}
-                </Badge>
-              )}
-            </div>
-
-            <p className="text-gray-700 leading-relaxed">{product.description}</p>
-
-            <div className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Benefits:</h3>
-              <ul className="space-y-1">
-                {product.benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center text-sm text-gray-700">
-                    <span className="w-2 h-2 bg-nature-500 rounded-full mr-2"></span>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {product.idealFor && (
-              <div className="space-y-3">
-                <h3 className="font-semibold text-gray-900">Ideal For:</h3>
-                <ul className="space-y-1">
-                  {product.idealFor.map((item, index) => (
-                    <li key={index} className="flex items-center text-sm text-gray-700">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                      {item}
-                    </li>
+              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                {product.name}
+              </h1>
+              
+              {/* Rating */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-5 w-5 ${
+                        i < Math.floor(product.rating)
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                    />
                   ))}
-                </ul>
+                </div>
+                <span className="text-sm text-gray-600">
+                  {product.rating} ({product.reviews} reviews)
+                </span>
               </div>
-            )}
 
-            <div className="border rounded-lg p-4 space-y-4">
-              <div className="flex items-center justify-between">
+              {/* Price */}
+              <div className="flex items-baseline gap-3 mb-6">
+                <span className="text-4xl font-bold text-primary">
+                  {product.price}
+                </span>
+                {product.originalPrice && (
+                  <span className="text-xl text-gray-400 line-through">
+                    {product.originalPrice}
+                  </span>
+                )}
+              </div>
+
+              {/* Description */}
+              <p className="text-gray-600 mb-6">{product.description}</p>
+
+              {/* Benefits */}
+              {product.benefits && product.benefits.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="font-semibold text-lg mb-3">Key Benefits:</h3>
+                  <ul className="space-y-2">
+                    {product.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <Award className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Stock Status */}
+              <div className="mb-6">
+                {product.inStock > 0 ? (
+                  <span className="text-green-600 font-medium">
+                    ✓ In Stock ({product.inStock} available)
+                  </span>
+                ) : (
+                  <span className="text-red-600 font-medium">
+                    ✗ Out of Stock
+                  </span>
+                )}
+              </div>
+
+              {/* Quantity Selector */}
+              <div className="flex items-center gap-4 mb-6">
                 <span className="font-medium">Quantity:</span>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center border rounded-lg">
                   <Button
+                    variant="ghost"
                     size="sm"
-                    variant="outline"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    disabled={quantity <= 1}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
-                  <span className="w-12 text-center">{quantity}</span>
+                  <span className="px-6 py-2 font-medium">{quantity}</span>
                   <Button
+                    variant="ghost"
                     size="sm"
-                    variant="outline"
-                    onClick={() => setQuantity(quantity + 1)}
+                    onClick={() => setQuantity(Math.min(product.inStock, quantity + 1))}
+                    disabled={quantity >= product.inStock}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button 
-                  className="flex-1 bg-nature-600 hover:bg-nature-700"
+              {/* Action Buttons */}
+              <div className="flex gap-4 mb-6">
+                <Button
+                  size="lg"
                   onClick={handleAddToCart}
+                  disabled={product.inStock === 0}
+                  className="flex-1"
                 >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
+                  <ShoppingCart className="mr-2 h-5 w-5" />
                   Add to Cart
                 </Button>
-                <Button variant="outline">
-                  <Heart className="h-4 w-4 mr-2" />
-                  Wishlist
-                </Button>
-                <Button variant="outline">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
+                {product.lineUrl && (
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => window.open(product.lineUrl, '_blank')}
+                    className="flex-1"
+                  >
+                    Order via LINE
+                  </Button>
+                )}
               </div>
-            </div>
 
-            {/* Guarantees */}
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t">
-              <div className="text-center">
-                <Truck className="h-6 w-6 mx-auto text-nature-600 mb-1" />
-                <p className="text-xs text-gray-600">Free Shipping</p>
-              </div>
-              <div className="text-center">
-                <Shield className="h-6 w-6 mx-auto text-nature-600 mb-1" />
-                <p className="text-xs text-gray-600">Quality Guarantee</p>
-              </div>
-              <div className="text-center">
-                <Award className="h-6 w-6 mx-auto text-nature-600 mb-1" />
-                <p className="text-xs text-gray-600">Certified Standards</p>
+              {/* Features */}
+              <div className="grid grid-cols-3 gap-4">
+                <Card className="p-4 text-center">
+                  <Truck className="h-6 w-6 mx-auto mb-2 text-primary" />
+                  <p className="text-sm font-medium">Free Shipping</p>
+                </Card>
+                <Card className="p-4 text-center">
+                  <Shield className="h-6 w-6 mx-auto mb-2 text-primary" />
+                  <p className="text-sm font-medium">Secure Payment</p>
+                </Card>
+                <Card className="p-4 text-center">
+                  <Award className="h-6 w-6 mx-auto mb-2 text-primary" />
+                  <p className="text-sm font-medium">Quality Guarantee</p>
+                </Card>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Product Details Tabs */}
-        <Card className="mb-12">
-          <Tabs defaultValue="details" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="details">Product Details</TabsTrigger>
-              <TabsTrigger value="ingredients">Ingredients</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews ({product.reviews})</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="details" className="p-6">
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Dosage Instructions:</h3>
-                  <p className="text-gray-700">{product.dosage}</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Package Size:</h3>
-                  <p className="text-gray-700">{product.size}</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Warnings:</h3>
-                  <p className="text-gray-700">{product.warnings}</p>
-                </div>
-                {product.registration && (
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Registration:</h3>
-                    <p className="text-gray-700">{product.registration}</p>
-                  </div>
-                )}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="ingredients" className="p-6">
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">Active Ingredients:</h3>
-                <p className="text-gray-700">{product.ingredients}</p>
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="reviews" className="p-6">
-              <div className="space-y-6">
-                {reviews.map((review, index) => (
-                  <div key={index} className="border-b last:border-b-0 pb-4 last:pb-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="font-medium">{review.name}</span>
-                        <div className="flex">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`h-4 w-4 ${
-                                i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                      <span className="text-sm text-gray-500">{review.date}</span>
-                    </div>
-                    <p className="text-gray-700">{review.comment}</p>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </Card>
-
-        {/* Recommended Products - Replacing Related Products section */}
+        {/* Related Products */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold mb-6">Related Products</h2>
+            <RecommendedProducts 
+              currentProductId={product.id}
+              currentCategory={product.category}
+              allProducts={allProducts}
+            />
+          </div>
+        )}
       </div>
-      
-      <RecommendedProducts
-        currentProductId={product.id}
-        currentCategory={
-          product.id === 22 || product.id === 17 ? "detox-health" :
-          product.id === 21 ? "beauty-supplement" :
-          product.id === 20 || product.id === 18 ? "eye-health" :
-          product.id === 19 || product.id === 7 ? "weight-loss" :
-          product.id === 16 ? "digestive-health" :
-          product.id === 15 || product.id === 12 ? "hearing-health" :
-          product.id === 14 || product.id === 10 ? "prostate-health" :
-          product.id === 13 ? "skin-health" :
-          product.id === 11 ? "mens-health" :
-          product.id === 9 ? "bone-joint" :
-          product.id === 8 ? "heart-health" : "detox-health"
-        }
-        allProducts={allProducts.map(p => ({
-          ...p,
-          category: p.category === "Beauty & Anti-Aging" ? "beauty-supplement" :
-                    p.category === "Weight Control & Body Shaping" ? "weight-loss" :
-                    p.category === "Eye Health & Vision" ? "eye-health" :
-                    p.category === "Detox & Cleanse" ? "detox-health" :
-                    p.category
-        }))}
-      />
     </div>
   );
 };

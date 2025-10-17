@@ -20,6 +20,7 @@ import AIConsultant from "./pages/AIConsultant";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
+import AdminProducts from "./pages/AdminProducts";
 import FloatingAIWidget from "./components/FloatingAIWidget";
 import "./i18n";
 
@@ -48,6 +49,7 @@ const App = () => (
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/admin/products" element={<AdminProducts />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
