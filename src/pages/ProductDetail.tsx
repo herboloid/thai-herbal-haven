@@ -17,6 +17,9 @@ import {
   Minus
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { RecommendedProducts } from "@/components/products/RecommendedProducts";
+import { allProducts } from "@/utils/productData";
+import { toast } from "@/hooks/use-toast";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -939,37 +942,33 @@ const ProductDetail = () => {
           </Tabs>
         </Card>
 
-        {/* Related Products */}
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {relatedProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-shadow">
-                <div className="relative">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-contain bg-white p-2 rounded-t-lg group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-nature-600">{product.price}</span>
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
-                    </div>
-                  </div>
-                  <Button asChild className="w-full mt-3" variant="outline">
-                    <Link to={`/product/${product.id}`}>View Details</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+        {/* Recommended Products - Replacing Related Products section */}
       </div>
+      
+      <RecommendedProducts
+        currentProductId={product.id}
+        currentCategory={
+          product.id === 22 || product.id === 17 ? "detox-health" :
+          product.id === 21 ? "beauty-supplement" :
+          product.id === 20 || product.id === 18 ? "eye-health" :
+          product.id === 19 || product.id === 7 ? "weight-loss" :
+          product.id === 16 ? "digestive-health" :
+          product.id === 15 || product.id === 12 ? "hearing-health" :
+          product.id === 14 || product.id === 10 ? "prostate-health" :
+          product.id === 13 ? "skin-health" :
+          product.id === 11 ? "mens-health" :
+          product.id === 9 ? "bone-joint" :
+          product.id === 8 ? "heart-health" : "detox-health"
+        }
+        allProducts={allProducts.map(p => ({
+          ...p,
+          category: p.category === "Beauty & Anti-Aging" ? "beauty-supplement" :
+                    p.category === "Weight Control & Body Shaping" ? "weight-loss" :
+                    p.category === "Eye Health & Vision" ? "eye-health" :
+                    p.category === "Detox & Cleanse" ? "detox-health" :
+                    p.category
+        }))}
+      />
     </div>
   );
 };
