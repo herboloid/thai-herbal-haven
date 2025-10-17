@@ -10,7 +10,6 @@ import { ProductCardSkeleton } from "@/components/products/ProductCardSkeleton";
 import { CategoryBackground } from "@/components/products/CategoryBackground";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { CategoriesNavigation } from "@/components/products/CategoriesNavigation";
-import { getCategoryBackground } from "@/utils/categoryBackgrounds";
 import { toast } from "@/hooks/use-toast";
 
 const Products = () => {
@@ -102,15 +101,12 @@ const Products = () => {
     });
   };
 
-  const backgroundImage = getCategoryBackground(filterCategory);
-  const isGradientBackground = backgroundImage.startsWith('linear-gradient');
-
   return (
     <div className="min-h-screen relative">
       <CategoryBackground category={filterCategory} />
 
       {/* Header */}
-      <header className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b relative z-10 transition-colors duration-500`}>
+      <header className="bg-white/70 backdrop-blur-sm border-b relative z-10 transition-colors duration-500">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {searchTerm ? `Search Results for "${searchTerm}"` : "Natural Dietary Supplements"}
@@ -124,7 +120,7 @@ const Products = () => {
         sortBy={sortBy}
         onSearchChange={handleSearchChange}
         onSortChange={setSortBy}
-        isGradientBackground={isGradientBackground}
+        isGradientBackground={true}
       />
 
       <CategoriesNavigation 
@@ -140,14 +136,14 @@ const Products = () => {
           }
           setSearchParams(newSearchParams);
         }}
-        isGradientBackground={isGradientBackground}
+        isGradientBackground={true}
       />
 
       {/* Products Grid */}
       <main className="py-8 relative z-10">
         <div className="container mx-auto px-4">
           <div className="mb-6">
-            <p className={`${isGradientBackground ? 'text-gray-700' : 'text-white'} transition-colors duration-500`}>
+            <p className="text-gray-700 transition-colors duration-500">
               Showing {sortedProducts.length} of {products.length} products
               {searchTerm && ` for "${searchTerm}"`}
             </p>
@@ -172,7 +168,7 @@ const Products = () => {
 
           {!isLoading && sortedProducts.length === 0 && (
             <div className="text-center py-12 col-span-full">
-              <p className={`${isGradientBackground ? 'text-gray-700' : 'text-white'} text-lg mb-4`}>
+              <p className="text-gray-700 text-lg mb-4">
                 {searchTerm 
                   ? `No products found for "${searchTerm}"`
                   : "No products found matching your filters"
