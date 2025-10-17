@@ -1,4 +1,4 @@
-import { Activity, Sparkles, Scale, Eye, Leaf, Heart, Ear, Users, Shield, Star, Bone, LucideIcon } from "lucide-react";
+import { Activity, Sparkles, Scale, Eye, Leaf, Heart, Ear, UserCircle, Target, Star, Bone, Wind, LucideIcon } from "lucide-react";
 
 /**
  * Category Configuration
@@ -29,11 +29,11 @@ export const CATEGORIES: Category[] = [
   { value: "weight-loss", labelKey: "productCategories.weight-loss", icon: Scale, count: 0 }, // Weight scale
   { value: "eye-health", labelKey: "productCategories.eye-health", icon: Eye, count: 0 }, // Eye health
   { value: "detox-health", labelKey: "productCategories.detox-health", icon: Leaf, count: 0 }, // Natural detox
-  { value: "digestive-health", labelKey: "productCategories.digestive-health", icon: Activity, count: 0 }, // Digestive activity (Note: Using Activity for digestive system activity)
+  { value: "digestive-health", labelKey: "productCategories.digestive-health", icon: Wind, count: 0 }, // Wind represents digestive system movement
   { value: "skin-health", labelKey: "productCategories.skin-health", icon: Star, count: 0 }, // Star for radiant skin
   { value: "hearing-health", labelKey: "productCategories.hearing-health", icon: Ear, count: 0 }, // Ear health
-  { value: "mens-health", labelKey: "productCategories.mens-health", icon: Users, count: 0 }, // Men's health
-  { value: "prostate-health", labelKey: "productCategories.prostate-health", icon: Shield, count: 0 }, // Protection/shield
+  { value: "mens-health", labelKey: "productCategories.mens-health", icon: UserCircle, count: 0 }, // Men's health (user profile)
+  { value: "prostate-health", labelKey: "productCategories.prostate-health", icon: Target, count: 0 }, // Target represents focused prostate health
   { value: "bone-joint", labelKey: "productCategories.bone-joint", icon: Bone, count: 0 }, // Bone structure
   { value: "heart-health", labelKey: "productCategories.heart-health", icon: Heart, count: 0 } // Heart health
 ];
