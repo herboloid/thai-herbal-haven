@@ -47,11 +47,6 @@ const Products = () => {
 
   const products = allProducts.map(p => ({
     ...p,
-    category: p.category === "Beauty & Anti-Aging" ? "beauty-supplement" :
-              p.category === "Weight Control & Body Shaping" ? "weight-loss" :
-              p.category === "Eye Health & Vision" ? "eye-health" :
-              p.category === "Detox & Cleanse" ? "detox-health" :
-              p.category,
     badge: p.badge || "🌟 New"
   }));
 
