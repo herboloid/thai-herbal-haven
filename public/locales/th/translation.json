@@ -71,6 +71,20 @@
     },
     "minRead": "นาทีในการอ่าน"
   },
+  "productCategories": {
+    "all": "ทุกหมวดหมู่",
+    "beauty-supplement": "ความงามและต้านอนุมูลอิสระ",
+    "weight-loss": "ควบคุมน้ำหนัก",
+    "eye-health": "สุขภาพดวงตา",
+    "detox-health": "ดีท็อกซ์และล้างพิษ",
+    "digestive-health": "สุขภาพระบบย่อย",
+    "skin-health": "สุขภาพผิวหนัง",
+    "hearing-health": "สุขภาพการได้ยิน",
+    "mens-health": "สุขภาพผู้ชาย",
+    "prostate-health": "สุขภาพต่อมลูกหมาก",
+    "bone-joint": "สุขภาพกระดูกและข้อ",
+    "heart-health": "สุขภาพหัวใจ"
+  },
   "common": {
     "loading": "กำลังโหลด...",
     "error": "เกิดข้อผิดพลาด",

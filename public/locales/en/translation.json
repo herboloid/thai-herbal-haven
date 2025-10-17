@@ -71,6 +71,20 @@
     },
     "minRead": "min read"
   },
+  "productCategories": {
+    "all": "All Categories",
+    "beauty-supplement": "Beauty & Anti-Aging",
+    "weight-loss": "Weight Control",
+    "eye-health": "Eye Health",
+    "detox-health": "Detox & Cleanse",
+    "digestive-health": "Digestive Health",
+    "skin-health": "Skin Health",
+    "hearing-health": "Hearing Health",
+    "mens-health": "Men's Health",
+    "prostate-health": "Prostate Health",
+    "bone-joint": "Bone & Joint",
+    "heart-health": "Heart Health"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error occurred",

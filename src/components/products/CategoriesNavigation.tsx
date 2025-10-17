@@ -2,6 +2,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { Category } from "@/config/categories";
+import { useTranslation } from "react-i18next";
 
 interface CategoriesNavigationProps {
   categories: Category[];
@@ -16,6 +17,8 @@ export const CategoriesNavigation = ({
   onCategoryChange,
   isGradientBackground 
 }: CategoriesNavigationProps) => {
+  const { t } = useTranslation();
+  
   return (
     <section 
       className={`${isGradientBackground ? 'bg-white/70' : 'bg-white/90'} backdrop-blur-sm border-b relative z-10 transition-colors duration-500`}
@@ -44,14 +47,14 @@ export const CategoriesNavigation = ({
                     if (typeof window !== 'undefined' && (window as any).gtag) {
                       (window as any).gtag('event', 'category_click', {
                         category_id: category.value,
-                        category_name: category.label
+                        category_name: t(category.labelKey)
                       });
                     }
                   }}
-                  aria-label={`${category.label} - ${category.count} products`}
+                  aria-label={`${t(category.labelKey)} - ${category.count} products`}
                 >
                   <Icon className={`h-4 w-4 ${colors.icon}`} aria-hidden="true" />
-                  <span>{category.label}</span>
+                  <span>{t(category.labelKey)}</span>
                   <Badge variant="secondary" className="ml-1 text-xs">
                     {category.count}
                   </Badge>
