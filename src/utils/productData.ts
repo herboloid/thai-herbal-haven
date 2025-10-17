@@ -13,6 +13,7 @@ export interface Product {
   benefits: string[];
   inStock: number;
   badge?: string;
+  lineUrl?: string;
 }
 
 export const allProducts: Product[] = [
@@ -28,7 +29,8 @@ export const allProducts: Product[] = [
     keywords: ["detox", "cleanse", "intestinal", "toxins", "papillomas", "warts", "skin tags", "body cleanse", "digestive health"],
     category: "Detox & Cleanse",
     benefits: ["Cleanses toxins", "Improves digestion", "Supports skin health"],
-    inStock: 12
+    inStock: 12,
+    lineUrl: "https://lin.ee/gkFyIZ4"
   },
   {
     id: 21,
@@ -42,7 +44,8 @@ export const allProducts: Product[] = [
     keywords: ["anti-aging", "skin", "beauty", "firming", "wrinkles", "pigmentation", "brightening", "collagen", "youth"],
     category: "Beauty & Anti-Aging",
     benefits: ["Reduces wrinkles", "Improves skin firmness", "Brightens pigmentation"],
-    inStock: 8
+    inStock: 8,
+    lineUrl: "https://lin.ee/gGN1rXh"
   },
   {
     id: 20,
@@ -56,7 +59,8 @@ export const allProducts: Product[] = [
     keywords: ["vision", "eyes", "eye health", "eye strain", "myopia", "farsightedness", "sight", "visual", "eye protection"],
     category: "Eye Health & Vision",
     benefits: ["Improves visual acuity", "Reduces eye fatigue", "Protects from blue light"],
-    inStock: 15
+    inStock: 15,
+    lineUrl: "https://lin.ee/ujbBjYd"
   },
   {
     id: 19,
@@ -70,7 +74,8 @@ export const allProducts: Product[] = [
     keywords: ["weight loss", "weight", "fat burning", "body shaping", "metabolism", "appetite", "cellulite", "slimming", "diet"],
     category: "Weight Control & Body Shaping",
     benefits: ["Boosts metabolism", "Burns fat", "Suppresses appetite"],
-    inStock: 6
+    inStock: 6,
+    lineUrl: "https://lin.ee/8OfKkNJ"
   },
   {
     id: 18,
@@ -84,7 +89,8 @@ export const allProducts: Product[] = [
     keywords: ["vision", "eyes", "eye health", "cataract", "glaucoma", "retina", "sight", "visual health", "eye care"],
     category: "Eye Health & Vision",
     benefits: ["Protects retina", "Prevents cataracts", "Improves night vision"],
-    inStock: 10
+    inStock: 10,
+    lineUrl: "https://lin.ee/jK1TEb0"
   }
 ];
 
