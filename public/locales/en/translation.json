@@ -104,7 +104,7 @@
     "cartItems": "Cart Items",
     "orderSummary": "Order Summary",
     "total": "Total",
-    "buyOnLine": "Buy on LINE",
+    "placeOrder": "Place order",
     "lineCheckout": "Complete your order via LINE",
     "lineCheckoutDesc": "Click the button below to purchase this product through LINE"
   },

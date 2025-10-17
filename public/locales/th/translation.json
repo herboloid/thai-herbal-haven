@@ -104,7 +104,7 @@
     "cartItems": "สินค้าในตะกร้า",
     "orderSummary": "สรุปคำสั่งซื้อ",
     "total": "ยอดรวม",
-    "buyOnLine": "ซื้อผ่าน LINE",
+    "placeOrder": "สั่งซื้อ",
     "lineCheckout": "สั่งซื้อผ่าน LINE",
     "lineCheckoutDesc": "คลิกปุ่มด้านล่างเพื่อซื้อสินค้านี้ผ่าน LINE"
   },
