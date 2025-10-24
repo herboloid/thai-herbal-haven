@@ -8,40 +8,12 @@ export interface CategoryColorScheme {
 
 export const getCategoryColors = (categoryId: string): CategoryColorScheme => {
   const colorMap: Record<string, CategoryColorScheme> = {
-    beauty: {
-      bg: 'bg-beauty-50',
-      text: 'text-beauty-700',
-      border: 'border-beauty-200',
-      hover: 'hover:bg-beauty-100',
-      icon: 'text-beauty-600'
-    },
-    'beauty-supplement': {
-      bg: 'bg-beauty-50',
-      text: 'text-beauty-700',
-      border: 'border-beauty-200',
-      hover: 'hover:bg-beauty-100',
-      icon: 'text-beauty-600'
-    },
-    weight: {
-      bg: 'bg-weight-50',
-      text: 'text-weight-700',
-      border: 'border-weight-200',
-      hover: 'hover:bg-weight-100',
-      icon: 'text-weight-600'
-    },
     'weight-loss': {
       bg: 'bg-weight-50',
       text: 'text-weight-700',
       border: 'border-weight-200',
       hover: 'hover:bg-weight-100',
       icon: 'text-weight-600'
-    },
-    vision: {
-      bg: 'bg-vision-50',
-      text: 'text-vision-700',
-      border: 'border-vision-200',
-      hover: 'hover:bg-vision-100',
-      icon: 'text-vision-600'
     },
     'eye-health': {
       bg: 'bg-vision-50',
@@ -50,61 +22,12 @@ export const getCategoryColors = (categoryId: string): CategoryColorScheme => {
       hover: 'hover:bg-vision-100',
       icon: 'text-vision-600'
     },
-    heart: {
-      bg: 'bg-heart-50',
-      text: 'text-heart-700',
-      border: 'border-heart-200',
-      hover: 'hover:bg-heart-100',
-      icon: 'text-heart-600'
-    },
     'heart-health': {
       bg: 'bg-heart-50',
       text: 'text-heart-700',
       border: 'border-heart-200',
       hover: 'hover:bg-heart-100',
       icon: 'text-heart-600'
-    },
-    detox: {
-      bg: 'bg-detox-50',
-      text: 'text-detox-700',
-      border: 'border-detox-200',
-      hover: 'hover:bg-detox-100',
-      icon: 'text-detox-600'
-    },
-    'detox-health': {
-      bg: 'bg-detox-50',
-      text: 'text-detox-700',
-      border: 'border-detox-200',
-      hover: 'hover:bg-detox-100',
-      icon: 'text-detox-600'
-    },
-    energy: {
-      bg: 'bg-energy-50',
-      text: 'text-energy-700',
-      border: 'border-energy-200',
-      hover: 'hover:bg-energy-100',
-      icon: 'text-energy-600'
-    },
-    immunity: {
-      bg: 'bg-immunity-50',
-      text: 'text-immunity-700',
-      border: 'border-immunity-200',
-      hover: 'hover:bg-immunity-100',
-      icon: 'text-immunity-600'
-    },
-    brain: {
-      bg: 'bg-brain-50',
-      text: 'text-brain-700',
-      border: 'border-brain-200',
-      hover: 'hover:bg-brain-100',
-      icon: 'text-brain-600'
-    },
-    'digestive-health': {
-      bg: 'bg-green-50',
-      text: 'text-green-700',
-      border: 'border-green-200',
-      hover: 'hover:bg-green-100',
-      icon: 'text-green-600'
     },
     'skin-health': {
       bg: 'bg-pink-50',
@@ -140,6 +63,27 @@ export const getCategoryColors = (categoryId: string): CategoryColorScheme => {
       border: 'border-amber-200',
       hover: 'hover:bg-amber-100',
       icon: 'text-amber-600'
+    },
+    'psoriasis': {
+      bg: 'bg-rose-50',
+      text: 'text-rose-700',
+      border: 'border-rose-200',
+      hover: 'hover:bg-rose-100',
+      icon: 'text-rose-600'
+    },
+    'hemorrhoids': {
+      bg: 'bg-purple-50',
+      text: 'text-purple-700',
+      border: 'border-purple-200',
+      hover: 'hover:bg-purple-100',
+      icon: 'text-purple-600'
+    },
+    'parasites': {
+      bg: 'bg-teal-50',
+      text: 'text-teal-700',
+      border: 'border-teal-200',
+      hover: 'hover:bg-teal-100',
+      icon: 'text-teal-600'
     }
   };
 

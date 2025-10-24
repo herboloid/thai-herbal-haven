@@ -72,18 +72,18 @@
     "minRead": "นาทีในการอ่าน"
   },
   "productCategories": {
-    "all": "ทุกหมวดหมู่",
-    "beauty-supplement": "ความงามและต้านอนุมูลอิสระ",
+    "all": "ทั้งหมด",
     "weight-loss": "ควบคุมน้ำหนัก",
-    "eye-health": "สุขภาพดวงตา",
-    "detox-health": "ดีท็อกซ์และล้างพิษ",
-    "digestive-health": "สุขภาพระบบย่อย",
-    "skin-health": "สุขภาพผิวหนัง",
-    "hearing-health": "สุขภาพการได้ยิน",
+    "heart-health": "บำรุงหัวใจและหลอดเลือด",
+    "bone-joint": "บำรุงกระดูกและข้อ",
+    "prostate-health": "ดูแลต่อมลูกหมาก",
+    "hearing-health": "บำรุงการได้ยิน",
+    "psoriasis": "โรคสะเก็ดเงิน",
     "mens-health": "สุขภาพผู้ชาย",
-    "prostate-health": "สุขภาพต่อมลูกหมาก",
-    "bone-joint": "สุขภาพกระดูกและข้อ",
-    "heart-health": "สุขภาพหัวใจ"
+    "hemorrhoids": "โรคริดสีดวงทวาร",
+    "parasites": "ปรสิต",
+    "eye-health": "บำรุงสายตา",
+    "skin-health": "ฟื้นฟูผิวพรรณ"
   },
   "common": {
     "loading": "กำลังโหลด...",

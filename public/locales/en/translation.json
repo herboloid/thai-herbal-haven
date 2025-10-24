@@ -72,18 +72,18 @@
     "minRead": "min read"
   },
   "productCategories": {
-    "all": "All Categories",
-    "beauty-supplement": "Beauty & Anti-Aging",
+    "all": "All",
     "weight-loss": "Weight Control",
-    "eye-health": "Eye Health",
-    "detox-health": "Detox & Cleanse",
-    "digestive-health": "Digestive Health",
-    "skin-health": "Skin Health",
-    "hearing-health": "Hearing Health",
+    "heart-health": "Cardiovascular Support",
+    "bone-joint": "Bone & Joint Support",
+    "prostate-health": "Prostate Care",
+    "hearing-health": "Hearing Support",
+    "psoriasis": "Psoriasis",
     "mens-health": "Men's Health",
-    "prostate-health": "Prostate Health",
-    "bone-joint": "Bone & Joint",
-    "heart-health": "Heart Health"
+    "hemorrhoids": "Hemorrhoids",
+    "parasites": "Parasites",
+    "eye-health": "Vision Support",
+    "skin-health": "Skin Rejuvenation"
   },
   "common": {
     "loading": "Loading...",
