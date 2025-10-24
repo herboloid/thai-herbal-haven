@@ -46,13 +46,13 @@ const Products = () => {
   const products = allProducts;
 
 
-  // Update category counts
+  // Update category counts - show only categories with products
   const categoriesWithCounts = CATEGORIES.map(category => ({
     ...category,
     count: category.value === "all" 
       ? products.length 
       : products.filter(product => product.category === category.value).length
-  }));
+  })).filter(category => category.count > 0);
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());

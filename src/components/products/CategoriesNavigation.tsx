@@ -27,7 +27,7 @@ export const CategoriesNavigation = ({
     >
       <div className="container mx-auto px-4 py-4">
         <Tabs value={activeCategory} onValueChange={onCategoryChange} className="w-full">
-          <TabsList className="w-full justify-start overflow-x-auto bg-transparent p-0 h-auto">
+          <TabsList className="w-full justify-start overflow-x-auto flex-nowrap bg-transparent p-0 h-auto gap-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
             {categories.map((category) => {
               const colors = getCategoryColors(category.value);
               const Icon = category.icon;
