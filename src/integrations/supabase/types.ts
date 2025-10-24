@@ -1563,19 +1563,29 @@ export type Database = {
           category: string
           created_at: string | null
           description: string
+          detailed_description_en: string | null
+          detailed_description_th: string | null
+          directions_en: string | null
+          directions_th: string | null
+          fda_number: string | null
           id: number
           image_url: string
           in_stock: number | null
+          ingredients: Json | null
           is_active: boolean | null
           keywords: Json | null
           line_url: string | null
           name: string
           original_price: string | null
+          package_size: string | null
           price: string
+          quantity: number | null
           rating: number | null
           reviews_count: number | null
+          shelf_life: string | null
           sort_order: number | null
           updated_at: string | null
+          weight: string | null
         }
         Insert: {
           badge?: string | null
@@ -1583,19 +1593,29 @@ export type Database = {
           category: string
           created_at?: string | null
           description: string
+          detailed_description_en?: string | null
+          detailed_description_th?: string | null
+          directions_en?: string | null
+          directions_th?: string | null
+          fda_number?: string | null
           id: number
           image_url: string
           in_stock?: number | null
+          ingredients?: Json | null
           is_active?: boolean | null
           keywords?: Json | null
           line_url?: string | null
           name: string
           original_price?: string | null
+          package_size?: string | null
           price: string
+          quantity?: number | null
           rating?: number | null
           reviews_count?: number | null
+          shelf_life?: string | null
           sort_order?: number | null
           updated_at?: string | null
+          weight?: string | null
         }
         Update: {
           badge?: string | null
@@ -1603,19 +1623,29 @@ export type Database = {
           category?: string
           created_at?: string | null
           description?: string
+          detailed_description_en?: string | null
+          detailed_description_th?: string | null
+          directions_en?: string | null
+          directions_th?: string | null
+          fda_number?: string | null
           id?: number
           image_url?: string
           in_stock?: number | null
+          ingredients?: Json | null
           is_active?: boolean | null
           keywords?: Json | null
           line_url?: string | null
           name?: string
           original_price?: string | null
+          package_size?: string | null
           price?: string
+          quantity?: number | null
           rating?: number | null
           reviews_count?: number | null
+          shelf_life?: string | null
           sort_order?: number | null
           updated_at?: string | null
+          weight?: string | null
         }
         Relationships: []
       }

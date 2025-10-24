@@ -50,6 +50,19 @@
     "reviews": "รีวิว",
     "originalPrice": "ราคาเดิม"
   },
+  "productDetail": {
+    "description": "รายละเอียดผลิตภัณฑ์",
+    "keyBenefits": "คุณประโยชน์หลัก",
+    "activeIngredients": "ส่วนประกอบสำคัญ",
+    "directionsForUse": "วิธีรับประทาน",
+    "productDetails": "รายละเอียดทางเทคนิค",
+    "quantity": "ปริมาณ",
+    "capsules": "แคปซูล",
+    "fdaNumber": "เลข อย.",
+    "weight": "น้ำหนักสุทธิ",
+    "packageSize": "ขนาดบรรจุภัณฑ์",
+    "shelfLife": "วันหมดอายุ"
+  },
   "blog": {
     "title": "บล็อกสุขภาพและการดูแลตนเอง",
     "subtitle": "คำแนะนำจากผู้เชี่ยวชาญด้านโภชนาการ แพทย์ และนักปฏิบัติการแพทย์แผนโบราณ",

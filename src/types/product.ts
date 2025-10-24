@@ -13,4 +13,14 @@ export interface Product {
   inStock: number;
   badge?: string;
   lineUrl?: string;
+  quantity?: number;
+  fdaNumber?: string;
+  weight?: string;
+  packageSize?: string;
+  shelfLife?: string;
+  ingredients?: string[];
+  directionsEn?: string;
+  directionsTh?: string;
+  detailedDescriptionEn?: string;
+  detailedDescriptionTh?: string;
 }

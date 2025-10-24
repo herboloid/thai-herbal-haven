@@ -13,18 +13,23 @@ import {
   Award,
   ChevronLeft,
   Plus,
-  Minus
+  Minus,
+  Pill,
+  FileText,
+  Info
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { RecommendedProducts } from "@/components/products/RecommendedProducts";
 import { useProduct, useProducts } from "@/hooks/useProducts";
 import { toast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCart();
+  const { t, i18n } = useTranslation();
   
   const { data: product, isLoading: productLoading } = useProduct(Number(id));
   const { data: allProducts = [], isLoading: productsLoading } = useProducts();
@@ -135,12 +140,18 @@ const ProductDetail = () => {
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 mb-6">{product.description}</p>
+              <div className="mb-6">
+                <p className="text-gray-600 leading-relaxed">
+                  {i18n.language === 'th' && product.detailedDescriptionTh 
+                    ? product.detailedDescriptionTh 
+                    : product.detailedDescriptionEn || product.description}
+                </p>
+              </div>
 
               {/* Benefits */}
               {product.benefits && product.benefits.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="font-semibold text-lg mb-3">Key Benefits:</h3>
+                  <h3 className="font-semibold text-lg mb-3">{t('productDetail.keyBenefits')}</h3>
                   <ul className="space-y-2">
                     {product.benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -150,6 +161,87 @@ const ProductDetail = () => {
                     ))}
                   </ul>
                 </div>
+              )}
+
+              {/* Active Ingredients */}
+              {product.ingredients && product.ingredients.length > 0 && (
+                <Card className="mb-6 bg-blue-50/50 border-blue-100">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Pill className="h-5 w-5 text-primary" />
+                      <h3 className="font-semibold text-lg">{t('productDetail.activeIngredients')}</h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {product.ingredients.map((ingredient, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm">
+                          <span className="text-primary mt-0.5">•</span>
+                          <span className="text-gray-700">{ingredient}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Directions for Use */}
+              {(product.directionsEn || product.directionsTh) && (
+                <Card className="mb-6 bg-purple-50/50 border-purple-100">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <FileText className="h-5 w-5 text-primary" />
+                      <h3 className="font-semibold text-lg">{t('productDetail.directionsForUse')}</h3>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      {i18n.language === 'th' && product.directionsTh 
+                        ? product.directionsTh 
+                        : product.directionsEn}
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Product Details */}
+              {(product.quantity || product.fdaNumber || product.weight || product.packageSize || product.shelfLife) && (
+                <Card className="mb-6">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Info className="h-5 w-5 text-primary" />
+                      <h3 className="font-semibold text-lg">{t('productDetail.productDetails')}</h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                      {product.quantity && (
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-gray-600">{t('productDetail.quantity')}</span>
+                          <span className="font-medium">{product.quantity} {t('productDetail.capsules')}</span>
+                        </div>
+                      )}
+                      {product.fdaNumber && (
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-gray-600">{t('productDetail.fdaNumber')}</span>
+                          <span className="font-medium">{product.fdaNumber}</span>
+                        </div>
+                      )}
+                      {product.weight && (
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-gray-600">{t('productDetail.weight')}</span>
+                          <span className="font-medium">{product.weight}</span>
+                        </div>
+                      )}
+                      {product.packageSize && (
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-gray-600">{t('productDetail.packageSize')}</span>
+                          <span className="font-medium">{product.packageSize}</span>
+                        </div>
+                      )}
+                      {product.shelfLife && (
+                        <div className="flex justify-between py-2 border-b">
+                          <span className="text-gray-600">{t('productDetail.shelfLife')}</span>
+                          <span className="font-medium">{product.shelfLife}</span>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
               )}
 
               {/* Stock Status */}

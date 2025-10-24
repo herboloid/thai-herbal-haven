@@ -50,6 +50,19 @@
     "reviews": "reviews",
     "originalPrice": "Original Price"
   },
+  "productDetail": {
+    "description": "Description",
+    "keyBenefits": "Key Benefits",
+    "activeIngredients": "Active Ingredients",
+    "directionsForUse": "Directions for Use",
+    "productDetails": "Product Details",
+    "quantity": "Quantity",
+    "capsules": "capsules",
+    "fdaNumber": "FDA No.",
+    "weight": "Weight",
+    "packageSize": "Package Size",
+    "shelfLife": "Shelf Life"
+  },
   "blog": {
     "title": "Health & Wellness Blog",
     "subtitle": "Expert insights on healthy living, disease prevention, and natural wellness from nutritionists, doctors, and traditional medicine practitioners.",

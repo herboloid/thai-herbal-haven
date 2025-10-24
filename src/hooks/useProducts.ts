@@ -16,6 +16,16 @@ export interface Product {
   inStock: number;
   badge?: string;
   lineUrl?: string;
+  quantity?: number;
+  fdaNumber?: string;
+  weight?: string;
+  packageSize?: string;
+  shelfLife?: string;
+  ingredients?: string[];
+  directionsEn?: string;
+  directionsTh?: string;
+  detailedDescriptionEn?: string;
+  detailedDescriptionTh?: string;
 }
 
 export const useProducts = () => {
@@ -46,6 +56,16 @@ export const useProducts = () => {
         inStock: p.in_stock,
         badge: p.badge || undefined,
         lineUrl: p.line_url || undefined,
+        quantity: p.quantity || undefined,
+        fdaNumber: p.fda_number || undefined,
+        weight: p.weight || undefined,
+        packageSize: p.package_size || undefined,
+        shelfLife: p.shelf_life || undefined,
+        ingredients: (p.ingredients as string[]) || undefined,
+        directionsEn: p.directions_en || undefined,
+        directionsTh: p.directions_th || undefined,
+        detailedDescriptionEn: p.detailed_description_en || undefined,
+        detailedDescriptionTh: p.detailed_description_th || undefined,
       })) as Product[];
     },
   });
@@ -83,6 +103,16 @@ export const useProductsByCategory = (category?: string) => {
         inStock: p.in_stock,
         badge: p.badge || undefined,
         lineUrl: p.line_url || undefined,
+        quantity: p.quantity || undefined,
+        fdaNumber: p.fda_number || undefined,
+        weight: p.weight || undefined,
+        packageSize: p.package_size || undefined,
+        shelfLife: p.shelf_life || undefined,
+        ingredients: (p.ingredients as string[]) || undefined,
+        directionsEn: p.directions_en || undefined,
+        directionsTh: p.directions_th || undefined,
+        detailedDescriptionEn: p.detailed_description_en || undefined,
+        detailedDescriptionTh: p.detailed_description_th || undefined,
       })) as Product[];
     },
     enabled: category !== undefined,
@@ -117,6 +147,16 @@ export const useProduct = (id: number) => {
         inStock: data.in_stock,
         badge: data.badge || undefined,
         lineUrl: data.line_url || undefined,
+        quantity: data.quantity || undefined,
+        fdaNumber: data.fda_number || undefined,
+        weight: data.weight || undefined,
+        packageSize: data.package_size || undefined,
+        shelfLife: data.shelf_life || undefined,
+        ingredients: (data.ingredients as string[]) || undefined,
+        directionsEn: data.directions_en || undefined,
+        directionsTh: data.directions_th || undefined,
+        detailedDescriptionEn: data.detailed_description_en || undefined,
+        detailedDescriptionTh: data.detailed_description_th || undefined,
       } as Product;
     },
   });
