@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
 import { useTranslation } from "react-i18next";
-import { allProducts } from "@/utils/productData";
+import { useProducts } from "@/hooks/useProducts";
 import { 
   ShoppingCart, 
   Minus, 
@@ -16,10 +16,11 @@ import {
 const Cart = () => {
   const { state, removeItem, updateQuantity, clearCart } = useCart();
   const { t } = useTranslation();
+  const { data: products = [] } = useProducts();
 
   // Get LINE URL for a product
   const getProductLineUrl = (productId: number): string | undefined => {
-    const product = allProducts.find(p => p.id === productId);
+    const product = products.find(p => p.id === productId);
     return product?.lineUrl;
   };
 

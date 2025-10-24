@@ -9,12 +9,13 @@ import InteractiveBackground from "@/components/InteractiveBackground";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
 import { CATEGORIES } from "@/config/categories";
-import { allProducts } from "@/utils/productData";
+import { useProducts } from "@/hooks/useProducts";
 
 const Index = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const latestPosts = getLatestPosts(5);
+  const { data: allProducts = [] } = useProducts();
 
   // Use CATEGORIES from config but map to include translations and product counts
   // This ensures consistency across the application

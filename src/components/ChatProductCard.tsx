@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, ShoppingCart, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Product } from "@/utils/productData";
+import { Product } from "@/types/product";
 import { getStatusColor } from "@/utils/categoryColors";
 
 interface ChatProductCardProps {

@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, Bot, Send, User } from "lucide-react";
-import { allProducts, getProductsByKeywords, getComboRecommendations, Product } from "@/utils/productData";
+import { Product } from "@/types/product";
+import { useProducts } from "@/hooks/useProducts";
 import ChatProductCard from "./ChatProductCard";
 import SmartHotButtons from "./SmartHotButtons";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +25,8 @@ interface Message {
 }
 
 const AISupplementChat = () => {
+  const { data: allProducts = [], isLoading } = useProducts();
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -197,15 +200,28 @@ const AISupplementChat = () => {
       
       // Получаем рекомендованные продукты на основе запроса
       const category = getCategoryFromQuery(text);
-      const recommendedProducts = getProductsByKeywords(text).slice(0, 3);
+      
+      // Simple keyword-based product filtering
+      const queryLower = text.toLowerCase();
+      const recommendedProducts = allProducts
+        .filter(product => 
+          product.keywords.some(keyword => queryLower.includes(keyword.toLowerCase())) ||
+          product.description.toLowerCase().includes(queryLower) ||
+          product.name.toLowerCase().includes(queryLower)
+        )
+        .slice(0, 3);
 
       // Check for combo offer request
       const isComboRequest = text.includes("combo") || text.includes("discount") || text.includes("offer");
       let showCombo = false;
       let comboProducts: Product[] = [];
 
+      // Simple combo recommendations: same category products
       if (isComboRequest && recommendedProducts.length > 0) {
-        comboProducts = getComboRecommendations(recommendedProducts[0].id);
+        const mainProduct = recommendedProducts[0];
+        comboProducts = allProducts
+          .filter(p => p.id !== mainProduct.id && p.category === mainProduct.category)
+          .slice(0, 2);
         showCombo = true;
       }
 
