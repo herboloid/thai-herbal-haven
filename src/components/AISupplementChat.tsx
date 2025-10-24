@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { getCategoryColors } from "@/utils/categoryColors";
 import { getSmartButtons, HotButton } from "@/utils/hotButtonScenarios";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
+import { getProductName } from "@/utils/productHelpers";
 
 interface Message {
   id: string;
@@ -26,6 +28,7 @@ interface Message {
 
 const AISupplementChat = () => {
   const { data: allProducts = [], isLoading } = useProducts();
+  const { t } = useTranslation();
   
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -125,7 +128,7 @@ const AISupplementChat = () => {
 
     if (products.length === 1) {
       const product = products[0];
-      return `Excellent choice! ${product.name} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviews} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
+      return `Excellent choice! ${getProductName(product.id, t)} is exactly what you need. This product has a ${product.rating} star rating with ${product.reviews} positive reviews. ${product.inStock <= 5 ? `⚠️ Attention: only ${product.inStock} units left in stock!` : ''}`;
     }
 
     if (products.length === 2) {
@@ -207,7 +210,7 @@ const AISupplementChat = () => {
         .filter(product => 
           product.keywords.some(keyword => queryLower.includes(keyword.toLowerCase())) ||
           product.description.toLowerCase().includes(queryLower) ||
-          product.name.toLowerCase().includes(queryLower)
+          getProductName(product.id, t).toLowerCase().includes(queryLower)
         )
         .slice(0, 3);
 
@@ -266,7 +269,7 @@ const AISupplementChat = () => {
       const successMessage: Message = {
         id: Date.now().toString(),
         type: 'ai',
-        content: `✅ ${product.name} добавлен в корзину! Хотите перейти к оформлению или добавить что-то еще?`,
+        content: `✅ ${getProductName(product.id, t)} добавлен в корзину! Хотите перейти к оформлению или добавить что-то еще?`,
         timestamp: new Date(),
         followUpQuestions: ["Перейти к оформлению", "Посмотреть похожие товары", "Продолжить покупки"]
       };
