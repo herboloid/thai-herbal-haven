@@ -23,6 +23,7 @@ import { RecommendedProducts } from "@/components/products/RecommendedProducts";
 import { useProduct, useProducts } from "@/hooks/useProducts";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { getProductName } from "@/utils/productHelpers";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -58,15 +59,16 @@ const ProductDetail = () => {
     .slice(0, 4);
 
   const handleAddToCart = () => {
+    const productName = getProductName(product.id, t);
     addItem({
       id: product.id,
-      name: product.name,
+      name: productName,
       price: product.price,
       image: product.image,
     });
     toast({
       title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
+      description: `${productName} has been added to your cart.`,
     });
   };
 
@@ -92,7 +94,7 @@ const ProductDetail = () => {
             <Card className="overflow-hidden shadow-xl">
               <img
                 src={product.image}
-                alt={product.name}
+                alt={getProductName(product.id, t)}
                 className="w-full h-auto object-cover"
               />
             </Card>
@@ -105,7 +107,7 @@ const ProductDetail = () => {
                 <Badge className="mb-2">{product.badge}</Badge>
               )}
               <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                {product.name}
+                {getProductName(product.id, t)}
               </h1>
               
               {/* Rating */}

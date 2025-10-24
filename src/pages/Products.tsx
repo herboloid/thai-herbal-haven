@@ -11,6 +11,7 @@ import { CategoryBackground } from "@/components/products/CategoryBackground";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { CategoriesNavigation } from "@/components/products/CategoriesNavigation";
 import { toast } from "@/hooks/use-toast";
+import { getProductName } from "@/utils/productHelpers";
 
 const Products = () => {
   const { t } = useTranslation();
@@ -53,7 +54,8 @@ const Products = () => {
   })).filter(category => category.count > 0);
 
   const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const productName = getProductName(product.id, t);
+    const matchesSearch = productName.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = filterCategory === "all" || product.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
@@ -74,9 +76,10 @@ const Products = () => {
   });
 
   const handleAddToCart = (product: typeof products[0]) => {
+    const productName = getProductName(product.id, t);
     addItem({
       id: product.id,
-      name: product.name,
+      name: productName,
       price: product.price,
       image: product.image,
       originalPrice: product.originalPrice || undefined,
@@ -84,7 +87,7 @@ const Products = () => {
     
     toast({
       title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
+      description: `${productName} has been added to your cart.`,
       duration: 3000,
     });
   };

@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { getProductName } from "@/utils/productHelpers";
 
 interface ProductCardProps {
   id: number;
@@ -28,6 +30,9 @@ export const ProductCard = ({
   badge, 
   onAddToCart 
 }: ProductCardProps) => {
+  const { t } = useTranslation();
+  const translatedName = getProductName(id, t);
+  
   return (
     <Link 
       to={`/product/${id}`} 
@@ -37,7 +42,7 @@ export const ProductCard = ({
         if (typeof window !== 'undefined' && (window as any).gtag) {
           (window as any).gtag('event', 'product_click', {
             product_id: id,
-            product_name: name,
+            product_name: translatedName,
             product_category: 'supplement'
           });
         }
@@ -47,7 +52,7 @@ export const ProductCard = ({
         <div className="relative overflow-hidden">
           <img
             src={image}
-            alt={`${name} - Natural dietary supplement for better health`}
+            alt={`${translatedName} - Natural dietary supplement for better health`}
             className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
@@ -58,7 +63,7 @@ export const ProductCard = ({
           )}
         </div>
         <CardContent className="p-4">
-          <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{name}</h3>
+          <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{translatedName}</h3>
           
           <div className="flex items-center mb-3">
             <div className="flex items-center">
@@ -81,7 +86,7 @@ export const ProductCard = ({
             <Button 
               className="w-full bg-nature-600 hover:bg-nature-700"
               onClick={(e) => e.preventDefault()}
-              aria-label={`View details for ${name}`}
+              aria-label={`View details for ${translatedName}`}
             >
               View Details
             </Button>
@@ -95,11 +100,11 @@ export const ProductCard = ({
                 if (typeof window !== 'undefined' && (window as any).gtag) {
                   (window as any).gtag('event', 'add_to_cart', {
                     product_id: id,
-                    product_name: name
+                    product_name: translatedName
                   });
                 }
               }}
-              aria-label={`Add ${name} to cart`}
+              aria-label={`Add ${translatedName} to cart`}
             >
               Add to Cart
             </Button>

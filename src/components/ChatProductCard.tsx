@@ -5,6 +5,8 @@ import { Star, ShoppingCart, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Product } from "@/types/product";
 import { getStatusColor } from "@/utils/categoryColors";
+import { useTranslation } from "react-i18next";
+import { getProductName } from "@/utils/productHelpers";
 
 interface ChatProductCardProps {
   product: Product;
@@ -15,6 +17,8 @@ interface ChatProductCardProps {
 
 const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: ChatProductCardProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const translatedName = getProductName(product.id, t);
 
   const handleViewProduct = () => {
     navigate(`/product/${product.id}`);
@@ -44,7 +48,7 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
           <div className="relative">
             <img
               src={product.image}
-              alt={product.name}
+              alt={translatedName}
               className="w-16 h-16 object-contain bg-white rounded"
             />
             {product.inStock <= 5 && (
@@ -56,7 +60,7 @@ const ChatProductCard = ({ product, reason, onAddToCart, showCombo = false }: Ch
           
           <div className="flex-1 min-w-0">
             <h4 className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
-              {product.name}
+              {translatedName}
             </h4>
             
             {reason && (

@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { getProductName } from "@/utils/productHelpers";
 
 interface Product {
   id: number;
@@ -25,6 +27,8 @@ export const RecommendedProducts = ({
   currentCategory, 
   allProducts 
 }: RecommendedProductsProps) => {
+  const { t } = useTranslation();
+  
   // Filter products from the same category, excluding current product
   const recommendedProducts = allProducts
     .filter(p => p.category === currentCategory && p.id !== currentProductId)
@@ -47,12 +51,13 @@ export const RecommendedProducts = ({
               key={product.id} 
               to={`/product/${product.id}`}
               onClick={() => {
+                const productName = getProductName(product.id, t);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 // Google Analytics tracking
                 if (typeof window !== 'undefined' && (window as any).gtag) {
                   (window as any).gtag('event', 'recommendation_click', {
                     product_id: product.id,
-                    product_name: product.name,
+                    product_name: productName,
                     source_product_id: currentProductId
                   });
                 }
@@ -62,14 +67,14 @@ export const RecommendedProducts = ({
                 <div className="relative overflow-hidden">
                   <img
                     src={product.image}
-                    alt={`${product.name} - Recommended supplement`}
+                    alt={`${getProductName(product.id, t)} - Recommended supplement`}
                     className="w-full h-48 object-contain bg-white p-2 transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
                 <CardContent className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 text-sm">
-                    {product.name}
+                    {getProductName(product.id, t)}
                   </h3>
                   
                   <div className="flex items-center mb-3">
@@ -88,7 +93,7 @@ export const RecommendedProducts = ({
                     <Button 
                       size="sm" 
                       className="bg-nature-600 hover:bg-nature-700"
-                      aria-label={`View ${product.name}`}
+                      aria-label={`View ${getProductName(product.id, t)}`}
                     >
                       View
                     </Button>

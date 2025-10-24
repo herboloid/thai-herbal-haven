@@ -10,6 +10,7 @@ import { getCategoryColors } from "@/utils/categoryColors";
 import { getLatestPosts } from "@/utils/blogData";
 import { CATEGORIES } from "@/config/categories";
 import { useProducts } from "@/hooks/useProducts";
+import { getProductName } from "@/utils/productHelpers";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -241,7 +242,7 @@ const Index = () => {
                     <div className="relative overflow-hidden">
                       <img
                         src={product.image}
-                        alt={product.name}
+                        alt={getProductName(product.id, t)}
                         className="w-full h-56 object-contain bg-white p-3 transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute top-3 right-3 flex flex-col gap-1">
@@ -264,7 +265,7 @@ const Index = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-sm leading-tight">{product.name}</h3>
+                      <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-sm leading-tight">{getProductName(product.id, t)}</h3>
                       
                       <div className="flex items-center mb-3">
                         <div className="flex items-center">
